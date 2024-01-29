@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Box, TextField, MenuItem } from '@mui/material'
 import { MapContainer, TileLayer, useMapEvents, Marker } from 'react-leaflet';import 'leaflet/dist/leaflet.css';
 
 const PuertoRicoMap: React.FC = () => {
@@ -15,13 +16,15 @@ const PuertoRicoMap: React.FC = () => {
     };
 
     return (
-        <MapContainer center={[18.2208, -66.5901]} zoom={9} style={{ height: '400px', width: '200%' }}>
+        <Box sx={{ borderColor: 'primary.main' }} >
+            <MapContainer center={[18.2208, -66.5901]} zoom={9} style={{ height: '400px', width: '200%' }}>
             <TileLayer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
             <MapEvents />
             {selectedCoords && <Marker position={selectedCoords} />}
-        </MapContainer>
+            </MapContainer>
+        </Box>
     );
 };
 
