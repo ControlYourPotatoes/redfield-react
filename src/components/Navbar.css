@@ -1,0 +1,183 @@
+.navbar {
+  background: linear-gradient(90deg, rgb(10, 111, 243) 0%, rgb(26, 23, 23) 100%);
+  height: 90px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  position: Fixed;
+  top: 0; /* Ensure it's always at the top */
+  width: 100%; /* Span the full viewport width */
+  z-index: 999; /* Keep it above other elements */
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 50px;
+    max-width: 1500px;
+  }
+
+.navbar-logo {
+    color: #fff;
+    justify-self: start;
+    margin-top: 10px;
+    margin-left: -80px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+  }
+  
+
+.image-container {
+    height: 120px; /* Adjust as needed */
+}
+
+.image-style {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* This will ensure the image maintains aspect ratio */
+}
+
+
+.closed-icon {
+background-image: url('/assets/icon/closed-icon.png'); /* Replace with your actual image path */
+}
+
+.opened-icon {
+background-image: url('/assets/icon/Open-icon.png'); /* Replace with your actual image path */
+}
+
+.nav-menu {
+display: grid;
+grid-template-columns: repeat(4, auto);
+grid-gap: 10px;
+list-style: none;
+text-align: center;
+width: 35vw;
+justify-content: end;
+margin-right: 4rem;
+}
+
+.nav-item {
+height: 10px;
+}
+
+.nav-links {
+color: #fff;
+display: flex;
+align-items: center;
+text-decoration: none;
+padding: 0.5rem 0.1rem;
+height: 100%;
+}
+
+.nav-links:hover {
+border-bottom: 4px solid #fff;
+transition: all 0.2s ease-out;
+}
+
+.nav-links-mobile {
+display: none;
+}
+
+.menu-icon {
+display: none;
+}
+
+@media screen and (max-width: 960px) {
+    .NavbarItems {
+        position: relative;
+    }
+
+    .nav-menu {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 90vh;
+        position: absolute;
+        top: 70px;
+        left: -100%;
+        opacity: 1;
+        transition: all 0.5s ease;
+    }
+
+    .nav-menu.active {
+        background: #242222;
+        left: 0;
+        opacity: 1;
+        transition: all 0.5s ease;
+        z-index: 1;
+    }
+
+    .nav-links {
+        text-align: center;
+        padding: 4rem;
+        width: 80%;
+        display: table;
+    }
+
+    .nav-links:hover {
+       
+        color: #242424;
+        text-align: center;
+        margin: 1rem auto;
+        border-radius: 4px;
+        width: 80%;
+        text-decoration: none;
+        font-size: 1.5rem;
+        
+        color: #fff;
+        padding: 14px 20px;
+        border: 1px solid #fff;
+        transition: all 0.3s ease-out;
+    }
+
+    .menu-icon {
+        display: block;
+        position: absolute;
+        top: 0;
+        right: 0;
+        transform: translate(-100%, 60%);
+        font-size: 1.8rem;
+        cursor: pointer;
+    }
+
+    .closed-icon, .opened-icon {
+        width: 50px; /* Adjust the size as needed */
+        height: 50px; /* Adjust the size as needed */
+        display: inline-block;
+        background-size: cover; /* Ensures the image covers the element */
+        cursor: pointer; /* Changes the cursor on hover */
+        margin-top: -10px;
+        margin-right: -20px;
+    }
+
+    .nav-links-mobile {
+        display: block;
+        text-align: center;
+        margin: 2rem auto;
+        border-radius: 4px;
+        width: 80%;
+        text-decoration: none;
+        font-size: 1.5rem;
+        background-color: transparent;
+        color: #fff;
+        padding: 14px 20px;
+        border: 1px solid #fff;
+        transition: all 0.3s ease-out;
+    }
+
+    .nav-links-mobile:hover {
+        background: #fff;
+        color: #242424;
+        transition: 250ms;
+    }
+
+    .nav-item {
+        height: 120px;
+        }
+}

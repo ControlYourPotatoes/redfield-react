@@ -1,0 +1,78 @@
+/* Style for background video */
+video {
+    object-fit: cover; /* Ensures video covers the entire container */
+    width: 100%; /* Full width of the container */
+    height: 100%; /* Full height of the container */
+    position: fixed; /* Fixed position to overlay */
+    z-index: -1; /* Places video behind other content */
+}
+
+/* Container for buttons and text over the video */
+.btns-container {
+    padding-top: 90px; /* Top padding to avoid navbar overlap */
+    height: calc(100vh - 90px); /* Height adjusted to accommodate navbar */
+    width: 100%; /* Full width of the container */
+    display: flex; /* Enables flexible box layout */
+    flex-direction: column; /* Stacks child elements vertically */
+    justify-content: center; /* Centers content vertically in the container */
+    align-items: center; /* Centers content horizontally in the container */
+    box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.2); /* Adds a dark overlay to video */
+    object-fit: contain; /* Ensures content fits within the container */
+}
+
+/* Styling for main heading (h1) in buttons container */
+.btns-container > h1 {
+    color: #fff; /* White text color */
+    font-size: 100px; /* Large font size for heading */
+}
+
+/* Styling for paragraph (p) in buttons container */
+.btns-container > p {
+    margin-top: 8px; /* Top margin for spacing */
+    color: #fff; /* White text color */
+    font-size: 32px; /* Font size for paragraph text */
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; /* Font family for paragraph text */
+}
+
+/* Container for video buttons */
+.video-btns {
+    margin-top: 32px; /* Top margin for spacing above buttons */
+}
+
+/* Styling for buttons inside videos-btns container */
+.videos-btns .btn {
+    margin: 6px; /* Margin around buttons for spacing */
+}
+
+/* Styling for play circle icon in video section */
+.fa-play-circle {
+    margin-left: 4px; /* Left margin for spacing next to text */
+}
+
+/* Media query for screen sizes up to 960px */
+@media screen and (max-width: 960px) {
+    .btns-container > h1 {
+        font-size: 70px; /* Smaller font size for h1 on smaller screens */
+    }
+}
+
+/* Media query for screen sizes up to 768px */
+@media screen and (max-width: 768px) {
+    .btns-container > h1 {
+        font-size: 50px; /* Even smaller font size for h1 on very small screens */
+    }
+
+    .btns-container > p {
+        font-size: 30px; /* Adjusted font size for paragraph on very small screens */
+    }
+
+    /* Adjustments for button styles on mobile devices */
+    .btn-mobile {
+        display: block; /* Makes button full-width */
+        text-decoration: none; /* Removes underline from text */
+    }
+
+    .btn {
+        width: 100%; /* Full width button for easier touch interaction */
+    }
+}
