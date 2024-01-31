@@ -14,11 +14,12 @@ function App() {
         <Navbar />
         <Routes> 
           <Route path='/' element={<Home />} />
-          <Route path='/About' />
-          <Route path='/Contact_us'/>
-          <Route path='/Prices'/>
-          <Route path='/Sign-up'/>
-        </Routes>
+            <Route path='/About' />
+            <Route path='/Contact_us'/>
+            <Route path='/Prices'/>
+            <Route path='/Sign-up'/>
+          </Routes>
+          <Home />
     <div className='muiBottons'>
         <MuiButton />
         <MuiTypography />

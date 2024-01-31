@@ -1,86 +1,50 @@
-
-import React, { useState, /*useEffect*/ } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
+import { AppBar, Toolbar, Button, IconButton } from '@mui/material';
+import { makeStyles, Theme } from '@material-ui/core/styles';
 
+const useStyles = makeStyles((theme: Theme) => ({
+    toolbar: {
+      justifyContent: 'space-between',
+      backgroundColor: '#2E3B55',
+    },
+    logoButton: {
+      marginRight: theme.spacing(2),
+    },
+    logoImage: {
+      height: '50px', // Adjust the size as needed
+    },
+    navLinks: {
+      display: 'flex',
+    },
+    navButton: {
+      color: 'white',
+      textTransform: 'none',
+      marginLeft: theme.spacing(1),
+    },
+  }));
 
 const Navbar: React.FC = () => {
-    // State variable to track the click
-    const [click, setClick] = useState<boolean>(false);
-    //const [button, setButton] = useState<boolean>(true);
+  const classes = useStyles();
 
-    // Function to toggle the state
-    const handleClick = () => setClick(!click);
-    const closeMobileMenu = () => setClick(false);
-
-    /*const showButton = () => {
-        if (window.innerWidth <= 960) {
-            setButton(false);
-        } else {
-            setButton(true);
-        } 
-    };
-
-    useEffect(() => {
-        const handleResize = () => {
-            showButton();
-        };
-
-        handleResize(); // Call initially and on resize
-        window.addEventListener('resize', handleResize);
-
-        // Cleanup
-        return () => window.removeEventListener('resize', handleResize);
-    }, []);
-*/
-    return (
-        <div>
-            <nav className="navbar">
-                <div className="navbar-container">
-                    <div className="navbar-logo">
-                        <div className="image-container Logo">
-                            <img src='/assets/gifs/spinHurricane.gif' alt="Spinning-gif" className="image-style" />
-                        </div>
-                        <div>
-                            <Link to='/' className="image-container Letters" onClick={closeMobileMenu}>
-                                <img src='/assets/icon/Logo_small_white.png' alt="Letters" className="image-style" />
-                            </Link>
-                        </div>
-                    </div>
-                    <div className='menu-icon' onClick={handleClick}>
-                        <i className={click ? 'closed-icon' : 'opened-icon'} />
-                    </div>
-                    <ul className={click ? 'nav-menu active' : 'nav-menu'}>
-                        <li className='nav-item'>
-                            <Link to='/' className='nav-links' onClick={closeMobileMenu}>
-                                Home
-                            </Link>
-                        </li>
-                        <li className='nav-item'>
-                            <Link to='/About' className='nav-links' onClick={closeMobileMenu}>
-                                About
-                            </Link>
-                        </li>
-                        <li className='nav-item'>
-                            <Link to='/Contact_us' className='nav-links' onClick={closeMobileMenu}>
-                                Contact Us
-                            </Link>
-                        </li>
-                        <li className='nav-item'>
-                            <Link to='/Prices' className='nav-links' onClick={closeMobileMenu}>
-                                Prices
-                            </Link>
-                        </li>
-                        <li className='nav-item'>
-                            <Link to='/sign-up' className='nav-links-mobile' onClick={closeMobileMenu}>
-                                Sign up
-                            </Link>
-                        </li>
-                    </ul>
-
-                </div>
-            </nav>
+  return (
+    <AppBar position="static">
+      <Toolbar className={classes.toolbar}>
+        <Link to="/" className={classes.logoButton}>
+          <IconButton edge="start" color="inherit" aria-label="logo">
+            <img src="public\assets\icon\edited_logo.png" alt="Logo" className={classes.logoImage} />
+          </IconButton>
+        </Link>
+        <div className={classes.navLinks}>
+          <Button color="inherit" className={classes.navButton} component={Link} to="/">Home</Button>
+          <Button color="inherit" className={classes.navButton} component={Link} to="/About">About</Button>
+          <Button color="inherit" className={classes.navButton} component={Link} to="/Contact_us">Contact Us</Button>
+          <Button color="inherit" className={classes.navButton} component={Link} to="/Prices">Prices</Button>
+          <Button color="inherit" className={classes.navButton} component={Link} to="/sign-up">Sign Up</Button>
         </div>
-    );
+      </Toolbar>
+    </AppBar>
+  );
 };
 
 export default Navbar;
