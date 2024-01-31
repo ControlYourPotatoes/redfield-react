@@ -17,7 +17,7 @@ const PuertoRicoMap: React.FC = () => {
 
     return (
         <Box sx={{ borderColor: 'primary.main' }} >
-            <MapContainer center={[18.2208, -66.5901]} zoom={9} style={{ height: '400px', width: '200%' }}>
+            <MapContainer center={[18.2208, -66.5901]} zoom={9} style={{ height: '500px', width: '200%' }}>
             <TileLayer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
