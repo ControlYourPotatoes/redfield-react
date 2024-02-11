@@ -1,13 +1,15 @@
+
 import React from 'react';
 import './App.css';
-import { MuiButton } from './components/MuiButton';
-import { MuiTypography } from './components/MuiTypography';
-import PuertoRicoMap from './components/PuertoRicoMap';
-import Navbar from './components/Navbar';
+import { MuiButton } from './components/MuiButton'; // Make sure this component exists
+import { MuiTypography } from './components/MuiTypography'; // Make sure this component exists
+import PuertoRicoMap from './components/PuertoRicoMap'; // Make sure this component exists
+import Navbar from './components/Navbar'; // Ensure this is updated to MUI v5
 import './components/Navbar.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from './components/pages/Home';
-import PricingTable from './components/PricingTable'; // Make sure to create this component
+import Home from './components/pages/Home'; // Make sure this component exists
+import About from './components/About'; // Ensure this component exists and is updated
+import PricingTable from './components/PricingTable'; // Make sure this component is created
 
 function App() {
   return (
@@ -16,14 +18,14 @@ function App() {
         <Navbar />
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/About' element={<div>About Page Placeholder</div>} />
+          <Route path='/About' element={<About />} />
           <Route path='/Contact_us' element={
             <div>
               <p>For any inquiries, please contact us at:</p>
               <a href="mailto:project.h.redfield@gmail.com">project.h.redfield@gmail.com</a>
             </div>
           } />
-          <Route path='/Prices' element={<PricingTable />} /> {/* Render the PricingTable component here */}
+          <Route path='/Prices' element={<PricingTable />} />
           <Route path='/Sign-up' element={<div>Sign Up Placeholder</div>} />
         </Routes>
         <div className='muiButtons'>
