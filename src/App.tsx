@@ -1,4 +1,3 @@
-
 import React from 'react';
 import './App.css';
 import { MuiButton } from './components/MuiButton'; // Make sure this component exists
@@ -10,6 +9,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './components/pages/Home'; // Make sure this component exists
 import About from './components/About'; // Ensure this component exists and is updated
 import PricingTable from './components/PricingTable'; // Make sure this component is created
+import SignUp from './components/SignUp'; // Ensure this component is created and added
 
 function App() {
   return (
@@ -26,7 +26,7 @@ function App() {
             </div>
           } />
           <Route path='/Prices' element={<PricingTable />} />
-          <Route path='/Sign-up' element={<div>Sign Up Placeholder</div>} />
+          <Route path='/Sign-up' element={<SignUp />} /> {/* Updated this line to include SignUp component */}
         </Routes>
         <div className='muiButtons'>
           <MuiButton />
