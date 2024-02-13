@@ -1,48 +1,45 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { AppBar, Toolbar, Button, IconButton } from '@mui/material';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { styled } from '@mui/material/styles';
 
-const useStyles = makeStyles((theme: Theme) => ({
-    toolbar: {
-      justifyContent: 'space-between',
-      backgroundColor: '#2E3B55',
-    },
-    logoButton: {
-      marginRight: theme.spacing(2),
-    },
-    logoImage: {
-      height: '50px', // Adjust the size as needed
-    },
-    navLinks: {
-      display: 'flex',
-    },
-    navButton: {
-      color: 'white',
-      textTransform: 'none',
-      marginLeft: theme.spacing(1),
-    },
-  }));
+// Define styles using the `styled` utility
+const StyledToolbar = styled(Toolbar)(({ theme }) => ({
+  justifyContent: 'space-between',
+  backgroundColor: '#2E3B55',
+}));
+
+const LogoButton = styled(IconButton)(({ theme }) => ({
+  marginRight: theme.spacing(2),
+  '& img': {
+    height: '50px', // Adjust the size as needed
+  },
+}));
+
+const NavLink = styled(Button)(({ theme }) => ({
+  color: 'white',
+  textTransform: 'none',
+  marginLeft: theme.spacing(1),
+}));
 
 const Navbar: React.FC = () => {
-  const classes = useStyles();
-
   return (
     <AppBar position="static">
-      <Toolbar className={classes.toolbar}>
-        <Link to="/" className={classes.logoButton}>
-          <IconButton edge="start" color="inherit" aria-label="logo">
-            <img src="/assets/icon/edited_logo.png" alt="Logo" className={classes.logoImage} />
-          </IconButton>
+      <StyledToolbar>
+        <Link to="/">
+          <LogoButton edge="start" color="inherit" aria-label="logo">
+            {/* Ensure your image path is correct */}
+            <img src="/assets/icon/edited_logo.png" alt="Logo" />
+          </LogoButton>
         </Link>
-        <div className={classes.navLinks}>
-          <Button color="inherit" className={classes.navButton} component={Link} to="/">Home</Button>
-          <Button color="inherit" className={classes.navButton} component={Link} to="/About">About</Button>
-          <Button color="inherit" className={classes.navButton} component={Link} to="/Contact_us">Contact Us</Button>
-          <Button color="inherit" className={classes.navButton} component={Link} to="/Prices">Prices</Button>
-          <Button color="inherit" className={classes.navButton} component={Link} to="/sign-up">Sign Up</Button>
+        <div style={{ display: 'flex' }}>
+          <NavLink component={Link} to="/">Home</NavLink>
+          <NavLink component={Link} to="/About">About</NavLink>
+          <NavLink component={Link} to="/Contact_us">Contact Us</NavLink>
+          <NavLink component={Link} to="/Prices">Prices</NavLink>
+          <NavLink component={Link} to="/sign-up">Sign Up</NavLink>
         </div>
-      </Toolbar>
+      </StyledToolbar>
     </AppBar>
   );
 };

@@ -1,4 +1,5 @@
 import React from 'react';
+import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
@@ -17,14 +18,22 @@ function App() {
     <div>
       <Router>
         <Navbar />
-        <div style={{ marginTop: '10px' }}> {/* Adjust the margin-top based on the navbar's height */}
-          <Routes>
-            <Route path='/' element={<Home />} />
-            <Route path='/About' element={<About />} />
-            <Route path='/Contact_us' element={<ContactUs />} />
-            <Route path='/Prices' element={<Prices />} />
-            <Route path='/Sign-up' element={<SignUp />} />
-          </Routes>
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/About' element={<About />} />
+          <Route path='/Contact_us' element={
+            <div>
+              <p>For any inquiries, please contact us at:</p>
+              <a href="mailto:project.h.redfield@gmail.com">project.h.redfield@gmail.com</a>
+            </div>
+          } />
+          <Route path='/Prices' element={<PricingTable />} />
+          <Route path='/Sign-up' element={<SignUp />} /> {/* Updated this line to include SignUp component */}
+        </Routes>
+        <div className='muiButtons'>
+          <MuiButton />
+          <MuiTypography />
+          <PuertoRicoMap />
         </div>
       </Router>
 
