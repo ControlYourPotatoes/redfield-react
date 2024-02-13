@@ -2,10 +2,7 @@ import React from 'react';
 import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-
-import Navbar from './components/Navbar';
 import './components/Navbar.css';
-
 import Home from './components/pages/Home';
 // Import other page components here
 import About from './components/pages/About';
@@ -31,9 +28,6 @@ function App() {
           <Route path='/Sign-up' element={<SignUp />} /> {/* Updated this line to include SignUp component */}
         </Routes>
         <div className='muiButtons'>
-          <MuiButton />
-          <MuiTypography />
-          <PuertoRicoMap />
         </div>
       </Router>
 
