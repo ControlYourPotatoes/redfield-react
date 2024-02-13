@@ -32,7 +32,7 @@ const Navbar: React.FC = () => {
       <Toolbar className={classes.toolbar}>
         <Link to="/" className={classes.logoButton}>
           <IconButton edge="start" color="inherit" aria-label="logo">
-            <img src="public\assets\icon\edited_logo.png" alt="Logo" className={classes.logoImage} />
+            <img src="/assets/icon/edited_logo.png" alt="Logo" className={classes.logoImage} />
           </IconButton>
         </Link>
         <div className={classes.navLinks}>
