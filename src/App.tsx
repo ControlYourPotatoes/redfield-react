@@ -1,8 +1,14 @@
 
 import './App.css'
-import { MuiTypography } from './components/MuiTypography';
 import HurricaneMap from './components/Dashboard/HurricaneMap'; // Updated import
 import PuertoRicoMap from './components/PuertoRicoMap';
+
+declare module 'react' {
+  interface IntrinsicAttributes {
+    initialLat?: number;
+    initialLng?: number;
+  }
+}
 
 function App() {
   const initialLat = 18.2208; // Example latitude
