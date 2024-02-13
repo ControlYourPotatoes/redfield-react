@@ -4,7 +4,7 @@ import { AppBar, Toolbar, Button, IconButton } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
 // Define styles using the `styled` utility
-const StyledToolbar = styled(Toolbar)(({ theme }) => ({
+const StyledToolbar = styled(Toolbar)(() => ({
   justifyContent: 'space-between',
   backgroundColor: '#2E3B55',
 }));
@@ -12,7 +12,7 @@ const StyledToolbar = styled(Toolbar)(({ theme }) => ({
 const LogoButton = styled(IconButton)(({ theme }) => ({
   marginRight: theme.spacing(2),
   '& img': {
-    height: '50px', // Adjust the size as needed
+    height: '50px',
   },
 }));
 
@@ -26,18 +26,28 @@ const Navbar: React.FC = () => {
   return (
     <AppBar position="static">
       <StyledToolbar>
-        <Link to="/">
-          <LogoButton edge="start" color="inherit" aria-label="logo">
-            {/* Ensure your image path is correct */}
-            <img src="/assets/icon/edited_logo.png" alt="Logo" />
-          </LogoButton>
-        </Link>
+        <LogoButton edge="start" color="inherit" aria-label="logo">
+          <Link to="/">
+            <img src="/assets/gifs/Templogo.gif" alt="Logo" />
+          </Link>
+        </LogoButton>
         <div style={{ display: 'flex' }}>
-          <NavLink component={Link} to="/">Home</NavLink>
-          <NavLink component={Link} to="/About">About</NavLink>
-          <NavLink component={Link} to="/Contact_us">Contact Us</NavLink>
-          <NavLink component={Link} to="/Prices">Prices</NavLink>
-          <NavLink component={Link} to="/sign-up">Sign Up</NavLink>
+          {/* Wrap Link around Button text for proper routing */}
+          <NavLink>
+            <Link to="/" style={{ textDecoration: 'none', color: 'white' }}>Home</Link>
+          </NavLink>
+          <NavLink>
+            <Link to="/About" style={{ textDecoration: 'none', color: 'white' }}>About</Link>
+          </NavLink>
+          <NavLink>
+            <Link to="/Contact_us" style={{ textDecoration: 'none', color: 'white' }}>Contact Us</Link>
+          </NavLink>
+          <NavLink>
+            <Link to="/Prices" style={{ textDecoration: 'none', color: 'white' }}>Prices</Link>
+          </NavLink>
+          <NavLink>
+            <Link to="/sign-up" style={{ textDecoration: 'none', color: 'white' }}>Sign Up</Link>
+          </NavLink>
         </div>
       </StyledToolbar>
     </AppBar>

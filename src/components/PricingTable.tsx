@@ -1,7 +1,6 @@
-import * as React from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography } from '@mui/material';
 
-const createData = (category, windSpeed, payment) => {
+const createData = (category: string, windSpeed: string, payment: string) => {
   return { category, windSpeed, payment };
 }
 
