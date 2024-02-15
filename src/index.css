@@ -19,3 +19,7 @@ body {
   min-height: 100vh;
   /* Removed display: flex and place-items: center */
 }
+
+.leaflet-container {
+  height: 400px;
+}
