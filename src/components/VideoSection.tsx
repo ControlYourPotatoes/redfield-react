@@ -1,8 +1,8 @@
 import React from 'react';
 import { Typography, Button } from '@mui/material';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles(() => ({
   videoContainer: {
     position: 'relative',
     textAlign: 'center',
@@ -26,7 +26,7 @@ const VideoSection: React.FC = () => {
 
   return (
     <div className={classes.videoContainer}>
-      <video className={classes.video} src='/assets/videos/video2.mp4' autoPlay loop muted />
+      <video className={classes.video} src='/assets/videos/background_home.mp4' autoPlay loop muted />
       <div className={classes.videoText}>
         <Typography variant="h1" component="h2">
           Shielding You from the Storm: Your Partner in Hurricane Resilience

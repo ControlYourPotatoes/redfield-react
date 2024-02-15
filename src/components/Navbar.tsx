@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { AppBar, Toolbar, Button, IconButton } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import './Navbar.css';
+
 
 // Define styles using the `styled` utility
 const StyledToolbar = styled(Toolbar)(() => ({
@@ -28,7 +30,7 @@ const Navbar: React.FC = () => {
       <StyledToolbar>
         <LogoButton edge="start" color="inherit" aria-label="logo">
           <Link to="/">
-            <img src="/assets/gifs/Templogo.gif" alt="Logo" />
+            <img src="https://github.com/ControlYourPotatoes/redfield-react/blob/d7ae39231b627827c29081173bf57ac41f53ba66/public/assets/icon/edited_logo.png?raw=true" alt="Logo" />
           </Link>
         </LogoButton>
         <div style={{ display: 'flex' }}>
