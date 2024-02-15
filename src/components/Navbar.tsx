@@ -36,9 +36,6 @@ const Navbar: React.FC = () => {
         <div style={{ display: 'flex' }}>
           {/* Wrap Link around Button text for proper routing */}
           <NavLink>
-            <Link to="/" style={{ textDecoration: 'none', color: 'white' }}>Home</Link>
-          </NavLink>
-          <NavLink>
             <Link to="/About" style={{ textDecoration: 'none', color: 'white' }}>About</Link>
           </NavLink>
           <NavLink>
