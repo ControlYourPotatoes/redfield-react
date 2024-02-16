@@ -46,7 +46,7 @@ yarn build
 yarn preview 
 ```
 
-# Deploy the smart contracts (from the backend directory):
+## Deploy the smart contracts (from the backend directory):
 
 Follow the steps in the H-Redfield Contracts repository
 
@@ -54,10 +54,10 @@ Follow the steps in the H-Redfield Contracts repository
 
 The application's architecture seamlessly integrates frontend interactivity with a secure and efficient backend. Leveraging the latest in blockchain technology and data oracles, it provides a reliable and user-friendly platform for hurricane insurance.
 
-## Contributing
+# Contributing
 
 Contributions are welcome! Please read our contributing guidelines for how to contribute to our project.
 
-## License
+# License
 
 This project is licensed under the MIT License.
