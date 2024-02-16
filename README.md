@@ -1,30 +1,63 @@
-# React + TypeScript + Vite
+# Hurricane Insurance DApp
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
 
-Currently, two official plugins are available:
+This project is a decentralized application (DApp) for Hurricane Insurance, leveraging real-time data to enable automatic payouts without the need for claim filings or wait times. Utilizing Chainlink for secure and reliable external data, the application ensures that policyholders are compensated quickly and accurately in the event of a hurricane.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Technologies
+| Technology | Description |
+|------------|-------------|
+| ![React](https://img.shields.io/badge/-React-61DAFB?logo=react&logoColor=white&style=flat) | Frontend development with Vite, React, and TypeScript for a modern user experience. |
+| ![TypeScript](https://img.shields.io/badge/-TypeScript-3178C6?logo=typescript&logoColor=white&style=flat) | Used for static type checking in the frontend, enhancing development efficiency and reducing runtime errors. |
+| ![Leaflet](https://img.shields.io/badge/-Leaflet-199900?logo=leaflet&logoColor=white&style=flat) | For the interactive mapping and hurricane model simulation interface. |
+| ![Material UI](https://img.shields.io/badge/-Material%20UI-0081CB?logo=material-ui&logoColor=white&style=flat) | Components and styling features for a sleek and intuitive design. |
+| ![Ethereum](https://img.shields.io/badge/-Ethereum-3C3C3D?logo=ethereum&logoColor=white&style=flat) | Etherisc Generic Insurance Framework for the smart contract development, running on Ethereum. |
+| ![Chainlink](https://img.shields.io/badge/-Chainlink-375BD2?logo=chainlink&logoColor=white&style=flat) | For fetching real-time hurricane data to trigger accurate and prompt payouts. |
+| ![Google Cloud](https://img.shields.io/badge/-Google%20Cloud-4285F4?logo=google-cloud&logoColor=white&style=flat) | Hosting the entire infrastructure, ensuring scalability and reliability. |
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### Prerequisites
 
-- Configure the top-level `parserOptions` property like this:
+- Node.js
+- Yarn or npm
+- An Ethereum wallet with testnet or mainnet ETH
+- Google Cloud account
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+# Installation
+
+## Clone the repository and install dependencies for both the frontend and backend:
+
+```bash
+git clone <repository-url>
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+```bash
+yarn install # or npm install
+```
+
+## Set up environment variables:
+Create a `.env` file in both the `frontend` and `backend` directories with the necessary API keys and configuration values.
+
+## Start the frontend application:
+
+```bash
+yarn build
+yarn preview 
+```
+
+## Deploy the smart contracts (from the backend directory):
+
+Follow the steps in the H-Redfield Contracts repository
+
+# Architecture
+
+The application's architecture seamlessly integrates frontend interactivity with a secure and efficient backend. Leveraging the latest in blockchain technology and data oracles, it provides a reliable and user-friendly platform for hurricane insurance.
+
+# Contributing
+
+Contributions are welcome! Please read our contributing guidelines for how to contribute to our project.
+
+# License
+
+This project is licensed under the MIT License.
