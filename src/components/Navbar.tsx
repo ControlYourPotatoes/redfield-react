@@ -45,7 +45,7 @@ const Navbar: React.FC = () => {
             <Link to="/Prices" style={{ textDecoration: 'none', color: 'white' }}>Prices</Link>
           </NavLink>
           <NavLink>
-            <Link to="/sign-up" style={{ textDecoration: 'none', color: 'white' }}>Sign Up</Link>
+            <Link to="/GuidedStore" style={{ textDecoration: 'none', color: 'white' }}>Sign Up</Link>
           </NavLink>
         </div>
       </StyledToolbar>
