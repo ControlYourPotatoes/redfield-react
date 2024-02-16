@@ -1,6 +1,6 @@
 import React from 'react';
 import { Typography, Button, Paper } from '@mui/material';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@mui/styles';
 
 
 const useStyles = makeStyles(() => ({
