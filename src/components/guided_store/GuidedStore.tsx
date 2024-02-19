@@ -93,7 +93,8 @@ export default function GuidedStore() {
 
   return (
     <Box sx={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-      <Stepper alternativeLabel activeStep={activeStep}>
+      <Box sx={{ width: '60%', margin: 'auto' }}>
+        <Stepper alternativeLabel activeStep={activeStep}>
         {steps.map((label, index) => (
           <Step key={label}>
             <StepLabel
@@ -109,6 +110,7 @@ export default function GuidedStore() {
           </Step>
         ))}
       </Stepper>
+      </Box>   
       <Box sx={{ width: '70%', margin: 'auto' }}>
         <Paper elevation={3} sx={{ margin: 2, padding: 3 }}>
           <Box sx={{ maxWidth: '900px', width: '100%', margin: 'auto' }}>
