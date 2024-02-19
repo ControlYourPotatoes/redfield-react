@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, TextField, MenuItem } from '@mui/material'
+import { Box } from '@mui/material'
 import { MapContainer, TileLayer, useMapEvents, Marker } from 'react-leaflet';import 'leaflet/dist/leaflet.css';
 
 const PuertoRicoMap: React.FC = () => {
@@ -17,7 +17,7 @@ const PuertoRicoMap: React.FC = () => {
 
     return (
         <Box sx={{ borderColor: 'primary.main' }} >
-            <MapContainer center={[18.2208, -66.5901]} zoom={9} style={{ height: '500px', width: '200%' }}>
+            <MapContainer center={[18.2208, -66.5901]} zoom={9} style={{ height: '500px', width: '100%' }}>
             <TileLayer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
