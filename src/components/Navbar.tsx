@@ -1,7 +1,7 @@
 import React, { useState }from 'react';
 import { Link } from 'react-router-dom';
 import { AppBar, Toolbar, Button, useTheme, useMediaQuery, Drawer } from '@mui/material';
-import { styled } from '@mui/material/styles';
+import { styled } from '@mui/material/styles'; //this needs to be modified to work on Hectors PC @mui/material/styles
 import './Navbar.css';
 
 const MenuIcon = "./assets/icon/Open-icon.png"; // Path to your custom menu icon
