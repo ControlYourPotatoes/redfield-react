@@ -32,7 +32,7 @@ const BasicPolicyPricingTable = () => {
             <TableRow>
               <TableCell>Category</TableCell>
               <TableCell align="right">Wind Speed</TableCell>
-              <TableCell align="right">Payment</TableCell>
+              <TableCell align="right">Payment/year</TableCell>
               <TableCell align="right">Insurance Policy Price/year</TableCell>
             </TableRow>
           </TableHead>
@@ -66,7 +66,7 @@ const PremiumPolicyPricingTable = () => {
             <TableRow>
               <TableCell>Category</TableCell>
               <TableCell align="right">Wind Speed</TableCell>
-              <TableCell align="right">Payment</TableCell>
+              <TableCell align="right">Payment/year</TableCell>
               <TableCell align="right">Insurance Policy Price/year</TableCell>
             </TableRow>
           </TableHead>
@@ -85,7 +85,7 @@ const PremiumPolicyPricingTable = () => {
         </Table>
       </TableContainer>
       <Typography variant="body2" style={{ marginTop: '16px', textAlign: 'center' }}>
-        Please note: The payment amounts listed are illustrative examples only and may not reflect actual prices applicable to your region. Actual payments are subject to variation based on geographical location and other factors. We recommend consulting with our customer service team for detailed pricing information specific to your area.
+        Please note: The insurance policy comes into effect 15 days after being paid.The payment amounts listed are illustrative examples only and may not reflect actual prices applicable to your region. Actual payments are subject to variation based on geographical location and other factors. We recommend consulting with our customer service team for detailed pricing information specific to your area.
       </Typography>
     </>
   );
