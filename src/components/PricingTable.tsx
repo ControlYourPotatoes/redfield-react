@@ -1,7 +1,7 @@
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography } from '@mui/material';
 
-const createData = (category: string, windSpeed: string, payment: string, polizaPrice: string) => {
-  return { category, windSpeed, payment, polizaPrice };
+const createData = (category: string, windSpeed: string, payment: string, insurancePolicyPrice: string) => {
+  return { category, windSpeed, payment, insurancePolicyPrice };
 }
 
 const originalRows = [
@@ -29,7 +29,7 @@ const OriginalPricingTable = () => {
               <TableCell>Category</TableCell>
               <TableCell align="right">Wind Speed</TableCell>
               <TableCell align="right">Payment</TableCell>
-              <TableCell align="right">Poliza Price</TableCell>
+              <TableCell align="right">Insurance Policy Price</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -40,7 +40,7 @@ const OriginalPricingTable = () => {
                 </TableCell>
                 <TableCell align="right">{row.windSpeed}</TableCell>
                 <TableCell align="right">{row.payment}</TableCell>
-                <TableCell align="right">{row.polizaPrice}</TableCell>
+                <TableCell align="right">{row.insurancePolicyPrice}</TableCell>
               </TableRow>
             ))}
           </TableBody>
@@ -63,7 +63,7 @@ const AdditionalPricingTable = () => {
               <TableCell>Category</TableCell>
               <TableCell align="right">Wind Speed</TableCell>
               <TableCell align="right">Payment</TableCell>
-              <TableCell align="right">Poliza Price</TableCell>
+              <TableCell align="right">Insurance Policy Price</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -74,7 +74,7 @@ const AdditionalPricingTable = () => {
                 </TableCell>
                 <TableCell align="right">{row.windSpeed}</TableCell>
                 <TableCell align="right">{row.payment}</TableCell>
-                <TableCell align="right">{row.polizaPrice}</TableCell>
+                <TableCell align="right">{row.insurancePolicyPrice}</TableCell>
               </TableRow>
             ))}
           </TableBody>
