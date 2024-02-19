@@ -24,7 +24,7 @@ const BasicPolicyPricingTable = () => {
   return (
     <>
       <Typography variant="h6" gutterBottom component="div" style={{ padding: '16px' }}>
-        Basic Policy Payment Table
+        Basic Policy 
       </Typography>
       <TableContainer component={Paper}>
         <Table aria-label="basic policy table">
@@ -33,7 +33,7 @@ const BasicPolicyPricingTable = () => {
               <TableCell>Category</TableCell>
               <TableCell align="right">Wind Speed</TableCell>
               <TableCell align="right">Payment</TableCell>
-              <TableCell align="right">Insurance Policy Price</TableCell>
+              <TableCell align="right">Insurance Policy Price/year</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -58,7 +58,7 @@ const PremiumPolicyPricingTable = () => {
   return (
     <>
       <Typography variant="h6" gutterBottom component="div" style={{ padding: '16px' }}>
-        Premium Policy Payment Table
+        Premium Policy
       </Typography>
       <TableContainer component={Paper}>
         <Table aria-label="premium policy table">
@@ -67,7 +67,7 @@ const PremiumPolicyPricingTable = () => {
               <TableCell>Category</TableCell>
               <TableCell align="right">Wind Speed</TableCell>
               <TableCell align="right">Payment</TableCell>
-              <TableCell align="right">Insurance Policy Price</TableCell>
+              <TableCell align="right">Insurance Policy Price/year</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
