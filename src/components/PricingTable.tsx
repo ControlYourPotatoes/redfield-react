@@ -1,14 +1,17 @@
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography } from '@mui/material';
 
-const createData = (category: string, windSpeed: string, payment: string) => {
-  return { category, windSpeed, payment };
+const createData = (category: string, windSpeed: string, payment: string, polizaPrice: string) => {
+  return { category, windSpeed, payment, polizaPrice };
 }
 
 const rows = [
-  createData('Category 5', '≥ 157 mph', '$1,000'),
-  createData('Category 4', '137 - 156 mph', '$800'),
-  createData('Category 3', '111 - 136 mph', '$650'),
-  // Add more rows as needed
+  createData('Category 5', '≥ 157 mph', '$1,000', '$52'),
+  createData('Category 4', '137 - 156 mph', '$800', '$52'),
+  createData('Category 3', '111 - 136 mph', '$650', '$52'),
+  createData('Category 2', '96 - 110 mph', '$400', '$52'),
+  createData('Category 1', '≤ 95 mph', '$52', '$52'),
+  // Additional row
+  createData('New Category', 'New Wind Speed Range', '$2,000', '$104'),
 ];
 
 const PricingTable = () => {
@@ -24,6 +27,7 @@ const PricingTable = () => {
               <TableCell>Category</TableCell>
               <TableCell align="right">Wind Speed</TableCell>
               <TableCell align="right">Payment</TableCell>
+              <TableCell align="right">Poliza Price</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -37,14 +41,12 @@ const PricingTable = () => {
                 </TableCell>
                 <TableCell align="right">{row.windSpeed}</TableCell>
                 <TableCell align="right">{row.payment}</TableCell>
+                <TableCell align="right">{row.polizaPrice}</TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </TableContainer>
-      <Typography variant="body2" style={{ marginTop: '16px', textAlign: 'center' }}>
-        Please note: The payment amounts listed are illustrative examples only and may not reflect actual prices applicable to your region. Actual payments are subject to variation based on geographical location and other factors. We recommend consulting with our customer service team for detailed pricing information specific to your area.
-      </Typography>
     </>
   );
 }
