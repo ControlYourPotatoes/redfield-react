@@ -1,0 +1,27 @@
+/* GuidedStore.css */
+.guidedStore-container {
+  padding-top: 20px; /* Adjust the space as needed */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: calc(100vh - 100px); /* Assuming your navbar is 100px */
+  background-color: #f5f5f5; /* Your desired background color */
+}
+
+/* If you have specific styles for the stepper, you can add them here */
+.stepper {
+  background-color: #fff; /* For example, if you want a different background for the stepper */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Optional: adds a subtle shadow for depth */
+  width: 100%; /* Or max-width if you want to limit it */
+  margin-bottom: 30px; /* Space below the stepper */
+}
+
+/* Style for the step content area */
+.step-content {
+  width: 100%; /* Or max-width if you want to limit it */
+  padding: 20px;
+  margin-top: 10px; /* Space above the content */
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
