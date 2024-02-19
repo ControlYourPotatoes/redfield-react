@@ -1,23 +1,30 @@
 import React from 'react';
 import { Typography, Button } from '@mui/material';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@mui/styles';
 
 const useStyles = makeStyles(() => ({
-  videoContainer: {
+  container: {
     position: 'relative',
-    textAlign: 'center',
-    backgroundColor: 'white',
-    width: '1400px'
-  },
-  videoText: {
-    position: 'absolute',
-    top: '40%',
-    left: '10%',
-    right: '0%',
-    transform: 'translate(-10%, -50%)',
+    height: '100vh', // Adjust height as necessary
+    overflow: 'hidden', // Prevent video overflow
+    backgroundColor: 'gray', // Fallback color in case the video doesn't load
   },
   video: {
     width: '100%',
+    height: '100%', // Adjust this to '100vh' if you want the video to cover the full viewport height
+    objectFit: 'cover', // Ensure video covers the area intended
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    zIndex: -1, // Video stays in the background
+  },
+  content: {
+    position: 'absolute',
+    top: '40%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    color: 'white', // Ensure text is visible on the video background
+    zIndex: 2, // Ensure content appears above the video
   },
 }));
 
@@ -25,9 +32,9 @@ const VideoSection: React.FC = () => {
   const classes = useStyles();
 
   return (
-    <div className={classes.videoContainer}>
-      <video className={classes.video} src='/assets/videos/background_home.mp4' autoPlay loop muted />
-      <div className={classes.videoText}>
+    <div className={classes.container}>
+      <video className={classes.video} src='/assets/videos/water_and_trees.mp4' autoPlay loop muted controls/>
+      <div className={classes.content}>
         <Typography variant="h1" component="h2">
           Shielding You from the Storm: Your Partner in Hurricane Resilience
         </Typography>
