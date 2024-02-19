@@ -6,7 +6,7 @@ import BusinessIcon from '@mui/icons-material/BusinessCenter';
 import PaymentIcon from '@mui/icons-material/Payment';
 import InfoIcon from '@mui/icons-material/Info';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import './Guidedstore.css';
+import './GuidedStore.css';
 
 // Import individual step components
 import StartComponent from './StartComponent';
