@@ -1,10 +1,18 @@
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography } from '@mui/material';
+import React from 'react';
+import { Typography, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 
-const createData = (category, windSpeed, payment, insurancePolicyPrice) => {
+interface RowData {
+  category: string;
+  windSpeed: string;
+  payment: string;
+  insurancePolicyPrice: string;
+}
+
+const createData = (category: string, windSpeed: string, payment: string, insurancePolicyPrice: string): RowData => {
   return { category, windSpeed, payment, insurancePolicyPrice };
 }
 
-const basicPolicyRows = [
+const basicPolicyRows: RowData[] = [
   createData('Category 5', '≥ 157 mph', '$1,000', '$50'),
   createData('Category 4', '130 - 156 mph', '$450 - $800', '$50'),
   createData('Category 3', '111 - 129 mph', '$150 - $350', '$50'),
@@ -12,7 +20,7 @@ const basicPolicyRows = [
   createData('Category 1', '74 - 95 mph', '$25', '$50'),
 ];
 
-const premiumPolicyRows = [
+const premiumPolicyRows: RowData[] = [
   createData('Category 5', '≥ 157 mph', '$2,000', '$100'),
   createData('Category 4', '130 - 156 mph', '$900 - $1,600', '$100'),
   createData('Category 3', '111 - 129 mph', '$300 - $700', '$100'),
@@ -20,11 +28,11 @@ const premiumPolicyRows = [
   createData('Category 1', '74 - 95 mph', '$50', '$100'),
 ];
 
-const BasicPolicyPricingTable = () => {
+const BasicPolicyPricingTable: React.FC = () => {
   return (
     <>
       <Typography variant="h6" gutterBottom component="div" style={{ padding: '16px' }}>
-        Basic Policy 
+        Basic Policy
       </Typography>
       <TableContainer component={Paper}>
         <Table aria-label="basic policy table">
@@ -54,7 +62,7 @@ const BasicPolicyPricingTable = () => {
   );
 }
 
-const PremiumPolicyPricingTable = () => {
+const PremiumPolicyPricingTable: React.FC = () => {
   return (
     <>
       <Typography variant="h6" gutterBottom component="div" style={{ padding: '16px' }}>
@@ -85,7 +93,7 @@ const PremiumPolicyPricingTable = () => {
         </Table>
       </TableContainer>
       <Typography variant="body2" style={{ marginTop: '16px', textAlign: 'center' }}>
-        Please note: The insurance policy comes into effect 15 days after being paid.The payment amounts listed are illustrative examples only and may not reflect actual prices applicable to your region. Actual payments are subject to variation based on geographical location and other factors. We recommend consulting with our customer service team for detailed pricing information specific to your area.
+        Please note: The insurance policy comes into effect 15 days after being paid. The payment amounts listed are illustrative examples only and may not reflect actual prices applicable to your region. Actual payments are subject to variation based on geographical location and other factors. We recommend consulting with our customer service team for detailed pricing information specific to your area.
       </Typography>
     </>
   );
