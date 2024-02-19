@@ -1,6 +1,6 @@
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography } from '@mui/material';
 
-const createData = (category: string, windSpeed: string, payment: string, insurancePolicyPrice: string) => {
+const createData = (category, windSpeed, payment, insurancePolicyPrice) => {
   return { category, windSpeed, payment, insurancePolicyPrice };
 }
 
@@ -87,9 +87,6 @@ const PremiumPolicyPricingTable = () => {
           </TableBody>
         </Table>
       </TableContainer>
-      <Typography variant="body2" style={{ marginTop: '16px', textAlign: 'center' }}>
-        Please note: The payment amounts listed are illustrative examples only and may not reflect actual prices applicable to your region. Actual payments are subject to variation based on geographical location and other factors. We recommend consulting with our customer service team for detailed pricing information specific to your area.
-      </Typography>
     </>
   );
 }
