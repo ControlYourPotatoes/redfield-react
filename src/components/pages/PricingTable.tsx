@@ -28,6 +28,11 @@ const premiumPolicyRows: RowData[] = [
   createData('Category 1', '74 - 95 mph', '$50', '$100'),
 ];
 
+const tableCellStyle: React.CSSProperties = {
+  fontSize: '1rem',
+  fontWeight: 'bold',
+};
+
 const BasicPolicyPricingTable: React.FC = () => {
   return (
     <>
@@ -38,10 +43,10 @@ const BasicPolicyPricingTable: React.FC = () => {
         <Table aria-label="basic policy table">
           <TableHead>
             <TableRow>
-              <TableCell>Category</TableCell>
-              <TableCell align="right">Wind Speed</TableCell>
-              <TableCell align="right">Payment/year</TableCell>
-              <TableCell align="right">Insurance Policy Price/year</TableCell>
+              <TableCell style={tableCellStyle}>Category</TableCell>
+              <TableCell style={tableCellStyle} align="right">Wind Speed</TableCell>
+              <TableCell style={tableCellStyle} align="right">Payment/year</TableCell>
+              <TableCell style={tableCellStyle} align="right">Insurance Policy Price/year</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -72,10 +77,10 @@ const PremiumPolicyPricingTable: React.FC = () => {
         <Table aria-label="premium policy table">
           <TableHead>
             <TableRow>
-              <TableCell>Category</TableCell>
-              <TableCell align="right">Wind Speed</TableCell>
-              <TableCell align="right">Payment/year</TableCell>
-              <TableCell align="right">Insurance Policy Price/year</TableCell>
+              <TableCell style={tableCellStyle}>Category</TableCell>
+              <TableCell style={tableCellStyle} align="right">Wind Speed</TableCell>
+              <TableCell style={tableCellStyle} align="right">Payment/year</TableCell>
+              <TableCell style={tableCellStyle} align="right">Insurance Policy Price/year</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
