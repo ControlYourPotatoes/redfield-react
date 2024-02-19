@@ -50,9 +50,6 @@ const BasicPolicyPricingTable = () => {
           </TableBody>
         </Table>
       </TableContainer>
-      <Typography variant="body2" style={{ marginTop: '16px', textAlign: 'center' }}>
-        Please note: The payment amounts listed are illustrative examples only and may not reflect actual prices applicable to your region. Actual payments are subject to variation based on geographical location and other factors. We recommend consulting with our customer service team for detailed pricing information specific to your area.
-      </Typography>
     </>
   );
 }
@@ -87,6 +84,9 @@ const PremiumPolicyPricingTable = () => {
           </TableBody>
         </Table>
       </TableContainer>
+      <Typography variant="body2" style={{ marginTop: '16px', textAlign: 'center' }}>
+        Please note: The payment amounts listed are illustrative examples only and may not reflect actual prices applicable to your region. Actual payments are subject to variation based on geographical location and other factors. We recommend consulting with our customer service team for detailed pricing information specific to your area.
+      </Typography>
     </>
   );
 }
