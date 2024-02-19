@@ -4,24 +4,26 @@ const createData = (category: string, windSpeed: string, payment: string, poliza
   return { category, windSpeed, payment, polizaPrice };
 }
 
-const rows = [
+const originalRows = [
   createData('Category 5', '≥ 157 mph', '$1,000', '$52'),
   createData('Category 4', '137 - 156 mph', '$800', '$52'),
   createData('Category 3', '111 - 136 mph', '$650', '$52'),
   createData('Category 2', '96 - 110 mph', '$400', '$52'),
   createData('Category 1', '≤ 95 mph', '$52', '$52'),
-  // Additional row
+];
+
+const additionalRows = [
   createData('New Category', 'New Wind Speed Range', '$2,000', '$104'),
 ];
 
-const PricingTable = () => {
+const OriginalPricingTable = () => {
   return (
     <>
+      <Typography variant="h6" gutterBottom component="div" style={{ padding: '16px' }}>
+        Original Payment Table
+      </Typography>
       <TableContainer component={Paper}>
-        <Typography variant="h6" gutterBottom component="div" style={{ padding: '16px' }}>
-          Payment Table
-        </Typography>
-        <Table aria-label="simple table">
+        <Table aria-label="original table">
           <TableHead>
             <TableRow>
               <TableCell>Category</TableCell>
@@ -31,11 +33,8 @@ const PricingTable = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
-              <TableRow
-                key={row.category}
-                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-              >
+            {originalRows.map((row) => (
+              <TableRow key={row.category}>
                 <TableCell component="th" scope="row">
                   {row.category}
                 </TableCell>
@@ -51,4 +50,38 @@ const PricingTable = () => {
   );
 }
 
-export default PricingTable;
+const AdditionalPricingTable = () => {
+  return (
+    <>
+      <Typography variant="h6" gutterBottom component="div" style={{ padding: '16px' }}>
+        Additional Payment Table
+      </Typography>
+      <TableContainer component={Paper}>
+        <Table aria-label="additional table">
+          <TableHead>
+            <TableRow>
+              <TableCell>Category</TableCell>
+              <TableCell align="right">Wind Speed</TableCell>
+              <TableCell align="right">Payment</TableCell>
+              <TableCell align="right">Poliza Price</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {additionalRows.map((row) => (
+              <TableRow key={row.category}>
+                <TableCell component="th" scope="row">
+                  {row.category}
+                </TableCell>
+                <TableCell align="right">{row.windSpeed}</TableCell>
+                <TableCell align="right">{row.payment}</TableCell>
+                <TableCell align="right">{row.polizaPrice}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </>
+  );
+}
+
+export { OriginalPricingTable, AdditionalPricingTable };
