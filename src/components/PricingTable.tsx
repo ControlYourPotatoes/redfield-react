@@ -4,26 +4,30 @@ const createData = (category: string, windSpeed: string, payment: string, insura
   return { category, windSpeed, payment, insurancePolicyPrice };
 }
 
-const originalRows = [
-  createData('Category 5', '≥ 157 mph', '$1,000', '$52'),
-  createData('Category 4', '137 - 156 mph', '$800', '$52'),
-  createData('Category 3', '111 - 136 mph', '$650', '$52'),
-  createData('Category 2', '96 - 110 mph', '$400', '$52'),
-  createData('Category 1', '≤ 95 mph', '$52', '$52'),
+const basicPolicyRows = [
+  createData('Category 5', '≥ 157 mph', '$1,000', '$50'),
+  createData('Category 4', '130 - 156 mph', '$450 - $800', '$50'),
+  createData('Category 3', '111 - 129 mph', '$150 - $350', '$50'),
+  createData('Category 2', '76 - 110 mph', '$50 - $100', '$50'),
+  createData('Category 1', '74 - 95 mph', '$25', '$50'),
 ];
 
-const additionalRows = [
-  createData('New Category', 'New Wind Speed Range', '$2,000', '$104'),
+const premiumPolicyRows = [
+  createData('Category 5', '≥ 157 mph', '$2,000', '$100'),
+  createData('Category 4', '130 - 156 mph', '$900 - $1,600', '$100'),
+  createData('Category 3', '111 - 129 mph', '$300 - $700', '$100'),
+  createData('Category 2', '76 - 110 mph', '$100 - $200', '$100'),
+  createData('Category 1', '74 - 95 mph', '$50', '$100'),
 ];
 
-const OriginalPricingTable = () => {
+const BasicPolicyPricingTable = () => {
   return (
     <>
       <Typography variant="h6" gutterBottom component="div" style={{ padding: '16px' }}>
-        Original Payment Table
+        Basic Policy Payment Table
       </Typography>
       <TableContainer component={Paper}>
-        <Table aria-label="original table">
+        <Table aria-label="basic policy table">
           <TableHead>
             <TableRow>
               <TableCell>Category</TableCell>
@@ -33,7 +37,7 @@ const OriginalPricingTable = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {originalRows.map((row) => (
+            {basicPolicyRows.map((row) => (
               <TableRow key={row.category}>
                 <TableCell component="th" scope="row">
                   {row.category}
@@ -46,18 +50,21 @@ const OriginalPricingTable = () => {
           </TableBody>
         </Table>
       </TableContainer>
+      <Typography variant="body2" style={{ marginTop: '16px', textAlign: 'center' }}>
+        Please note: The payment amounts listed are illustrative examples only and may not reflect actual prices applicable to your region. Actual payments are subject to variation based on geographical location and other factors. We recommend consulting with our customer service team for detailed pricing information specific to your area.
+      </Typography>
     </>
   );
 }
 
-const AdditionalPricingTable = () => {
+const PremiumPolicyPricingTable = () => {
   return (
     <>
       <Typography variant="h6" gutterBottom component="div" style={{ padding: '16px' }}>
-        Additional Payment Table
+        Premium Policy Payment Table
       </Typography>
       <TableContainer component={Paper}>
-        <Table aria-label="additional table">
+        <Table aria-label="premium policy table">
           <TableHead>
             <TableRow>
               <TableCell>Category</TableCell>
@@ -67,7 +74,7 @@ const AdditionalPricingTable = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {additionalRows.map((row) => (
+            {premiumPolicyRows.map((row) => (
               <TableRow key={row.category}>
                 <TableCell component="th" scope="row">
                   {row.category}
@@ -80,8 +87,11 @@ const AdditionalPricingTable = () => {
           </TableBody>
         </Table>
       </TableContainer>
+      <Typography variant="body2" style={{ marginTop: '16px', textAlign: 'center' }}>
+        Please note: The payment amounts listed are illustrative examples only and may not reflect actual prices applicable to your region. Actual payments are subject to variation based on geographical location and other factors. We recommend consulting with our customer service team for detailed pricing information specific to your area.
+      </Typography>
     </>
   );
 }
 
-export { OriginalPricingTable, AdditionalPricingTable };
+export { BasicPolicyPricingTable, PremiumPolicyPricingTable };
