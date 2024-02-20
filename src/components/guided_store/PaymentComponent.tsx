@@ -1,56 +1,79 @@
 import React, { useState } from 'react';
-import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
-import { Button, CircularProgress, Typography } from '@mui/material';
+import { Button, CircularProgress, Typography, Card, CardContent, CardActionArea, CardMedia, Grid } from '@mui/material';
+import CardPayment from './CardPayment';
+import WalletPayment from './WalletPayment';
+import MetamaskIcon from "https://raw.githubusercontent.com/ControlYourPotatoes/redfield-react/Puga/public/assets/icon/metamask-icon.svg";
+import CardIcon from '@mui/icons-material/CreditCard';
 
 const PaymentComponent: React.FC = () => {
-  const stripe = useStripe();
-  const elements = useElements();
+  const [paymentMethod, setPaymentMethod] = useState<'wallet' | 'card'>('wallet');
   const [loading, setLoading] = useState(false);
+
+  const handlePaymentMethodChange = (method: 'wallet' | 'card') => {
+    setPaymentMethod(method);
+  };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setLoading(true);
 
-    if (!stripe || !elements) {
-      return;
-    }
+    // Simulate form submission or handle other logic here
 
-    const cardElement = elements.getElement(CardElement);
-
-    if (!cardElement) {
-      return;
-    }
-
-    const { error, paymentMethod } = await stripe.createPaymentMethod({
-      type: 'card',
-      card: cardElement,
-    });
-
-    setLoading(false);
-
-    if (error) {
-      console.error('Error:', error);
-    } else {
-      console.log('PaymentMethod:', paymentMethod);
-      // Handle successful payment here
-    }
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
   };
 
   return (
     <div>
       <Typography variant="h5" gutterBottom>
-        Payment Details
+        Select Payment Method
       </Typography>
+      <Grid container spacing={2}>
+        <Grid item xs={6}>
+          <Card variant={paymentMethod === 'wallet' ? 'elevation' : 'outlined'}>
+            <CardActionArea onClick={() => handlePaymentMethodChange('wallet')}>
+              <CardMedia
+                component="img"
+                height="140"
+                image={MetamaskIcon}
+                alt="Metamask Icon"
+              />
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="div">
+                  Wallet
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+          </Card>
+        </Grid>
+        <Grid item xs={6}>
+          <Card variant={paymentMethod === 'card' ? 'elevation' : 'outlined'}>
+            <CardActionArea onClick={() => handlePaymentMethodChange('card')}>
+              <CardIcon sx={{ fontSize: 100 }} />
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="div">
+                  Card
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+          </Card>
+        </Grid>
+      </Grid>
       <form onSubmit={handleSubmit}>
-        <CardElement />
+        {paymentMethod === 'wallet' ? (
+          <WalletPayment />
+        ) : (
+          <CardPayment />
+        )}
         <Button
           type="submit"
           variant="contained"
           color="primary"
-          disabled={!stripe}
+          disabled={loading}
           style={{ marginTop: '1rem' }}
         >
-          {loading ? <CircularProgress size={24} color="inherit" /> : 'Pay Now'}
+          {loading ? <CircularProgress size={24} color="inherit" /> : 'Proceed'}
         </Button>
       </form>
     </div>
