@@ -6,9 +6,9 @@ import Navbar from './components/Navbar';
 import Home from './components/pages/Home';
 import About from './components/pages/About';
 import ContactUs from './components/pages/ContactUs';
-import SignUp from './components/pages/SignUp';
 import Prices from './components/pages/Prices';
 
+import GuidedStore from './components/guided_store/GuidedStore';
 function App() {
   return (
     <div>
@@ -18,7 +18,7 @@ function App() {
         <Route path='/About' element={<About />} />
         <Route path='/Contact_us' element={<ContactUs />} />
         <Route path='/Prices' element={<Prices />} />
-        <Route path='/Sign-up' element={<SignUp />} />
+        <Route path='/GuidedStore' element={<GuidedStore />} />
       </Routes>
     </div>
   );
