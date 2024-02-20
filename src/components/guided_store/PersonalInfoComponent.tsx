@@ -59,7 +59,7 @@ const PersonalInfoComponent = () => {
                 </Grid>
             </Box>
             {/* Wrapper with padding for the map component */}
-            <Box component="FormMap" sx={{ padding: 2 }}>
+            <Box sx={{ padding: 2 }}>
                 <PuertoRicoMap />
             </Box>
             <Button variant="contained" color="primary" sx={{ mt: 2 }}>
