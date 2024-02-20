@@ -35,9 +35,10 @@ const PaymentComponent: React.FC = () => {
             <CardActionArea onClick={() => handlePaymentMethodChange('wallet')}>
               <CardMedia
                 component="img"
-                height="140"
-                image={MetamaskIcon}
+                height="130"
+                src="https://raw.githubusercontent.com/ControlYourPotatoes/redfield-react/Puga/public/assets/icon/metamask-icon.svg"
                 alt="Metamask Icon"
+                style={{ width: 'auto', maxHeight: '100%', padding: '30px',}}
               />
               <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
@@ -50,7 +51,7 @@ const PaymentComponent: React.FC = () => {
         <Grid item xs={6}>
           <Card variant={paymentMethod === 'card' ? 'elevation' : 'outlined'}>
             <CardActionArea onClick={() => handlePaymentMethodChange('card')}>
-              <CardIcon sx={{ fontSize: 100 }} />
+              <CardIcon sx={{ fontSize: 160, padding: '10px', width: 'auto' }} />
               <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
                   Card
@@ -62,7 +63,7 @@ const PaymentComponent: React.FC = () => {
       </Grid>
       <form onSubmit={handleSubmit}>
         {paymentMethod === 'wallet' ? (
-          <WalletPayment />
+          <WalletPayment handlePaymentMethodChange={handlePaymentMethodChange} />
         ) : (
           <CardPayment />
         )}
