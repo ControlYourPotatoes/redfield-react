@@ -1,5 +1,6 @@
 import React from 'react';
-import { Typography, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import { Typography, Paper, Table, TableBody,
+        TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 
 interface RowData {
   category: string;
@@ -98,7 +99,11 @@ const PremiumPolicyPricingTable: React.FC = () => {
         </Table>
       </TableContainer>
       <Typography variant="body2" style={{ marginTop: '16px', textAlign: 'center' }}>
-        Please note: The insurance policy comes into effect 15 days after being paid. The payment amounts listed are illustrative examples only and may not reflect actual prices applicable to your region. Actual payments are subject to variation based on geographical location and other factors. We recommend consulting with our customer service team for detailed pricing information specific to your area.
+        Please note: The insurance policy comes into effect 15 days after being paid. 
+        The payment amounts listed are illustrative examples only and may not reflect 
+        actual prices applicable to your region. Actual payments are subject to variation 
+        based on geographical location and other factors. We recommend consulting with our 
+        customer service team for detailed pricing information specific to your area.
       </Typography>
     </>
   );
