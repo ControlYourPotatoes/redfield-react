@@ -13,6 +13,6 @@ module.exports = {
     'react-refresh/only-export-components': [
       'warn',
       { allowConstantExport: true },
-    ],
+    ], "max-len": ["error", 100],
   },
 }
