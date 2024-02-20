@@ -20,11 +20,11 @@ const LogoButton = styled(Button)(({ theme }) => ({
   },
 }));
 
-const Hurricane = styled('img')(({ theme }) => ({
+const Hurricane = styled('img')({
   //  marginRight: '16px', // Adjust the spacing as needed
   height: '120px', // Adjust the size as needed
   // Add more styles as needed
-}));
+});
 
 const IconContainer = styled('div')({
   display: 'flex',

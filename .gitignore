@@ -25,3 +25,11 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+#trashFiles
+favicon.ico
+logo192.png
+logo512.png
+manifest.json
+.gitignore
+yarn.lock

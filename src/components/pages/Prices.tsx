@@ -1,11 +1,13 @@
 import React from 'react';
-import PricingTable from '../PricingTable';
+import { BasicPolicyPricingTable, PremiumPolicyPricingTable } from './PricingTable';
 
-const Prices = () => {
+
+const Prices: React.FC = () => {
     return (
         <div>
             <h1>Prices</h1>
-            <PricingTable />
+            <BasicPolicyPricingTable />
+            <PremiumPolicyPricingTable />
         </div>
     );
 };
