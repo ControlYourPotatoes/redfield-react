@@ -44,7 +44,7 @@ const VideoSection: React.FC = () => {
 
   return (
     <div className={classes.container}>
-      <video className={classes.video} src='/assets/videos/water_and_trees.mp4' autoPlay loop muted controls/>
+      <video className={classes.video} src='/assets/videos/water_and_trees.mp4' autoPlay loop muted/>
       <div className={classes.content}>
         <Typography variant="h1" component="h2">
           Shielding You from the Storm: Your Partner in Hurricane Resilience

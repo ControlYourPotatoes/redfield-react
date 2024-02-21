@@ -33,3 +33,4 @@ logo512.png
 manifest.json
 .gitignore
 yarn.lock
+package-lock.json
