@@ -1,9 +1,13 @@
 import React from 'react';
+// import HurricaneMap from './HurricaneMap';
+import Box from '@mui/material/Box';
 
 const Dashboard = () => {
     return (
         <div>
-            yolo wey
+            <Box>
+                <h1>Dashboard</h1>
+            </Box>
         </div>
     );
 };
