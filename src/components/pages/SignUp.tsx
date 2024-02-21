@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import { Container, TextField, Button, Typography } from '@mui/material';
+import { Container, TextField, Button, Typography, CircularProgress, Alert } from '@mui/material';
 
 const SignUp: React.FC = () => {
     const [formData, setFormData] = useState({
@@ -11,7 +11,10 @@ const SignUp: React.FC = () => {
 
     const stripe = useStripe();
     const elements = useElements();
+
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
+    const [success, setSuccess] = useState<string | null>(null);
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setFormData({
@@ -23,54 +26,80 @@ const SignUp: React.FC = () => {
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         setLoading(true);
+        setError(null);
+        setSuccess(null);
 
         if (!stripe || !elements) {
+            setError("Stripe has not loaded yet. Please try again later.");
+            setLoading(false);
             return;
         }
 
         const cardElement = elements.getElement(CardElement);
 
         if (!cardElement) {
+            setError("Stripe Card Element has not loaded yet. Please try again later.");
+            setLoading(false);
             return;
         }
 
-        // Call your backend server to create a payment intent and get the client secret
-        const response = await fetch('/create-payment-intent', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                amount: 1000, // Amount in cents
-            }),
-        });
-
-        const { clientSecret } = await response.json();
-
-        // Confirm the card payment with the client secret
-        const { error } = await stripe.confirmCardPayment(clientSecret, {
-            payment_method: {
-                card: cardElement,
-                billing_details: {
-                    name: formData.name,
-                    email: formData.email,
+        try {
+            const paymentIntentResponse = await fetch('/create-payment-intent', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
                 },
-            },
-        });
+                body: JSON.stringify({
+                    amount: 1000, // Amount in cents
+                }),
+            });
 
-        setLoading(false);
+            const paymentIntent = await paymentIntentResponse.json();
 
-        if (error) {
-            console.error('Error:', error);
-        } else {
-            console.log('Payment successful');
-            // Handle successful payment
+            const paymentResult = await stripe.confirmCardPayment(paymentIntent.clientSecret, {
+                payment_method: {
+                    card: cardElement,
+                    billing_details: {
+                        name: formData.name,
+                        email: formData.email,
+                    },
+                },
+            });
+
+            if (paymentResult.error) {
+                setError(`Payment failed: ${paymentResult.error.message}`);
+                setLoading(false);
+                return;
+            }
+
+            // Here, send the user information to your backend
+            const userInfoResponse = await fetch('/save-user-info', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+
+            if (!userInfoResponse.ok) {
+                throw new Error('Failed to save user information');
+            }
+
+            const userInfo = await userInfoResponse.json();
+            console.log('User information saved', userInfo);
+            setSuccess("Payment successful and user information saved.");
+        } catch (error) {
+            setError(`Error: ${error instanceof Error ? error.message : 'An unknown error occurred'}`);
+        } finally {
+            setLoading(false);
         }
     };
 
     return (
         <Container maxWidth="sm">
             <Typography variant="h4" gutterBottom>Sign Up</Typography>
+            {error && <Alert severity="error">{error}</Alert>}
+            {success && <Alert severity="success">{success}</Alert>}
             <form onSubmit={handleSubmit}>
                 <TextField
                     fullWidth
@@ -105,7 +134,7 @@ const SignUp: React.FC = () => {
                     disabled={!stripe || loading}
                     style={{ marginTop: '20px' }}
                 >
-                    {loading ? 'Processing...' : 'Submit'}
+                    {loading ? <CircularProgress size={24} /> : 'Submit'}
                 </Button>
             </form>
         </Container>
@@ -113,4 +142,3 @@ const SignUp: React.FC = () => {
 };
 
 export default SignUp;
-
