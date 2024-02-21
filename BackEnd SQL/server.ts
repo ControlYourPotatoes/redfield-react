@@ -1,34 +1,41 @@
-const express = require('express');
-const mysql = require('mysql');
-const cors = require('cors');
+import express, { Request, Response } from 'express';
+import mysql from 'mysql';
+import cors from 'cors';
 
 const app = express();
-const port = 3001; // Use a different port if your React app runs on 3000
+const port = 3001;
 
-// Middleware
 app.use(cors());
-app.use(express.json()); // for parsing application/json
+app.use(express.json());
 
-// MySQL database connection
 const connection = mysql.createConnection({
   host: 'localhost',
-  user: 'your_username',
-  password: 'your_password',
-  database: 'user_data'
+  user: 'your_username', // Replace with your MySQL username
+  password: 'your_password', // Replace with your MySQL password
+  database: 'your_database_name' // Ensure this database exists
 });
 
 connection.connect(error => {
-  if (error) throw error;
+  if (error) {
+    console.error('An error occurred while connecting to the database:', error);
+    return;
+  }
   console.log('Successfully connected to the database.');
 });
 
-// API endpoint to handle signup form submission
-app.post('/signup', (req, res) => {
-  const { name, phoneNumber, email } = req.body;
-  const sql = 'INSERT INTO signups (name, phone_number, email) VALUES (?, ?, ?)';
-  
-  connection.query(sql, [name, phoneNumber, email], (error, results) => {
+app.post('/signup', (req: Request, res: Response) => {
+  const { name, phoneNumber, email, address } = req.body;
+
+  // Basic validation
+  if (!name || !phoneNumber || !email || !address) {
+    return res.status(400).send('Missing fields in request body');
+  }
+
+  const sql = 'INSERT INTO users (name, phone_number, email, address) VALUES (?, ?, ?, ?)';
+
+  connection.query(sql, [name, phoneNumber, email, address], (error, results) => {
     if (error) {
+      console.error('Error inserting data into database:', error);
       return res.status(500).send('Error in saving to database');
     }
     res.status(200).send('Signup successful');
