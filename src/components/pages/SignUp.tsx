@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { Container, TextField, Button, Typography, CircularProgress, Alert } from '@mui/material';
+import { signUpSchema } from './validation'; // Adjust this import path as necessary
+import * as yup from 'yup'; // Ensure yup is installed and imported
 
 const SignUp: React.FC = () => {
     const [formData, setFormData] = useState({
@@ -29,21 +31,24 @@ const SignUp: React.FC = () => {
         setError(null);
         setSuccess(null);
 
-        if (!stripe || !elements) {
-            setError("Stripe has not loaded yet. Please try again later.");
-            setLoading(false);
-            return;
-        }
-
-        const cardElement = elements.getElement(CardElement);
-
-        if (!cardElement) {
-            setError("Stripe Card Element has not loaded yet. Please try again later.");
-            setLoading(false);
-            return;
-        }
-
         try {
+            // Validate formData using signUpSchema from yup
+            await signUpSchema.validate(formData, { abortEarly: false });
+
+            if (!stripe || !elements) {
+                setError("Stripe has not loaded yet. Please try again later.");
+                setLoading(false);
+                return;
+            }
+
+            const cardElement = elements.getElement(CardElement);
+
+            if (!cardElement) {
+                setError("Stripe Card Element has not loaded yet. Please try again later.");
+                setLoading(false);
+                return;
+            }
+
             const paymentIntentResponse = await fetch('/create-payment-intent', {
                 method: 'POST',
                 headers: {
@@ -72,7 +77,7 @@ const SignUp: React.FC = () => {
                 return;
             }
 
-            // Here, send the user information to your backend
+            // Send the user information to your backend
             const userInfoResponse = await fetch('/save-user-info', {
                 method: 'POST',
                 headers: {
@@ -89,7 +94,12 @@ const SignUp: React.FC = () => {
             console.log('User information saved', userInfo);
             setSuccess("Payment successful and user information saved.");
         } catch (error) {
-            setError(`Error: ${error instanceof Error ? error.message : 'An unknown error occurred'}`);
+            if (error instanceof yup.ValidationError) {
+                // Handle validation errors here
+                setError(error.errors.join(', ')); // Join all validation error messages
+            } else {
+                setError(`Error: ${error instanceof Error ? error.message : 'An unknown error occurred'}`);
+            }
         } finally {
             setLoading(false);
         }
