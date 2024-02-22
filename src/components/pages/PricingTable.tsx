@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography, Paper, Table, TableBody,
+import { Container, Typography, Paper, Table, TableBody,
         TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 
 interface RowData {
@@ -36,7 +36,7 @@ const tableCellStyle: React.CSSProperties = {
 
 const BasicPolicyPricingTable: React.FC = () => {
   return (
-    <>
+    <Container id="prices">
       <Typography variant="h6" gutterBottom component="div" style={{ padding: '16px' }}>
         Basic Policy
       </Typography>
@@ -64,7 +64,7 @@ const BasicPolicyPricingTable: React.FC = () => {
           </TableBody>
         </Table>
       </TableContainer>
-    </>
+    </Container>
   );
 }
 
