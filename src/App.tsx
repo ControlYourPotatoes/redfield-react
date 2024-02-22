@@ -6,6 +6,7 @@ import About from './components/pages/About';
 import Prices from './components/pages/Prices';
 import ContactUs from './components/pages/ContactUs';
 import GuidedStore from './components/guided_store/GuidedStore';
+import Dashboard from './components/Dashboard/Dashboard';
 
 // MainPage component that includes Home, Prices, and About
 const MainPage = () => (
@@ -25,6 +26,7 @@ function App() {
         <Route path='/Contact_us' element={<ContactUs />} />
         <Route path='/GuidedStore' element={<GuidedStore />} />
         <Route path="*" element={<Navigate to="/" replace />} />
+        <Route path='/Dashboard' element={<Dashboard />} />
       </Routes>
     </div>
   );
