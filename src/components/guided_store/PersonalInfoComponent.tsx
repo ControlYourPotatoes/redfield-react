@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Typography, TextField, Grid, Button, Box } from '@mui/material';
 import * as yup from 'yup';
+import PuertoRicoMap from '../PuertoRicoMap'; // Ensure this path matches the location of your PuertoRicoMap component
 
-// Define the validation schema using Yup
+// Validation schema
 const validationSchema = yup.object({
   firstName: yup.string().required('First Name is required'),
   lastName: yup.string().required('Last Name is required'),
@@ -22,14 +23,13 @@ const PersonalInfoComponent = () => {
 
   const [errors, setErrors] = useState({});
 
-  // Handle field change
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormValues({ ...formValues, [name]: value });
-    setErrors({ ...errors, [name]: '' }); // Optionally reset field error
+    // Optionally reset errors
+    setErrors({ ...errors, [name]: '' });
   };
 
-  // Handle form submission
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -37,13 +37,19 @@ const PersonalInfoComponent = () => {
       await validationSchema.validate(formValues, { abortEarly: false });
       setErrors({}); // Reset errors if validation succeeds
 
-      // API call to send data to the server
+      // Here, insert the API call logic to send data to your backend
       const response = await fetch('http://localhost:3001/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formValues),
+        body: JSON.stringify({
+          firstName: formValues.firstName,
+          lastName: formValues.lastName,
+          phone: formValues.phone,
+          email: formValues.email,
+          address: formValues.address,
+        }),
       });
 
       if (!response.ok) {
@@ -51,18 +57,18 @@ const PersonalInfoComponent = () => {
       }
 
       console.log('Form submission successful');
-      // Process server response or clear form, etc.
+      // Handle success here, e.g., showing a success message or redirecting the user
     } catch (err) {
+      console.error('Submission error:', err);
       if (err instanceof yup.ValidationError) {
+        // Transform Yup validation errors to a more manageable structure
         const formErrors = err.inner.reduce((acc, current) => {
           acc[current.path] = current.message;
           return acc;
         }, {});
         setErrors(formErrors);
-      } else {
-        console.error('Submission error:', err);
-        // Handle other errors (e.g., network error, server error)
       }
+      // Handle other errors, e.g., network error or server error
     }
   };
 
@@ -144,6 +150,10 @@ const PersonalInfoComponent = () => {
             </Button>
           </Grid>
         </Grid>
+      </Box>
+      {/* Displaying the Puerto Rico map component below the form */}
+      <Box sx={{ padding: 2 }}>
+        <PuertoRicoMap />
       </Box>
     </div>
   );
