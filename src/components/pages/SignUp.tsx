@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
+import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { Container, TextField, Button, Typography } from '@mui/material';
 
 const SignUp: React.FC = () => {
-    // State to store form field values
     const [formData, setFormData] = useState({
         name: '',
         phoneNumber: '',
         email: '',
     });
 
-    // Handle form field changes
+    const stripe = useStripe();
+    const elements = useElements();
+    const [loading, setLoading] = useState(false);
+
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setFormData({
             ...formData,
@@ -17,11 +20,52 @@ const SignUp: React.FC = () => {
         });
     };
 
-    // Handle form submission
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault(); // Prevent the default form submission behavior
-        console.log('Form Data Submitted:', formData);
-        // Here you can also send the formData to a server or API endpoint
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        setLoading(true);
+
+        if (!stripe || !elements) {
+            return;
+        }
+
+        const cardElement = elements.getElement(CardElement);
+
+        if (!cardElement) {
+            return;
+        }
+
+        // Call your backend server to create a payment intent and get the client secret
+        const response = await fetch('/create-payment-intent', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                amount: 1000, // Amount in cents
+            }),
+        });
+
+        const { clientSecret } = await response.json();
+
+        // Confirm the card payment with the client secret
+        const { error } = await stripe.confirmCardPayment(clientSecret, {
+            payment_method: {
+                card: cardElement,
+                billing_details: {
+                    name: formData.name,
+                    email: formData.email,
+                },
+            },
+        });
+
+        setLoading(false);
+
+        if (error) {
+            console.error('Error:', error);
+        } else {
+            console.log('Payment successful');
+            // Handle successful payment
+        }
     };
 
     return (
@@ -53,8 +97,15 @@ const SignUp: React.FC = () => {
                     value={formData.email}
                     onChange={handleChange}
                 />
-                <Button type="submit" variant="contained" color="primary" style={{ marginTop: '20px' }}>
-                    Submit
+                <CardElement />
+                <Button
+                    type="submit"
+                    variant="contained"
+                    color="primary"
+                    disabled={!stripe || loading}
+                    style={{ marginTop: '20px' }}
+                >
+                    {loading ? 'Processing...' : 'Submit'}
                 </Button>
             </form>
         </Container>
@@ -62,3 +113,4 @@ const SignUp: React.FC = () => {
 };
 
 export default SignUp;
+

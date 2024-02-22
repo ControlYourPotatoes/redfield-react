@@ -1,5 +1,5 @@
 import React from 'react';
-import { Stepper, Step, StepLabel, Button, Typography, Box } from '@mui/material';
+import { Stepper, Step, StepLabel, Button, Typography, Box, Paper } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import HomeIcon from '@mui/icons-material/Home';
 import BusinessIcon from '@mui/icons-material/BusinessCenter';
@@ -74,9 +74,27 @@ export default function GuidedStore() {
     setActiveStep(0);
   };
 
+  const renderActiveComponent = (step: number) => {
+    switch (step) {
+      case 0:
+        return <StartComponent />;
+      case 1:
+        return <CoverageComponent />;
+      case 2:
+        return <PersonalInfoComponent />;
+      case 3:
+        return <PaymentComponent />;
+      case 4:
+        return <ConfirmationComponent />;
+      default:
+        return null;
+    }
+  };
+
   return (
-    <div>
-      <Stepper alternativeLabel activeStep={activeStep}>
+    <Box sx={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <Box sx={{ width: '60%', margin: 'auto' }}>
+        <Stepper alternativeLabel activeStep={activeStep}>
         {steps.map((label, index) => (
           <Step key={label}>
             <StepLabel
@@ -92,14 +110,15 @@ export default function GuidedStore() {
           </Step>
         ))}
       </Stepper>
-      <div>
-        {activeStep === 0 && <StartComponent />}
-        {activeStep === 1 && <CoverageComponent />}
-        {activeStep === 2 && <PersonalInfoComponent />}
-        {activeStep === 3 && <PaymentComponent />}
-        {activeStep === 4 && <ConfirmationComponent />}
-      </div>
-      <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+      </Box>   
+      <Box sx={{ width: '70%', margin: 'auto' }}>
+        <Paper elevation={3} sx={{ margin: 2, padding: 3 }}>
+          <Box sx={{ maxWidth: '900px', width: '100%', margin: 'auto' }}>
+            {renderActiveComponent(activeStep)}
+          </Box>
+        </Paper>
+      </Box>
+      <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2, width: '70%', margin: 'auto' }}>
         <Button color="primary" disabled={activeStep === 0} onClick={handleBack} sx={{ mr: 1 }}>
           Back
         </Button>
@@ -116,6 +135,6 @@ export default function GuidedStore() {
           <Button onClick={handleReset}>Reset</Button>
         </React.Fragment>
       )}
-    </div>
+    </Box>
   );
 }

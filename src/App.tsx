@@ -7,6 +7,7 @@ import Home from './components/pages/Home';
 import About from './components/pages/About';
 import ContactUs from './components/pages/ContactUs';
 import Prices from './components/pages/Prices';
+import Dashboard from './components/Dashboard/Dashboard';
 
 import GuidedStore from './components/guided_store/GuidedStore';
 function App() {
@@ -19,6 +20,7 @@ function App() {
         <Route path='/Contact_us' element={<ContactUs />} />
         <Route path='/Prices' element={<Prices />} />
         <Route path='/GuidedStore' element={<GuidedStore />} />
+        <Route path='/Dashboard' element={<Dashboard />} />
       </Routes>
     </div>
   );
