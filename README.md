@@ -61,3 +61,7 @@ Contributions are welcome! Please read our contributing guidelines for how to co
 # License
 
 This project is licensed under the MIT License.
+
+# Authors
+
+

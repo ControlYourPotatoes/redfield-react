@@ -4,9 +4,14 @@
   font-weight: 400;
 
   color-scheme: light dark;
+<<<<<<< HEAD
   color: rgba(255, 255, 255, 0.87); /* font color*/
   /*background-color: #f60f0f; /*background color */
   background: linear-gradient(90deg, rgb(10, 111, 243) 0%, rgb(26, 23, 23) 100%);
+=======
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #ead7d7;
+>>>>>>> origin/Puga
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;

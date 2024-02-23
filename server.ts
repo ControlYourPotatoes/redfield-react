@@ -10,9 +10,9 @@ app.use(express.json());
 
 const connection = mysql.createConnection({
   host: 'localhost',
-  user: 'your_username', // Replace with your MySQL username
-  password: 'your_password', // Replace with your MySQL password
-  database: 'your_database_name' // Ensure this database exists
+  user: 'H_Redfield', // Replace with your MySQL username
+  password: 'H_Redfield_pwd', // Replace with your MySQL password
+  database: 'H_Redfield_db' // Ensure this database exists
 });
 
 connection.connect(error => {

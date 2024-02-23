@@ -20,11 +20,11 @@ const LogoButton = styled(Button)(({ theme }) => ({
   },
 }));
 
-const Hurricane = styled('img')({
+const Hurricane = styled('img')(({ }) => ({
   //  marginRight: '16px', // Adjust the spacing as needed
   height: '120px', // Adjust the size as needed
   // Add more styles as needed
-});
+}));
 
 const IconContainer = styled('div')({
   display: 'flex',
@@ -122,7 +122,28 @@ const Navbar: React.FC = () => {
           </>
         ) : (
           // Web view - Full navbar links
+<<<<<<< HEAD
             navigationList()
+=======
+        <div style={{ display: 'flex' }}>
+          {/* Wrap Link around Button text for proper routing */}
+          <NavLink>
+            <Link to="/About" style={{ textDecoration: 'none', color: 'white' }}>About</Link>
+          </NavLink>
+          <NavLink>
+            <Link to="/Contact_us" style={{ textDecoration: 'none', color: 'white' }}>Contact Us</Link>
+          </NavLink>
+          <NavLink>
+            <Link to="/Prices" style={{ textDecoration: 'none', color: 'white' }}>Prices</Link>
+          </NavLink>
+          <NavLink>
+            <Link to="/GuidedStore" style={{ textDecoration: 'none', color: 'white' }}>Sign Up</Link>
+          </NavLink>
+          <NavLink>
+            <Link to="/Dashboard" style={{ textDecoration: 'none', color: 'white' }}>Dashboard</Link>
+          </NavLink>
+        </div>
+>>>>>>> origin/Puga
         )}
       </StyledToolbar>
     </AppBar>

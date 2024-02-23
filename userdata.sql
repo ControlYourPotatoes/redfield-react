@@ -1,4 +1,4 @@
-USE user_data;
+USE H_Redfield_db;
 
 CREATE TABLE signups (
   id INT AUTO_INCREMENT PRIMARY KEY,

@@ -1,9 +1,15 @@
 // App.tsx
+<<<<<<< HEAD
 import { Routes, Route, Navigate } from 'react-router-dom';
+=======
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
+>>>>>>> origin/Puga
 import Navbar from './components/Navbar';
 import Home from './components/pages/Home';
 import About from './components/pages/About';
 import Prices from './components/pages/Prices';
+<<<<<<< HEAD
 import ContactUs from './components/pages/ContactUs';
 import GuidedStore from './components/guided_store/GuidedStore';
 import Dashboard from './components/Dashboard/Dashboard';
@@ -16,6 +22,11 @@ const MainPage = () => (
     <About />
   </div>
 );
+=======
+import GuidedStore from './components/guided_store/GuidedStore';
+import Dashboard from './components/Dashboard/Dashboard'; // Ensure this import matches the exported component
+
+>>>>>>> origin/Puga
 
 function App() {
   return (
