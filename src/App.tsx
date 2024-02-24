@@ -7,7 +7,7 @@ import About from './components/pages/About';
 import ContactUs from './components/pages/ContactUs';
 import Prices from './components/pages/Prices';
 import GuidedStore from './components/guided_store/GuidedStore';
-import Dashboard from './components/Dashboard/Dashboard'; // Ensure this import matches the exported component
+import Dashboard from './components/Dashboard/Dashboard';
 
 
 function App() {

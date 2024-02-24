@@ -104,9 +104,6 @@ const Navbar: React.FC = () => {
           <NavLink>
             <Link to="/GuidedStore" style={{ textDecoration: 'none', color: 'white' }}>Sign Up</Link>
           </NavLink>
-          <NavLink>
-            <Link to="/Dashboard" style={{ textDecoration: 'none', color: 'white' }}>Dashboard</Link>
-          </NavLink>
         </div>
         )}
       </StyledToolbar>
