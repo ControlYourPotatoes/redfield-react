@@ -9,18 +9,18 @@ const HurricaneMap: React.FC = () => {
   const [hurricanePath, setHurricanePath] = useState<[number, number][]>([]);
 
   const hurricaneIcon = new L.Icon({
-    iconUrl: '\public\assets\gifs\hurricaneicon.png',
+    iconUrl: '/assets/gifs/hurricaneicon.gif',
     iconSize: [50, 50],
     iconAnchor: [25, 25],
   });
 
   useEffect(() => {
-    fetch('.\mariaPath.json')
+    fetch('http://localhost:3001/api/hurricane')
       .then(response => response.json())
       .then(data => {
         setHurricanePath(data);
       })
-      .catch(error => console.error("Failed to load hurricane path data:", error));
+      
   }, []);
 
   const startAnimation = () => {
