@@ -23,12 +23,12 @@ const PersonalInfoComponent = () => {
 
   const [errors, setErrors] = useState({});
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormValues({ ...formValues, [name]: value });
-    // Optionally reset errors
-    setErrors({ ...errors, [name]: '' });
-  };
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = event.target;
+        setFormValues({...formValues, [name]: value});
+        // Optionally reset errors
+        setErrors({...errors, [name]: ''});
+    };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
