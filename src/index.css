@@ -4,8 +4,9 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #b58a8a;
+  color: rgba(255, 255, 255, 0.87); /* font color*/
+  /*background-color: #f60f0f; /*background color */
+  background: linear-gradient(90deg, rgb(10, 111, 243) 0%, rgb(26, 23, 23) 100%);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -23,3 +24,4 @@ body {
 .leaflet-container {
   height: 400px;
 }
+

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Button, CircularProgress, Typography, Card, CardContent, CardActionArea, CardMedia, Grid } from '@mui/material';
 import CardPayment from './CardPayment';
 import WalletPayment from './WalletPayment';
-import MetamaskIcon from "https://raw.githubusercontent.com/ControlYourPotatoes/redfield-react/Puga/public/assets/icon/metamask-icon.svg";
 import CardIcon from '@mui/icons-material/CreditCard';
 
 const PaymentComponent: React.FC = () => {

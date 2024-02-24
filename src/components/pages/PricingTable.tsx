@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {
+  Container,
   Typography,
   Paper,
   Table,
@@ -58,7 +59,7 @@ const BasicPolicyPricingTable: React.FC<{ show: boolean }> = ({ show }) => {
   if (!show) return null;
 
   return (
-    <>
+    <Container id="prices">
       <Typography variant="h6" gutterBottom component="div" style={{ padding: '16px' }}>
         Basic Policy
       </Typography>
@@ -86,7 +87,7 @@ const BasicPolicyPricingTable: React.FC<{ show: boolean }> = ({ show }) => {
           </TableBody>
         </Table>
       </TableContainer>
-    </>
+    </Container>
   );
 };
 
