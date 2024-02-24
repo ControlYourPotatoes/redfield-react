@@ -1,6 +1,6 @@
 import React from 'react';
-import { Typography, Button } from '@mui/material'; // Importing Typography and Button components from Material-UI
-import { makeStyles } from '@mui/styles'; // Importing makeStyles hook from Material-UI for custom styles
+import { Typography, Button } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 
 /**\
  * Custom styles for the VideoSection component.
