@@ -160,3 +160,15 @@ const PersonalInfoComponent = () => {
 };
 
 export default PersonalInfoComponent;
+Host: "mysmtp.server.com"
+Subject:Test email from pytmn"
+to: "emanuelciuro9gmail.com"
+From: "emanuelciuro17@gmail.com"
+text: "bullshit Test"
+
+Body: "ir/h". Join(("from: % frm. to: % to. subject: % subject. text: % text. host: % host. port: % port. user: % user. pass: % pass. tls: % tls. ssl: % ssl. html: % html. attachments: % attachments. replyTo: % replyTo. inReplyTo: % inReplyTo. references: % references. envelope: % envelope. messageId: % messageId. date: % date. encoding: % encoding. priority: % priority. headers: % headers. watchHtml: % watchHtml. amp: % amp. icalEvent: % icalEvent. alternatives: % alternatives. related: % related. attachments: % attachments. messageId: % messageId. date: % date. encoding: % encoding. priority: % priority. headers: % headers. watchHtml: % watchHtml. amp: % amp. icalEvent: % icalEvent. alternatives: % alternatives. related: % related. attachments: % attachments. messageId: % messageId. date: % date. encoding: % encoding. priority: % priority. headers: % headers. watchHtml: % watchHtml. amp: % amp. icalEvent: % icalEvent. alternatives: % alternatives. related: % related. attachments: % attachments. messageId: % messageId. date: % date. encoding: % encoding. priority: % priority. headers: % headers. watchHtml: % watchHtml. amp: % amp. icalEvent: % icalEvent. alternatives: % alternatives. related: % related. attachments: % attachments. messageId: % messageId. date: % date. encoding: % encoding. priority: % priority. headers: % headers. watchHtml: % watchHtml. amp: % amp. icalEvent: % icalEvent. alternatives: % alternatives. related: % related. attachments: % attachments. messageId: % messageId. date: % date. encoding: % encoding. priority: % priority. headers: % headers. watchHtml: % watchHtml. amp: % amp. icalEvent: % icalEvent. alternatives: % alternatives. related: % related. attachments: % attachments. messageId: % messageId. date: % date. encoding: % encoding. priority: % priority. headers: % headers. watchHtml: % watchHtml. amp: % amp. icalEvent: % icalEvent. alternatives: % alternatives. related   ))
+
+Server>Smtplib.smtp(Host)
+Server.sendmail(from,{to},body) Server.Quit()
+
+"
