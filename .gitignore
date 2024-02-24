@@ -34,3 +34,4 @@ manifest.json
 .gitignore
 yarn.lock
 package-lock.json
+*.txt

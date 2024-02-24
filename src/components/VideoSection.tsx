@@ -27,11 +27,15 @@ const useStyles = makeStyles(() => ({
   // Style for the content overlaying the video
   content: {
     position: 'absolute', // Absolute positioning within the container
-    top: '50%', // Center vertically in the visible area below the navbar
+    top: '70%', // Center vertically in the visible area below the navbar
     left: '50%', // Center horizontally
     transform: 'translate(-50%, -50%)', // Adjust position to truly center the content
     color: 'white', // Text color for visibility against the video background
     zIndex: 2, // Ensure content is layered above the video
+  },
+  WithBorder: {
+    color: 'white', // Text color to black
+    '-webkit-text-stroke': '1px black', // Apply 1px white stroke for the border effect
   },
 }));
 
@@ -44,15 +48,15 @@ const VideoSection: React.FC = () => {
 
   return (
     <div className={classes.container}>
-      <video className={classes.video} src='/assets/videos/water_and_trees.mp4' autoPlay loop muted/>
+      <video className={classes.video} src='/assets/videos/water_and_trees.mp4' autoPlay loop muted />
       <div className={classes.content}>
-        <Typography variant="h1" component="h2">
-          Shielding You from the Storm: Your Partner in Hurricane Resilience
+        <Typography variant="h2" component="h2"className={classes.WithBorder}>
+        Welcome to Redfiled, where the future of insurance is today
         </Typography>
         <Typography variant="body1">
           What are you waiting for?
         </Typography>
-        <Button variant="contained" color="primary">Get Started</Button>
+        <Button variant="contained" color="primary">Sigh Up</Button>
       </div>
     </div>
   );

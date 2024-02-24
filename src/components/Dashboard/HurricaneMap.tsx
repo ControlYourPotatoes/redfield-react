@@ -1,35 +1,54 @@
 import React, { useState, useEffect } from 'react';
 import L from 'leaflet';
-import { MapContainer, TileLayer, Marker, useMap } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Polyline, useMapEvents } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import { Box } from '@mui/material'
-
-import './HurricaneMap.css';
+import { Box, Button } from '@mui/material';
 
 const HurricaneMap: React.FC = () => {
-  const [hurricanePosition, setHurricanePosition] = useState<[number, number]>([18.2208, -66.5901]); // Initial position
+  const [hurricanePosition, setHurricanePosition] = useState<[number, number]>([15.3, -61.3]);
+  const [hurricanePath, setHurricanePath] = useState<[number, number][]>([]);
 
-  // Define a custom icon for the hurricane marker
   const hurricaneIcon = new L.Icon({
-    iconUrl: 'path/to/your/hurricane.png', // Replace with your GIF path
-    iconSize: [50, 50], // Adjust size as needed
-    iconAnchor: [25, 25], // Adjust anchor as needed
+    iconUrl: '/assets/gifs/hurricaneicon.gif',
+    iconSize: [50, 50],
+    iconAnchor: [25, 25],
   });
 
-  // Update the position of the hurricane marker here as needed
   useEffect(() => {
-    // Example: Update position based on some external data
-    // setHurricanePosition([newLat, newLng]);
-  }, []); // Dependency array based on your data source
+    fetch('http://localhost:3001/api/hurricane')
+      .then(response => response.json())
+      .then(data => {
+        const transformedPath = data.path.map(point => [point.lat, point.lon]);
+      setHurricanePath(transformedPath);
+      })
+      .catch(error => console.error("Failed to load hurricane path data:", error));
+  }, []);
+
+  const startAnimation = () => {
+    let pathIndex = 0;
+
+    const interval = setInterval(() => {
+      if (pathIndex < hurricanePath.length) {
+        setHurricanePosition(hurricanePath[pathIndex]);
+        pathIndex += 1;
+      } else {
+        clearInterval(interval);
+      }
+    }, 1000);
+  };
 
   return (
-    <Box sx={{ borderColor: 'primary.main', width: '200%' }} >
-    <MapContainer center={hurricanePosition} zoom={6} style={{ height: '500px', width: '100px' }}>
-      <TileLayer
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
-      <Marker position={hurricanePosition} icon={hurricaneIcon} />
-    </MapContainer>
+    <Box sx={{ borderColor: 'primary.main', width: '100%' }} >
+      <MapContainer center={hurricanePosition} zoom={6} style={{ height: '500px', width: '100%' }}>
+        <TileLayer
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
+        <Marker position={hurricanePosition} icon={hurricaneIcon} />
+        <Polyline positions={hurricanePath} color="red" />
+      </MapContainer>
+      <Button onClick={startAnimation} variant="contained" color="primary" style={{ marginTop: '10px' }}>
+        Start Animation
+      </Button>
     </Box>
   );
 };
