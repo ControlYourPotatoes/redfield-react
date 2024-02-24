@@ -18,9 +18,10 @@ const HurricaneMap: React.FC = () => {
     fetch('http://localhost:3001/api/hurricane')
       .then(response => response.json())
       .then(data => {
-        setHurricanePath(data);
+        const transformedPath = data.path.map(point => [point.lat, point.lon]);
+      setHurricanePath(transformedPath);
       })
-      
+      .catch(error => console.error("Failed to load hurricane path data:", error));
   }, []);
 
   const startAnimation = () => {
