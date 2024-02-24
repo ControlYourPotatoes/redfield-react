@@ -22,7 +22,6 @@ function App() {
       <Navbar />
       <Routes>
         <Route path='/' element={<MainPage />} />
-        <Route path='/Contact_us' element={<ContactUs />} />
         <Route path='/GuidedStore' element={<GuidedStore />} />
         <Route path="*" element={<Navigate to="/" replace />} />
         <Route path='/Dashboard' element={<Dashboard />} />
