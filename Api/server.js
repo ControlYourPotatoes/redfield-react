@@ -2,8 +2,10 @@
 const express = require('express');
 const cors = require('cors');
 const app = express();
-app.use(cors()); // This enables CORS for all routes
 const port = 3001; // Ensure this port is free or change it as needed
+// Serve static files from the 'public' directory
+app.use(express.static('public'));
+app.use(cors()); // This enables CORS for all routes
 
 // Mock data for the sake of example
 const hurricaneData = {
@@ -21,10 +23,32 @@ const hurricaneData = {
   ]
 };
 
+
+// API endpoint for hurricane data
 app.get('/api/hurricane', (req, res) => {
   res.json(hurricaneData);
 });
 
+// Root route serving a simple HTML page
+app.get('/', (req, res) => {
+    res.send(`
+    <!doctype html>
+    <html lang="en">
+      <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>H-Redfield</title>
+        <link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
+      </head>
+      <body>
+        <div id="root"></div>
+        <script type="module" src="/src/main.tsx"></script>
+      </body>
+    </html>
+    `);
+  });
+
+  // Start the server
 app.listen(port, () => {
   console.log(`Hurricane API running at http://localhost:${port}`);
 });
