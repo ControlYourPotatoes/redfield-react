@@ -16,3 +16,13 @@ const createUser = async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 };
+
+const getUsers = async (req, res) => {
+  try {
+    // Assuming you have a model function to fetch all users
+    const users = await UserModel.findAll();
+    res.json(users);
+  } catch (error) {
+    res.status(500).json({ message: "An error occurred while fetching users.", error: error.toString() });
+  }
+};
