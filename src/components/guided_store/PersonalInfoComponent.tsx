@@ -38,7 +38,7 @@ const PersonalInfoComponent = () => {
       setErrors({}); // Reset errors if validation succeeds
 
       // Here, insert the API call logic to send data to your backend
-      const response = await fetch('http://localhost:3001/signup', {
+      const response = await fetch('http://localhost:3000/api/users', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -1,28 +1,60 @@
-const pool = require('../config/db');
-const bcrypt = require('bcryptjs');
+const UserModel = require('../models/user');
 
-const createUser = async (req, res) => {
-  const { name, email, password } = req.body;
-  const hashedPassword = await bcrypt.hash(password, 8);
+const userController = {
+  createUser: async (req, res) => {
+    try {
+      const newUser = await UserModel.createUser(req.body);
+      res.status(201).json(newUser);
+    } catch (error) {
+      res.status(400).json({ error: error.message });
+    }
+  },
 
-  try {
-    const { rows } = await pool.query(
-      'INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING *',
-      [name, email, hashedPassword]
-    );
-    res.status(201).json(rows[0]);
-  } catch (error) {
-    // Handle errors, e.g., duplicate email
-    res.status(400).json({ error: error.message });
-  }
+  getAllUsers: async (req, res) => {
+    try {
+      const users = await UserModel.getAllUsers();
+      res.json(users);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  },
+
+  getUserById: async (req, res) => {
+    try {
+      const user = await UserModel.getUserById(req.params.id);
+      if (!user) {
+        return res.status(404).json({ message: 'User not found' });
+      }
+      res.json(user);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  },
+
+  deleteUserById: async (req, res) => {
+    try {
+      const user = await UserModel.deleteUserById(req.params.id);
+      if (!user) {
+        return res.status(404).json({ message: 'User not found' });
+      }
+      res.json({ message: 'User deleted successfully' });
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  },
+
+  updateUserById: async (req, res) => {
+    try {
+      const user = await UserModel.updateUserById(req.params.id, req.body);
+      if (!user) {
+        return res.status(404).json({ message: 'User not found' });
+      }
+      res.json(user);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  },
+  
 };
 
-const getUsers = async (req, res) => {
-  try {
-    // Assuming you have a model function to fetch all users
-    const users = await UserModel.findAll();
-    res.json(users);
-  } catch (error) {
-    res.status(500).json({ message: "An error occurred while fetching users.", error: error.toString() });
-  }
-};
+module.exports = userController;
