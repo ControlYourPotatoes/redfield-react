@@ -4,14 +4,14 @@ import { MapContainer, TileLayer, Marker, Polyline, useMapEvents } from 'react-l
 import 'leaflet/dist/leaflet.css';
 import { Box, Button } from '@mui/material';
 
-const HurricaneMap: React.FC = () => {
-  const [hurricanePosition, setHurricanePosition] = useState<[number, number]>([15.3, -61.3]);
-  const [hurricanePath, setHurricanePath] = useState<[number, number][]>([]);
+const HurricaneMap = () => {
+  const [hurricanePosition, setHurricanePosition] = useState([15.3, -61.3]);
+  const [hurricanePath, setHurricanePath] = useState([]);
 
   const hurricaneIcon = new L.Icon({
     iconUrl: '/assets/gifs/hurricaneicon.gif',
-    iconSize: [50, 50],
-    iconAnchor: [25, 25],
+    iconSize: [150, 150],
+    iconAnchor: [75, 75],
   });
 
   useEffect(() => {
@@ -24,17 +24,55 @@ const HurricaneMap: React.FC = () => {
       .catch(error => console.error("Failed to load hurricane path data:", error));
   }, []);
 
+
   const startAnimation = () => {
     let pathIndex = 0;
+    //let emailSent = false; // To ensure the email is sent only once
+
+    const sendEmail = (message) => {
+      fetch('http://localhost:3001/api/send-notification', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ message }),
+      })
+      .then(response => response.json())
+      .then(data => console.log(data))
+      .catch(error => console.error('Error:', error));
+    };
 
     const interval = setInterval(() => {
       if (pathIndex < hurricanePath.length) {
-        setHurricanePosition(hurricanePath[pathIndex]);
+        const currentPosition = hurricanePath[pathIndex];
+        setHurricanePosition(currentPosition);
+        
+        // Example condition to send an email
+        // if (!emailSent && currentPosition[0] === 18.49694743514779 && currentPosition[1] === -66.98600567820672) {
+        //   fetch('http://localhost:3001/api/send-sms', {
+        //     method: 'POST',
+        //     headers: {
+        //       'Content-Type': 'application/json',
+        //     },
+        //   })
+        //   .then(response => response.json())
+        //   .then(data => console.log(data))
+        //   .catch(error => console.error('Error:', error));
+        // }
+
+        // Trigger email at specific points
+      if (currentPosition[0] === hurricanePath[1][0] && currentPosition[1] === hurricanePath[1][1]) {
+        sendEmail("The hurricane has reached the first critical point.");
+      } else if (currentPosition[0] === hurricanePath[2][0] && currentPosition[1] === hurricanePath[2][1]) {
+        sendEmail("Confirmation: The hurricane has hit the second mark.");
+      } else if (currentPosition[0] === hurricanePath[3][0] && currentPosition[1] === hurricanePath[3][1]) {
+        sendEmail("The hurricane has left the third mark.");
+      }
         pathIndex += 1;
       } else {
         clearInterval(interval);
       }
-    }, 1000);
+    }, 500);
   };
 
   return (
