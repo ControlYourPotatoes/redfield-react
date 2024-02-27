@@ -25,15 +25,15 @@ interface ColorlibStepIconProps {
 
 const ColorlibStepIconRoot = styled('div')<ColorlibStepIconProps>(({ theme, active, completed }) => ({
   borderRadius: '50%',
-  width: '50px',
-  height: '50px',
+  width: '3rem',
+  height: '3rem',
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
   background: completed
-    ? `radial-gradient(circle, ${theme.palette.success.main} 0%, transparent 70%)` // For completed state
+    ? `radial-gradient(circle, ${theme.palette.success.main} 40%, transparent 55%)` // For completed state
     : active
-    ? `radial-gradient(circle, ${theme.palette.primary.main} 0%, transparent 70%)` // For active state
+    ? `radial-gradient(circle, ${theme.palette.primary.main} 40%, transparent 55%)` // For active state
     : 'transparent', // Default when neither active nor completed
 }));
 
@@ -94,7 +94,7 @@ export default function GuidedStore() {
   return (
     <Box sx={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <Box sx={{ width: '60%', margin: 'auto', padding: '10px', marginTop: '30px' }}>
-        <Stepper alternativeLabel activeStep={activeStep}>
+        <Stepper activeStep={activeStep}>
         {steps.map((label, index) => (
           <Step key={label}>
             <StepLabel
@@ -111,20 +111,20 @@ export default function GuidedStore() {
         ))}
       </Stepper>
       </Box>   
-      <Box sx={{ width: '70%', margin: 'auto' }}>
-        <Paper elevation={3} sx={{ margin: 2, padding: 3 }}>
+      <Box sx={{margin: 'auto' }}>
+        <Paper elevation={5} sx={{ margin: 2, padding: 3 }}>
           <Box sx={{ maxWidth: '900px', width: '100%', margin: 'auto' }}>
             {renderActiveComponent(activeStep)}
           </Box>
         </Paper>
       </Box>
-      <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2, width: '70%', margin: 'auto' }}>
-        <Button color="primary" disabled={activeStep === 0} onClick={handleBack} sx={{ mr: 1 }}>
+      <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2, width: '50%', margin: 'auto' }}>
+        <Button variant="contained" color="primary" disabled={activeStep === 0} onClick={handleBack} sx={{ mr: 1 }}>
           Back
         </Button>
         <Box sx={{ flex: '1 1 auto' }} />
-        <Button onClick={handleNext}>
-          {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+        <Button variant="contained" onClick={handleNext}>
+          {activeStep === steps.length - 1 ? 'Submit' : 'Next'}
         </Button>
       </Box>
       {activeStep === steps.length && (
