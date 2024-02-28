@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import {
   Container,
-  Typography,
   Paper,
   Table,
   TableBody,
@@ -9,7 +8,11 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Button
+  CircularProgress,
+  Card,
+  CardContent,
+  CardActionArea,
+  Typography
 } from '@mui/material';
 
 // Define the RowData interface
@@ -54,94 +57,94 @@ const tableCellStyle: React.CSSProperties = {
   fontWeight: 'bold',
 };
 
-// Basic Policy Pricing Table Component
-const BasicPolicyPricingTable: React.FC<{ show: boolean }> = ({ show }) => {
-  if (!show) return null;
-
-  return (
-    <Container id="prices">
-      <Typography variant="h6" gutterBottom component="div" style={{ padding: '16px' }}>
-        Basic Policy
-      </Typography>
-      <TableContainer component={Paper}>
-        <Table aria-label="basic policy table">
-          <TableHead>
-            <TableRow>
-              <TableCell style={tableCellStyle}>Category</TableCell>
-              <TableCell style={tableCellStyle} align="right">Wind Speed</TableCell>
-              <TableCell style={tableCellStyle} align="right">Payment/year</TableCell>
-              <TableCell style={tableCellStyle} align="right">Insurance Policy Price/year</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {basicPolicyRows.map((row) => (
-              <TableRow key={row.category}>
-                <TableCell component="th" scope="row">
-                  {row.category}
-                </TableCell>
-                <TableCell align="right">{row.windSpeed}</TableCell>
-                <TableCell align="right">{row.payment}</TableCell>
-                <TableCell align="right">{row.insurancePolicyPrice}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </Container>
-  );
-};
-
-// Premium Policy Pricing Table Component
-const PremiumPolicyPricingTable: React.FC<{ show: boolean }> = ({ show }) => {
-  if (!show) return null;
-
-  return (
-    <>
-      <Typography variant="h6" gutterBottom component="div" style={{ padding: '16px' }}>
-        Premium Policy
-      </Typography>
-      <TableContainer component={Paper}>
-        <Table aria-label="premium policy table">
-          <TableHead>
-            <TableRow>
-              <TableCell style={tableCellStyle}>Category</TableCell>
-              <TableCell style={tableCellStyle} align="right">Wind Speed</TableCell>
-              <TableCell style={tableCellStyle} align="right">Payment/year</TableCell>
-              <TableCell style={tableCellStyle} align="right">Insurance Policy Price/year</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {premiumPolicyRows.map((row) => (
-              <TableRow key={row.category}>
-                <TableCell component="th" scope="row">
-                  {row.category}
-                </TableCell>
-                <TableCell align="right">{row.windSpeed}</TableCell>
-                <TableCell align="right">{row.payment}</TableCell>
-                <TableCell align="right">{row.insurancePolicyPrice}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </>
-  );
-};
 // Main component to render the buttons and tables
-const InsurancePricing: React.FC = () => {
-  const [showBasic, setShowBasic] = useState(false);
-  const [showPremium, setShowPremium] = useState(false);
+const PricingTable: React.FC = () => {
+  const [showBasic, setShowBasic] = useState<boolean>(false);
+  const [showPremium, setShowPremium] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   return (
     <div>
-      <Button variant="contained" color="primary" onClick={() => setShowBasic(!showBasic)} style={{ margin: '10px' }}>
-        {showBasic ? 'Hide Basic Policy' : 'Buy Basic Policy at $50/yearly'}
-      </Button>
-      <Button variant="contained" color="secondary" onClick={() => setShowPremium(!showPremium)} style={{ margin: '10px' }}>
-        {showPremium ? 'Hide Premium Policy' : 'Buy Premium Policy at $100/yearly'}
-      </Button>
-      <BasicPolicyPricingTable show={showBasic} />
-      <PremiumPolicyPricingTable show={showPremium} />
+      <Card variant={showBasic ? 'elevation' : 'outlined'}>
+        <CardActionArea onClick={() => setShowBasic(!showBasic)}>
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="div">
+              {loading ? <CircularProgress size={24} style={{ color: 'white' }} /> : showBasic ? 'Hide Basic Policy' : 'Basic Policy $50/yearly'}
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+      </Card>
+      <Card variant={showPremium ? 'elevation' : 'outlined'}>
+        <CardActionArea onClick={() => setShowPremium(!showPremium)}>
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="div">
+              {loading ? <CircularProgress size={24} style={{ color: 'white' }} /> :'Premium Policy $100/yearly'}
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+      </Card>
+      {showBasic && (
+        <Container id="basicPrices">
+          <Typography variant="h6" gutterBottom component="div" style={{ padding: '16px' }}>
+            Basic Policy
+          </Typography>
+          <TableContainer component={Paper}>
+            <Table aria-label="basic policy table">
+              <TableHead>
+                <TableRow>
+                  <TableCell style={tableCellStyle}>Category</TableCell>
+                  <TableCell style={tableCellStyle} align="right">Wind Speed</TableCell>
+                  <TableCell style={tableCellStyle} align="right">Payment/year</TableCell>
+                  <TableCell style={tableCellStyle} align="right">Insurance Policy Price/year</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {basicPolicyRows.map((row) => (
+                  <TableRow key={row.category}>
+                    <TableCell component="th" scope="row">
+                      {row.category}
+                    </TableCell>
+                    <TableCell align="right">{row.windSpeed}</TableCell>
+                    <TableCell align="right">{row.payment}</TableCell>
+                    <TableCell align="right">{row.insurancePolicyPrice}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Container>
+      )}
+      {showPremium && (
+        <Container id="premiumPrices">
+          <Typography variant="h6" gutterBottom component="div" style={{ padding: '16px' }}>
+            Premium Policy
+          </Typography>
+          <TableContainer component={Paper}>
+            <Table aria-label="premium policy table">
+              <TableHead>
+                <TableRow>
+                  <TableCell style={tableCellStyle}>Category</TableCell>
+                  <TableCell style={tableCellStyle} align="right">Wind Speed</TableCell>
+                  <TableCell style={tableCellStyle} align="right">Payment/year</TableCell>
+                  <TableCell style={tableCellStyle} align="right">Insurance Policy Price/year</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {premiumPolicyRows.map((row) => (
+                  <TableRow key={row.category}>
+                    <TableCell component="th" scope="row">
+                      {row.category}
+                    </TableCell>
+                    <TableCell align="right">{row.windSpeed}</TableCell>
+                    <TableCell align="right">{row.payment}</TableCell>
+                    <TableCell align="right">{row.insurancePolicyPrice}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Container>
+      )}
       { (showBasic || showPremium) && (
         <Typography variant="body2" style={{ marginTop: '16px', textAlign: 'center' }}>
           Please note: The insurance policy comes into effect 15 days after being paid. 
@@ -155,4 +158,4 @@ const InsurancePricing: React.FC = () => {
   );
 };
 
-export default InsurancePricing;
+export default PricingTable;
