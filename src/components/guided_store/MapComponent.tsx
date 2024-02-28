@@ -1,42 +1,65 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
-// Update the component to accept props
+// Assuming you have the following import at the top of your file
+const googleMapsApiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
+
+// Function to load the Google Maps script
+function loadGoogleMapsScript(apiKey) {
+  return new Promise((resolve) => {
+    if (typeof google !== 'undefined') {
+      resolve();
+      return;
+    }
+
+    const script = document.createElement('script');
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}`;
+    script.async = true;
+    script.defer = true;
+    script.onload = () => resolve();
+    document.head.appendChild(script);
+  });
+}
+
 const MapComponent = ({ coordinates }) => {
-  const mapRef = useRef(null); // Reference to the div where the map will be rendered
+  const mapRef = useRef(null);
+  const [apiLoaded, setApiLoaded] = useState(false);
+  const [map, setMap] = useState(null);
+  const defaultCenter = { lat: 18.2208, lng: -66.5901 };
 
   useEffect(() => {
+    loadGoogleMapsScript(googleMapsApiKey).then(() => setApiLoaded(true));
+  }, []);
+
+  useEffect(() => {
+    if (!apiLoaded) return;
+
     const initMap = async () => {
-      // Use the coordinates from props for both the map center and the marker
-      const position = coordinates;
+      if (!map) {
+        const initializedMap = new google.maps.Map(mapRef.current, {
+          zoom: 9, // Default zoom
+          center: defaultCenter,
+        });
+        setMap(initializedMap);
+      } 
 
-      // Dynamically import the Google Maps libraries needed
-      //@ts-ignore
-      const { Map } = await google.maps.importLibrary("maps") as google.maps.MapsLibrary;
-      //@ts-ignore
-      const { AdvancedMarkerElement } = await google.maps.importLibrary("marker") as google.maps.MarkerLibrary;
+      // Determine zoom level based on whether the coordinates match the default center
+      const zoomLevel = coordinates.lat === defaultCenter.lat && coordinates.lng === defaultCenter.lng ? 9 : 15;
 
-      // Initialize the map with the provided coordinates
-      const map = new Map(mapRef.current, {
-        zoom: 9,
-        center: position,
-        mapId: '02', // Replace 'your-map-id-here' with your actual Map ID if you're using one
-      });
+      map?.setCenter(coordinates);
+      map?.setZoom(zoomLevel);
 
-      // Initialize the marker at the provided coordinates
-      const marker = new AdvancedMarkerElement({
+      // Initialize or move the marker to the new coordinates
+      new google.maps.Marker({
         map: map,
-        position: position, // This ensures the marker is placed at the coordinates passed as props
-        title: 'Marker', // You can customize this title as needed
+        position: coordinates,
+        title: 'Location',
       });
     };
 
-    // Call initMap and handle potential errors
     initMap().catch(console.error);
-  }, [coordinates]); // The effect depends on coordinates to re-initialize if they change
+  }, [apiLoaded, coordinates, map]);
 
-  return (
-    <div ref={mapRef} style={{ width: '100%', height: '400px' }} id="map"></div>
-  );
+  return <div ref={mapRef} style={{ width: '100%', height: '400px' }} />;
 };
 
 export default MapComponent;

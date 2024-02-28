@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Typography, TextField, Grid, Button, Box } from '@mui/material';
 import * as yup from 'yup';
 import { APIProvider, Map, AdvancedMarker } from '@vis.gl/react-google-maps';
+import MapComponent from './MapComponent';
 
 // Validation schema
 const validationSchema = yup.object({
@@ -37,6 +38,10 @@ const PersonalInfoComponent = () => {
 
   const [errors, setErrors] = useState({});
 
+  const defaultCoordinates = {
+    lat: 18.2208,
+    lng: -66.5901,
+  };
 
   const [coordinates, setCoordinates] = useState({ lat: 18.2208, lng: -66.5901 }); // Default to Puerto Rico's approximate center
 
@@ -49,8 +54,13 @@ const PersonalInfoComponent = () => {
 
     // Geocode address when address field changes
     if (name === 'address') {
-      console.log(`Geocoding address field changed - Name: ${name}, Value: ${value}`); // Debugging output
-      geocodeAddress(value);
+      // Only geocode when the address field has a non-empty value
+      if (value.trim() !== '') {
+        geocodeAddress(value);
+      } else {
+        // Reset coordinates if the address field is cleared
+        setCoordinates(defaultCoordinates);
+      }
     }
   };
 
@@ -195,14 +205,7 @@ const PersonalInfoComponent = () => {
       </Box>
       {/* Displaying the Puerto Rico map component below the form */}
       <Box sx={{ padding: 2 }}>
-        <APIProvider apiKey={googleMapsApiKey}>
-          <Map
-            defaultCenter={{lat: 22.54992, lng: 0}}
-            defaultZoom={3}
-            gestureHandling={'greedy'}
-            disableDefaultUI={true}
-          />
-        </APIProvider>
+          <MapComponent coordinates={coordinates} />
           {/* Display coordinates */}
           {coordinates.lat && coordinates.lng && (
               <Typography>
