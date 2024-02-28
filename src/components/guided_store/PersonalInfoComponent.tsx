@@ -1,91 +1,162 @@
-import React from 'react';
-import {
-  Container,
-  Typography,
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-} from '@mui/material';
+import React, { useState } from 'react';
+import { Typography, TextField, Grid, Button, Box } from '@mui/material';
+import * as yup from 'yup';
+import PuertoRicoMap from '../PuertoRicoMap'; // Ensure this path matches the location of your PuertoRicoMap component
 
-interface Props {
-  policyType: 'basic' | 'premium';
-}
+// Validation schema
+const validationSchema = yup.object({
+  firstName: yup.string().required('First Name is required'),
+  lastName: yup.string().required('Last Name is required'),
+  phone: yup.string().required('Phone is required').matches(/^\d+$/, 'Phone must be only digits'),
+  email: yup.string().email('Invalid email format').required('Email is required'),
+  address: yup.string().required('Address is required'),
+});
 
-// Define the RowData interface
-interface RowData {
-  category: string;
-  windSpeed: string;
-  payment: string;
-  insurancePolicyPrice: string;
-}
+const PersonalInfoComponent = () => {
+  const [formValues, setFormValues] = useState({
+    firstName: '',
+    lastName: '',
+    phone: '',
+    email: '',
+    address: '',
+  });
 
-// Function to create row data
-const createData = (
-  category: string,
-  windSpeed: string,
-  payment: string,
-  insurancePolicyPrice: string
-): RowData => {
-  return { category, windSpeed, payment, insurancePolicyPrice };
-};
+  const [errors, setErrors] = useState({});
 
-// Pricing Table Component
-const PricingTable: React.FC<Props> = ({ policyType }) => {
-  // Data for the basic policy table
-  const basicPolicyRows: RowData[] = [
-    createData('Category 5', '≥ 157 mph', '$1,000', '$50'),
-    createData('Category 4', '130 - 156 mph', '$450 - $800', '$50'),
-    createData('Category 3', '111 - 129 mph', '$150 - $350', '$50'),
-    createData('Category 2', '76 - 110 mph', '$50 - $100', '$50'),
-    createData('Category 1', '74 - 95 mph', '$25', '$50'),
-  ];
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormValues({ ...formValues, [name]: value });
+    // Optionally reset errors
+    setErrors({ ...errors, [name]: '' });
+  };
 
-  // Data for the premium policy table
-  const premiumPolicyRows: RowData[] = [
-    createData('Category 5', '≥ 157 mph', '$2,000', '$100'),
-    createData('Category 4', '130 - 156 mph', '$900 - $1,600', '$100'),
-    createData('Category 3', '111 - 129 mph', '$300 - $700', '$100'),
-    createData('Category 2', '76 - 110 mph', '$100 - $200', '$100'),
-    createData('Category 1', '74 - 95 mph', '$50', '$100'),
-  ];
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      // Validate form values
+      await validationSchema.validate(formValues, { abortEarly: false });
+      setErrors({}); // Reset errors if validation succeeds
 
-  const tableData = policyType === 'basic' ? basicPolicyRows : premiumPolicyRows;
+      // Here, insert the API call logic to send data to your backend
+      const response = await fetch('http://localhost:3001/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          firstName: formValues.firstName,
+          lastName: formValues.lastName,
+          phone: formValues.phone,
+          email: formValues.email,
+          address: formValues.address,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Server responded with an error');
+      }
+
+      console.log('Form submission successful');
+      // Handle success here, e.g., showing a success message or redirecting the user
+    } catch (err) {
+      console.error('Submission error:', err);
+      if (err instanceof yup.ValidationError) {
+        // Transform Yup validation errors to a more manageable structure
+        const formErrors = err.inner.reduce((acc, current) => {
+          acc[current.path] = current.message;
+          return acc;
+        }, {});
+        setErrors(formErrors);
+      }
+      // Handle other errors, e.g., network error or server error
+    }
+  };
 
   return (
-    <Container id={`${policyType}Prices`}>
-      <Typography variant="h6" gutterBottom component="div" style={{ padding: '16px' }}>
-        {policyType === 'basic' ? 'Basic Policy' : 'Premium Policy'}
+    <div>
+      <Typography variant="h3" gutterBottom>
+        Policy Holder Information
       </Typography>
-      <TableContainer component={Paper}>
-        <Table aria-label={`${policyType} policy table`}>
-          <TableHead>
-            <TableRow>
-              <TableCell>Category</TableCell>
-              <TableCell align="right">Wind Speed</TableCell>
-              <TableCell align="right">Payment/year</TableCell>
-              <TableCell align="right">Insurance Policy Price/year</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {tableData.map((row) => (
-              <TableRow key={row.category}>
-                <TableCell component="th" scope="row">
-                  {row.category}
-                </TableCell>
-                <TableCell align="right">{row.windSpeed}</TableCell>
-                <TableCell align="right">{row.payment}</TableCell>
-                <TableCell align="right">{row.insurancePolicyPrice}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </Container>
+      <Box component="form" sx={{ padding: 2 }} onSubmit={handleSubmit}>
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              required
+              id="firstName"
+              name="firstName"
+              label="First Name"
+              fullWidth
+              value={formValues.firstName}
+              onChange={handleChange}
+              error={Boolean(errors.firstName)}
+              helperText={errors.firstName || ''}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              required
+              id="lastName"
+              name="lastName"
+              label="Last Name"
+              fullWidth
+              value={formValues.lastName}
+              onChange={handleChange}
+              error={Boolean(errors.lastName)}
+              helperText={errors.lastName || ''}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              required
+              id="phone"
+              name="phone"
+              label="Phone"
+              fullWidth
+              value={formValues.phone}
+              onChange={handleChange}
+              error={Boolean(errors.phone)}
+              helperText={errors.phone || ''}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              required
+              id="email"
+              name="email"
+              label="Email"
+              fullWidth
+              value={formValues.email}
+              onChange={handleChange}
+              error={Boolean(errors.email)}
+              helperText={errors.email || ''}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              required
+              id="address"
+              name="address"
+              label="Address"
+              fullWidth
+              value={formValues.address}
+              onChange={handleChange}
+              error={Boolean(errors.address)}
+              helperText={errors.address || ''}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <Button type="submit" variant="contained" color="primary" sx={{ mt: 2 }}>
+              Save Information
+            </Button>
+          </Grid>
+        </Grid>
+      </Box>
+      {/* Displaying the Puerto Rico map component below the form */}
+      <Box sx={{ padding: 2 }}>
+        <PuertoRicoMap />
+      </Box>
+    </div>
   );
 };
 
-export default PricingTable;
+export default PersonalInfoComponent;
