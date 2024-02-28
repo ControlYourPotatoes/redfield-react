@@ -113,7 +113,7 @@ export default function GuidedStore() {
       </Box>   
       <Box sx={{margin: 'auto' }}>
         <Paper elevation={5} sx={{ margin: 2, padding: 3 }}>
-          <Box sx={{ maxWidth: '900px', width: '100%', margin: 'auto' }}>
+          <Box sx={{ maxWidth: '900px', margin: 'auto' }}>
             {renderActiveComponent(activeStep)}
           </Box>
         </Paper>

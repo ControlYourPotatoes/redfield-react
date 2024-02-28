@@ -1,77 +1,119 @@
 import React, { useState } from 'react';
 import { Typography, TextField, Grid, Button, Box } from '@mui/material';
 import * as yup from 'yup';
-import PuertoRicoMap from '../PuertoRicoMap'; // Ensure this path matches the location of your PuertoRicoMap component
+import { APIProvider, Map, AdvancedMarker } from '@vis.gl/react-google-maps';
 
 // Validation schema
 const validationSchema = yup.object({
   firstName: yup.string().required('First Name is required'),
   lastName: yup.string().required('Last Name is required'),
-  phone: yup.string().required('Phone is required').matches(/^\d+$/, 'Phone must be only digits'),
+  phoneNumber: yup.string().required('Phone is required').matches(/^\d+$/, 'Phone must be only digits'),
   email: yup.string().email('Invalid email format').required('Email is required'),
   address: yup.string().required('Address is required'),
 });
 
+const googleMapsApiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
+
+
 const PersonalInfoComponent = () => {
-  const [formValues, setFormValues] = useState({
+  interface FormValues {
+    firstName: string;
+    lastName: string;
+    phoneNumber: string;
+    email: string;
+    address: string;
+    // Add any other fields you're using
+  }
+  
+  // Then use this interface when calling useState
+  const [formValues, setFormValues] = useState<FormValues>({
     firstName: '',
     lastName: '',
-    phone: '',
+    phoneNumber: '',
     email: '',
     address: '',
+    // Initialize any other fields you're using
   });
 
   const [errors, setErrors] = useState({});
 
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = event.target;
-        setFormValues({...formValues, [name]: value});
-        // Optionally reset errors
-        setErrors({...errors, [name]: ''});
-    };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    try {
-      // Validate form values
-      await validationSchema.validate(formValues, { abortEarly: false });
-      setErrors({}); // Reset errors if validation succeeds
+  const [coordinates, setCoordinates] = useState({ lat: 18.2208, lng: -66.5901 }); // Default to Puerto Rico's approximate center
 
-      // Here, insert the API call logic to send data to your backend
-      const response = await fetch('http://localhost:3000/api/users', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          firstName: formValues.firstName,
-          lastName: formValues.lastName,
-          phone: formValues.phone,
-          email: formValues.email,
-          address: formValues.address,
-        }),
-      });
 
-      if (!response.ok) {
-        throw new Error('Server responded with an error');
-      }
+  // Handles changes in the text fields and updates formValues state
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    console.log(`Field changed - Name: ${name}, Value: ${value}`); // Debugging output
+    setFormValues({ ...formValues, [name]: value });
 
-      console.log('Form submission successful');
-      // Handle success here, e.g., showing a success message or redirecting the user
-    } catch (err) {
-      console.error('Submission error:', err);
-      if (err instanceof yup.ValidationError) {
-        // Transform Yup validation errors to a more manageable structure
-        const formErrors = err.inner.reduce((acc, current) => {
-          acc[current.path] = current.message;
-          return acc;
-        }, {});
-        setErrors(formErrors);
-      }
-      // Handle other errors, e.g., network error or server error
+    // Geocode address when address field changes
+    if (name === 'address') {
+      console.log(`Geocoding address field changed - Name: ${name}, Value: ${value}`); // Debugging output
+      geocodeAddress(value);
     }
   };
 
+  // Function to geocode address using Google's Geocoding API
+  const geocodeAddress = async (address: string) => {
+    const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=${googleMapsApiKey}`;
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+      if (data.status === 'OK') {
+        const { lat, lng } = data.results[0].geometry.location;
+        setCoordinates({ lat, lng });
+      } else {
+        console.error('Geocoding error:', data.status);
+      }
+    } catch (error) {
+      console.error('Failed to fetch coordinates:', error);
+    }
+  };
+
+    // Function to handle form submission
+    const handleSubmit = async (event: { preventDefault: () => void; }) => {
+      event.preventDefault();
+      try {
+        // Validate form values
+        await validationSchema.validate(formValues, { abortEarly: false });
+        setErrors({}); // Reset errors if validation succeeds
+  
+        // Here, insert the API call logic to send data to your backend
+        const response = await fetch('http://localhost:3000/api/users', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            firstName: formValues.firstName,
+            lastName: formValues.lastName,
+            phone: formValues.phoneNumber,
+            email: formValues.email,
+            address: formValues.address,
+          }),
+        });
+  
+        if (!response.ok) {
+          throw new Error('Server responded with an error');
+        }
+  
+        console.log('Form submission successful');
+        // Handle success here, e.g., showing a success message or redirecting the user
+      } catch (err) {
+        console.error('Submission error:', err);
+        if (err instanceof yup.ValidationError) {
+          // Transform Yup validation errors to a more manageable structure
+          const formErrors = err.inner.reduce((acc, current) => {
+            acc[current.path] = current.message;
+            return acc;
+          }, {});
+          setErrors(formErrors);
+        }
+        // Handle other errors, e.g., network error or server error
+      }
+    };
+  
   return (
     <div>
       <Typography variant="h3" gutterBottom>
@@ -108,14 +150,14 @@ const PersonalInfoComponent = () => {
           <Grid item xs={12} sm={6}>
             <TextField
               required
-              id="phone"
-              name="phone"
+              id="phoneNumber"
+              name="phoneNumber"
               label="Phone"
               fullWidth
-              value={formValues.phone}
+              value={formValues.phoneNumber}
               onChange={handleChange}
-              error={Boolean(errors.phone)}
-              helperText={errors.phone || ''}
+              error={Boolean(errors.phoneNumber)}
+              helperText={errors.phoneNumber || ''}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -153,7 +195,19 @@ const PersonalInfoComponent = () => {
       </Box>
       {/* Displaying the Puerto Rico map component below the form */}
       <Box sx={{ padding: 2 }}>
-        <PuertoRicoMap />
+        <APIProvider apiKey={googleMapsApiKey}>
+          <Map
+            defaultCenter={{lat: 22.54992, lng: 0}}
+            defaultZoom={3}
+            gestureHandling={'greedy'}
+            disableDefaultUI={true}
+          />
+        </APIProvider>
+          {/* Display coordinates */}
+          {coordinates.lat && coordinates.lng && (
+              <Typography>
+                Coordinates: {coordinates.lat}, {coordinates.lng}
+              </Typography>)}
       </Box>
     </div>
   );
