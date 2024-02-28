@@ -1,15 +1,5 @@
 import React from 'react';
-import {
-  Container,
-  Typography,
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-} from '@mui/material';
+import { Container, Typography, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 
 interface Props {
   policyType: 'basic' | 'premium';
@@ -33,7 +23,6 @@ const createData = (
   return { category, windSpeed, payment, insurancePolicyPrice };
 };
 
-// Pricing Table Component
 const PricingTable: React.FC<Props> = ({ policyType }) => {
   // Data for the basic policy table
   const basicPolicyRows: RowData[] = [
@@ -81,10 +70,10 @@ const PricingTable: React.FC<Props> = ({ policyType }) => {
                 <TableCell align="right">{row.insurancePolicyPrice}</TableCell>
               </TableRow>
             ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </Container>
+            </TableBody>
+            </Table>
+            </TableContainer>
+            </Container>
   );
 };
 
