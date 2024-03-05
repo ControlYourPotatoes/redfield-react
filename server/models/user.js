@@ -79,4 +79,23 @@ const UserModel = {
   }
 };
 
+  createPolicy = async ({ userId, type, coordinates }) => {
+  // Construct the query to insert a policy record
+  // Assuming your policy table has columns (userId, type, coordinates)
+  const query = `
+    INSERT INTO policy (userId, type, coordinates)
+    VALUES ($1, $2, $3)
+    RETURNING *; // Returns all columns of the newly inserted row
+  `;
+  const values = [userId, type, JSON.stringify(coordinates)]; // Assuming coordinates is an object or array
+
+  try {
+    const { rows } = await pool.query(query, values);
+    return rows[0]; // Return the inserted policy record
+  } catch (error) {
+    console.error("Error creating policy:", error);
+    throw error;
+  }
+};
+
 module.exports = UserModel;

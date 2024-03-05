@@ -55,6 +55,32 @@ const userController = {
     }
   },
   
+  handleSubmitForm: async (req, res) => {
+    const { personalInfo, policy, payment } = req.body;
+    
+    try {
+      // Assuming createUser method is adapted to return the user's ID or the full user object
+      const newUser = await UserModel.createUser(personalInfo);
+  
+      // Assuming you will add createPolicy and createPayment methods to UserModel
+      const newPolicy = await UserModel.createPolicy({ userId: newUser.id, ...policy });
+      const newPayment = await UserModel.createPayment({ userId: newUser.id, ...payment });
+  
+      // Respond with the created entities or a success message
+      res.status(201).json({
+        message: "Form data submitted successfully",
+        user: newUser,
+        policy: newPolicy,
+        payment: newPayment,
+      });
+    } catch (error) {
+      console.error("Error handling form submission:", error);
+      res.status(500).json({ error: error.message });
+    }
+  },
+
+  // Add a new method to the userController object
 };
+
 
 module.exports = userController;

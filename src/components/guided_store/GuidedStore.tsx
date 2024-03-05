@@ -117,16 +117,15 @@ export default function GuidedStore() {
 
 
   const renderActiveComponent = (step: number, values: any, setFieldValue: any) => {
-    const commonProps = { values, setFieldValue };
     switch (step) {
       case 0:
         return <StartComponent />;
       case 1:
-        return <CoverageComponent {...commonProps} />;
+        return <CoverageComponent />;
       case 2:
-        return <PersonalInfoComponent {...commonProps} />;
+        return <PersonalInfoComponent />;
       case 3:
-        return <PaymentComponent {...commonProps} />;
+        return <PaymentComponent />;
       case 4:
         return <ConfirmationComponent formData={values} />;
       default:
