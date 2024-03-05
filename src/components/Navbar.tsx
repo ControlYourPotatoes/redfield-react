@@ -48,11 +48,42 @@ const Navbar: React.FC = () => {
   const location = useLocation(); // Hook to get the current location
   const navigate = useNavigate(); // Hook for programmatic navigation
   const [menuOpen, setMenuOpen] = useState(false); // State to manage menu icon toggle
+  const [visible, setVisible] = useState(true); // New state to control Navbar visibility
 
   useEffect(() => {
     // Close the mobile menu when the location changes
     setMenuOpen(false);
   }, [location]);
+
+  // New useEffect hook to handle scroll and idle behavior
+  useEffect(() => {
+    let lastScrollY = window.scrollY;
+    let idleTimer: ReturnType<typeof setTimeout>; // Timer to track idle time
+
+    const handleScroll = () => {
+      // Clear existing timer on scroll start
+      clearTimeout(idleTimer);
+
+      // Determine scroll direction
+      const currentScrollY = window.scrollY;
+      setVisible(lastScrollY > currentScrollY || currentScrollY < 10);
+      lastScrollY = currentScrollY;
+
+      // Set a timer to mark idle state and show navbar
+      idleTimer = setTimeout(() => {
+        setVisible(true); // Show navbar after idle time
+      }, 1000); // 2000ms = 2 seconds of idle time before showing navbar
+    };
+
+    // Add scroll event listener
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    // Cleanup function to remove event listener
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      clearTimeout(idleTimer);
+    };
+  }, []);
 
   const handleNavigationClick = (section: string) => {
     if (location.pathname === '/') {
@@ -107,7 +138,7 @@ const Navbar: React.FC = () => {
 
 
   return (
-    <AppBar position="fixed">
+    <AppBar position="fixed" style={{ transition: 'top 0.3s', top: visible ? '0' : '-100px' }}>
       <StyledToolbar>
         <IconContainer>
           <Hurricane src="./assets/gifs/spinHurricane.gif" alt="New Icon" />
