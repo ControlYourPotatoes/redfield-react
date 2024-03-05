@@ -1,7 +1,8 @@
 import React, { useState, useEffect }from 'react';
 import { Link as RouterLink, useLocation, useNavigate} from 'react-router-dom'; // Import for routing to different pages
-import { AppBar, Toolbar, Button, useTheme, useMediaQuery, Drawer, Box, styled, Link as MuiLink } from '@mui/material';
+import { AppBar, Toolbar, Button, useTheme, useMediaQuery, Drawer, Box, styled, Link as MuiLink} from '@mui/material';
 import { scroller , animateScroll as scroll } from 'react-scroll'; // Import for smooth scrolling
+import AccountMenu from './pages/AccountMenu'; // Import AccountMenu component
 import './Navbar.css';
 
 const MenuIcon = "./assets/icon/Open-icon.png"; // Path to your custom menu icon
@@ -98,6 +99,9 @@ const Navbar: React.FC = () => {
       <MuiLink component={RouterLink} to="/Dashboard" style={{ textDecoration: 'none' }}>
         <StyledButton style={{color: getButtonTextColor()}}>Dashboard</StyledButton>
       </MuiLink>
+      <MuiLink component={RouterLink} to="/SignInUpForm" style={{ textDecoration: 'none' }}>
+        <StyledButton style={{color: getButtonTextColor()}}>Sign Up</StyledButton>
+      </MuiLink>
     </Box>
   );
 
@@ -121,11 +125,15 @@ const Navbar: React.FC = () => {
             </Button>
             <Drawer anchor={'right'} open={menuOpen} onClose={() => setMenuOpen(false)}>
               {navigationList()}
+              <AccountMenu />
             </Drawer>
           </>
         ) : (
           // Web view - Full navbar links
-            navigationList()
+          <>
+            {navigationList()}
+            <AccountMenu />
+          </>
         )}
       </StyledToolbar>
     </AppBar>
