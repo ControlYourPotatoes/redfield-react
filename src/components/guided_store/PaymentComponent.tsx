@@ -1,15 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Button, CircularProgress, Typography, Card, CardContent, CardActionArea, CardMedia, Grid } from '@mui/material';
 import CardPayment from './CardPayment';
 import WalletPayment from './WalletPayment';
 import CardIcon from '@mui/icons-material/CreditCard';
+import { useFormikContext } from 'formik';
+
 
 const PaymentComponent: React.FC = () => {
-  const [paymentMethod, setPaymentMethod] = useState<'wallet' | 'card'>('wallet');
-  const [loading, setLoading] = useState(false);
+  const { setFieldValue, values } = useFormikContext(); // Use Formik's context
+  const [loading, setLoading] = React.useState(false);
 
   const handlePaymentMethodChange = (method: 'wallet' | 'card') => {
-    setPaymentMethod(method);
+    setFieldValue('payment.type', method); // Update Formik's state instead of local state
+    console.log('payment.type:', method);
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -30,7 +33,7 @@ const PaymentComponent: React.FC = () => {
       </Typography>
       <Grid container spacing={2}>
         <Grid item xs={6}>
-          <Card variant={paymentMethod === 'wallet' ? 'elevation' : 'outlined'}>
+          <Card variant={values.paymentMethod === 'wallet' ? 'elevation' : 'outlined'}>
             <CardActionArea onClick={() => handlePaymentMethodChange('wallet')}>
               <CardMedia
                 component="img"
@@ -48,7 +51,7 @@ const PaymentComponent: React.FC = () => {
           </Card>
         </Grid>
         <Grid item xs={6}>
-          <Card variant={paymentMethod === 'card' ? 'elevation' : 'outlined'}>
+        <Card variant={values.paymentMethod === 'card' ? 'elevation' : 'outlined'}>
             <CardActionArea onClick={() => handlePaymentMethodChange('card')}>
               <CardIcon sx={{ fontSize: 160, padding: '10px', width: 'auto' }} />
               <CardContent>
@@ -61,7 +64,7 @@ const PaymentComponent: React.FC = () => {
         </Grid>
       </Grid>
       <form onSubmit={handleSubmit}>
-        {paymentMethod === 'wallet' ? (
+        {values.paymentMethod === 'wallet' ? (
           <WalletPayment handlePaymentMethodChange={handlePaymentMethodChange} />
         ) : (
           <CardPayment />

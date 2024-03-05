@@ -9,6 +9,9 @@ const HurricaneMap = () => {
   const [hurricanePath, setHurricanePath] = useState([]);
 
   const hurricaneIcon = new L.Icon({
+    iconUrl: 'assets/gifs/hurricaneicon.gif',
+    iconSize: [50, 50],
+    iconAnchor: [25, 25],
     iconUrl: '/assets/gifs/hurricaneicon.gif',
     iconSize: [150, 150],
     iconAnchor: [75, 75],

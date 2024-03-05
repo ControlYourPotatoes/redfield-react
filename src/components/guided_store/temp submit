@@ -1,0 +1,42 @@
+    // Function to handle form submission
+    const handleSubmit = async (event: { preventDefault: () => void; }) => {
+      event.preventDefault();
+      try {
+        // Validate form values
+        await validationSchema.validate(formValues, { abortEarly: false });
+        setErrors({}); // Reset errors if validation succeeds
+  
+        // Here, insert the API call logic to send data to your backend
+        const response = await fetch('http://localhost:3000/api/users', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            firstName: formValues.firstName,
+            lastName: formValues.lastName,
+            phone: formValues.phoneNumber,
+            email: formValues.email,
+            address: formValues.address,
+          }),
+        });
+  
+        if (!response.ok) {
+          throw new Error('Server responded with an error');
+        }
+  
+        console.log('Form submission successful');
+        // Handle success here, e.g., showing a success message or redirecting the user
+      } catch (err) {
+        console.error('Submission error:', err);
+        if (err instanceof yup.ValidationError) {
+          // Transform Yup validation errors to a more manageable structure
+          const formErrors = err.inner.reduce((acc, current) => {
+            acc[current.path] = current.message;
+            return acc;
+          }, {});
+          setErrors(formErrors);
+        }
+        // Handle other errors, e.g., network error or server error
+      }
+    };

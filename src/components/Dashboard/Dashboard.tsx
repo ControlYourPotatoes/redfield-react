@@ -6,8 +6,7 @@ import HurricaneMap from './HurricaneMap';
 const Dashboard: React.FC = () => {
   return (
     <Box sx={{ padding: '20px' }}>
-      <Typography variant="h4">Dashboard </Typography>
-      <Typography>Current Weather</Typography>
+      <Typography variant="h4">Dashboard Placeholder</Typography>
       <HurricaneMap />
     </Box>
   );

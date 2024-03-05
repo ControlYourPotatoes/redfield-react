@@ -12,6 +12,7 @@ const CloseIcon = "./assets/icon/closed-icon.png"; // Path to your custom close 
 const StyledToolbar = styled(Toolbar)(() => ({
   justifyContent: 'space-between',
   backgroundColor: '#2E3B55',
+  maxHeight: '3rem',
 }));
 
 const LogoButton = styled(Button)(({ theme }) => ({
@@ -23,7 +24,7 @@ const LogoButton = styled(Button)(({ theme }) => ({
 
 const Hurricane = styled('img')(({ }) => ({
   //  marginRight: '16px', // Adjust the spacing as needed
-  height: '120px', // Adjust the size as needed
+  height: '100px', // Adjust the size as needed
   // Add more styles as needed
 }));
 

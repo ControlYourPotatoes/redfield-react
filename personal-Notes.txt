@@ -1,0 +1,33 @@
+what I'm installing to test postgreSQL
+sudo apt-get install postgresql-12
+
+ The repository contains many different packages including third party addons. The most common and important packages are (substitute the version number as required):
+postgresql-client-12 	client libraries and client binaries
+postgresql-12 	core database server
+libpq-dev 	libraries and headers for C language frontend development
+postgresql-server-dev-12 	libraries and headers for C language backend development
+
+#note when installed this command showed 
+Success. You can now start the database server using:
+pg_ctlcluster 12 main start
+
+
+configuring SQL 
+https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-22-04
+root password is “My$ecureP@ssw0rd!”
+
+possible set ups 
+CREATE TABLE users (
+  user_id INT NOT NULL AUTO_INCREMENT,
+  username VARCHAR(255) NOT NULL UNIQUE,
+  password_hash VARCHAR(255) NOT NULL,
+  salt VARCHAR(255) NOT NULL,
+  PRIMARY KEY (user_id)
+);
+CREATE TABLE user_info (
+  user_id INT NOT NULL,
+  name VARCHAR(255) NOT NULL,
+  email VARCHAR(255) NOT NULL UNIQUE,
+  address VARCHAR(255),
+  FOREIGN KEY (user_id) REFERENCES users(user_id)
+);
