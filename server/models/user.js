@@ -116,6 +116,20 @@ const UserModel = {
     console.error("Error creating payment:", error);
     throw error;
   }
-}
+};
+  
+    getPolicyByUserId = async (userId) => {
+    // Construct the query to fetch a policy by userId
+    const query = 'SELECT * FROM policy WHERE userId = $1';
+    
+    try {
+      const { rows } = await pool.query(query, [userId]);
+      return rows[0]; // Return the policy record
+    } catch (error) {
+      console.error(`Error fetching policy by userId: ${userId}`, error);
+      throw error;
+    }
+  };
+  
 
 module.exports = UserModel;
