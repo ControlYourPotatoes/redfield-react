@@ -98,4 +98,24 @@ const UserModel = {
   }
 };
 
+  createPayment = async ({ userId, type, payment, amount }) => {
+  // Construct the query to insert a payment record
+  // Assuming your payment table has columns (userId, type, payment, amount)
+  const query = `
+    INSERT INTO payment (userId, type, payment, amount)
+    VALUES ($1, $2, $3, $4)
+    RETURNING *; // Returns all columns of the newly inserted row
+  `;
+  const values = [userId, type, payment.details, amount]; // Assuming card is an object with type and number
+  
+  try {
+    const { rows } = await pool.query(query, values);
+    return rows[0]; // Return the inserted payment record
+  }
+  catch (error) {
+    console.error("Error creating payment:", error);
+    throw error;
+  }
+}
+
 module.exports = UserModel;
