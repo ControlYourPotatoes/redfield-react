@@ -52,7 +52,7 @@ const VideoSection: React.FC = () => {
         <Typography variant="body1">
           What are you waiting for?
         </Typography>
-        <Button variant="contained" color="primary">Get Started</Button>
+        <Button variant="outlined" color="primary">Get Started</Button>
       </div>
     </div>
   );
