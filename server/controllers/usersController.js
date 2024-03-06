@@ -10,6 +10,39 @@ const userController = {
     }
   },
 
+  createPolicy: async (req, res) => {
+    try {
+      const newPolicy = await UserModel.createPolicy(req.body);
+      res.status(201).json(newPolicy);
+    } catch (error) {
+      res.status(400).json({ error: error.message });
+    }
+  },
+
+  createPayment: async (req, res) => {
+    try {
+      const newPayment = await UserModel.createPayment(req.body);
+      res.status(201).json(newPayment);
+    } catch (error) {
+      res.status(400).json({ error: error.message });
+    }
+  },
+
+  submitForm: async (req, res) => {
+    const { personalInfo, policy, payment } = req.body;
+    
+    try {
+      // Assuming createUser, createPolicy, and createPayment are functions that return the created entity
+      const user = await createUser(personalInfo);
+      const userPolicy = await createPolicy({ ...policy, userId: user.id });
+      const userPayment = await createPayment({ ...payment, userId: user.id });
+  
+      res.status(201).json({ user, userPolicy, userPayment });
+    } catch (error) {
+      res.status(500).json({ message: "Error submitting form", error: error.message });
+    }
+  },
+
   getAllUsers: async (req, res) => {
     try {
       const users = await UserModel.getAllUsers();
@@ -53,32 +86,8 @@ const userController = {
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
-  },
+  },    
   
-  handleSubmitForm: async (req, res) => {
-    const { personalInfo, policy, payment } = req.body;
-    
-    try {
-      // Assuming createUser method is adapted to return the user's ID or the full user object
-      const newUser = await UserModel.createUser(personalInfo);
-  
-      // Assuming you will add createPolicy and createPayment methods to UserModel
-      const newPolicy = await UserModel.createPolicy({ userId: newUser.id, ...policy });
-      const newPayment = await UserModel.createPayment({ userId: newUser.id, ...payment });
-  
-      // Respond with the created entities or a success message
-      res.status(201).json({
-        message: "Form data submitted successfully",
-        user: newUser,
-        policy: newPolicy,
-        payment: newPayment,
-      });
-    } catch (error) {
-      console.error("Error handling form submission:", error);
-      res.status(500).json({ error: error.message });
-    }
-  },
-
   // Add a new method to the userController object
 };
 
