@@ -7,13 +7,17 @@ id match with user db
 
 cooordinates 
 
-/cloudsql/round-dispatch-414819:us-central1:db-redfield
+INSTANCE_UNIX_SOCKET=/cloudsql/round-dispatch-414819:us-central1:db-redfield
+INSTANCE_CONNECTION_NAME=round-dispatch-414819:us-central1:db-redfield
 
-gcloud run deploy server-web \
-  --image gcr.io//server-web \
+gcloud run deploy server-web
+  --image gcr.io//server-web
   --platform managed \
   --add-cloudsql-instances round-dispatch-414819:us-central1:db-redfield \
   --update-env-vars DB_USER=admin,DB_PASSWORD=admin,DB_NAME=postgres,DB_PORT=5432 \
   --allow-unauthenticated
 
 gcloud run deploy server-web --image gcr.io/round-dispatch-414819/server-web --platform managed --add-cloudsql-instances round-dispatch-414819:us-central1:db-redfield --update-env-vars DB_USER=admin,DB_PASSWORD=admin,DB_NAME=postgres,DB_PORT=5432 --allow-unauthenticated
+
+gcloud run deploy server-web --image gcr.io/round-dispatch-414819/server-web --add-cloudsql-instances round-dispatch-414819:us-central1:db-redfield --set-env-vars INSTANCE_UNIX_SOCKET="/cloudsql/round-dispatch-414819:us-central1:db-redfield" --set-env-vars INSTANCE_CONNECTION_NAME="round-dispatch-414819:us-central1:db-redfield" --set-env-vars DB_NAME="postgres" --set-env-vars DB_USER="admin" --set-env-vars DB_PASS="admin" --set-env-vars DB_PORT="5432" --allow-unauthenticated
+

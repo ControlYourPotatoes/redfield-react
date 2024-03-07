@@ -1,41 +1,35 @@
 const express = require('express');
 const cors = require('cors');
 const usersRoutes = require('./routes/users');
-const winston = require('winston');
-const { LoggingWinston } = require('@google-cloud/logging-winston');
+const createDatabasePool = require('./config/db'); // Adjust the path as necessary
+require('dotenv').config();
 
 const app = express();
 app.use(cors());
 
-const transports = [
-  new winston.transports.Console(),
-];
-
-if (process.env.NODE_ENV === 'production') {
-  transports.push(new LoggingWinston());
-}
-
-
-const logger = winston.createLogger({
-  level: 'info', // Log only if info level or above
-  transports: [
-    new winston.transports.Console(),
-    new LoggingWinston(),
-  ],
-});
-
-const port = process.env.PORT || 3000;
-
 app.use(express.json());
 
-// Middleware to log the request body
+// Simplified logging middleware using console
 app.use((req, res, next) => {
-  logger.info('Received request', { body: req.body });
+  console.log('Received request', { url: req.url, method: req.method, body: req.body });
   next();
 });
 
-app.use('/api', usersRoutes);
+// Initialize the database pool and then start the server
+createDatabasePool().then(pool => {
+  // Make the pool accessible to your route handlers, if needed
+  console.log("Database pool created successfully.");
+  app.locals.pool = pool;
+  console.log('Is pool available in app.locals?', Boolean(app.locals.pool));
+  
+  app.use('/api', usersRoutes);
 
-app.listen(port, () => {
-  logger.info(`Server listening on port ${port}`);
+  const port = process.env.PORT || 3000;
+  app.listen(port, () => {
+    console.log(`Server listening on port ${port}`);
+  });
+}).catch(error => {
+  console.error('Failed to initialize the database pool:', error);
+  // Consider exiting the process if the database is essential to your application
+  process.exit(1);
 });

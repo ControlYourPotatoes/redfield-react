@@ -2,8 +2,9 @@ const UserModel = require('../models/user');
 
 const userController = {
   createUser: async (req, res) => {
+    const pool = req.app.locals.pool;
     try {
-      const newUser = await UserModel.createUser(req.body);
+      const newUser = await UserModel.createUser(pool, req.body);
       res.status(201).json(newUser);
     } catch (error) {
       res.status(400).json({ error: error.message });
@@ -11,8 +12,9 @@ const userController = {
   },
 
   createPolicy: async (req, res) => {
+    const pool = req.app.locals.pool;
     try {
-      const newPolicy = await UserModel.createPolicy(req.body);
+      const newPolicy = await UserModel.createPolicy(pool, req.body);
       res.status(201).json(newPolicy);
     } catch (error) {
       res.status(400).json({ error: error.message });
@@ -20,32 +22,19 @@ const userController = {
   },
 
   createPayment: async (req, res) => {
+    const pool = req.app.locals.pool;
     try {
-      const newPayment = await UserModel.createPayment(req.body);
+      const newPayment = await UserModel.createPayment(pool, req.body);
       res.status(201).json(newPayment);
     } catch (error) {
       res.status(400).json({ error: error.message });
     }
   },
 
-  submitForm: async (req, res) => {
-    const { personalInfo, policy, payment } = req.body;
-    
-    try {
-      // Assuming createUser, createPolicy, and createPayment are functions that return the created entity
-      const user = await createUser(personalInfo);
-      const userPolicy = await createPolicy({ ...policy, userId: user.id });
-      const userPayment = await createPayment({ ...payment, userId: user.id });
-  
-      res.status(201).json({ user, userPolicy, userPayment });
-    } catch (error) {
-      res.status(500).json({ message: "Error submitting form", error: error.message });
-    }
-  },
-
   getAllUsers: async (req, res) => {
+    const pool = req.app.locals.pool;
     try {
-      const users = await UserModel.getAllUsers();
+      const users = await UserModel.getAllUsers(pool);
       res.json(users);
     } catch (error) {
       res.status(500).json({ error: error.message });
@@ -53,8 +42,9 @@ const userController = {
   },
 
   getUserById: async (req, res) => {
+    const pool = req.app.locals.pool;
     try {
-      const user = await UserModel.getUserById(req.params.id);
+      const user = await UserModel.getUserById(pool, req.params.id);
       if (!user) {
         return res.status(404).json({ message: 'User not found' });
       }
@@ -65,8 +55,9 @@ const userController = {
   },
 
   deleteUserById: async (req, res) => {
+    const pool = req.app.locals.pool;
     try {
-      const user = await UserModel.deleteUserById(req.params.id);
+      const user = await UserModel.deleteUserById(pool, req.params.id);
       if (!user) {
         return res.status(404).json({ message: 'User not found' });
       }
@@ -77,8 +68,9 @@ const userController = {
   },
 
   updateUserById: async (req, res) => {
+    const pool = req.app.locals.pool;
     try {
-      const user = await UserModel.updateUserById(req.params.id, req.body);
+      const user = await UserModel.updateUserById(pool, req.params.id, req.body);
       if (!user) {
         return res.status(404).json({ message: 'User not found' });
       }
@@ -86,10 +78,7 @@ const userController = {
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
-  },    
-  
-  // Add a new method to the userController object
+  }
 };
-
 
 module.exports = userController;
