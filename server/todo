@@ -6,3 +6,14 @@ policy type
 id match with user db
 
 cooordinates 
+
+/cloudsql/round-dispatch-414819:us-central1:db-redfield
+
+gcloud run deploy server-web \
+  --image gcr.io//server-web \
+  --platform managed \
+  --add-cloudsql-instances round-dispatch-414819:us-central1:db-redfield \
+  --update-env-vars DB_USER=admin,DB_PASSWORD=admin,DB_NAME=postgres,DB_PORT=5432 \
+  --allow-unauthenticated
+
+gcloud run deploy server-web --image gcr.io/round-dispatch-414819/server-web --platform managed --add-cloudsql-instances round-dispatch-414819:us-central1:db-redfield --update-env-vars DB_USER=admin,DB_PASSWORD=admin,DB_NAME=postgres,DB_PORT=5432 --allow-unauthenticated
