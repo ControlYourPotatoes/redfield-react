@@ -46,7 +46,7 @@ let transporter = nodemailer.createTransport({
 function sendNotificationEmail(message) {
   let mailOptions = {
     from: process.env.GMAIL_USER, // place your email
-    to: 'alexanderpuga78@gmail.com', // Set the recipient email address
+    to: 'mercedes.diaz@holbertonschool.com', // Set the recipient email address
     subject: 'Hurricane Alert',
     text: message,
   };
