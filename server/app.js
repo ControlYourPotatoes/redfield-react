@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 const usersRoutes = require('./routes/users');
 const createDatabasePool = require('./config/db'); // Adjust the path as necessary
 require('dotenv').config();
@@ -15,21 +16,29 @@ app.use((req, res, next) => {
   next();
 });
 
+// API routes
+app.use('/api', usersRoutes);
+// After API routes, serve static files from the React build
+app.use(express.static(path.join(__dirname, '..', 'dist')));
+
+// SPA support: redirect all non-API requests to the React index.html
+app.get('*', (req, res) => {
+  if (!req.url.startsWith('/api')) {
+    res.sendFile(path.join(__dirname, '..', 'dist', 'index.html'));
+  }
+});
+
+
 // Initialize the database pool and then start the server
 createDatabasePool().then(pool => {
-  // Make the pool accessible to your route handlers, if needed
   console.log("Database pool created successfully.");
   app.locals.pool = pool;
-  console.log('Is pool available in app.locals?', Boolean(app.locals.pool));
   
-  app.use('/api', usersRoutes);
-
   const port = process.env.PORT || 3000;
   app.listen(port, () => {
     console.log(`Server listening on port ${port}`);
   });
 }).catch(error => {
   console.error('Failed to initialize the database pool:', error);
-  // Consider exiting the process if the database is essential to your application
   process.exit(1);
 });
