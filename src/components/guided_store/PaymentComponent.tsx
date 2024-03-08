@@ -4,15 +4,15 @@ import CardPayment from './CardPayment';
 import WalletPayment from './WalletPayment';
 import CardIcon from '@mui/icons-material/CreditCard';
 import { useFormikContext } from 'formik';
+import { FormData } from './types'; // Make sure the path is correct based on your project structure
 
 
 const PaymentComponent: React.FC = () => {
-  const { setFieldValue, values } = useFormikContext(); // Use Formik's context
+  const { setFieldValue, values } = useFormikContext<FormData>();
   const [loading, setLoading] = React.useState(false);
 
   const handlePaymentMethodChange = (method: 'wallet' | 'card') => {
-    setFieldValue('payment.type', method); // Update Formik's state instead of local state
-    console.log('payment.type:', method);
+    setFieldValue('payment.type', method);
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -33,7 +33,7 @@ const PaymentComponent: React.FC = () => {
       </Typography>
       <Grid container spacing={2}>
         <Grid item xs={6}>
-          <Card variant={values.paymentMethod === 'wallet' ? 'elevation' : 'outlined'}>
+          <Card variant={values.payment.type === 'wallet' ? 'elevation' : 'outlined'}>
             <CardActionArea onClick={() => handlePaymentMethodChange('wallet')}>
               <CardMedia
                 component="img"
@@ -51,7 +51,7 @@ const PaymentComponent: React.FC = () => {
           </Card>
         </Grid>
         <Grid item xs={6}>
-        <Card variant={values.paymentMethod === 'card' ? 'elevation' : 'outlined'}>
+        <Card variant={values.payment.type === 'card' ? 'elevation' : 'outlined'}>
             <CardActionArea onClick={() => handlePaymentMethodChange('card')}>
               <CardIcon sx={{ fontSize: 160, padding: '10px', width: 'auto' }} />
               <CardContent>
@@ -64,7 +64,7 @@ const PaymentComponent: React.FC = () => {
         </Grid>
       </Grid>
       <form onSubmit={handleSubmit}>
-        {values.paymentMethod === 'wallet' ? (
+        {values.payment.type === 'wallet' ? (
           <WalletPayment handlePaymentMethodChange={handlePaymentMethodChange} />
         ) : (
           <CardPayment />

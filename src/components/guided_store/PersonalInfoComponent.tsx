@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Typography, TextField, Grid, Button, Box } from '@mui/material';
+import { Typography, TextField, Grid, Box } from '@mui/material';
 import * as yup from 'yup';
 import { useFormikContext } from 'formik';
+import { FormData } from './types';
 
 import MapComponent from './MapComponent';
 
@@ -20,7 +21,7 @@ const googleMapsApiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
 
 
 const PersonalInfoComponent = () => {
-  const { values, setFieldValue} = useFormikContext();
+  const { values, setFieldValue } = useFormikContext<FormData>();
   
 
 
@@ -66,11 +67,11 @@ const PersonalInfoComponent = () => {
     setFieldValue(name, value); // Keep this as is to update the form state correctly
     
     // Remove the 'personalInfo.' prefix before passing to validateField
-    const fieldName = name.replace("personalInfo.", "");
+    const fieldName = name.replace("policy.", "");
     validateField(fieldName, value); // Now passing the adjusted field name
 
     // Geocode address when address field changes
-    if (name === 'personalInfo.address') {
+    if (name === 'policy.address') {
       // Only geocode when the address field has a non-empty value
       if (value.trim() !== '') {
         geocodeAddress(value);
@@ -91,7 +92,7 @@ const PersonalInfoComponent = () => {
       console.log(`${path} is valid`);
       // Note: Adjust localErrors state structure if needed to match this path
       setLocalErrors((prev) => ({ ...prev, [path]: undefined }));
-    } catch (error) {
+    } catch (error: any) {
       if (error instanceof yup.ValidationError) {
         console.log(`${path} is invalid:`, error.message);
         // Adjust localErrors to use the full path or just fieldName, based on your state structure
@@ -162,11 +163,11 @@ const PersonalInfoComponent = () => {
           <Grid item xs={12}>
             <TextField
               required
-              id="personalInfo.address"
-              name="personalInfo.address"
+              id="policy.address"
+              name="policy.address"
               label="Address"
               fullWidth
-              value={values.personalInfo?.address || ''}
+              value={values.policy?.address || ''}
               onChange={handleChange}
               error={Boolean(localErrors['personalInfo.address'])}
               helperText={localErrors['personalInfo.address'] || ''}
