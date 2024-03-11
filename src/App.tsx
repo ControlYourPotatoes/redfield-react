@@ -7,6 +7,7 @@ import Prices from './components/pages/Prices';
 import GuidedStore from './components/guided_store/GuidedStore';
 import Dashboard from './components/Dashboard/Dashboard';
 import SignInSignUpPage from './components/pages/SignUpform';
+import InvestorDashboard from './components/Dashboard/InvestorDashboard';
 
 
 // MainPage component that includes Home, Prices, and About
@@ -28,6 +29,7 @@ function App() {
         <Route path="*" element={<Navigate to="/" replace />} />
         <Route path='/Dashboard' element={<Dashboard />} />
         <Route path='/SignInUpForm' element={<SignInSignUpPage/>} />
+        <Route path='/InvestorDashboard' element={<InvestorDashboard />} />
       </Routes>
     </div>
   );
