@@ -4,7 +4,7 @@ const express = require('express');
 const cors = require('cors');
 const nodemailer = require('nodemailer'); // testing for mailing 
 const app = express();
-const port = 3001; // Ensure this port is free or change it as needed
+const port = 8080; // Ensure this port is free or change it as needed
 
 app.use(cors()); // This enables CORS for all routes
 app.use(express.json()); // To parse JSON bodies
@@ -46,7 +46,7 @@ let transporter = nodemailer.createTransport({
 function sendNotificationEmail(message) {
   let mailOptions = {
     from: process.env.GMAIL_USER, // place your email
-    to: 'alexanderpuga78@gmail.com', // Set the recipient email address
+    to: 'carl-frank7@hotmail.com', // Set the recipient email address
     subject: 'Hurricane Alert',
     text: message,
   };
