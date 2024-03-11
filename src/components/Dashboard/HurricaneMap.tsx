@@ -37,18 +37,21 @@ const HurricaneMap: React.FC = () => {
   };
 
   return (
-    <Box sx={{ borderColor: 'primary.main', width: '100%' }} >
-      <MapContainer center={hurricanePosition} zoom={6} style={{ height: '500px', width: '100%' }}>
+    <>
+    <Box sx={{ background: 'primary.main', width:'40%', height: '300px', padding: '30px', borderWidth: '20px',}} >
+      <MapContainer center={hurricanePosition} zoom={6} style={{ height: '100%', width: '100%' }}>
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         <Marker position={hurricanePosition} icon={hurricaneIcon} />
         <Polyline positions={hurricanePath} color="red" />
-      </MapContainer>
+      </MapContainer> 
+    </Box>
       <Button onClick={startAnimation} variant="contained" color="primary" style={{ marginTop: '10px' }}>
         Start Animation
       </Button>
-    </Box>
+    </>
+    
   );
 };
 

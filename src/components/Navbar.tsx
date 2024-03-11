@@ -70,7 +70,7 @@ const Navbar: React.FC = () => {
           <Hurricane src="./assets/gifs/spinHurricane.gif" alt="New Icon" />
             <LogoButton color="inherit" aria-label="logo">
               <Link to="/">
-                <img src="./assets/icon/edited_logo.png" alt="Logo" />
+                <img src="\assets\logo\redfieldLogoLight.png" alt="Logo" />
               </Link>
             </LogoButton>
         </IconContainer>
