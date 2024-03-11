@@ -17,8 +17,8 @@ const UserModel = {
 
   createPolicy: async (pool, { userId, type, coordinates }) => {
     const query = `
-      INSERT INTO policy (userId, type, coordinates)
-      VALUES ($1, $2, $3)
+      INSERT INTO policy (userId, type, coordinates, address)
+      VALUES ($1, $2, $3, $4)
       RETURNING *;
     `;
     const values = [userId, type, JSON.stringify(coordinates)];
@@ -44,6 +44,17 @@ const UserModel = {
       return rows[0];
     } catch (error) {
       throw new Error(`Error creating payment: ${error.message}`);
+    }
+  },
+
+  getAllPayments: async (pool) => {
+    const query = 'SELECT * FROM payment';
+
+    try {
+      const { rows } = await pool.query(query);
+      return rows;
+    } catch (error) {
+      throw new Error(`Error fetching all payments: ${error.message}`);
     }
   },
 
@@ -95,7 +106,20 @@ const UserModel = {
     } catch (error) {
       throw new Error(`Error updating user by ID: ${id} - ${error.message}`);
     }
+  },
+
+  getAllPolicies: async (pool) => {
+    const query = 'SELECT * FROM policy';
+    
+    try {
+      const { rows } = await pool.query(query);
+      return rows;
+    } catch (error) {
+      throw new Error(`Error fetching all policies: ${error.message}`);
+    }
   }
+  
+
 };
 
 module.exports = UserModel;

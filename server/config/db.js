@@ -3,11 +3,11 @@ require('dotenv').config();
 
 async function createDatabasePool() {
   // Determine the host based on the environment
-  const host = process.env.INSTANCE_CONNECTION_NAME ? `/cloudsql/${process.env.INSTANCE_CONNECTION_NAME}` : process.env.DB_HOST;
+  const selectedhost = process.env.INSTANCE_CONNECTION_NAME ? `/cloudsql/${process.env.INSTANCE_CONNECTION_NAME}` : process.env.DB_HOST;
 
   const pool = new Pool({
     user: process.env.DB_USER,
-    host: host,
+    host: selectedhost,
     database: process.env.DB_NAME,
     password: process.env.DB_PASS,
     port: process.env.DB_PORT || 5432, // Default PostgreSQL port

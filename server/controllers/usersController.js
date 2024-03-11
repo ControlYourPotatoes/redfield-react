@@ -21,6 +21,16 @@ const userController = {
     }
   },
 
+  getAllPolicies: async (req, res) => {
+    const pool = req.app.locals.pool;
+    try {
+      const policies = await UserModel.getAllPolicies(pool);
+      res.json(policies);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  },
+
   createPayment: async (req, res) => {
     const pool = req.app.locals.pool;
     try {
@@ -28,6 +38,16 @@ const userController = {
       res.status(201).json(newPayment);
     } catch (error) {
       res.status(400).json({ error: error.message });
+    }
+  },
+
+  getAllPayments: async (req, res) => {
+    const pool = req.app.locals.pool;
+    try {
+      const payments = await UserModel.getAllPayments(pool);
+      res.json(payments);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
     }
   },
 

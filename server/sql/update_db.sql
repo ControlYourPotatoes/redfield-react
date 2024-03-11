@@ -22,6 +22,7 @@ CREATE TABLE users (
 CREATE TABLE policy (
     userId UUID PRIMARY KEY,
     type VARCHAR(255) NOT NULL,
+    address VARCHAR(255) NOT NULL,
     coordinates JSONB, -- or use VARCHAR if you're storing JSON as text
     FOREIGN KEY (userId) REFERENCES users(id) ON DELETE CASCADE,
     created_at TIMESTAMP WITHOUT TIME ZONE DEFAULT now(),
