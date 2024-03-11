@@ -1,0 +1,36 @@
+.receipt-container {
+  padding: 16px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.receipt-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.policy-holder,
+.policy-email,
+.policy-address,
+.policy-type,
+.hurricane-category,
+.policy-price,
+.policy-date {
+  margin-bottom: 8px;
+  font-size: 16px;
+}
+
+.policy-type {
+  font-style: italic;
+}
+
+.hurricane-category {
+  color: #d32f2f;
+}
+
+.policy-price {
+  color: #2e7d32;
+  font-weight: bold;
+}
