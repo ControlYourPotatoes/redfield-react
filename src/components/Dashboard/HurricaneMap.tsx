@@ -15,7 +15,7 @@ const HurricaneMap = () => {
   });
 
   useEffect(() => {
-    fetch('http://localhost:3001/api/hurricane')
+    fetch('http://localhost:8080/api/hurricane')
       .then(response => response.json())
       .then(data => {
         const transformedPath = data.path.map(point => [point.lat, point.lon]);
@@ -30,7 +30,7 @@ const HurricaneMap = () => {
     //let emailSent = false; // To ensure the email is sent only once
 
     const sendEmail = (message) => {
-      fetch('http://localhost:3001/api/send-notification', {
+      fetch('http://localhost:8080/api/send-notification', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
