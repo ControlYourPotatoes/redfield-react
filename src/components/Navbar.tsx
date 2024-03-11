@@ -131,8 +131,8 @@ const Navbar: React.FC = () => {
       <MuiLink component={RouterLink} to="/Dashboard" style={{ textDecoration: 'none' }}>
         <StyledButton style={{color: getButtonTextColor()}}>Dashboard</StyledButton>
       </MuiLink>
-      <MuiLink component={RouterLink} to="/SignInUpForm" style={{ textDecoration: 'none' }}>
-        <StyledButton style={{color: getButtonTextColor()}}>Sign Up</StyledButton>
+      <MuiLink component={RouterLink} to="/InvestorDashboard" style={{ textDecoration: 'none' }}>
+        <StyledButton style={{color: getButtonTextColor()}}>InvestorDashboard</StyledButton>
       </MuiLink>
     </Box>
   );
