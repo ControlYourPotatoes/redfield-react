@@ -4,26 +4,27 @@ import { AppBar, Toolbar, Button, useTheme, useMediaQuery, Drawer } from '@mui/m
 import { styled } from '@mui/material/styles'; //this needs to be modified to work on Hectors PC @mui/material/styles
 import './Navbar.css';
 
-const MenuIcon = "./assets/icon/Open-icon.png"; // Path to your custom menu icon
+const MenuIcon = "./assets/icon/logoLightMode.png"; // Path to your custom menu icon
 const CloseIcon = "./assets/icon/closed-icon.png"; // Path to your custom close icon
 
 // Define styles using the `styled` utility
 const StyledToolbar = styled(Toolbar)(() => ({
   justifyContent: 'space-between',
-  backgroundColor: '#2E3B55',
-  maxHeight: '3rem',
+  backgroundColor: '#7dbbc5#7fbbf4',
+  maxHeight: '2rem',
 }));
 
 const LogoButton = styled(Button)(({ theme }) => ({
   marginRight: theme.spacing(2),
   '& img': {
-    height: '50px',
+    height: '40px',
+    marginTop: '7px',
   },
 }));
 
 const Hurricane = styled('img')(({ }) => ({
   //  marginRight: '16px', // Adjust the spacing as needed
-  height: '100px', // Adjust the size as needed
+  height: '45px', // Adjust the size as needed
   // Add more styles as needed
 }));
 
@@ -32,7 +33,7 @@ const IconContainer = styled('div')({
   alignItems: 'center',
 });
 const NavLink = styled(Button)(({ theme }) => ({
-  color: 'white',
+  color: 'theme.palette.primary.main',
   textTransform: 'none',
   marginLeft: theme.spacing(1),
 }));
@@ -67,10 +68,10 @@ const Navbar: React.FC = () => {
     <AppBar position="static">
       <StyledToolbar>
         <IconContainer>
-          <Hurricane src="./assets/gifs/spinHurricane.gif" alt="New Icon" />
+          <Hurricane src="./assets/icon/logoLightMode.png" alt="New Icon" />
             <LogoButton color="inherit" aria-label="logo">
               <Link to="/">
-                <img src="\assets\logo\redfieldLogoLight.png" alt="Logo" />
+                <img src="\assets\logo\redfieldLogoDark.png" alt="Logo" />
               </Link>
             </LogoButton>
         </IconContainer>
@@ -93,16 +94,16 @@ const Navbar: React.FC = () => {
           // Web view - Full navbar links
         <div style={{ display: 'flex' }}>
           {/* Wrap Link around Button text for proper routing */}
-          <NavLink>
+          <NavLink size="large">
             <Link to="/About" style={{ textDecoration: 'none', color: 'white' }}>About</Link>
           </NavLink>
-          <NavLink>
+          <NavLink size="large">
             <Link to="/Contact_us" style={{ textDecoration: 'none', color: 'white' }}>Contact Us</Link>
           </NavLink>
-          <NavLink>
+          <NavLink size="large">
             <Link to="/Prices" style={{ textDecoration: 'none', color: 'white' }}>Prices</Link>
           </NavLink>
-          <NavLink>
+          <NavLink size="large">
             <Link to="/GuidedStore" style={{ textDecoration: 'none', color: 'white' }}>Sign Up</Link>
           </NavLink>
         </div>

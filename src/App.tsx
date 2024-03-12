@@ -9,7 +9,6 @@ import GuidedStore from './components/guided_store/GuidedStore';
 import Dashboard from './components/Dashboard/Dashboard';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from './theme';
-import { Slider } from '@mui/material';
 function App() {
   return (
     <ThemeProvider theme={theme}>
@@ -24,13 +23,6 @@ function App() {
           <Route path='/Dashboard' element={<Dashboard />} />
         </Routes>
       </div>
-      <Slider
-  defaultValue={30}
-  sx={{
-    width: 300,
-    color: 'success.main',
-  }}
-/>
     </ThemeProvider>
   );
 }

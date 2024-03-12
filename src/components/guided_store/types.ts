@@ -12,6 +12,7 @@ export interface PolicyInfo {
     lastName: string;
     phoneNumber: string;
     email: string;
+    password: string;
   }
   
   interface PaymentInfo {

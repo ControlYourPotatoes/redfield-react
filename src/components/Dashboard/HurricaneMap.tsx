@@ -15,7 +15,7 @@ const HurricaneMap: React.FC = () => {
   });
 
   useEffect(() => {
-    fetch('.\mariaPath.json')
+    fetch('\mariaPath.json')
       .then(response => response.json())
       .then(data => {
         setHurricanePath(data);
@@ -38,7 +38,7 @@ const HurricaneMap: React.FC = () => {
 
   return (
     <>
-    <Box sx={{ background: 'primary.main', width:'40%', height: '300px', padding: '30px', borderWidth: '20px',}} >
+    <Box sx={{ background: 'primary.main', width:'40%', height: '300px', padding: '30px', borderWidth: '20px', minWidth: '20rem'}} >
       <MapContainer center={hurricanePosition} zoom={6} style={{ height: '100%', width: '100%' }}>
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
