@@ -1,120 +1,84 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import Avatar from '@mui/material/Avatar';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Tooltip from '@mui/material/Tooltip';
-import PersonAdd from '@mui/icons-material/PersonAdd';
-import Settings from '@mui/icons-material/Settings';
-import Logout from '@mui/icons-material/Logout';
-import LogoutButton from './Logout';
-import PublicIcon from '@mui/icons-material/Public';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { Avatar, Box, Button, IconButton, Menu, MenuItem, Tooltip, Typography } from '@mui/material';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { Link, animateScroll as scroll } from 'react-scroll';
 
 export default function AccountMenu() {
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
-  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+  const open = Boolean(anchorEl);
+
+  const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
 
-   // Define an event handler for navigating to the dashboard
-   const handleNavigateToDashboard = () => {
-    navigate('/Dashboard');
+  const handleLoginLogout = () => {
+    if (isLoggedIn) {
+      setIsLoggedIn(false);
+      navigate('/'); // Navigate to home upon logout
+    } else {
+      navigate('/SignInUpForm'); // Navigate to login/sign up form
+    }
   };
+
+  const scrollToSection = (sectionId) => {
+    // Check if we're already on the homepage
+    if (location.pathname === '/') {
+      scroll.scrollTo(sectionId);
+    } else {
+      navigate('/'); // Navigate to the home page first
+      setTimeout(() => scroll.scrollTo(sectionId), 0); // Adjust timing if needed
+    }
+  };
+
   return (
     <React.Fragment>
       <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
-        <Typography sx={{ minWidth: 100 }}>Home</Typography>
-        <Typography sx={{ minWidth: 100 }}>Prices</Typography>
-        <Typography sx={{ minWidth: 100 }}>About</Typography>
-        <Typography sx={{ minWidth: 100 }}>Contact Us</Typography>
-        <Tooltip title="Account settings">
-          <IconButton
-            onClick={handleClick}
-            size="small"
-            sx={{ ml: 2 }}
-            aria-controls={open ? 'account-menu' : undefined}
-            aria-haspopup="true"
-            aria-expanded={open ? 'true' : undefined}
-          >
-            <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
-          </IconButton>
-        </Tooltip>
+        <Button onClick={() => scrollToSection('home')} color="inherit">Home</Button>
+        <Button onClick={() => scrollToSection('prices')} color="inherit">Prices</Button>
+        <Button onClick={() => scrollToSection('about')} color="inherit">About</Button>
+        <Typography sx={{ flexGrow: 1 }} />
+
+        {isLoggedIn ? (
+          <Tooltip title="Account settings">
+            <IconButton onClick={handleMenu} size="small" sx={{ ml: 2 }} aria-controls={open ? 'account-menu' : undefined} aria-haspopup="true">
+              <Avatar sx={{ width: 32, height: 32 }}><AccountCircleIcon /></Avatar>
+            </IconButton>
+          </Tooltip>
+        ) : (
+          <Button color="inherit" onClick={handleLoginLogout}>{isLoggedIn ? 'Log Out' : 'Log In'}</Button>
+        )}
       </Box>
-      <Menu
-        anchorEl={anchorEl}
-        id="account-menu"
-        open={open}
-        onClose={handleClose}
-        onClick={handleClose}
-        PaperProps={{
-          elevation: 0,
-          sx: {
-            overflow: 'visible',
-            filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
-            mt: 1.5,
-            '& .MuiAvatar-root': {
-              width: 32,
-              height: 32,
-              ml: -0.5,
-              mr: 1,
-            },
-            '&::before': {
-              content: '""',
-              display: 'block',
-              position: 'absolute',
-              top: 0,
-              right: 14,
-              width: 10,
-              height: 10,
-              bgcolor: 'background.paper',
-              transform: 'translateY(-50%) rotate(45deg)',
-              zIndex: 0,
-            },
-          },
-        }}
-        transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-        anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+
+      {isLoggedIn && (
+        <Menu
+          id="menu-appbar"
+          anchorEl={anchorEl}
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+          keepMounted
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+          open={open}
+          onClose={handleClose}
         >
-        <MenuItem onClick={handleClose}>
-          <Avatar /> Profile
-        </MenuItem>
-        <MenuItem onClick={handleNavigateToDashboard}>
-        <ListItemIcon>
-            <PublicIcon fontSize="small" />
-          </ListItemIcon>
-          Dashboard
-        </MenuItem>
-        <Divider />
-        <MenuItem onClick={handleClose}>
-          <ListItemIcon>
-            <PersonAdd fontSize="small" />
-          </ListItemIcon>
-          Add another account
-        </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <ListItemIcon>
-            <Settings fontSize="small" />
-          </ListItemIcon>
-          Settings
-        </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <ListItemIcon>
-            <Logout fontSize="small" />
-          </ListItemIcon>
-          <LogoutButton/>
-        </MenuItem>
-      </Menu>
+          <MenuItem onClick={handleClose}>Profile</MenuItem>
+          <MenuItem onClick={handleClose}>My account</MenuItem>
+          <MenuItem onClick={handleLoginLogout}>Log Out</MenuItem>
+        </Menu>
+      )}
     </React.Fragment>
   );
 }
