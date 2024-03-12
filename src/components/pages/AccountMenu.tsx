@@ -11,15 +11,25 @@ import Tooltip from '@mui/material/Tooltip';
 import PersonAdd from '@mui/icons-material/PersonAdd';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
+import LogoutButton from './Logout';
+import PublicIcon from '@mui/icons-material/Public';
+import { useNavigate } from 'react-router-dom';
 
 export default function AccountMenu() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
+  const navigate = useNavigate();
+
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+   // Define an event handler for navigating to the dashboard
+   const handleNavigateToDashboard = () => {
+    navigate('/Dashboard');
   };
   return (
     <React.Fragment>
@@ -75,12 +85,15 @@ export default function AccountMenu() {
         }}
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
-      >
+        >
         <MenuItem onClick={handleClose}>
           <Avatar /> Profile
         </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <Avatar /> My account
+        <MenuItem onClick={handleNavigateToDashboard}>
+        <ListItemIcon>
+            <PublicIcon fontSize="small" />
+          </ListItemIcon>
+          Dashboard
         </MenuItem>
         <Divider />
         <MenuItem onClick={handleClose}>
@@ -99,7 +112,7 @@ export default function AccountMenu() {
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>
-          Logout
+          <LogoutButton/>
         </MenuItem>
       </Menu>
     </React.Fragment>
