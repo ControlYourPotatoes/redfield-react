@@ -1,9 +1,47 @@
 import { useState } from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, Form, Field, ErrorMessage, FormikHelpers} from 'formik';
 import * as Yup from 'yup';
-import styled from 'styled-components';
+import styled, {css}from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faLock, faUser, faPhone, faUserAlt } from '@fortawesome/free-solid-svg-icons';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { FormControlLabel, Switch} from '@mui/material';
+
+
+type FormContainerProps = {
+  $show?: boolean;
+};
+
+// Interfaces for the form values
+interface SignUpFormValues {
+  firstName: string;
+  lastName: string;
+  phoneNumber: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+}
+
+interface LoginFormValues {
+  email: string;
+  password: string;
+}
+
+// Initial values for the forms
+const initialValuesSignUp: SignUpFormValues = {
+  firstName: '',
+  lastName: '',
+  phoneNumber: '',
+  email: '',
+  password: '',
+  confirmPassword: '',
+};
+
+const initialValuesLogin: LoginFormValues = {
+  email: '',
+  password: '',
+};
 
 const Container = styled.div`
 display: flex;
@@ -14,20 +52,22 @@ height: 100vh;
 position: relative;
 `;
 
-const FormContainer = styled.div<{ show: boolean }>`
- flex-direction: column;
- transition: all 0.5s ease;
- opacity: ${({ show }) => (show ? 1 : 0)};
- display: ${({ show }) => (show ? 'flex' : 'none')};
- width: 100%;
- max-width: 550px;
- padding: 20px;
- box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
- border-radius: 5px;
- background-color: white;
- min-height: 550px; 
- color: black;
- margin-bottom: 20px; /* Adjust spacing between form and button */
+const FormContainer = styled.div<FormContainerProps>`
+  ${({ $show }) => css`
+    opacity: ${$show ? 1 : 0};
+    display: ${$show ? 'flex' : 'none'};
+    flex-direction: column;
+    transition: all 0.5s ease;
+    width: 100%;
+    max-width: 550px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    background-color: white;
+    max-height: 890px; 
+    color: black;
+    margin-bottom: 20px;
+  `}
 `;
 
 const InputWrapper = styled.div`
@@ -155,6 +195,7 @@ const ToggleWrapper = styled.div`
   width: 100%; // Ensures the wrapper spans the full width of its parent
   padding-right: 20px; // Adjust this value to move the toggle button more to the right
   margin-bottom: 20px; // Adds some space below the toggle button
+  margin-top: 20px
 `;
 
 const ToggleContainer = styled.div`
@@ -212,14 +253,18 @@ const forgotPasswordSchema = Yup.object().shape({
     email: Yup.string().email('Invalid email address').required('Email is required'),
   });
 
-const SignInSignUpPage = () => {
-  const [isSignUp, setIsSignUp] = useState(false);
-  const [showForgotPassword, setShowForgotPassword] = useState(false);
+  const SignInSignUpPage = () => {
+    const navigate = useNavigate();
+    const [isSignUp, setIsSignUp] = useState(false);
+    const [showForgotPassword, setShowForgotPassword] = useState(false);
+    const [signUpError, setSignUpError] = useState(''); // Add a state for sign-up errors
+    const [LogInError, setLogInError] = useState(''); 
+  
 
-  const toggleForm = () => {
-    setIsSignUp(!isSignUp);
-    setShowForgotPassword(false);
-  };
+    const toggleForm = (event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => {
+      setIsSignUp(checked);
+      setShowForgotPassword(false);
+    };
 
   const handleForgotPassword = () => {
     setShowForgotPassword(true);
@@ -230,7 +275,7 @@ const SignInSignUpPage = () => {
 
   };
 
-  const sendForgotPasswordRequest = (values) => {
+  const sendForgotPasswordRequest = (values: any) => {
     console.log('Sending forgot password request for:', values.email);
     // Here you would send a request to your backend
     // This is just a placeholder for demonstration
@@ -283,21 +328,46 @@ const SignInSignUpPage = () => {
   };
 
 
+  
+    const handleSignUpSubmit = async (values: SignUpFormValues, { setSubmitting }: FormikHelpers<SignUpFormValues>) => {
+      try {
+        await axios.post('http://localhost:8080/api/signup', values);
+        navigate('/dashboard'); // Navigate to dashboard upon successful signup
+      } catch (error: any) {
+        console.error('Sign Up Error', error?.response?.data || 'An error occurred');
+      } finally {
+        setSubmitting(false);
+      }
+    };
+
+  //submit login 
+    const handleLoginSubmit = async (values: LoginFormValues, { setSubmitting }: FormikHelpers<LoginFormValues>) => {
+      try {
+        await axios.post('http://localhost:8080/api/login', values);
+        navigate('/dashboard'); // Navigate to dashboard upon successful login
+      } catch (error: any) {
+        console.error('Login Error', error?.response?.data || 'An error occurred');
+      } finally {
+        setSubmitting(false);
+      }
+    };
+
   return (
-    <Container style={containerStyle}>
-      <FormContainer show={!isSignUp}>
+    <Container>
+      <FormControlLabel
+        control={<Switch checked={isSignUp} onChange={toggleForm} color="primary" />}
+        label={isSignUp ? 'Switch to Sign In' : 'Switch to Sign Up'}
+      />
+
+      {/* Log-In Form */}
+      <FormContainer $show={!isSignUp}>
         <Formik
-          initialValues={{ email: '', password: '' }}
+          initialValues={initialValuesLogin}
           validationSchema={signInSchema}
-          onSubmit={(values) => console.log('Log In', values)}
+          onSubmit={handleLoginSubmit}
         >
           {({ isSubmitting }) => (
             <Form>
-              <ToggleWrapper>
-               <ToggleContainer  onClick={toggleForm}>
-                <ToggleIndicator isSignUp={isSignUp} />
-               </ToggleContainer >
-              </ToggleWrapper>
               <StyledLabel>Email</StyledLabel>
               <InputWrapper>
                <Icon icon={faEnvelope} />
@@ -323,6 +393,7 @@ const SignInSignUpPage = () => {
               <SubmitButton type="submit" disabled={isSubmitting}>
              {isSignUp ? 'Sign Up' : 'Sign In'}
              </SubmitButton>
+             {LogInError && <div style={{ color: 'red' }}> {LogInError}</div>}
              <ForgotPasswordWrapper>
           <ForgotPasswordLink onClick={handleForgotPassword}>
             Forgot Password?
@@ -333,19 +404,15 @@ const SignInSignUpPage = () => {
         </Formik>
       </FormContainer>
 
-      <FormContainer show={isSignUp}>
+            {/* Sign-Up Form */}
+      <FormContainer $show={isSignUp}>
         <Formik
-          initialValues={{  firstName: '', lastName:'', phoneNumber: '', email: '', password: '', confirmPassword: ''}}
+          initialValues={initialValuesSignUp}
           validationSchema={signUpSchema}
-          onSubmit={(values) => console.log('Sign Up', values)}
+          onSubmit={handleSignUpSubmit} 
         >
           {({ isSubmitting }) => (
             <Form>
-              <ToggleWrapper>
-               <ToggleContainer  onClick={toggleForm}>
-                <ToggleIndicator isSignUp={isSignUp} />
-               </ToggleContainer >
-              </ToggleWrapper>
               <StyledLabel>Email</StyledLabel>
               <InputWrapper>
               <Icon icon={faEnvelope} />
@@ -402,11 +469,11 @@ const SignInSignUpPage = () => {
               <SubmitButton type="submit" disabled={isSubmitting}>
                 {isSignUp ? 'Sign Up' : 'Sign In'}
               </SubmitButton>
+              {signUpError && <div style={{ color: 'red' }}>{signUpError}</div>}
             </Form>
           )}
         </Formik>
       </FormContainer>
-
      
     </Container>
   );

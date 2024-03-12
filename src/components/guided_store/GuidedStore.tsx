@@ -105,7 +105,7 @@ export default function GuidedStore() {
   const handleNext = () => {
     if (activeStep === steps.length - 1) {
       // If it's the last step, submit the form.
-      handleSubmit(values);
+      console.log('Ending submit');
     } else {
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
     }
@@ -116,7 +116,7 @@ export default function GuidedStore() {
   };
 
 
-  const renderActiveComponent = (step: number, values: any, setFieldValue: any) => {
+  const renderActiveComponent = (step: number, values: any) => {
     switch (step) {
       case 0:
         return <StartComponent />;
@@ -135,7 +135,7 @@ export default function GuidedStore() {
 
   return (
     <Formik initialValues={initialFormValues} onSubmit={handleSubmit}>
-    {({ values, setFieldValue, handleChange, handleSubmit }) => (
+    {({ values, handleChange }) => (
       <Form>
         <Box sx={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <Box sx={{ width: '60%', margin: 'auto', padding: '10px', marginTop: '30px' }}>
@@ -159,7 +159,7 @@ export default function GuidedStore() {
           <Box sx={{margin: 'auto' }}>
             <Paper elevation={5} sx={{ margin: 2, padding: 3 }}>
               <Box sx={{ maxWidth: '1000px', margin: 'auto' }}>
-              {renderActiveComponent(activeStep, values, setFieldValue)}
+              {renderActiveComponent(activeStep, values)}
               </Box>
             </Paper>
           </Box>
