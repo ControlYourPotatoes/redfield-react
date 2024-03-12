@@ -1,84 +1,127 @@
 import React from 'react';
-import { Container, Typography, Paper, Card , CardActions, CardContent, CardMedia, Button, Grid, styled } from '@mui/material';
+import {Paper, Container, Typography, Card, CardActions, CardContent, CardMedia, Button, Grid, styled } from '@mui/material';
 
-// Style the CardActions to center the content
+// Ensure CardActionsCentered is visible and correctly placed
 const CardActionsCentered = styled(CardActions)({
-    justifyContent: 'center',
-    marginBottom: '8px',
-  });
-  
-  // Style the Card for hover effect
-  const StyledCard = styled(Card)({
-    height: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    transition: 'transform 0.3s ease-in-out',
-    '&:hover': {
-      transform: 'scale(1.03)', // Adjust scale value as needed
+  justifyContent: 'center',
+  transition: 'opacity 0.3s ease-in-out, visibility 0.3s ease-in-out',
+  position: 'absolute',
+  bottom: '-80%', // Adjust as needed to position at the bottom of the expanded card
+  width: '100%',
+  opacity: 0,
+  visibility: 'hidden',
+});
+
+const StyledCard = styled(Card)({
+  position: 'relative',
+  width: '140px',
+  height: '140px',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'center',
+  background: '#fff',
+  borderRadius: '70%',
+  boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)',
+  overflow: 'hidden',
+  transition: 'all 0.3s ease-in-out',
+  marginTop: '50px',
+  '&:hover': {
+    width: '240px',
+    height: '340px',
+    borderRadius: '15px',
+    '.MuiCardContent-root, .MuiCardActions-root': {
+      opacity: 1,
+      visibility: 'visible',
+      top: '1px',
     },
-    borderRadius: '15px', // Keeps the card's corners rounded
-    overflow: 'hidden',
-  });
+  },
+});
+
+
+
+const StyledCardMedia = styled(CardMedia)({
+  borderRadius: '50%', // Keeps the image round
+  width: '140px', // Image width
+  height: '140px', // Image height
+  boxSizing: 'border-box',
+  border: '5px solid white', // White border for the image
+  objectFit: 'cover',
+  position: 'absolute',
+  top: '50%', // Initially position in the middle
+  left: '50%',
+  transform: 'translate(-50%, -50%)', // Center the image
+  transition: 'transform 0.3s ease-in-out, top 0.3s ease-in-out',
+  zIndex: 1, // Make sure the image is above other content
+  // Only adjust the 'top' property to move the image up without changing its appearance
+  // Move image to the top on hover; adjust the percentage as needed
   
-  const CardContentStyled = styled(CardContent)({
-    color: 'black', // Set your desired text color
-  });
+});
+
+const CardContentStyled = styled(CardContent)({
+  opacity: 0,
+  visibility: 'hidden',
+  transition: 'opacity 0.3s ease-in-out, visibility 0.3s ease-in-out',
+  position: 'absolute',
+  width: '100%',
+  textAlign: 'center',
+});
+
+const CardContainer = styled('div')({
+  height: '340px', // Maximum height of the card when expanded
+  width: '240px', // Maximum width of the card when expanded
+  padding: '20px', // Inner space around the content
+  margin: '20px', // Space around the outer edges of each card container
+  boxSizing: 'border-box',
+  display: 'inline-block', // Keeps the card within this allocated space
+  marginBottom: '40px', // Adjust as needed for spacing below the cards
+});
+
 
 //data for the cards
 const profileCards = [
     {
       name: "Hector Rodriguez",
       role: "Software Engineer, Fullstack Developer",
-      imageUrl: "https://placehold.co/200x200",
+      imageUrl: "./assets/Profile/Hector.jpg",
       linkedInUrl: "https://www.linkedin.com/in/hector-rodriguez-lopez/",
-      backgroundImage: "https://placehold.co/600x400", // Background image URL
-      //backgroundColor: "#ffebee", // Example background color
+      
     },
     {
       name: "Carlos Carrasquillo",
       role: "Blockchain Expert, Fullstack web3 Developer",
       imageUrl: "./assets/Profile/Carlos.jpg",
       linkedInUrl: "https://www.linkedin.com/in/carlos-carrasquillo-developer/",
-      backgroundImage: "https://placehold.co/600x400", // Background image URL
+     
     },
     {
       name: "Alexander Puga",
       role: "Smart Contract Developer, Fullstack Developer",
-      imageUrl: "https://placehold.co/600x400",
+      imageUrl: "./assets/Profile/puga.jpg",
       linkedInUrl: "https://www.linkedin.com/in/pugatech/",
-      backgroundImage: "https://placehold.co/600x400", // Background image URL
+      
     },
   ];
 
 
 const About: React.FC = () => {
     return (
-        <Container id="about">
+        <Container id="about" style={{ padding: '50px' }}>
             {/* Cards Row */}
-            <Grid container spacing={4} style={{ marginBottom: '20px' }}>
-              {profileCards.map((card) => (
-                <Grid item xs={12} sm={4} key={card.name}>
-                  <StyledCard style={{ backgroundImage: `url(${card.backgroundImage})` }}>  
-                  <CardMedia
-                    component="img"
-                    height="140"
-                    image={card.imageUrl}
-                    alt={card.name}
-                    style={{
-                    width: '140px',
-                    borderRadius: '50%',
-                    margin: '20px auto 10px', // Adjust margin to center the image and provide spacing
-                    objectFit: 'cover',
-                    }}
-                />
+            <Grid container spacing={4} style={{ marginBottom: '40px' }}>
+              {profileCards.map((card, index) => (
+                <Grid item xs={12} sm={4} key={index}>
+                  <CardContainer>
+                  <StyledCard>  
+                  <StyledCardMedia
+                  image={card.imageUrl}
+                  title={card.name}
+                  />
                     <CardContentStyled>
-                      <Typography gutterBottom variant="h5" component="div" style={{color: 'yourColorHere'}}>
+                      <Typography gutterBottom variant="h5" component="div">
                         {card.name}
                       </Typography>
-                      <Typography variant="body2" color="text.secondary" style={{color: 'yourColorHere'}}>
+                      <Typography variant="body2" color="text.secondary">
                         {card.role}
                       </Typography>
                     </CardContentStyled>
@@ -86,14 +129,15 @@ const About: React.FC = () => {
                       <Button size="small" href={card.linkedInUrl} target="_blank">LinkedIn</Button>
                     </CardActionsCentered>
                   </StyledCard>
+                  </CardContainer>
                 </Grid>
               ))}
             </Grid>
 
-            <Paper elevation={3} 
+            <Paper elevation={3}
                    style={{ 
                        padding: '20px', 
-                       marginTop: '20px',
+                       marginTop: '40px',
                        color: 'white', 
                        backgroundColor: 'transparent', // Make background transparent
                        border: '1px solid black', // Add black border

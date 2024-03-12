@@ -1,6 +1,7 @@
 import React from 'react';
 import { Typography, Button } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import { Link } from 'react-router-dom'; // Import for routing to different pages
 
 /**\
  * Custom styles for the VideoSection component.
@@ -13,29 +14,40 @@ const useStyles = makeStyles(() => ({
     height: 'calc(100vh - 64px)', // Full viewport height minus the navbar height, adjust 64px according to your navbar's height 
     overflow: 'hidden', // Hide any overflow, ensuring video doesn't extend beyond this container
     backgroundColor: 'gray', // Background color as a fallback if the video fails to load
+    margin: '40px', // Adds space around the edges
+    boxSizing: 'border-box', // Ensures that padding and border are included in the total width and height
 
   },
   // Style for the video element
   video: {
-    width: '100%', // Full width to cover the container
-    height: '100%', // Full height to cover the container
+    width: 'calc(100% + 40px)', // Counteracts the margin by expanding width
+    height: 'calc(100% + 40px)', // Counteracts the margin by expanding height
     objectFit: 'cover', // Ensures the video covers the designated area without distortion
-    top: 0, // Align to the top of the container
-    left: 0, // Align to the left of the container
+    osition: 'absolute', // Changed to absolute to allow for size adjustment
+    top: '20px', // Align to the top of the container
+    left: '-20px', // Align to the left of the container
     zIndex: -1, // Position behind the content
   },
   // Style for the content overlaying the video
   content: {
     position: 'absolute', // Absolute positioning within the container
-    top: '70%', // Center vertically in the visible area below the navbar
+    top: '50%', // Center vertically in the visible area below the navbar
     left: '50%', // Center horizontally
     transform: 'translate(-50%, -50%)', // Adjust position to truly center the content
     color: 'white', // Text color for visibility against the video background
     zIndex: 2, // Ensure content is layered above the video
+    display: 'flex', // This changes depending on your layout preference
+    flexDirection: 'column', // Stacks items vertically
+    alignItems: 'center', // Centers items horizontally
+    justifyContent: 'center', // Adjust this as needed to center the items vertically within the content area
+  },
+  buttonSpacing: {
+    marginTop: '20px', // Adds space above the button
   },
   WithBorder: {
     color: 'white', // Text color to black
     '-webkit-text-stroke': '1px black', // Apply 1px white stroke for the border effect
+    marginBottom: '20px', // Consistent with the other Typography components
   },
 }));
 
@@ -56,7 +68,9 @@ const VideoSection: React.FC = () => {
         <Typography variant="body1">
           What are you waiting for?
         </Typography>
-        <Button variant="contained" color="primary">Sigh Up</Button>
+        <Link to="/SignInUpForm" style={{ textDecoration: 'none' }}>
+        <Button variant="contained" color="primary" className={classes.buttonSpacing}>get Started</Button>
+        </Link>
       </div>
     </div>
   );

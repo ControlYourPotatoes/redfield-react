@@ -9,16 +9,13 @@ const HurricaneMap = () => {
   const [hurricanePath, setHurricanePath] = useState([]);
 
   const hurricaneIcon = new L.Icon({
-    iconUrl: 'assets/gifs/hurricaneicon.gif',
-    iconSize: [50, 50],
-    iconAnchor: [25, 25],
     iconUrl: '/assets/gifs/hurricaneicon.gif',
     iconSize: [150, 150],
     iconAnchor: [75, 75],
   });
 
   useEffect(() => {
-    fetch('http://localhost:3001/api/hurricane')
+    fetch('http://localhost:8080/api/hurricane')
       .then(response => response.json())
       .then(data => {
         const transformedPath = data.path.map(point => [point.lat, point.lon]);
@@ -33,7 +30,7 @@ const HurricaneMap = () => {
     //let emailSent = false; // To ensure the email is sent only once
 
     const sendEmail = (message) => {
-      fetch('http://localhost:3001/api/send-notification', {
+      fetch('http://localhost:8080/api/send-notification', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

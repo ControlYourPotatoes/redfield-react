@@ -4,10 +4,17 @@ const express = require('express');
 const cors = require('cors');
 const nodemailer = require('nodemailer'); // testing for mailing 
 const app = express();
-const port = 3001; // Ensure this port is free or change it as needed
+const PORT = process.env.PORT || 5173; // Ensure this port is free or change it as needed
+
+//login/signup
+const bodyParser = require('body-parser');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+
 
 app.use(cors()); // This enables CORS for all routes
 app.use(express.json()); // To parse JSON bodies
+app.use(bodyParser.json());
 
 // Mock data 
 const hurricaneData = {
@@ -91,7 +98,46 @@ app.get('/', (req, res) => {
     `);
   });
 
+  //login/signup
+  // Database setup
+// Assume a mock database or use an actual DB like MongoDB, PostgreSQL, etc.
+const users = []; // This should be replaced with actual database logic
+
+app.post('/api/signup', async (req, res) => {
+  const { email, password, firstName, lastName, phoneNumber } = req.body;
+  
+  // Check if the user already exists (this is simplified for demonstration)
+  const userExists = users.some(user => user.email === email);
+  if (userExists) {
+      return res.status(400).send('User already exists');
+  }
+  
+  // Hash the password
+  const hashedPassword = await bcrypt.hash(password, 10);
+  // Save the user to your database
+  users.push({ email, password: hashedPassword, firstName, lastName, phoneNumber }); // Simplified for demonstration
+  // Return response
+  res.status(201).send('User created');
+});
+
+app.post('/api/login', async (req, res) => {
+  const { email, password } = req.body;
+  // Find the user by email
+  const user = users.find(user => user.email === email);
+  if (!user) {
+    return res.status(400).send('User not found');
+  }
+  // Check password
+  const isMatch = await bcrypt.compare(password, user.password);
+  if (!isMatch) {
+    return res.status(400).send('Invalid credentials');
+  }
+  // Generate JWT token
+  const token = jwt.sign({ email: user.email }, 'secret', { expiresIn: '1h' });
+  res.status(200).json({ token });
+});
+
 // Start the server
-app.listen(port, () => {
-console.log(`Hurricane API running at http://localhost:${port}`);
+app.listen(PORT, () => {
+console.log(`Server running on port ${PORT}`);
 });
