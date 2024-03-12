@@ -27,47 +27,11 @@ const HurricaneMap = () => {
 
   const startAnimation = () => {
     let pathIndex = 0;
-    //let emailSent = false; // To ensure the email is sent only once
-
-    const sendEmail = (message) => {
-      fetch('http://localhost:8080/api/send-notification', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ message }),
-      })
-      .then(response => response.json())
-      .then(data => console.log(data))
-      .catch(error => console.error('Error:', error));
-    };
 
     const interval = setInterval(() => {
       if (pathIndex < hurricanePath.length) {
         const currentPosition = hurricanePath[pathIndex];
-        setHurricanePosition(currentPosition);
-        
-        // Example condition to send an email
-        // if (!emailSent && currentPosition[0] === 18.49694743514779 && currentPosition[1] === -66.98600567820672) {
-        //   fetch('http://localhost:3001/api/send-sms', {
-        //     method: 'POST',
-        //     headers: {
-        //       'Content-Type': 'application/json',
-        //     },
-        //   })
-        //   .then(response => response.json())
-        //   .then(data => console.log(data))
-        //   .catch(error => console.error('Error:', error));
-        // }
-
-        // Trigger email at specific points
-      if (currentPosition[0] === hurricanePath[1][0] && currentPosition[1] === hurricanePath[1][1]) {
-        sendEmail("The hurricane has reached the first critical point.");
-      } else if (currentPosition[0] === hurricanePath[2][0] && currentPosition[1] === hurricanePath[2][1]) {
-        sendEmail("Confirmation: The hurricane has hit the second mark.");
-      } else if (currentPosition[0] === hurricanePath[3][0] && currentPosition[1] === hurricanePath[3][1]) {
-        sendEmail("The hurricane has left the third mark.");
-      }
+        setHurricanePosition(currentPosition)
         pathIndex += 1;
       } else {
         clearInterval(interval);
