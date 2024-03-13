@@ -1,5 +1,3 @@
-// components/policyboard/Dashboard.tsx
-import React from 'react';
 import { Box, Typography } from '@mui/material';
 import HurricaneMap from './HurricaneMap';
 import ReceiptComponent from './Map Receipt/ReceiptComponent';
@@ -16,7 +14,7 @@ const Dashboard: React.FC = () => {
           email: 'sofia@test.com',
           address: '123 Main St'
         }}
-        policyType="basic"
+        policyType="standard"
         hurricaneDetails={{ category: 3 }}
         date="04-21-2024"
       />
