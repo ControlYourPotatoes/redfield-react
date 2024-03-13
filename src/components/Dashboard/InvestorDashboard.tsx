@@ -5,16 +5,26 @@ import {
 } from '@mui/material';
 import SwapVertIcon from '@mui/icons-material/SwapVert';
 
-const usdcLogo = '/assets/icon/USDC.png';
-const rdfLogo = '/assets/icon/RedField.png';
+// Direct reference from the public folder for the logos
+const usdcLogoPath = '/assets/icon/USDC.png';
+const rdfLogoPath = '/assets/icon/RedField.png';
 
 const InvestorDashboard: React.FC = () => {
-  const [fromValue, setFromValue] = useState({ label: 'RDF Policy Insurance', logo: rdfLogo });
-  const [toValue, setToValue] = useState({ label: 'USDC', logo: usdcLogo });
+  const [fromCurrency, setFromCurrency] = useState({
+    label: "RDF Policy Insurance",
+    logo: rdfLogoPath,
+    symbol: "RDF"
+  });
+  const [toCurrency, setToCurrency] = useState({
+    label: "USDC",
+    logo: usdcLogoPath,
+    symbol: "USDC"
+  });
 
+  // Function to handle the swap of "From" and "To" labels and logos
   const handleSwap = () => {
-    setFromValue(prevState => ({ ...toValue }));
-    setToValue(prevState => ({ ...fromValue }));
+    setFromCurrency(prev => toCurrency);
+    setToCurrency(prev => fromCurrency);
   };
 
   return (
@@ -36,19 +46,19 @@ const InvestorDashboard: React.FC = () => {
                     label="From"
                     fullWidth
                     variant="outlined"
+                    value={fromCurrency.label}
                     InputProps={{
                       readOnly: true,
                       startAdornment: (
                         <InputAdornment position="start">
-                          <img src={fromValue.logo} alt="From Logo" style={{ width: '24px', height: '24px', marginRight: '5px' }} />
-                          {fromValue.label}
+                          <img src={fromCurrency.logo} alt={`${fromCurrency.label} logo`} style={{ width: '24px', height: '24px', marginRight: '5px' }} />
                         </InputAdornment>
                       ),
                     }}
                   />
                 </Grid>
                 <Grid item xs={12} display="flex" justifyContent="center">
-                  <IconButton onClick={handleSwap}>
+                  <IconButton onClick={handleSwap} aria-label="Swap">
                     <SwapVertIcon fontSize="large" />
                   </IconButton>
                 </Grid>
@@ -57,23 +67,33 @@ const InvestorDashboard: React.FC = () => {
                     label="To"
                     fullWidth
                     variant="outlined"
+                    value={toCurrency.label}
                     InputProps={{
                       readOnly: true,
                       startAdornment: (
                         <InputAdornment position="start">
-                          <img src={toValue.logo} alt="To Logo" style={{ width: '24px', height: '24px', marginRight: '5px' }} />
-                          {toValue.label}
+                          <img src={toCurrency.logo} alt={`${toCurrency.label} logo`} style={{ width: '24px', height: '24px', marginRight: '5px' }} />
                         </InputAdornment>
                       ),
                     }}
                   />
                 </Grid>
                 <Grid item xs={12}>
-                  <Typography variant="body2" gutterBottom>Price: 1 RDF per 500 USDC</Typography>
-                  <Typography variant="body2" gutterBottom>Slippage Tolerance: 0.1%</Typography>
-                  <Typography variant="body2" gutterBottom>Minimum received: 0 USDC</Typography>
-                  <Typography variant="body2" gutterBottom>Price Impact: {"<"} 0.01%</Typography>
-                  <Typography variant="body2" gutterBottom>Route: RDF {" > "} USDC</Typography>
+                  <Typography variant="body2" gutterBottom>
+                    Price: 1 RDF per 500 USDC
+                  </Typography>
+                  <Typography variant="body2" gutterBottom>
+                    Slippage Tolerance: 0.1%
+                  </Typography>
+                  <Typography variant="body2" gutterBottom>
+                    Minimum received: 0 USDC
+                  </Typography>
+                  <Typography variant="body2" gutterBottom>
+                    Price Impact: {"<"} 0.01%
+                  </Typography>
+                  <Typography variant="body2" gutterBottom>
+                    Route: RDF {" > "} USDC
+                  </Typography>
                 </Grid>
                 <Grid item xs={12}>
                   <Button variant="contained" color="primary" fullWidth>
@@ -116,13 +136,13 @@ const InvestorDashboard: React.FC = () => {
                   >
                     <TableCell component="th" scope="row">
                       <Box display="flex" alignItems="center">
-                        <img src={rdfLogo} alt="Redfield Logo" style={{ width: '24px', height: '24px', marginRight: '5px' }} />
+                        <img src={rdfLogoPath} alt="RDF Logo" style={{ width: '24px', height: '24px', marginRight: '5px' }} />
                         RDF Insurance
                       </Box>
                     </TableCell>
                     <TableCell align="right">
-                      <Box display="flex" alignItems="center">
-                        <img src={usdcLogo} alt="USDC Logo" style={{ width: '24px', height: '24px', marginRight: '5px' }} />
+                      <Box display="flex" alignItems="center" justifyContent="flex-end">
+                        <img src={usdcLogoPath} alt="USDC Logo" style={{ width: '24px', height: '24px', marginRight: '5px' }} />
                         USDC
                       </Box>
                     </TableCell>
@@ -133,7 +153,7 @@ const InvestorDashboard: React.FC = () => {
                       <Button variant="contained">Deposit</Button>
                     </TableCell>
                   </TableRow>
-                  {/* Additional rows as needed */}
+                  {/* Additional rows can be added here as needed */}
                 </TableBody>
               </Table>
             </TableContainer>
