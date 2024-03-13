@@ -1,9 +1,22 @@
-import React from 'react';
-import { Box, Container, Paper, Typography, TextField, Button, InputAdornment, Grid, TableContainer, Table, TableHead, TableRow, TableCell, TableBody } from '@mui/material';
-// Import SwapVertIcon instead of SwapHorizIcon
+import React, { useState } from 'react';
+import {
+  Box, Container, Paper, Typography, TextField, Button, InputAdornment, Grid, IconButton,
+  TableContainer, Table, TableHead, TableRow, TableCell, TableBody
+} from '@mui/material';
 import SwapVertIcon from '@mui/icons-material/SwapVert';
 
-const InvestorDashboard = () => {
+const usdcLogo = '/assets/icon/USDC.png';
+const rdfLogo = '/assets/icon/RedField.png';
+
+const InvestorDashboard: React.FC = () => {
+  const [fromValue, setFromValue] = useState({ label: 'RDF Policy Insurance', logo: rdfLogo });
+  const [toValue, setToValue] = useState({ label: 'USDC', logo: usdcLogo });
+
+  const handleSwap = () => {
+    setFromValue(prevState => ({ ...toValue }));
+    setToValue(prevState => ({ ...fromValue }));
+  };
+
   return (
     <Box>
       {/* First Section */}
@@ -20,25 +33,38 @@ const InvestorDashboard = () => {
               <Grid container spacing={3} alignItems="center">
                 <Grid item xs={12}>
                   <TextField
-                    label="From: RDF Policy Insurance"
+                    label="From"
                     fullWidth
                     variant="outlined"
                     InputProps={{
-                      endAdornment: <InputAdornment position="end">RDF</InputAdornment>,
+                      readOnly: true,
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <img src={fromValue.logo} alt="From Logo" style={{ width: '24px', height: '24px', marginRight: '5px' }} />
+                          {fromValue.label}
+                        </InputAdornment>
+                      ),
                     }}
                   />
                 </Grid>
-                {/* Replace SwapHorizIcon with SwapVertIcon */}
                 <Grid item xs={12} display="flex" justifyContent="center">
-                  <SwapVertIcon fontSize="large" />
+                  <IconButton onClick={handleSwap}>
+                    <SwapVertIcon fontSize="large" />
+                  </IconButton>
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
-                    label="To: USDC"
+                    label="To"
                     fullWidth
                     variant="outlined"
                     InputProps={{
-                      endAdornment: <InputAdornment position="end">USDC</InputAdornment>,
+                      readOnly: true,
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <img src={toValue.logo} alt="To Logo" style={{ width: '24px', height: '24px', marginRight: '5px' }} />
+                          {toValue.label}
+                        </InputAdornment>
+                      ),
                     }}
                   />
                 </Grid>
@@ -51,7 +77,7 @@ const InvestorDashboard = () => {
                 </Grid>
                 <Grid item xs={12}>
                   <Button variant="contained" color="primary" fullWidth>
-                    connect wallet
+                    Connect Wallet
                   </Button>
                 </Grid>
               </Grid>
@@ -89,14 +115,25 @@ const InvestorDashboard = () => {
                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                   >
                     <TableCell component="th" scope="row">
-                      RDF Insurance
+                      <Box display="flex" alignItems="center">
+                        <img src={rdfLogo} alt="Redfield Logo" style={{ width: '24px', height: '24px', marginRight: '5px' }} />
+                        RDF Insurance
+                      </Box>
                     </TableCell>
-                    <TableCell align="right">USDC</TableCell>
+                    <TableCell align="right">
+                      <Box display="flex" alignItems="center">
+                        <img src={usdcLogo} alt="USDC Logo" style={{ width: '24px', height: '24px', marginRight: '5px' }} />
+                        USDC
+                      </Box>
+                    </TableCell>
                     <TableCell align="right">0%</TableCell>
                     <TableCell align="right">0.00 USDC</TableCell>
                     <TableCell align="right">TIME OVER</TableCell>
-                    <TableCell align="right"><Button variant="contained">Deposit</Button></TableCell>
+                    <TableCell align="right">
+                      <Button variant="contained">Deposit</Button>
+                    </TableCell>
                   </TableRow>
+                  {/* Additional rows as needed */}
                 </TableBody>
               </Table>
             </TableContainer>
