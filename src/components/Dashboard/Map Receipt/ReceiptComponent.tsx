@@ -1,5 +1,7 @@
 import React from 'react';
-import { Typography, Box } from '@mui/material';
+import { Typography, Box, Button } from '@mui/material';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 
 interface PolicyHolder {
   firstName: string;
@@ -8,17 +10,10 @@ interface PolicyHolder {
   address: string;
 }
 
-type PolicyType = 'basic' | 'premium';
+type PolicyType = 'standard' | 'premium';
 
 interface HurricaneDetails {
   category: number;
-}
-
-interface RowData {
-  category: string;
-  windSpeed: string;
-  payment: string;
-  insurancePolicyPrice: string;
 }
 
 interface ReceiptProps {
@@ -35,8 +30,8 @@ const ReceiptComponent: React.FC<ReceiptProps> = ({
   date,
 }) => {
   // Pricing data
-  const pricingData = {
-    basic: [
+  const pricingData: { [key in PolicyType]: { category: number; payment: number }[] } = {
+    standard: [
       { category: 5, payment: 1000 },
       { category: 4, payment: 800 }, // Assuming the higher end of the range
       { category: 3, payment: 350 }, // Assuming the higher end of the range
@@ -59,9 +54,31 @@ const ReceiptComponent: React.FC<ReceiptProps> = ({
 
   // Calculate the total payment
   const totalPayment = getPaymentAmount(policyType, hurricaneDetails.category);
-  
+
+  const handleSaveReceipt = () => {
+    // Create a reference to the receipt container
+    const receiptContainer = document.getElementById('receipt-container');
+
+    if (receiptContainer) {
+      // Convert the receipt container to a canvas
+      html2canvas(receiptContainer).then(canvas => {
+        // Convert the canvas to a data URL
+        const imgData = canvas.toDataURL('image/png');
+
+        // Set PDF size (you can adjust it according to your needs)
+        const pdf = new jsPDF('p', 'mm', 'a4');
+
+        // Add the canvas image as a PDF page
+        pdf.addImage(imgData, 'PNG', 0, 0, 210, 297); // Adjust dimensions as needed
+
+        // Save the PDF
+        pdf.save('receipt.pdf');
+      });
+    }
+  };
+
   return (
-    <Box sx={{
+    <Box id="receipt-container" sx={{
       padding: 2,
       backgroundColor: '#f5f5f5',
       borderRadius: '8px',
@@ -86,12 +103,12 @@ const ReceiptComponent: React.FC<ReceiptProps> = ({
       <Typography sx={{ color: 'black', marginBottom: '8px' }}>Address: {policyHolder.address}</Typography>
       {/* Added marginBottom for space below the Policy Type */}
       <Typography sx={{ color: 'black', marginBottom: '16px' }}>
-        Policy Type: {policyType.charAt(0).toUpperCase() + policyType.slice(1)} Policy ${policyType === 'basic' ? '50' : '100'}
+        Policy Type: {policyType.charAt(0).toUpperCase() + policyType.slice(1)} Policy ${policyType === 'standard' ? '50' : '100'}
       </Typography>
       <Typography sx={{ fontWeight: 'bold', color: 'error.main', marginBottom: '8px' }}>Hurricane Category: {hurricaneDetails.category}</Typography>
       <Typography sx={{ fontWeight: 'bold', color: 'success.main' }}>Total Payment: ${totalPayment}</Typography>
+      <Button variant="contained" onClick={handleSaveReceipt} sx={{ marginTop: '16px' }}>Save Receipt as PDF</Button>
     </Box>
-    
   );
 };
 
