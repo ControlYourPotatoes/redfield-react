@@ -2,14 +2,14 @@ require('dotenv').config(); // Load environment variables from .env file
 
 const express = require('express');
 const cors = require('cors');
-const nodemailer = require('nodemailer'); // testing for mailing 
+const nodemailer = require('nodemailer'); // for mailing
 const app = express();
 const port = 8080; // Ensure this port is free or change it as needed
 
 app.use(cors()); // This enables CORS for all routes
 app.use(express.json()); // To parse JSON bodies
 
-// Mock data 
+// Mock data
 const hurricaneData = {
   id: "hurricane-2023",
   name: "maria path",
@@ -42,16 +42,16 @@ let transporter = nodemailer.createTransport({
   },
 });
 
-// send an email
+// Function to send an email with HTML content
 function sendNotificationEmail(message) {
   let mailOptions = {
-    from: process.env.GMAIL_USER, // place your email
-    to: 'carl-frank7@hotmail.com', // Set the recipient email address
+    from: process.env.GMAIL_USER, // Sender email address
+    to: 'carl-frank7@hotmail.com', // Recipient email address
     subject: 'Hurricane Alert',
-    text: message,
+    html: message, // Specify email content in HTML
   };
   
-  transporter.sendMail(mailOptions,function(error, info) {
+  transporter.sendMail(mailOptions, function(error, info) {
     if (error) {
       console.log(error);
     } else {
@@ -65,10 +65,10 @@ app.get('/api/hurricane', (req, res) => {
   res.json(hurricaneData);
 });
 
-// Adjust the endpoint to extract the message from the request body
+// Endpoint to handle sending notifications
 app.post('/api/send-notification', (req, res) => {
-  const { message } = req.body; // Extract message from the request body
-  sendNotificationEmail(message); // Pass the message to the email function
+  const { message } = req.body; // Extract the message from the request body
+  sendNotificationEmail(message); // Send the email with the provided message
   res.json({ message: 'Email sent successfully' });
 });
 
@@ -88,10 +88,10 @@ app.get('/', (req, res) => {
         <script type="module" src="/src/main.tsx"></script>
       </body>
     </html>
-    `);
-  });
+  `);
+});
 
 // Start the server
 app.listen(port, () => {
-console.log(`Hurricane API running at http://localhost:${port}`);
+  console.log(`Hurricane API running at http://localhost:${port}`);
 });
