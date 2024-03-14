@@ -12,7 +12,7 @@ app.use(express.json()); // To parse JSON bodies
 // Mock data
 const hurricaneData = {
   id: "hurricane-2023",
-  name: "maria path",
+  name: "Maria Path",
   path: [
     { lat: 15.300950405816799, lon: -61.14722058940372 },
     { lat: 15.496900874274315, lon: -61.42172327156733 },
@@ -38,19 +38,28 @@ let transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
     user: process.env.GMAIL_USER, // Your Gmail address
-    pass: process.env.GMAIL_APP_PASSWORD, // Your Gmail password or App Password
+    pass: process.env.GMAIL_APP_PASSWORD, // Your Gmail app password
   },
 });
 
-// Function to send an email with HTML content
+// Function to send an email with HTML content and embedded Redfield logo
 function sendNotificationEmail(message) {
-  let mailOptions = {
-    from: process.env.GMAIL_USER, // Sender email address
-    to: 'carl-frank7@hotmail.com', // Recipient email address
-    subject: 'Hurricane Alert',
-    html: message, // Specify email content in HTML
-  };
+  const emailSignature = `<div style="margin-top: 20px;"><img src="cid:redfieldLogo" alt="Redfield Logo" style="width: 100px; height: auto;"></div>`;
   
+  let mailOptions = {
+    from: process.env.GMAIL_USER,
+    to: 'recipient@example.com', // Replace with the actual recipient email address
+    subject: 'Hurricane Alert',
+    html: message + emailSignature,
+    attachments: [
+      {
+        filename: 'RedfieldLogo.png',
+        path: './public/assets/icon/RedfieldLogo.png', // Adjusted path
+        cid: 'redfieldLogo' // Content-ID reference for embedding the image
+      }
+    ]
+  };
+
   transporter.sendMail(mailOptions, function(error, info) {
     if (error) {
       console.log(error);
@@ -67,8 +76,8 @@ app.get('/api/hurricane', (req, res) => {
 
 // Endpoint to handle sending notifications
 app.post('/api/send-notification', (req, res) => {
-  const { message } = req.body; // Extract the message from the request body
-  sendNotificationEmail(message); // Send the email with the provided message
+  const { message } = req.body;
+  sendNotificationEmail(message);
   res.json({ message: 'Email sent successfully' });
 });
 
