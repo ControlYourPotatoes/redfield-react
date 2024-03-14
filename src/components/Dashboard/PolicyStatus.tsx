@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import PolicyContext from './PolicyContext';
 
-const PolicyStatus = () => {
+const PolicyStatus: React.FC = () => {
   const policyData = useContext(PolicyContext);
 
   if (!policyData) {
@@ -11,10 +11,10 @@ const PolicyStatus = () => {
   return (
     <div>
       <h2>Policy Status</h2>
-      <p>Status: {activeStatus}</p>
-      <p>Expire Date: {expireDate}</p>
-      <p>Policy ID: {policyId}</p>
-      <p>Payment Process: {paymentProcessStatus}</p>
+      <p>Policy ID: {policyData.policyId}</p>
+      <p>Expiration Date: {policyData.expireDate}</p>
+      <p>Active: {policyData.isActive ? 'Yes' : 'No'}</p>
+      <p>Payment Status: {policyData.paymentProcessStatus}</p>
     </div>
   );
 };

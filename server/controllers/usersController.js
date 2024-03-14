@@ -21,16 +21,6 @@ const userController = {
     }
   },
 
-  getAllPolicies: async (req, res) => {
-    const pool = req.app.locals.pool;
-    try {
-      const policies = await UserModel.getAllPolicies(pool);
-      res.json(policies);
-    } catch (error) {
-      res.status(500).json({ error: error.message });
-    }
-  },
-
   createPayment: async (req, res) => {
     const pool = req.app.locals.pool;
     try {
@@ -38,6 +28,16 @@ const userController = {
       res.status(201).json(newPayment);
     } catch (error) {
       res.status(400).json({ error: error.message });
+    }
+  },
+
+  getAllPolicies: async (req, res) => {
+    const pool = req.app.locals.pool;
+    try {
+      const policies = await UserModel.getAllPolicies(pool);
+      res.json(policies);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
     }
   },
 
@@ -61,6 +61,19 @@ const userController = {
     }
   },
 
+  getPolicyById: async (req, res) => {
+    const pool = req.app.locals.pool;
+    try {
+      const policy = await UserModel.getPolicyById(pool, req.params.id);
+      if (!policy) {
+        return res.status(404).json({ message: 'Policy not found' });
+      }
+      res.json(policy);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  },
+
   getUserById: async (req, res) => {
     const pool = req.app.locals.pool;
     try {
@@ -69,6 +82,19 @@ const userController = {
         return res.status(404).json({ message: 'User not found' });
       }
       res.json(user);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  },
+
+  getPaymentById: async (req, res) => {
+    const pool = req.app.locals.pool;
+    try {
+      const payment = await UserModel.getPaymentById(pool, req.params.id);
+      if (!payment) {
+        return res.status(404).json({ message: 'Payment not found' });
+      }
+      res.json(payment);
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
@@ -87,6 +113,45 @@ const userController = {
     }
   },
 
+  deletePolicyById: async (req, res) => {
+    const pool = req.app.locals.pool;
+    try {
+      const policy = await UserModel.deletePolicyById(pool, req.params.id);
+      if (!policy) {
+        return res.status(404).json({ message: 'Policy not found' });
+      }
+      res.json({ message: 'Policy deleted successfully' });
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  },
+
+  deletePaymentById: async (req, res) => {
+    const pool = req.app.locals.pool;
+    try {
+      const payment = await UserModel.deletePaymentById(pool, req.params.id);
+      if (!payment) {
+        return res.status(404).json({ message: 'Payment not found' });
+      }
+      res.json({ message: 'Payment deleted successfully' });
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  },
+
+  updatePaymentById: async (req, res) => {
+    const pool = req.app.locals.pool;
+    try {
+      const payment = await UserModel.updatePaymentById(pool, req.params.id, req.body);
+      if (!payment) {
+        return res.status(404).json({ message: 'Payment not found' });
+      }
+      res.json(payment);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  },
+
   updateUserById: async (req, res) => {
     const pool = req.app.locals.pool;
     try {
@@ -100,5 +165,7 @@ const userController = {
     }
   }
 };
+
+  
 
 module.exports = userController;

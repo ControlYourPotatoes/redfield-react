@@ -23,7 +23,9 @@ CREATE TABLE policy (
     userId UUID PRIMARY KEY,
     type VARCHAR(255) NOT NULL,
     address VARCHAR(255) NOT NULL,
-    coordinates JSONB, -- or use VARCHAR if you're storing JSON as text
+    coordinates JSONB,
+    status INT NOT NULL,
+    expirationDate DATE NOT NULL,
     FOREIGN KEY (userId) REFERENCES users(id) ON DELETE CASCADE,
     created_at TIMESTAMP WITHOUT TIME ZONE DEFAULT now(),
     updated_at TIMESTAMP WITHOUT TIME ZONE DEFAULT now()
@@ -33,11 +35,9 @@ CREATE TABLE policy (
 CREATE TABLE payment (
     userId UUID PRIMARY KEY,
     type VARCHAR(255) NOT NULL,
-    paymentDetails JSONB, -- or use VARCHAR if you're storing JSON as text
+    paymentDetails JSONB,
     amount DECIMAL(10, 2) NOT NULL,
     FOREIGN KEY (userId) REFERENCES users(id) ON DELETE CASCADE,
     created_at TIMESTAMP WITHOUT TIME ZONE DEFAULT now(),
     updated_at TIMESTAMP WITHOUT TIME ZONE DEFAULT now()
 );
-
-

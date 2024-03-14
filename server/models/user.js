@@ -15,13 +15,15 @@ const UserModel = {
     }
   },
 
-  createPolicy: async (pool, { userId, type, coordinates }) => {
+  createPolicy: async (pool, { userId, type, address, coordinates, status }) => {
+    // Query no longer includes expirationDate explicitly
     const query = `
-      INSERT INTO policy (userId, type, coordinates, address)
-      VALUES ($1, $2, $3, $4)
+      INSERT INTO policy (userId, type, address, coordinates, status)
+      VALUES ($1, $2, $3, $4, $5)
       RETURNING *;
     `;
-    const values = [userId, type, JSON.stringify(coordinates)];
+    // The values array does not include expirationDate
+    const values = [userId, type, address, JSON.stringify(coordinates), status];
     
     try {
       const { rows } = await pool.query(query, values);
@@ -29,7 +31,7 @@ const UserModel = {
     } catch (error) {
       throw new Error(`Error creating policy: ${error.message}`);
     }
-  },
+},
 
   createPayment: async (pool, { userId, type, paymentDetails, amount }) => {
     const query = `
@@ -69,6 +71,17 @@ const UserModel = {
     }
   },
 
+  getAllPolicies: async (pool) => {
+    const query = 'SELECT * FROM policy';
+    
+    try {
+      const { rows } = await pool.query(query);
+      return rows;
+    } catch (error) {
+      throw new Error(`Error fetching all policies: ${error.message}`);
+    }
+  },
+
   getUserById: async (pool, id) => {
     const query = 'SELECT * FROM users WHERE id = $1';
     
@@ -77,6 +90,43 @@ const UserModel = {
       return rows[0];
     } catch (error) {
       throw new Error(`Error fetching user by ID: ${id} - ${error.message}`);
+    }
+  },
+
+  getPolicyByUserId: async (pool, userId) => {
+    const query = 'SELECT * FROM policy WHERE userId = $1';
+    
+    try {
+      const { rows } = await pool.query(query, [userId]);
+      if (rows.length > 0) {
+        return rows[0];
+      } else {
+        return null;
+      }
+    } catch (error) {
+      throw new Error(`Error fetching policy by userId: ${userId} - ${error.message}`);
+    }
+},
+
+  getPaymentById: async (pool, id) => {
+    const query = 'SELECT * FROM payment WHERE id = $1';
+    
+    try {
+      const { rows } = await pool.query(query, [id]);
+      return rows[0];
+    } catch (error) {
+      throw new Error(`Error fetching payment by ID: ${id} - ${error.message}`);
+    }
+  },
+
+  deletePolicyById: async (pool, id) => {
+    const query = 'DELETE FROM policy WHERE id = $1 RETURNING id';
+    
+    try {
+      const { rows } = await pool.query(query, [id]);
+      return rows[0];
+    } catch (error) {
+      throw new Error(`Error deleting policy by ID: ${id} - ${error.message}`);
     }
   },
 
@@ -108,16 +158,6 @@ const UserModel = {
     }
   },
 
-  getAllPolicies: async (pool) => {
-    const query = 'SELECT * FROM policy';
-    
-    try {
-      const { rows } = await pool.query(query);
-      return rows;
-    } catch (error) {
-      throw new Error(`Error fetching all policies: ${error.message}`);
-    }
-  }
   
 
 };
