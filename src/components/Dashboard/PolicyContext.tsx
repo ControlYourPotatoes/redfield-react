@@ -7,7 +7,7 @@ interface Coordinates {
 }
 
 interface PolicyData {
-  userId: string;
+  userid: string;
   type: string;
   address: string;
   coordinates: Coordinates | null;
