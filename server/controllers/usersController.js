@@ -90,13 +90,13 @@ const userController = {
   getPaymentById: async (req, res) => {
     const pool = req.app.locals.pool;
     try {
-      const payment = await UserModel.getPaymentById(pool, req.params.id);
-      if (!payment) {
-        return res.status(404).json({ message: 'Payment not found' });
-      }
-      res.json(payment);
+        const payment = await UserModel.getPaymentById(pool, req.params.id); // Assuming 'id' in the URL is the 'userId'
+        if (!payment) {
+            return res.status(404).json({ message: 'Payment not found' });
+        }
+        res.json(payment);
     } catch (error) {
-      res.status(500).json({ error: error.message });
+        res.status(500).json({ error: error.message });
     }
   },
 

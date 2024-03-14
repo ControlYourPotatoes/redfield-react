@@ -9,12 +9,13 @@ router.put('/users/:id', usersController.updateUserById);
 router.get('/users/:id', usersController.getUserById);
 
 router.get('/policy', usersController.getAllPolicies);
-router.post('/policy', usersController.createPolicy);
+router.post('/:userId/policy', usersController.createPolicy);
 router.delete('/policy/:id', usersController.deletePolicyById);
 router.get('/policy/:id', usersController.getPolicyById);
 
 router.get('/payment', usersController.getAllPayments);
 router.post('/:userId/payment', usersController.createPayment);
+router.get('/payment/:id', usersController.getPaymentById);
 
 
 

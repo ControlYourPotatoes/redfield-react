@@ -31,7 +31,7 @@ const UserModel = {
     } catch (error) {
       throw new Error(`Error creating policy: ${error.message}`);
     }
-},
+  },
 
   createPayment: async (pool, { userId, type, paymentDetails, amount }) => {
     const query = `
@@ -106,21 +106,20 @@ const UserModel = {
     } catch (error) {
       throw new Error(`Error fetching policy by userId: ${userId} - ${error.message}`);
     }
-},
+  },
 
-  getPaymentById: async (pool, id) => {
+  getPaymentById: async (pool, userId) => {
     const query = 'SELECT * FROM payment WHERE userId = $1';
-    
     try {
-      const { rows } = await pool.query(query, [id]);
-      return rows[0];
+        const { rows } = await pool.query(query, [userId]);
+        return rows.length > 0 ? rows[0] : null;
     } catch (error) {
-      throw new Error(`Error fetching payment by ID: ${id} - ${error.message}`);
+        throw new Error(`Error fetching payment by userId: ${userId} - ${error.message}`);
     }
   },
 
   deletePolicyById: async (pool, id) => {
-    const query = 'DELETE FROM policy WHERE id = $1 RETURNING id';
+    const query = 'DELETE FROM policy WHERE userId = $1 RETURNING id';
     
     try {
       const { rows } = await pool.query(query, [id]);
