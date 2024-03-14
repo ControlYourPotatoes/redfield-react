@@ -1,7 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import PolicyContext from './PolicyContext';
 
-const PolicyStatus = ({ isActive, expireDate, policyId, paymentProcessStatus }) => {
-  const activeStatus = isActive ? "Active" : "Inactive";
+const PolicyStatus = () => {
+  const policyData = useContext(PolicyContext);
+
+  if (!policyData) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div>
       <h2>Policy Status</h2>

@@ -1,8 +1,10 @@
-import React, { useEffect } from 'react';
-
+import React, { useState, useEffect } from 'react';
+import LayoutSwitcher from './LayoutSwitcher';
+import { Switch, Button } from '@mui/material';
 
 // Import the InfoPanel, PolicyStatus, and HurricaneMap components
 import InfoPanel from './InfoPanel';
+
 import PolicyStatus from './PolicyStatus';
 import HurricaneMap from './HurricaneMap';
 import WeatherWidget from './Weatherwidget';
@@ -33,14 +35,25 @@ const Dashboard = () => {
     { day: 'Saturday', condition: 'Cloudy', temperature: 22, icon: '☁️' },
     { day: 'Sunday', condition: 'Rainy', temperature: 18, icon: '🌧️' }
   ];
+  //States
+  const [isLiveWeatherEvent, setIsLiveWeatherEvent] = useState<boolean>(false);
+
+  const handleToggleWeatherEvent = () => {
+    setIsLiveWeatherEvent((prevState) => !prevState);
+  };
 
 
   return (
     <div>
-      <WeatherWidget />
-      <InfoPanel {...hurricaneInfo} />
-      <PolicyStatus {...policyInfo} />
-      <HurricaneMap />
+      <Switch
+        checked={isLiveWeatherEvent}
+        onChange={handleToggleWeatherEvent}
+        name="weatherEventToggle"
+      />
+      <Button variant="contained" onClick={handleToggleWeatherEvent}>
+        Toggle Weather Event
+      </Button>
+      <LayoutSwitcher isLiveWeatherEvent={isLiveWeatherEvent} />
     </div>
   );
 };
