@@ -72,7 +72,7 @@ const userController = {
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
-  },
+},
 
   getUserById: async (req, res) => {
     const pool = req.app.locals.pool;

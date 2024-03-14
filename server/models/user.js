@@ -93,7 +93,7 @@ const UserModel = {
     }
   },
 
-  getPolicyByUserId: async (pool, userId) => {
+  getPolicyById: async (pool, userId) => {
     const query = 'SELECT * FROM policy WHERE userId = $1';
     
     try {
@@ -109,7 +109,7 @@ const UserModel = {
 },
 
   getPaymentById: async (pool, id) => {
-    const query = 'SELECT * FROM payment WHERE id = $1';
+    const query = 'SELECT * FROM payment WHERE userId = $1';
     
     try {
       const { rows } = await pool.query(query, [id]);
