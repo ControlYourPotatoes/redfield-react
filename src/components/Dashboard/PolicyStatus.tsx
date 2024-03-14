@@ -30,19 +30,28 @@ const PolicyStatus: React.FC = () => {
     <Card raised>
       <CardContent>
         <Box display="flex" alignItems="center">
-          <Avatar>
-            <ShieldIcon />
+          <Avatar sx={{ width: 100, height: 110 }}>
+            <img src="\assets\svg\insurance-svgrepo-com.svg" alt="User Avatar" />
           </Avatar>
           <Box marginLeft={2}>
-            <Typography variant="h6">{UserInfo.firstName} {UserInfo.lastName}</Typography>
+            <Typography variant="h5">{UserInfo.firstName} {UserInfo.lastName}</Typography>
             <Typography color="textSecondary">{policyData.address}</Typography>
           </Box>
         </Box>
-        <Typography variant="body2" color="textSecondary">
-          Policy Member ID: {policyData.userId}
-        </Typography>
+        
+        <Box>
+          <Typography variant="body2" color="textSecondary">
+            Policy Member ID: {policyData.userId}
+          </Typography>
+          <Typography variant="body2" color="textSecondary">
+            Expiration Date: {policyData.expirationdate}
+          </Typography>
+          <Typography variant="body2" color="textSecondary">
+            Created At: {policyData.created_at}
+          </Typography>
+        </Box>
         <Chip label={getStatusLabel(policyData.status)} color="primary" />
-        <Typography variant="body2">
+        <Typography variant="body1">
           Type of Insurance: {policyData.type}
         </Typography>
         {/* ... other policy details */}
