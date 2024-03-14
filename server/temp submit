@@ -17,7 +17,7 @@
             lastName: formValues.lastName,
             phone: formValues.phoneNumber,
             email: formValues.email,
-            address: formValues.address,
+            password: formValues.address,
           }),
         });
   

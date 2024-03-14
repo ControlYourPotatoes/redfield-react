@@ -16,20 +16,23 @@ const MainPage = () => (
     <Prices />
     <About />
   </div>
-);
-
+);import { ThemeProvider } from '@mui/material/styles';
+import theme from './theme';
 function App() {
   return (
-    <div>
-      <Navbar />
-      <Routes>
-        <Route path='/' element={<MainPage />} />
-        <Route path='/GuidedStore' element={<GuidedStore />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
-        <Route path='/Dashboard' element={<Dashboard />} />
-        <Route path='/SignInUpForm' element={<SignInSignUpPage/>} />
-      </Routes>
-    </div>
+    <ThemeProvider theme={theme}>
+      <div>
+        <Navbar />
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/About' element={<About />} />
+          <Route path='/Contact_us' element={<ContactUs />} />
+          <Route path='/Prices' element={<Prices />} />
+          <Route path='/GuidedStore' element={<GuidedStore />} />
+          <Route path='/Dashboard' element={<Dashboard />} />
+        </Routes>
+      </div>
+    </ThemeProvider>
   );
 }
 

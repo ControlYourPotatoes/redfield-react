@@ -1,8 +1,9 @@
-import React from 'react';
 import { Typography, Grid, Paper, Box } from '@mui/material';
 
+import { FormData } from './types';
+
 // Assuming formData is passed as a prop containing all form values
-const ConfirmationComponent = ({ formData }) => {
+const ConfirmationComponent: React.FC<{ formData: FormData }> = ({ formData }) => {
     return (
         <Box sx={{ width: '100%', padding: 2 }}>
             <Typography variant="h2" gutterBottom>
@@ -12,21 +13,21 @@ const ConfirmationComponent = ({ formData }) => {
                 <Grid container spacing={2}>
                     <Grid item xs={12}>
                         <Typography variant="h6">Policy Details</Typography>
-                        <Typography>Type: {formData.policy?.type}</Typography>
-                        {/* Display other policy details */}
+                        <Typography>Type: {formData.policy.type}</Typography>
+                        <Typography>Address: {formData.policy.address}</Typography>
+                        {/* Include additional policy details as needed */}
                     </Grid>
                     <Grid item xs={12}>
                         <Typography variant="h6">Personal Info</Typography>
-                        <Typography>Name: {formData.personalInfo?.firstName} {formData.personalInfo?.lastName}</Typography>
-                        <Typography>Phone: {formData.personalInfo?.phoneNumber}</Typography>
-                        <Typography>Email: {formData.personalInfo?.email}</Typography>
-                        <Typography>Address: {formData.personalInfo?.address}</Typography>
-                        {/* Display other personal info details */}
+                        <Typography>Name: {formData.personalInfo.firstName} {formData.personalInfo.lastName}</Typography>
+                        <Typography>Phone: {formData.personalInfo.phoneNumber}</Typography>
+                        <Typography>Email: {formData.personalInfo.email}</Typography>
+                        {/* Include additional personal info details as needed */}
                     </Grid>
                     <Grid item xs={12}>
                         <Typography variant="h6">Payment Info</Typography>
-                        <Typography>Type: {formData.payment?.type}</Typography>
-                        {/* Display other payment details */}
+                        <Typography>Type: {formData.payment.type}</Typography>
+                        {/* Include additional payment details as needed */}
                     </Grid>
                 </Grid>
             </Paper>

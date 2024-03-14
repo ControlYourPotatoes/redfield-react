@@ -1,13 +1,28 @@
+const { Pool } = require('pg');
 require('dotenv').config();
 
-const { Pool } = require('pg');
+async function createDatabasePool() {
+  // Determine the host based on the environment
+  const selectedhost = process.env.INSTANCE_CONNECTION_NAME ? `/cloudsql/${process.env.INSTANCE_CONNECTION_NAME}` : process.env.DB_HOST;
 
-const pool = new Pool({
-  user: process.env.DB_USER,
-  host: process.env.DB_HOST,
-  database: process.env.DB_NAME,
-  password: process.env.DB_PASSWORD,
-  port: process.env.DB_PORT,
-});
+  const pool = new Pool({
+    user: process.env.DB_USER,
+    host: selectedhost,
+    database: process.env.DB_NAME,
+    password: process.env.DB_PASS,
+    port: process.env.DB_PORT || 5432, // Default PostgreSQL port
+  });
 
-module.exports = pool;
+  // Test the connection
+  try {
+    await pool.query('SELECT 1+1 AS result');
+    console.log('Database connection successful.');
+  } catch (err) {
+    console.error('Database connection failed:', err);
+    throw err;
+  }
+
+  return pool;
+}
+
+module.exports = createDatabasePool;

@@ -2,17 +2,59 @@ const UserModel = require('../models/user');
 
 const userController = {
   createUser: async (req, res) => {
+    const pool = req.app.locals.pool;
     try {
-      const newUser = await UserModel.createUser(req.body);
+      const newUser = await UserModel.createUser(pool, req.body);
       res.status(201).json(newUser);
     } catch (error) {
       res.status(400).json({ error: error.message });
     }
   },
 
-  getAllUsers: async (req, res) => {
+  createPolicy: async (req, res) => {
+    const pool = req.app.locals.pool;
     try {
-      const users = await UserModel.getAllUsers();
+      const newPolicy = await UserModel.createPolicy(pool, req.body);
+      res.status(201).json(newPolicy);
+    } catch (error) {
+      res.status(400).json({ error: error.message });
+    }
+  },
+
+  getAllPolicies: async (req, res) => {
+    const pool = req.app.locals.pool;
+    try {
+      const policies = await UserModel.getAllPolicies(pool);
+      res.json(policies);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  },
+
+  createPayment: async (req, res) => {
+    const pool = req.app.locals.pool;
+    try {
+      const newPayment = await UserModel.createPayment(pool, req.body);
+      res.status(201).json(newPayment);
+    } catch (error) {
+      res.status(400).json({ error: error.message });
+    }
+  },
+
+  getAllPayments: async (req, res) => {
+    const pool = req.app.locals.pool;
+    try {
+      const payments = await UserModel.getAllPayments(pool);
+      res.json(payments);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  },
+
+  getAllUsers: async (req, res) => {
+    const pool = req.app.locals.pool;
+    try {
+      const users = await UserModel.getAllUsers(pool);
       res.json(users);
     } catch (error) {
       res.status(500).json({ error: error.message });
@@ -20,8 +62,9 @@ const userController = {
   },
 
   getUserById: async (req, res) => {
+    const pool = req.app.locals.pool;
     try {
-      const user = await UserModel.getUserById(req.params.id);
+      const user = await UserModel.getUserById(pool, req.params.id);
       if (!user) {
         return res.status(404).json({ message: 'User not found' });
       }
@@ -32,8 +75,9 @@ const userController = {
   },
 
   deleteUserById: async (req, res) => {
+    const pool = req.app.locals.pool;
     try {
-      const user = await UserModel.deleteUserById(req.params.id);
+      const user = await UserModel.deleteUserById(pool, req.params.id);
       if (!user) {
         return res.status(404).json({ message: 'User not found' });
       }
@@ -44,8 +88,9 @@ const userController = {
   },
 
   updateUserById: async (req, res) => {
+    const pool = req.app.locals.pool;
     try {
-      const user = await UserModel.updateUserById(req.params.id, req.body);
+      const user = await UserModel.updateUserById(pool, req.params.id, req.body);
       if (!user) {
         return res.status(404).json({ message: 'User not found' });
       }
@@ -53,34 +98,7 @@ const userController = {
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
-  },
-  
-  handleSubmitForm: async (req, res) => {
-    const { personalInfo, policy, payment } = req.body;
-    
-    try {
-      // Assuming createUser method is adapted to return the user's ID or the full user object
-      const newUser = await UserModel.createUser(personalInfo);
-  
-      // Assuming you will add createPolicy and createPayment methods to UserModel
-      const newPolicy = await UserModel.createPolicy({ userId: newUser.id, ...policy });
-      const newPayment = await UserModel.createPayment({ userId: newUser.id, ...payment });
-  
-      // Respond with the created entities or a success message
-      res.status(201).json({
-        message: "Form data submitted successfully",
-        user: newUser,
-        policy: newPolicy,
-        payment: newPayment,
-      });
-    } catch (error) {
-      console.error("Error handling form submission:", error);
-      res.status(500).json({ error: error.message });
-    }
-  },
-
-  // Add a new method to the userController object
+  }
 };
-
 
 module.exports = userController;

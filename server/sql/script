@@ -1,0 +1,1 @@
+psql.exe -h 35.224.182.91 -U admin -d postgres -f update_db.sql
