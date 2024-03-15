@@ -8,7 +8,7 @@ import GuidedStore from './components/guided_store/GuidedStore';
 import Dashboard from './components/Dashboard/Dashboard';
 import SignInSignUpPage from './components/pages/SignUpform';
 import ContactUs from './components/pages/ContactUs';
-import { ThemeProvider } from '@mui/material/styles';
+import ThemeProvider from "@mui/material/styles/ThemeProvider";
 import theme from './theme';
 
 // MainPage component that includes Home, Prices, and About
