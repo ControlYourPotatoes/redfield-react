@@ -1,15 +1,16 @@
 import { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage, FormikHelpers} from 'formik';
 import * as Yup from 'yup';
-import styled from 'styled-components';
+import styled, {css}from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faLock, faUser, faPhone, faUserAlt } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { FormControlLabel, Switch} from '@mui/material';
 
 
 type FormContainerProps = {
-  show: boolean;
+  $show?: boolean;
 };
 
 // Interfaces for the form values
@@ -51,20 +52,22 @@ height: 100vh;
 position: relative;
 `;
 
-const FormContainer =  styled.div<{ show?: boolean }>`
- opacity: ${({ show }) => (show ? 1 : 0)};
- display: ${({ show }) => (show ? 'flex' : 'none')};
- flex-direction: column;
- transition: all 0.5s ease;
- width: 100%;
- max-width: 550px;
- padding: 20px;
- box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
- border-radius: 5px;
- background-color: white;
- max-height: 890px; 
- color: black;
- margin-bottom: 20px; /* Adjust spacing between form and button */
+const FormContainer = styled.div<FormContainerProps>`
+  ${({ $show }) => css`
+    opacity: ${$show ? 1 : 0};
+    display: ${$show ? 'flex' : 'none'};
+    flex-direction: column;
+    transition: all 0.5s ease;
+    width: 100%;
+    max-width: 550px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    background-color: white;
+    max-height: 890px; 
+    color: black;
+    margin-bottom: 20px;
+  `}
 `;
 
 const InputWrapper = styled.div`
@@ -258,10 +261,10 @@ const forgotPasswordSchema = Yup.object().shape({
     const [LogInError, setLogInError] = useState(''); 
   
 
-  const toggleForm = () => {
-    setIsSignUp(!isSignUp);
-    setShowForgotPassword(false);
-  };
+    const toggleForm = (event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => {
+      setIsSignUp(checked);
+      setShowForgotPassword(false);
+    };
 
   const handleForgotPassword = () => {
     setShowForgotPassword(true);
@@ -324,45 +327,40 @@ const forgotPasswordSchema = Yup.object().shape({
     paddingTop: isSignUp ? '150px' : '0', // Or any other value that suits your design
   };
 
- // Example onSubmit method for the sign-up form
- const handleSignUpSubmit = async (values: SignUpFormValues,
-  { setSubmitting }: FormikHelpers<SignUpFormValues>
-) => {
-  try {
-    
-    const response = await axios.post('http://localhost:8080/api/signup', values);
-    console.log('Sign Up Success',values, response.data);
-    // Here you could redirect the user or show a success message
-    navigate('/dashboard');
-  }  catch (error: any) {
-    console.error('Sign Up Error', error?.response?.data || 'An error occurred');
-    setSignUpError('Failed to sign up. Please try again.');
-  } finally {
-    setSubmitting(false);
-  }
-};
 
-  // Handle form submission for sign-in
-  const handleLoginSubmit = async (
-    values: LoginFormValues,
-    { setSubmitting }: FormikHelpers<LoginFormValues>
-  ) => {
-    try {
-      const response = await axios.post('http://localhost:8080/api/login', values);
-      console.log('Login Success', response.data);
-      // Handle successful login, e.g., navigate to dashboard or store JWT token
-      navigate('/dashboard');
-    } catch (error: any) {
-      console.error('Login Error', error?.response?.data || 'An error occurred');
-      setLogInError('email already in system');
-    } finally {
-      setSubmitting(false);
-    }
-  };
+  
+    const handleSignUpSubmit = async (values: SignUpFormValues, { setSubmitting }: FormikHelpers<SignUpFormValues>) => {
+      try {
+        await axios.post('http://localhost:8080/api/signup', values);
+        navigate('/dashboard'); // Navigate to dashboard upon successful signup
+      } catch (error: any) {
+        console.error('Sign Up Error', error?.response?.data || 'An error occurred');
+      } finally {
+        setSubmitting(false);
+      }
+    };
+
+  //submit login 
+    const handleLoginSubmit = async (values: LoginFormValues, { setSubmitting }: FormikHelpers<LoginFormValues>) => {
+      try {
+        await axios.post('http://localhost:8080/api/login', values);
+        navigate('/dashboard'); // Navigate to dashboard upon successful login
+      } catch (error: any) {
+        console.error('Login Error', error?.response?.data || 'An error occurred');
+      } finally {
+        setSubmitting(false);
+      }
+    };
 
   return (
-    <Container style={containerStyle}>
-      <FormContainer show={!isSignUp}>
+    <Container>
+      <FormControlLabel
+        control={<Switch checked={isSignUp} onChange={toggleForm} color="primary" />}
+        label={isSignUp ? 'Switch to Sign In' : 'Switch to Sign Up'}
+      />
+
+      {/* Log-In Form */}
+      <FormContainer $show={!isSignUp}>
         <Formik
           initialValues={initialValuesLogin}
           validationSchema={signInSchema}
@@ -370,11 +368,6 @@ const forgotPasswordSchema = Yup.object().shape({
         >
           {({ isSubmitting }) => (
             <Form>
-              <ToggleWrapper>
-               <ToggleContainer  onClick={toggleForm}>
-                <ToggleIndicator isSignUp={isSignUp} />
-               </ToggleContainer >
-              </ToggleWrapper>
               <StyledLabel>Email</StyledLabel>
               <InputWrapper>
                <Icon icon={faEnvelope} />
@@ -411,7 +404,8 @@ const forgotPasswordSchema = Yup.object().shape({
         </Formik>
       </FormContainer>
 
-      <FormContainer show={isSignUp}>
+            {/* Sign-Up Form */}
+      <FormContainer $show={isSignUp}>
         <Formik
           initialValues={initialValuesSignUp}
           validationSchema={signUpSchema}
@@ -419,11 +413,6 @@ const forgotPasswordSchema = Yup.object().shape({
         >
           {({ isSubmitting }) => (
             <Form>
-              <ToggleWrapper>
-               <ToggleContainer  onClick={toggleForm}>
-                <ToggleIndicator isSignUp={isSignUp} />
-               </ToggleContainer >
-              </ToggleWrapper>
               <StyledLabel>Email</StyledLabel>
               <InputWrapper>
               <Icon icon={faEnvelope} />
@@ -485,7 +474,6 @@ const forgotPasswordSchema = Yup.object().shape({
           )}
         </Formik>
       </FormContainer>
-
      
     </Container>
   );

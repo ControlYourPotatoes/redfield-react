@@ -90,10 +90,13 @@ const Navbar: React.FC = () => {
   const handleNavigationClick = (section: string) => {
     if (location.pathname === '/') {
       // If on the home page, scroll to specific section
-      scroller.scrollTo(section, { duration: 500, offset: -100 });
+      scroller.scrollTo(section, { duration: 800, delay: 0, smooth: 'easeInOutQuart', offset: -70 });
     } else {
       // If not, navigate to the home page with a query parameter
-      navigate(`/?scrollTo=${section}`);
+      navigate('/');
+      setTimeout(() => {
+        scroller.scrollTo(section, { duration: 800, delay: 0, smooth: 'easeInOutQuart', offset: -70 });
+      }, 100);
     }
   };
 
