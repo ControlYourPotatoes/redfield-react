@@ -78,7 +78,7 @@ app.post('/api/send-notification', (req, res) => {
   sendNotificationEmail(message); // Pass the message to the email function
   res.json({ message: 'Email sent successfully' });
 });
-
+https://www.nhc.noaa.gov/data/tcr/AL152017_Maria.pdf
 // Root route serving a simple HTML page
 app.get('/', (req, res) => {
   res.send(`
