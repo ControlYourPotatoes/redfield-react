@@ -1,9 +1,13 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+// vite.config.ts
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import svgrPlugin from 'vite-plugin-svgr';
 
-// https://vitejs.dev/config/
 export default defineConfig({
-  //base: "/redfield/",
-  //when we host this needs to be updated withdomain
-  plugins: [react()],
-})
+  plugins: [
+    react(),
+    svgrPlugin({
+      // Configuration options here (if needed)
+    }),
+  ],
+});

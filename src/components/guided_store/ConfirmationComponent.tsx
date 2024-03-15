@@ -1,6 +1,6 @@
 import { Typography, Grid, Paper, Box } from '@mui/material';
 
-import { FormData } from './types';
+import { FormData } from '../../types';
 
 // Assuming formData is passed as a prop containing all form values
 const ConfirmationComponent: React.FC<{ formData: FormData }> = ({ formData }) => {

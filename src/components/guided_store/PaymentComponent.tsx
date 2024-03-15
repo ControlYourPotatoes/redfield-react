@@ -4,7 +4,7 @@ import CardPayment from './CardPayment';
 import WalletPayment from './WalletPayment';
 import CardIcon from '@mui/icons-material/CreditCard';
 import { useFormikContext } from 'formik';
-import { FormData } from './types'; // Make sure the path is correct based on your project structure
+import { FormData } from '../../types'; // Make sure the path is correct based on your project structure
 
 
 const PaymentComponent: React.FC = () => {

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Typography, TextField, Grid, Box } from '@mui/material';
 import * as yup from 'yup';
 import { useFormikContext } from 'formik';
-import { FormData } from './types';
+import { FormData } from '../../types';
 
 import MapComponent from './MapComponent';
 
