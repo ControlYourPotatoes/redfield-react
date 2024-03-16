@@ -221,7 +221,7 @@ const SignInSignUpPage = () => {
     const [isSignUp, setIsSignUp] = useState(false);
     const [showForgotPassword, setShowForgotPassword] = useState(false);
     const [signUpError, setSignUpError] = useState(''); // Add a state for sign-up errors
-    const [LogInError, setLogInError] = useState(''); 
+    const [loginError, setLoginError] = useState<string>('');
     const { login } = useAuth();
 
     const toggleForm = (event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => {
@@ -238,15 +238,6 @@ const SignInSignUpPage = () => {
 
     };
 
-  // const sendForgotPasswordRequest = (values: any) => {
-  //   console.log('Sending forgot password request for:', values.email);
-  //   // Here you would send a request to your backend
-  //   // This is just a placeholder for demonstration
-  //   alert('If this email exists in our database, a password reset link will be sent.');
-  //   setShowForgotPassword(false);
-  // };
-
-  // db forgot Password
   const sendForgotPasswordRequest = async (
     values: { email: string },
     formikHelpers: FormikHelpers<{ email: string }>
@@ -300,22 +291,6 @@ const SignInSignUpPage = () => {
     );
   }
 
-
-
-
-    // local signup
-    // const handleSignUpSubmit = async (values: SignUpFormValues, { setSubmitting }: FormikHelpers<SignUpFormValues>) => {
-    //   try {
-    //     await axios.post('http://localhost:8080/api/signup', values);
-    //     navigate('/dashboard'); // Navigate to dashboard upon successful signup
-    //   } catch (error: any) {
-    //     console.error('Sign Up Error', error?.response?.data || 'An error occurred');
-    //   } finally {
-    //     setSubmitting(false);
-    //   }
-    // };
-
-    //db signup 
     const handleSignUpSubmit = async (values: SignUpFormValues, { setSubmitting }: FormikHelpers<SignUpFormValues>) => {
       try {
         await axios.post('http://localhost:3000/api/signup', values);
@@ -344,6 +319,7 @@ const SignInSignUpPage = () => {
       navigate('/dashboard'); // Navigate to dashboard upon successful login
     } catch (error: any) {
       console.error('Login Error', error?.response?.data || 'An error occurred');
+      setLoginError(error?.response?.data?.message || 'Failed to log in. Please try again.');
     } finally {
       setSubmitting(false);
     }

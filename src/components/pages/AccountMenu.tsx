@@ -8,15 +8,16 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Logout from '@mui/icons-material/Logout';
 import PublicIcon from '@mui/icons-material/Public';
 import { scroller } from 'react-scroll'; // Import for smooth scrolling
-
+import { useAuth } from './AuthContext'; // Adjust the path as necessary
 
 export default function AccountMenu() {
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const [profileDialogOpen, setProfileDialogOpen] = useState(false);
   const [profilePic, setProfilePic] = useState<JSX.Element>(<AccountCircleIcon />);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
+  const { authToken, logout } = useAuth(); // Destructure the relevant fields from useAuth
+  const isLoggedIn = !!authToken; // Determine if logged in based on the presence of an authToken
   //icons
   const icons = [<FaceIcon />, <TagFacesIcon />, <PetsIcon />];
  
@@ -45,15 +46,9 @@ export default function AccountMenu() {
     }
   };
 
-  useEffect(() => {
-    // Check if the authToken exists in local storage to set the login status
-    const authToken = localStorage.getItem('authToken');
-    setIsLoggedIn(!!authToken);
-  }, []);
-
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>)  => {
+  
+  const handleClick = (event: any)  => {
     setAnchorEl(event.currentTarget);
-
   };
 
   const handleClose = () => {
@@ -66,17 +61,14 @@ export default function AccountMenu() {
   };
 
   const handleLogin = () => {
-    setIsLoggedIn(true);
+    navigate('/SignInUpForm'); // Navigate to login/sign up form
   };
 
   const handleLogout = () => {
     // Perform logout logic here (e.g., clearing user data)
-    localStorage.removeItem('authToken');
-    setIsLoggedIn(false);
+    logout();
     handleClose();
-
-     // Navigate to Home page on logout
-     navigate('/');
+    navigate('/');
   };
 
   const handleNavigateToDashboard = () => {

@@ -29,7 +29,7 @@ function App() {
         <AuthProvider>
           <Navbar />
           <Routes>
-            <Route path='/' element={<Home />} />
+            <Route path='/' element={<MainPage />} />
             <Route path='/About' element={<About />} />
             <Route path='/Contact_us' element={<ContactUs />} />
             <Route path='/Prices' element={<Prices />} />
