@@ -4,7 +4,7 @@ import * as Yup from 'yup';
 import styled, {css}from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faLock, faUser, faPhone, faUserAlt } from '@fortawesome/free-solid-svg-icons';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { FormControlLabel, Switch} from '@mui/material';
 import { useAuth } from './AuthContext';
@@ -189,45 +189,6 @@ const ForgotPasswordFormContainer = styled.div`
   color: black;
 `;
 
-const ToggleWrapper = styled.div`
-  display: flex;
-  justify-content: center; // Aligns the toggle container to the right
-  width: 100%; // Ensures the wrapper spans the full width of its parent
-  padding-right: 20px; // Adjust this value to move the toggle button more to the right
-  margin-bottom: 20px; // Adds some space below the toggle button
-  margin-top: 20px
-`;
-
-const ToggleContainer = styled.div`
-  display: flex;
-  background-color: black;
-  border-radius: 20px;
-  width: 150px;
-  height: 40px;
-  cursor: pointer;
-  position: relative;
-  margin-bottom: 40px; // Add space below the toggle button
-`;
-
-const ToggleIndicator = styled.div<{ isSignUp: boolean }>`
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  background-color: lightgray;
-  border-radius: 18px;
-  transition: all 0.2s ease;
-  width: 50%; // Indicator covers half of the container
-  left: ${({ isSignUp }) => (isSignUp ? '50%' : '0')}; // Move indicator based on isSignUp
-  font-size: 14px;
-  font-weight: bold;
-  color: #333;
-  &:before {
-    content: ${({ isSignUp }) => (isSignUp ? '"Sign Up"' : '"Log In"')};
-  }
-`;
-
 const signInSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Required'),
   password: Yup.string().min(6, 'Password is too short').required('Required'),
@@ -277,26 +238,42 @@ const SignInSignUpPage = () => {
 
     };
 
-  const sendForgotPasswordRequest = (values: any) => {
-    console.log('Sending forgot password request for:', values.email);
-    // Here you would send a request to your backend
-    // This is just a placeholder for demonstration
-    alert('If this email exists in our database, a password reset link will be sent.');
-    setShowForgotPassword(false);
+  // const sendForgotPasswordRequest = (values: any) => {
+  //   console.log('Sending forgot password request for:', values.email);
+  //   // Here you would send a request to your backend
+  //   // This is just a placeholder for demonstration
+  //   alert('If this email exists in our database, a password reset link will be sent.');
+  //   setShowForgotPassword(false);
+  // };
+
+  // db forgot Password
+  const sendForgotPasswordRequest = async (
+    values: { email: string },
+    formikHelpers: FormikHelpers<{ email: string }>
+  ) => {
+    try {
+      await axios.post('http://localhost:3001/api/forgot-password', values);
+      alert('If this email is registered, a reset link has been sent.');
+      formikHelpers.setSubmitting(false); // Use formikHelpers to set submitting state
+      setShowForgotPassword(false); // Optionally, manage the display state based on the operation
+    } catch (error: any) {
+      const axiosError = error as AxiosError; // Typecast the error to AxiosError for TypeScript
+      console.error('Forgot Password Error', axiosError.response?.data || 'An error occurred');
+      formikHelpers.setSubmitting(false);
+    }
   };
 
   if (showForgotPassword) {
     return (
         <Container>
       <ForgotPasswordFormContainer>
-        <Formik
-          initialValues={{ email: '' }}
-          validationSchema={forgotPasswordSchema}
-          onSubmit={(values, { setSubmitting }) => {
-            sendForgotPasswordRequest(values);
-            setSubmitting(false);
-          }}
-        >
+      <Formik
+        initialValues={{ email: '' }}
+        validationSchema={forgotPasswordSchema}
+        onSubmit={(values, formikHelpers) => {
+        sendForgotPasswordRequest(values, formikHelpers);
+       }}
+      >
           {({ isSubmitting, errors, touched  }) => (
             <Form>
               <FormTitle>Forgot Password</FormTitle>
@@ -323,20 +300,31 @@ const SignInSignUpPage = () => {
     );
   }
 
-   // Calculate the dynamic style based on isSignUp state
-   const containerStyle = {
-    justifyContent: isSignUp ? 'flex-start' : 'center',
-    paddingTop: isSignUp ? '150px' : '0', // Or any other value that suits your design
-  };
 
 
-  
+
+    // local signup
+    // const handleSignUpSubmit = async (values: SignUpFormValues, { setSubmitting }: FormikHelpers<SignUpFormValues>) => {
+    //   try {
+    //     await axios.post('http://localhost:8080/api/signup', values);
+    //     navigate('/dashboard'); // Navigate to dashboard upon successful signup
+    //   } catch (error: any) {
+    //     console.error('Sign Up Error', error?.response?.data || 'An error occurred');
+    //   } finally {
+    //     setSubmitting(false);
+    //   }
+    // };
+
+    //db signup 
     const handleSignUpSubmit = async (values: SignUpFormValues, { setSubmitting }: FormikHelpers<SignUpFormValues>) => {
       try {
         await axios.post('http://localhost:3000/api/signup', values);
         navigate('/dashboard'); // Navigate to dashboard upon successful signup
+        setSignUpError(''); // Clear any previous error messages
       } catch (error: any) {
         console.error('Sign Up Error', error?.response?.data || 'An error occurred');
+        // Directly use the backend's error message
+        setSignUpError(error?.response?.data?.message || 'An unexpected error occurred. Please try again.');
       } finally {
         setSubmitting(false);
       }
@@ -402,7 +390,7 @@ const SignInSignUpPage = () => {
               <SubmitButton type="submit" disabled={isSubmitting}>
              {isSignUp ? 'Sign Up' : 'Sign In'}
              </SubmitButton>
-             {LogInError && <div style={{ color: 'red' }}> {LogInError}</div>}
+             {loginError && <div style={{ color: 'red' }}> {loginError}</div>}
              <ForgotPasswordWrapper>
           <ForgotPasswordLink onClick={handleForgotPassword}>
             Forgot Password?

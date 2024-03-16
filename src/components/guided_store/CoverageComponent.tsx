@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import styled from 'styled-components';
+import { Typography, Switch, FormControlLabel, Button, Alert } from '@mui/material';
 
 // Styling for the overall layout, adjusted for wider tables
 const Container = styled.div`
@@ -14,71 +15,25 @@ align-items: center; // Center children (including the toggle button)
 
 `;
 
-// Styling for the switch
-const Switch = styled.div`
-  margin: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const SwitchLabel = styled.label`
-  margin: 0 10px;
-  font-size: 16px;
-  cursor: pointer;
-`;
-
-// Adjust Slider to use isActive prop for styling
-const Slider = styled.span<SliderProps>`
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 34px;
-  background-color: #ccc;
-  border-radius: 34px;
-  margin: 0 10px;
-  cursor: pointer;
-  &::after {
-    content: '';
-    position: absolute;
-    top: 2px;
-    left: 2px;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    background-color: white;
-    transition: 0.4s;
-    transform: ${({ isActive }) => isActive ? 'translateX(26px)' : 'none'};
-  }
-`;
-
-const SwitchInput = styled.input`
-  opacity: 0;
-  width: 0;
-  height: 0;
-  position: absolute;
-  margin-left: -9999px; // Visually hide the input
-`;
-
 // Styling for the tables
 const Table = styled.table`
   border-collapse: collapse;
-  width: 150%;
-  margin: 0 -20px;
+  width: 130%;
+  margin: 20px 0;
   th, td {
     border: 1px solid #ddd;
-    padding: 10px;
+    padding: 8px;
     text-align: left;
   }
   th {
-    background-color:lightgray;
+    background-color:#f2f2f2;
   }
 `;
 
 // Styling for the policy selection 
 const PolicySelector = styled.label`
-  margin-top: 20px;
   display: block;
+  margin: 20px;
   cursor: pointer;
 `;
 
@@ -88,7 +43,7 @@ const Checkbox = styled.input`
 
 // Styling for the message displaying the selected policy
 const SelectedPolicyMessage = styled.div`
- width: 450px; // Reserve space for the message
+ height: 20px;
  margin-top: 20px;
  text-align: center;
  transition: opacity 0.3s ease;
@@ -100,9 +55,6 @@ const SelectedPolicyMessage = styled.div`
 type PolicyType = 'Basic' | 'Premium';
 
 // Define an interface for SliderProps to accept the activePolicy prop
-interface SliderProps {
-    isActive: boolean;
-  }
   
 interface Category {
   windSpeed: string;
@@ -166,17 +118,17 @@ const reversedCategories = [...policies[activePolicy].categories].reverse();
 
   return (
     <Container>
-    <Switch>
-        <SwitchLabel>Basic</SwitchLabel>
-        <SwitchInput
-          type="checkbox"
-          id="policyToggle"
-          checked={activePolicy === 'Premium'}
-          onChange={togglePolicy}
-        />
-        <Slider isActive={activePolicy === 'Premium'} onClick={togglePolicy}></Slider>
-        <SwitchLabel>Premium</SwitchLabel>
-      </Switch>
+    <FormControlLabel
+        control={
+          <Switch
+            checked={activePolicy === 'Premium'}
+            onChange={togglePolicy}
+            name="policySwitch"
+            color="primary"
+          />
+        }
+        label={activePolicy === 'Premium' ? 'Premium' : 'Basic'}
+      />
     <Table>
       <thead>
         <tr>
@@ -208,8 +160,16 @@ const reversedCategories = [...policies[activePolicy].categories].reverse();
       Select {activePolicy} Policy
     </PolicySelector>
     <SelectedPolicyMessage style={{ opacity: selectedPolicyName ? 1 : 0 }}>
-        {selectedPolicyName ? `"Selected Policy: ${selectedPolicyName}" has been sent to the server.` : ''}
+        {selectedPolicyName ? `${selectedPolicyName} Policy has been selected` : ''}
       </SelectedPolicyMessage>
+
+            <Typography variant="body2" sx={{ marginTop: '14px', padding: '0 2px' }}>
+                Please note: The insurance policy comes into effect 15 days after being paid. 
+                The payment amounts listed are illustrative examples only and may not reflect 
+                actual prices applicable to your region. Actual payments are subject to variation 
+                based on geographical location and other factors. We recommend consulting with our 
+                customer service team for detailed pricing information specific to your area.
+            </Typography>
   </Container>
 );
 };
