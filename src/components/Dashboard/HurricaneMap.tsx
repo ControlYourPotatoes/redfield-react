@@ -4,39 +4,36 @@ import { MapContainer, TileLayer, Marker, Polyline } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { Box, Button } from '@mui/material';
 
-const HurricaneMap = () => {
-  const [hurricanePosition, setHurricanePosition] = useState([15.3, -61.3]);
-  const [hurricanePath, setHurricanePath] = useState([]);
+const HurricaneMap: React.FC = () => {
+  const [hurricanePosition, setHurricanePosition] = useState<[number, number]>([15.3, -61.3]);
+  const [hurricanePath, setHurricanePath] = useState<[number, number][]>([]);
 
   const hurricaneIcon = new L.Icon({
-    iconUrl: '/assets/gifs/hurricaneicon.gif',
-    iconSize: [150, 150],
-    iconAnchor: [75, 75],
+    iconUrl: 'assets/gifs/hurricaneicon.gif',
+    iconSize: [50, 50],
+    iconAnchor: [25, 25],
   });
 
   useEffect(() => {
-    fetch('http://localhost:8080/api/hurricane')
+    fetch('\mariaPath.json')
       .then(response => response.json())
       .then(data => {
-        const transformedPath = data.path.map(point => [point.lat, point.lon]);
-      setHurricanePath(transformedPath);
+        setHurricanePath(data);
       })
       .catch(error => console.error("Failed to load hurricane path data:", error));
   }, []);
-
 
   const startAnimation = () => {
     let pathIndex = 0;
 
     const interval = setInterval(() => {
       if (pathIndex < hurricanePath.length) {
-        const currentPosition = hurricanePath[pathIndex];
-        setHurricanePosition(currentPosition)
+        setHurricanePosition(hurricanePath[pathIndex]);
         pathIndex += 1;
       } else {
         clearInterval(interval);
       }
-    }, 500);
+    }, 1000);
   };
 
   return (

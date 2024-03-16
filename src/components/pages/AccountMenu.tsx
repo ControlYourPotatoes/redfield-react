@@ -89,7 +89,8 @@ const Logo = styled('img')({
 });
 
 const Hurricane = styled('img')({
-  height: '100px',
+  height: '60px',
+  marginRight: '20px',
   // Additional styles
 });
 
@@ -109,8 +110,8 @@ const NavigationContainer = styled(Box)(({ theme }) => ({
      <StyledAppBar>
         <Toolbar>
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <Hurricane src="./assets/gifs/spinHurricane.gif" alt="New Icon" />
-            <Logo src="./assets/icon/edited_logo.png" alt="Logo" />
+            <Hurricane src="\assets\icon\logoLightMode.png" alt="New Icon" />
+            <Logo src="\assets\logo\redfieldLogoDark.svg" alt="Logo" />
           </Box>
 
           <NavigationContainer>

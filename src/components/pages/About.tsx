@@ -77,7 +77,18 @@ const CardContainer = styled('div')({
   marginBottom: '40px', // Adjust as needed for spacing below the cards
 });
 
-
+const CustomPaper = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.background.paper, // Use theme for color scheme flexibility
+  padding: theme.spacing(4),
+  marginTop: theme.spacing(5),
+  borderRadius: theme.shape.borderRadius,
+  boxShadow: theme.shadows[3], // Use theme shadows for consistency
+  color: theme.palette.text.primary,
+}));
+const Highlight = styled('span')(({ theme }) => ({
+  color: theme.palette.primary.main, // Highlight color
+  fontWeight: 'bold',
+}));
 //data for the cards
 const profileCards = [
     {
@@ -134,33 +145,26 @@ const About: React.FC = () => {
               ))}
             </Grid>
 
-            <Paper elevation={3}
-                   style={{ 
-                       padding: '20px', 
-                       marginTop: '40px',
-                       color: 'white', 
-                       backgroundColor: 'transparent', // Make background transparent
-                       border: '1px solid black', // Add black border
-                       borderRadius: '4px', // Optional: adds rounded corners (match your design)
-                   }}>
-
-                <Typography variant="h4" gutterBottom>About</Typography>
-                <Typography paragraph>
-                    Redfiled is an innovative insurance company specializing in hurricane protection, leveraging the power of blockchain technology to offer unique and cutting-edge solutions in the insurance world. Founded by a team of experts in software engineering, blockchain, and smart contracts, our mission is to transform the insurance industry through the use of these advanced technologies, providing our clients unparalleled security and peace of mind in the face of climatic challenges.
-                </Typography>
-                <Typography paragraph>
-                    At Redfiled, we understand that hurricanes can have devastating consequences for individuals, families, and communities. That's why we've developed a revolutionary insurance product that eliminates the complications and delays traditionally associated with insurance claims after a hurricane. Our policy uses blockchain-based smart contract technology to make automatic, predetermined payouts the moment certain climatological parameters, such as hurricane speed and distance, are met. This means that our clients receive payments quickly when they need them most, without the need to file a claim or prove damage.
-                </Typography>
-                <Typography paragraph>
-                    What sets Redfiled apart in the market is our ability to provide an immediate response during critical moments, thanks to our blockchain-based platform. This technology not only ensures transparency and efficiency in the disbursement of payments but also significantly reduces fraud, which in turn allows Redfiled to offer more competitive premiums to our clients.
-                </Typography>
-                <Typography paragraph>
-                    Our commitment to innovation extends beyond our products. At Redfiled, we are constantly exploring new technologies and approaches to improve customer experience, risk management, and operational effectiveness. We firmly believe in the power of technology to change lives and are dedicated to using this power to provide security and support to our clients in the face of unpredictable climate challenges.
-                </Typography>
-                <Typography paragraph>
-                    Choosing Redfiled means choosing a reliable ally that is at the forefront of insurance technology. With Redfiled, you are protected efficiently and effectively, allowing you to face the future with confidence, knowing that we are here to support you every step of the way. We are committed to offering not only security but also peace of mind, through our dedication to excellence, innovation, and customer service. Welcome to Redfiled, where the future of insurance is today.
-                </Typography>
-            </Paper>
+            <CustomPaper elevation={3}>
+            <Typography variant="h4" gutterBottom component="div">
+              About <Highlight>Redfield</Highlight>
+            </Typography>
+            <Typography variant="body1" paragraph>
+               Redfield is an innovative insurance company specializing in hurricane protection, leveraging the power of blockchain technology to offer unique and cutting-edge solutions in the insurance world. Founded by a team of experts in software engineering, blockchain, and smart contracts, our mission is to transform the insurance industry through the use of these advanced technologies, providing our clients unparalleled security and peace of mind in the face of climatic challenges.
+            </Typography>
+            <Typography variant="body1" paragraph>
+                At Redfield, we understand that hurricanes can have devastating consequences for individuals, families, and communities. That's why we've developed a revolutionary insurance product that eliminates the complications and delays traditionally associated with insurance claims after a hurricane. Our policy uses blockchain-based smart contract technology to make automatic, predetermined payouts the moment certain climatological parameters, such as hurricane speed and distance, are met. This means that our clients receive payments quickly when they need them most, without the need to file a claim or prove damage.
+            </Typography>
+            <Typography variant="body1" paragraph>
+               What sets Redfield apart in the market is our ability to provide an immediate response during critical moments, thanks to our blockchain-based platform. This technology not only ensures transparency and efficiency in the disbursement of payments but also significantly reduces fraud, which in turn allows Redfield to offer more competitive premiums to our clients.
+            </Typography>
+            <Typography variant="body1" paragraph>
+                Our commitment to innovation extends beyond our products. At Redfield, we are constantly exploring new technologies and approaches to improve customer experience, risk management, and operational effectiveness. We firmly believe in the power of technology to change lives and are dedicated to using this power to provide security and support to our clients in the face of unpredictable climate challenges.
+            </Typography>
+            <Typography variant="body1" paragraph>
+                Choosing Redfield means choosing a reliable ally that is at the forefront of insurance technology. With Redfield, you are protected efficiently and effectively, allowing you to face the future with confidence, knowing that we are here to support you every step of the way. We are committed to offering not only security but also peace of mind, through our dedication to excellence, innovation, and customer service. Welcome to Redfield, where the future of insurance is today.
+            </Typography>
+            </CustomPaper>
         </Container>
     );
 }

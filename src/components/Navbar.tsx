@@ -123,6 +123,7 @@ const Navbar: React.FC = () => {
         gap: isMobile ? '10px' : '20px',
       }}
     >
+      
     </Box>
   );
 
@@ -131,7 +132,7 @@ const Navbar: React.FC = () => {
     <AppBar position="fixed" style={{ transition: 'top 0.3s', top: visible ? '0' : '-100px' }}>
       <StyledToolbar>
         <IconContainer>
-          <Hurricane src="./assets/icon/logoLightMode.png" alt="New Icon" />
+          <Hurricane src="./assetsicon/logoLightMode.png" alt="New Icon" />
           <MuiLink component={RouterLink} to="/" style={{ textDecoration: 'none' }}>
             <LogoButton color="inherit" aria-label="logo">
             
