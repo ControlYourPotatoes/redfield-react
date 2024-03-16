@@ -122,7 +122,7 @@ const NavigationContainer = styled(Box)(({ theme }) => ({
           </Box>
 
           <NavigationContainer>
-            <Button color="inherit" onClick={() => scrollToTop}>Home</Button>
+            <Button color="inherit" onClick={() => scrollToTop()}>Home</Button>
             <Button color="inherit" onClick={() => handleNavigationClick('about')}>About</Button>
             <Button color="inherit" onClick={() => navigate('/dashboard')}>Dashboard</Button>
             <Button color="inherit" component="a" href="mailto:project.h.redfield@gmail.com" sx={{ textDecoration: 'none', color: 'inherit' }}>
