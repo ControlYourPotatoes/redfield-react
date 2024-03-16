@@ -143,15 +143,15 @@ export default function GuidedStore() {
             {steps.map((label, index) => (
               <Step key={label}>
                 <StepLabel
-                  StepIconComponent={ColorlibStepIcon}
+                  StepIconComponent={ColorlibStepIcon as React.ElementType<StepIconProps>}
                   StepIconProps={{
-                    active: index === activeStep,
-                    completed: index < activeStep,
-                    icon: index + 1,
+                  active: index === activeStep,
+                  completed: index < activeStep,
+                  icon: index + 1,
                   }}
-                >
+                  >
                   {label}
-                </StepLabel>
+                  </StepLabel>
               </Step>
             ))}
           </Stepper>

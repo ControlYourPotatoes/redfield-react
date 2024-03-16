@@ -27,7 +27,7 @@ const LayoutSwitcher: React.FC<LayoutSwitcherProps> = ({ isLiveWeatherEvent }) =
         
       {isLiveWeatherEvent ? (
         <>
-          <InfoPanel {...hurricaneInfo} />
+          <InfoPanel windSpeed={0} locationCoords={[0,0]} estimatedPayout={0} warningState={''} distanceToInsured={0}  />
           <HurricaneMap />
         </>
       ) : (
