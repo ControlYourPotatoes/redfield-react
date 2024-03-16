@@ -3,12 +3,14 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { Avatar, Box, Button, IconButton, Menu, MenuItem, Tooltip, Typography } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { Link, animateScroll as scroll } from 'react-scroll';
+import { useAuth } from './AuthContext'; // Adjust the path as necessary
 
 export default function AccountMenu() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+  const { authToken, logout } = useAuth(); // Destructure the relevant fields from useAuth
+  const isLoggedIn = !!authToken;
 
   const open = Boolean(anchorEl);
 
@@ -22,7 +24,7 @@ export default function AccountMenu() {
 
   const handleLoginLogout = () => {
     if (isLoggedIn) {
-      setIsLoggedIn(false);
+      logout(); // Use logout function from AuthContext
       navigate('/'); // Navigate to home upon logout
     } else {
       navigate('/SignInUpForm'); // Navigate to login/sign up form

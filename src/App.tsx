@@ -10,6 +10,7 @@ import SignInSignUpPage from './components/pages/SignUpform';
 import ContactUs from './components/pages/ContactUs';
 import ThemeProvider from "@mui/material/styles/ThemeProvider";
 import theme from './theme';
+import { AuthProvider } from './components/pages/AuthContext';
 
 // MainPage component that includes Home, Prices, and About
 const MainPage = () => (
@@ -25,16 +26,18 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <div>
-        <Navbar />
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/About' element={<About />} />
-          <Route path='/Contact_us' element={<ContactUs />} />
-          <Route path='/Prices' element={<Prices />} />
-          <Route path='/GuidedStore' element={<GuidedStore />} />
-          <Route path='/Dashboard' element={<Dashboard />} />
-          <Route path='/SignInUpForm' element={<SignInSignUpPage />} />
-        </Routes>
+        <AuthProvider>
+          <Navbar />
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/About' element={<About />} />
+            <Route path='/Contact_us' element={<ContactUs />} />
+            <Route path='/Prices' element={<Prices />} />
+            <Route path='/GuidedStore' element={<GuidedStore />} />
+            <Route path='/Dashboard' element={<Dashboard />} />
+            <Route path='/SignInUpForm' element={<SignInSignUpPage />} />
+          </Routes>
+        </AuthProvider>
       </div>
     </ThemeProvider>
   );

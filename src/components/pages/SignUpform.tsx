@@ -7,7 +7,7 @@ import { faEnvelope, faLock, faUser, faPhone, faUserAlt } from '@fortawesome/fre
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { FormControlLabel, Switch} from '@mui/material';
-
+import { useAuth } from './AuthContext';
 
 type FormContainerProps = {
   $show?: boolean;
@@ -248,32 +248,34 @@ const signUpSchema = Yup.object().shape({
     .required('Phone number is required'),
 });
 
+
+
 // Yup validation schema for the forgot password email
 const forgotPasswordSchema = Yup.object().shape({
     email: Yup.string().email('Invalid email address').required('Email is required'),
   });
 
-  const SignInSignUpPage = () => {
+const SignInSignUpPage = () => {
     const navigate = useNavigate();
     const [isSignUp, setIsSignUp] = useState(false);
     const [showForgotPassword, setShowForgotPassword] = useState(false);
     const [signUpError, setSignUpError] = useState(''); // Add a state for sign-up errors
     const [LogInError, setLogInError] = useState(''); 
-  
+    const { login } = useAuth();
 
     const toggleForm = (event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => {
       setIsSignUp(checked);
       setShowForgotPassword(false);
     };
 
-  const handleForgotPassword = () => {
-    setShowForgotPassword(true);
-  };
+    const handleForgotPassword = () => {
+      setShowForgotPassword(true);
+    };
 
-  const handleBack = () => {
-    setShowForgotPassword(false);
+    const handleBack = () => {
+      setShowForgotPassword(false);
 
-  };
+    };
 
   const sendForgotPasswordRequest = (values: any) => {
     console.log('Sending forgot password request for:', values.email);
@@ -341,22 +343,23 @@ const forgotPasswordSchema = Yup.object().shape({
     };
 
   //submit login 
-    const handleLoginSubmit = async (values: LoginFormValues, { setSubmitting }: FormikHelpers<LoginFormValues>) => {
-      try {
-        console.log(values);
-        const response = await axios.post('http://localhost:3000/api/login', values);
-
-        const authToken = response.data.token; // Assuming the token is returned in the response
-        localStorage.setItem('authToken', authToken); // Save the token to localStorage
-        console.log(authToken);
-
-        navigate('/dashboard'); // Navigate to dashboard upon successful login
-      } catch (error: any) {
-        console.error('Login Error', error?.response?.data || 'An error occurred');
-      } finally {
-        setSubmitting(false);
-      }
-    };
+  const handleLoginSubmit = async (values: LoginFormValues, { setSubmitting }: FormikHelpers<LoginFormValues>) => {
+  
+    try {
+      const response = await axios.post('http://localhost:3000/api/login', values);
+      const authToken = response.data.token; // Assuming the token is returned in the response
+  
+      login(authToken); // Use the login function from your context to update the global state
+  
+      localStorage.setItem('authToken', authToken); // Optional: Save the token to localStorage for persistence
+  
+      navigate('/dashboard'); // Navigate to dashboard upon successful login
+    } catch (error: any) {
+      console.error('Login Error', error?.response?.data || 'An error occurred');
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   return (
     <Container>
