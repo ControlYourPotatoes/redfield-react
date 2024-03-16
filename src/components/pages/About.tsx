@@ -138,10 +138,10 @@ const About: React.FC = () => {
                    style={{ 
                        padding: '20px', 
                        marginTop: '40px',
-                       color: 'white', 
-                       backgroundColor: 'transparent', // Make background transparent
-                       border: '1px solid black', // Add black border
-                       borderRadius: '4px', // Optional: adds rounded corners (match your design)
+                       color: 'black', 
+                       backgroundColor: 'white', // Make background transparent
+                       border: '4px solid black', // Add black border
+                       borderRadius: '34px', // Optional: adds rounded corners (match your design)
                    }}>
 
                 <Typography variant="h4" gutterBottom>About</Typography>
