@@ -1,5 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
+/// <reference types="@types/google.maps" />
 
+import React, { useEffect, useRef, useState } from 'react';
+declare var google: any;
 // Load Google Maps API key from environment variables
 const googleMapsApiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
 
@@ -33,7 +35,14 @@ interface MapComponentProps {
 const MapComponent: React.FC<MapComponentProps> = ({ coordinates }) => {
   const mapRef = useRef<HTMLDivElement>(null);
   const [apiLoaded, setApiLoaded] = useState(false);
-  const [map, setMap] = useState<google.maps.Map | null>(null);
+  const [map, setMap] = useState<google.maps.Map | null>(null); // Add type declaration for 'google' namespace
+
+  // Interface for the coordinates prop
+  interface Coordinates {
+    lat: number;
+    lng: number;
+  }
+
   const defaultCenter: Coordinates = { lat: 18.2208, lng: -66.5901 };
 
   useEffect(() => {

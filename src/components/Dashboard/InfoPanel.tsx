@@ -1,6 +1,21 @@
 import React from 'react';
 
-const InfoPanel = ({ windSpeed, locationCoords, estimatedPayout, warningState, distanceToInsured }) => {
+interface InfoPanelProps {
+  windSpeed: number;
+  locationCoords: [number, number]; // Assuming locationCoords is a tuple of [lat, lng]
+  estimatedPayout: number;
+  warningState: string;
+  distanceToInsured: number;
+}
+
+// Option 1: Using React.FC with the Props Interface
+const InfoPanel: React.FC<InfoPanelProps> = ({
+  windSpeed,
+  locationCoords,
+  estimatedPayout,
+  warningState,
+  distanceToInsured,
+}) => {
   return (
     <div>
       <h2>Hurricane Information</h2>

@@ -27,7 +27,7 @@ const PolicyStatus: React.FC = () => {
   const policyData = useContext(PolicyContext);
 
   const getStatusLabel = (status: number) => {
-    const statusMap = {
+    const statusMap: Record<number, string> = {
       1: 'Active',
       0: 'Expired',
       3: 'Warning, Live Weather Event',
