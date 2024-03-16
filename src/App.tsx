@@ -33,6 +33,7 @@ function App() {
           <Route path='/Prices' element={<Prices />} />
           <Route path='/GuidedStore' element={<GuidedStore />} />
           <Route path='/Dashboard' element={<Dashboard />} />
+          <Route path='/SignInUpForm' element={<SignInSignUpPage />} />
         </Routes>
       </div>
     </ThemeProvider>

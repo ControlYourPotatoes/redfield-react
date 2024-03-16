@@ -331,7 +331,7 @@ const forgotPasswordSchema = Yup.object().shape({
   
     const handleSignUpSubmit = async (values: SignUpFormValues, { setSubmitting }: FormikHelpers<SignUpFormValues>) => {
       try {
-        await axios.post('http://localhost:8080/api/signup', values);
+        await axios.post('http://localhost:3000/api/signup', values);
         navigate('/dashboard'); // Navigate to dashboard upon successful signup
       } catch (error: any) {
         console.error('Sign Up Error', error?.response?.data || 'An error occurred');
@@ -343,7 +343,13 @@ const forgotPasswordSchema = Yup.object().shape({
   //submit login 
     const handleLoginSubmit = async (values: LoginFormValues, { setSubmitting }: FormikHelpers<LoginFormValues>) => {
       try {
-        await axios.post('http://localhost:8080/api/login', values);
+        console.log(values);
+        const response = await axios.post('http://localhost:3000/api/login', values);
+
+        const authToken = response.data.token; // Assuming the token is returned in the response
+        localStorage.setItem('authToken', authToken); // Save the token to localStorage
+        console.log(authToken);
+
         navigate('/dashboard'); // Navigate to dashboard upon successful login
       } catch (error: any) {
         console.error('Login Error', error?.response?.data || 'An error occurred');
@@ -386,7 +392,7 @@ const forgotPasswordSchema = Yup.object().shape({
                 <ErrorMessage name="password" component="div" />
               </ErrorMessageContainer>
               <CheckboxLabel>
-                <Checkbox type="checkbox" name="rememberMe" />
+                <Checkbox type="checkbox" />
                 Remember Me
               </CheckboxLabel>
               

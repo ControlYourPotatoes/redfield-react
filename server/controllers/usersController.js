@@ -163,7 +163,44 @@ const userController = {
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
-  }
+  },
+
+  updatePolicyById: async (req, res) => {
+    const pool = req.app.locals.pool;
+    try {
+      const policy = await UserModel.updatePolicyById(pool, req.params.id, req.body);
+      if (!policy) {
+        return res.status(404).json({ message: 'Policy not found' });
+      }
+      res.json(policy);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  },
+
+  login: async (req, res) => {
+    const pool = req.app.locals.pool;
+    try {
+      const { email, password } = req.body;
+      const loginResult = await UserModel.login(pool, email, password);
+      
+      // Check if login was successful
+      if (loginResult.success) {
+        // Login successful, return the token
+        res.json({ token: loginResult.token });
+      } else {
+        // Login failed, return an error message
+        // It's generally a good practice to use a 401 status code for authentication failures
+        res.status(401).json({ message: loginResult.message });
+      }
+    } catch (error) {
+      // Log the error for debugging purposes
+      console.error(`Login error: ${error.message}`);
+      // Return a generic error message to the client
+      res.status(500).json({ error: 'An error occurred during the login process.' });
+    }
+  },
+  
 };
 
   

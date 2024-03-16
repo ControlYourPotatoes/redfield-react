@@ -8,7 +8,7 @@ import { format } from 'date-fns';
 
 
 const Item = styled(Box)(({ theme }) => ({ 
-  // border: '1px dashed black',
+  border: '1px dashed black',
 }));
 
 const Label = styled(Typography)(({ theme }) => ({
@@ -102,7 +102,7 @@ const PolicyStatus: React.FC = () => {
           <Grid xs={6}>
             <Item>
               <Label variant="cardlabel" color="textSecondary">Date Created</Label>
-              <Values>{formattedExpirationDate}</Values>
+              <Values>{formattedCreatedDate}</Values>
             </Item>
           </Grid>
 

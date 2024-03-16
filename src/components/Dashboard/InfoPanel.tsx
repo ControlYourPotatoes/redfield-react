@@ -1,8 +1,5 @@
 import React from 'react';
 
-
-
-
 const InfoPanel = ({ windSpeed, locationCoords, estimatedPayout, warningState, distanceToInsured }) => {
   return (
     <div>

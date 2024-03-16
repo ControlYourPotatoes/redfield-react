@@ -123,21 +123,6 @@ const Navbar: React.FC = () => {
         gap: isMobile ? '10px' : '20px',
       }}
     >
-      <StyledButton onClick={handleHomeClick} style={{color: getButtonTextColor()}}>Home</StyledButton>
-      <StyledButton onClick={() => handleNavigationClick('about')} style={{color: getButtonTextColor()}}>About</StyledButton>
-      <StyledButton onClick={() => handleNavigationClick('prices')} style={{color: getButtonTextColor()}}>Prices</StyledButton>
-      <a href="mailto:project.h.redfield@gmail.com" style={{ textDecoration: 'none' }}>
-      <StyledButton style={{color: getButtonTextColor()}}>Contact Us</StyledButton>
-      </a>
-      <MuiLink component={RouterLink} to="/GuidedStore" style={{ textDecoration: 'none' }}>
-        <StyledButton style={{color: getButtonTextColor()}}>Get Started</StyledButton>
-      </MuiLink>
-      <MuiLink component={RouterLink} to="/Dashboard" style={{ textDecoration: 'none' }}>
-        <StyledButton style={{color: getButtonTextColor()}}>Dashboard</StyledButton>
-      </MuiLink>
-      <MuiLink component={RouterLink} to="/SignInUpForm" style={{ textDecoration: 'none' }}>
-        <StyledButton style={{color: getButtonTextColor()}}>Sign Up</StyledButton>
-      </MuiLink>
     </Box>
   );
 
@@ -146,7 +131,7 @@ const Navbar: React.FC = () => {
     <AppBar position="fixed" style={{ transition: 'top 0.3s', top: visible ? '0' : '-100px' }}>
       <StyledToolbar>
         <IconContainer>
-          <Hurricane src="./assetsicon/logoLightMode.png" alt="New Icon" />
+          <Hurricane src="./assets/icon/logoLightMode.png" alt="New Icon" />
           <MuiLink component={RouterLink} to="/" style={{ textDecoration: 'none' }}>
             <LogoButton color="inherit" aria-label="logo">
             

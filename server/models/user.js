@@ -1,3 +1,7 @@
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+
+
 const UserModel = {
   createUser: async (pool, { firstName, lastName, phone, email, password }) => {
     const query = `
@@ -6,7 +10,7 @@ const UserModel = {
       RETURNING id, firstName, lastName, phone, email, password;
     `;
     const values = [firstName, lastName, phone, email, password];
-    
+
     try {
       const { rows } = await pool.query(query, values);
       return rows[0];
@@ -15,7 +19,10 @@ const UserModel = {
     }
   },
 
-  createPolicy: async (pool, { userId, type, address, coordinates, status }) => {
+  createPolicy: async (
+    pool,
+    { userId, type, address, coordinates, status }
+  ) => {
     // Query no longer includes expirationDate explicitly
     const query = `
       INSERT INTO policy (userId, type, address, coordinates, status)
@@ -24,7 +31,7 @@ const UserModel = {
     `;
     // The values array does not include expirationDate
     const values = [userId, type, address, JSON.stringify(coordinates), status];
-    
+
     try {
       const { rows } = await pool.query(query, values);
       return rows[0];
@@ -40,7 +47,7 @@ const UserModel = {
       RETURNING *;
     `;
     const values = [userId, type, JSON.stringify(paymentDetails), amount];
-    
+
     try {
       const { rows } = await pool.query(query, values);
       return rows[0];
@@ -50,7 +57,7 @@ const UserModel = {
   },
 
   getAllPayments: async (pool) => {
-    const query = 'SELECT * FROM payment';
+    const query = "SELECT * FROM payment";
 
     try {
       const { rows } = await pool.query(query);
@@ -61,8 +68,9 @@ const UserModel = {
   },
 
   getAllUsers: async (pool) => {
-    const query = 'SELECT id, firstName, lastName, phone, email, password FROM users';
-    
+    const query =
+      "SELECT id, firstName, lastName, phone, email, password FROM users";
+
     try {
       const { rows } = await pool.query(query);
       return rows;
@@ -72,8 +80,8 @@ const UserModel = {
   },
 
   getAllPolicies: async (pool) => {
-    const query = 'SELECT * FROM policy';
-    
+    const query = "SELECT * FROM policy";
+
     try {
       const { rows } = await pool.query(query);
       return rows;
@@ -83,8 +91,8 @@ const UserModel = {
   },
 
   getUserById: async (pool, id) => {
-    const query = 'SELECT * FROM users WHERE id = $1';
-    
+    const query = "SELECT * FROM users WHERE id = $1";
+
     try {
       const { rows } = await pool.query(query, [id]);
       return rows[0];
@@ -94,8 +102,8 @@ const UserModel = {
   },
 
   getPolicyById: async (pool, userId) => {
-    const query = 'SELECT * FROM policy WHERE userId = $1';
-    
+    const query = "SELECT * FROM policy WHERE userId = $1";
+
     try {
       const { rows } = await pool.query(query, [userId]);
       if (rows.length > 0) {
@@ -104,23 +112,27 @@ const UserModel = {
         return null;
       }
     } catch (error) {
-      throw new Error(`Error fetching policy by userId: ${userId} - ${error.message}`);
+      throw new Error(
+        `Error fetching policy by userId: ${userId} - ${error.message}`
+      );
     }
   },
 
   getPaymentById: async (pool, userId) => {
-    const query = 'SELECT * FROM payment WHERE userId = $1';
+    const query = "SELECT * FROM payment WHERE userId = $1";
     try {
-        const { rows } = await pool.query(query, [userId]);
-        return rows.length > 0 ? rows[0] : null;
+      const { rows } = await pool.query(query, [userId]);
+      return rows.length > 0 ? rows[0] : null;
     } catch (error) {
-        throw new Error(`Error fetching payment by userId: ${userId} - ${error.message}`);
+      throw new Error(
+        `Error fetching payment by userId: ${userId} - ${error.message}`
+      );
     }
   },
 
   deletePolicyById: async (pool, id) => {
-    const query = 'DELETE FROM policy WHERE userId = $1 RETURNING id';
-    
+    const query = "DELETE FROM policy WHERE userId = $1 RETURNING id";
+
     try {
       const { rows } = await pool.query(query, [id]);
       return rows[0];
@@ -130,8 +142,8 @@ const UserModel = {
   },
 
   deleteUserById: async (pool, id) => {
-    const query = 'DELETE FROM users WHERE id = $1 RETURNING id';
-    
+    const query = "DELETE FROM users WHERE id = $1 RETURNING id";
+
     try {
       const { rows } = await pool.query(query, [id]);
       return rows[0];
@@ -140,7 +152,11 @@ const UserModel = {
     }
   },
 
-  updateUserById: async (pool, id, { firstName, lastName, phone, email, password }) => {
+  updateUserById: async (
+    pool,
+    id,
+    { firstName, lastName, phone, email, password }
+  ) => {
     const query = `
       UPDATE users
       SET firstName = $1, lastName = $2, phone = $3, email = $4, password = $5
@@ -148,7 +164,7 @@ const UserModel = {
       RETURNING id, firstName, lastName, phone, email, password;
     `;
     const values = [firstName, lastName, phone, email, password, id];
-    
+
     try {
       const { rows } = await pool.query(query, values);
       return rows[0];
@@ -157,8 +173,64 @@ const UserModel = {
     }
   },
 
-  
+  updatePolicyById: async (
+    pool,
+    id,
+    { userId, type, address, coordinates, status }
+  ) => {
+    const query = `
+      UPDATE policy
+      SET userId = $1, type = $2, address = $3, coordinates = $4, status = $5
+      WHERE id = $6
+      RETURNING *;
+    `;
+    const values = [
+      userId,
+      type,
+      address,
+      JSON.stringify(coordinates),
+      status,
+      id,
+    ];
 
+    try {
+      const { rows } = await pool.query(query, values);
+      return rows[0];
+    } catch (error) {
+      throw new Error(`Error updating policy by ID: ${id} - ${error.message}`);
+    }
+  },
+
+  login: async (pool, email, password) => {
+    const query = 'SELECT * FROM users WHERE email = $1';
+  
+    try {
+      const { rows } = await pool.query(query, [email]);
+      if (rows.length > 0) {
+        const user = rows[0];
+        console.log(`Comparing login password: '${password}' with stored password: '${user.password}'`);
+
+        const validPassword = password.trim() === user.password.trim();
+
+
+        if (validPassword) {
+          // Generate the token without including sensitive data
+          const token = jwt.sign({ id: user.id, email: user.email }, 'secret', { expiresIn: '1h' });
+          return { success: true, token: token };
+        } else {
+          // If the password is invalid, return an object indicating failure but do not throw an error here
+          return { success: false, message: 'Invalid credentials' };
+        }
+      } else {
+        // If no user is found, return an object indicating failure but do not throw an error here
+        return { success: false, message: 'User not found' };
+      }
+    } catch (error) {
+      // Propagate a database or other internal errors as needed
+      throw new Error(`Error logging in: ${error.message}`);
+    }
+  },
+  
 };
 
 module.exports = UserModel;
