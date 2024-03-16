@@ -9,19 +9,47 @@ import Logout from '@mui/icons-material/Logout';
 import PublicIcon from '@mui/icons-material/Public';
 import { scroller } from 'react-scroll'; // Import for smooth scrolling
 
-import { useAuth } from './AuthContext'; // Adjust the path as necessary
 
 export default function AccountMenu() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const [profileDialogOpen, setProfileDialogOpen] = useState(false);
   const [profilePic, setProfilePic] = useState<JSX.Element>(<AccountCircleIcon />);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
-  const location = useLocation();
-  const { authToken, logout } = useAuth(); // Destructure the relevant fields from useAuth
-  const isLoggedIn = !!authToken;
+  //icons
+  const icons = [<FaceIcon />, <TagFacesIcon />, <PetsIcon />];
+ 
 
-  const open = Boolean(anchorEl);
+   // Function to scroll to the top of the page
+   const scrollToTop = () => {
+    if (location.pathname !== '/') {
+      navigate('/');
+    }
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  };
+
+  const handleNavigationClick = (section: string) => {
+    if (location.pathname === '/') {
+      // If on the home page, scroll to specific section
+      scroller.scrollTo(section, { duration: 800, delay: 0, smooth: 'easeInOutQuart', offset: -70 });
+    } else {
+      // If not, navigate to the home page with a query parameter
+      navigate('/');
+      setTimeout(() => {
+        scroller.scrollTo(section, { duration: 800, delay: 0, smooth: 'easeInOutQuart', offset: -70 });
+      }, 100);
+    }
+  };
+
+  useEffect(() => {
+    // Check if the authToken exists in local storage to set the login status
+    const authToken = localStorage.getItem('authToken');
+    setIsLoggedIn(!!authToken);
+  }, []);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>)  => {
     setAnchorEl(event.currentTarget);
@@ -32,24 +60,6 @@ export default function AccountMenu() {
     setAnchorEl(null);
   };
 
-  const handleLoginLogout = () => {
-    if (isLoggedIn) {
-      logout(); // Use logout function from AuthContext
-      navigate('/'); // Navigate to home upon logout
-    } else {
-      navigate('/SignInUpForm'); // Navigate to login/sign up form
-    }
-  };
-
-  const scrollToSection = (sectionId) => {
-    // Check if we're already on the homepage
-    if (location.pathname === '/') {
-      scroll.scrollTo(sectionId);
-    } else {
-      navigate('/'); // Navigate to the home page first
-      setTimeout(() => scroll.scrollTo(sectionId), 0); // Adjust timing if needed
-    }
-  };
   const handleIconSelect = (icon: JSX.Element) => {
     setProfilePic(icon);
     setProfileDialogOpen(false);
