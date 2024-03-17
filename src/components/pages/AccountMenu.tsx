@@ -77,7 +77,7 @@ export default function AccountMenu() {
 
  
 const StyledAppBar = styled(AppBar)({
-  backgroundColor: '#2E3B55', // Define your color
+  background: 'radial-gradient(circle at 47% 42%,rgba(48, 57, 62, 1), rgba(27, 33, 38, 1), #000000)',
   maxHeight: '64px', // Adjust based on your design
   zIndex: 1201, // Ensures AppBar is above most other components
   position: 'fixed', // Fixed position for AppBar
