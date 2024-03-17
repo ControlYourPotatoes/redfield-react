@@ -1,7 +1,9 @@
-import React from 'react';
-import { Typography, Button } from '@mui/material';
+import React, {useState} from 'react';
+import { Typography, Button, IconButton } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { Link } from 'react-router-dom'; // Import for routing to different pages
+import {VolumeOff, VolumeUp} from '@mui/icons-material';
+
 
 /**\
  * Custom styles for the VideoSection component.
@@ -32,7 +34,7 @@ const useStyles = makeStyles(() => ({
     position: 'absolute', // Absolute positioning within the container
     top: '50%', // Center vertically in the visible area below the navbar
     left: '50%', // Center horizontally
-    transform: 'translate(-50%, -50%)', // Adjust position to truly center the content
+    transform: 'translate(-50%, 340%)', // Adjust position to truly center the content
     color: 'white', // Text color for visibility against the video background
     zIndex: 2, // Ensure content is layered above the video
     display: 'flex', // This changes depending on your layout preference
@@ -56,20 +58,28 @@ const useStyles = makeStyles(() => ({
  */
 const VideoSection: React.FC = () => {
   const classes = useStyles(); // Using custom styles defined above
+  const [isMuted, setIsMuted] = useState(true); // State to manage mute status
 
+
+    // Toggle function to change mute status
+    const toggleMute = () => {
+      setIsMuted(!isMuted);
+    };
+  
   return (
     <div className={classes.container}>
-      <video className={classes.video} src='/assets/videos/water_and_trees.mp4' autoPlay loop muted />
+      <video className={classes.video} src='/assets/videos/REDFIELD INTRO.mp4' autoPlay loop muted={isMuted}/>
       <div className={classes.content}>
-        <Typography variant="h2" component="h2"className={classes.WithBorder}>
-        Welcome to Redfiled, where the future of insurance is today
-        </Typography>
+        
         <Typography variant="body1">
           What are you waiting for?
         </Typography>
         <Link to="/SignInUpForm" style={{ textDecoration: 'none' }}>
         <Button variant="contained" color="primary" className={classes.buttonSpacing}>get Started</Button>
         </Link>
+        <IconButton color="secondary" className={classes.buttonSpacing} onClick={toggleMute}>
+        {isMuted ? <VolumeOff /> : <VolumeUp />}
+        </IconButton>
       </div>
     </div>
   );
