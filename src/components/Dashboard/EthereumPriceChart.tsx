@@ -1,10 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { Line } from 'react-chartjs-2';
-import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Tooltip, Legend } from 'chart.js';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Tooltip,
+  Legend,
+  ChartData,
+  ChartOptions,
+} from 'chart.js';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Tooltip, Legend);
 
-const options = {
+const options: ChartOptions<'line'> = {
   responsive: true,
   plugins: {
     legend: {
@@ -21,6 +31,13 @@ const options = {
       title: {
         display: true,
         text: 'Time',
+        color: 'black', // X-axis title color
+      },
+      ticks: {
+        color: 'black', // X-axis ticks color
+      },
+      grid: {
+        color: 'rgba(0, 0, 0, 0.1)', // X-axis grid line color
       },
     },
     y: {
@@ -28,40 +45,47 @@ const options = {
       title: {
         display: true,
         text: 'Price (USD)',
+        color: 'black', // Y-axis title color
+      },
+      ticks: {
+        color: 'black', // Y-axis ticks color
+      },
+      grid: {
+        color: 'rgba(0, 0, 0, 0.1)', // Y-axis grid line color
       },
     },
   },
 };
 
 const EthereumPriceChart: React.FC = () => {
-  const [data, setData] = useState({
+  const [data, setData] = useState<ChartData<'line'>>({
     labels: [],
     datasets: [
       {
         label: 'Ethereum Price',
         data: [],
-        borderColor: 'rgb(53, 162, 235)',
-        backgroundColor: 'rgba(53, 162, 235, 0.5)',
+        borderColor: 'black', // Line color
+        backgroundColor: 'rgba(0, 0, 0, 0.5)', // Fill color
       },
     ],
   });
 
   useEffect(() => {
-    // Here you should fetch the real-time Ethereum price and update the chart data
-    // For demonstration, we're adding dummy data points every second
-    const interval = setInterval(() => {
+    const fetchPriceData = async () => {
+      // This is a placeholder. In a real app, replace this with actual data fetching
+      const newData = Math.random() * 1000 + 1000;
+      
       setData((prevData) => ({
-        ...prevData,
         labels: [...prevData.labels, new Date().toLocaleTimeString()],
-        datasets: [
-          {
-            ...prevData.datasets[0],
-            data: [...prevData.datasets[0].data, Math.random() * 1000 + 1000], // Replace with real data
-          },
-        ],
+        datasets: prevData.datasets.map((dataset) => ({
+          ...dataset,
+          data: [...dataset.data, newData],
+        })),
       }));
-    }, 1000);
+    };
 
+    const interval = setInterval(fetchPriceData, 1000);
+    
     return () => clearInterval(interval);
   }, []);
 
