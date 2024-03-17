@@ -13,10 +13,9 @@ const useStyles = makeStyles(() => ({
     position: 'relative', // Relative positioning to allow absolute positioning within
     height: 'calc(100vh - 64px)', // Full viewport height minus the navbar height, adjust 64px according to your navbar's height 
     overflow: 'hidden', // Hide any overflow, ensuring video doesn't extend beyond this container
-    backgroundColor: 'gray', // Background color as a fallback if the video fails to load
-    margin: '40px', // Adds space around the edges
+    backgroundColor: 'black', // Background color as a fallback if the video fails to load
+    marginTop: '30px', // Adds space around the edges
     boxSizing: 'border-box', // Ensures that padding and border are included in the total width and height
-
   },
   // Style for the video element
   video: {

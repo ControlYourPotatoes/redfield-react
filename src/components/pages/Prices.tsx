@@ -7,7 +7,7 @@ import PricingCards from './PricingCards';
 const Prices: React.FC = () => {
     return (
         
-        <div style={{paddingTop: '20em'}}>
+        <div style={{paddingTop: '5%'}}>
             <Box sx={{p:'1em'}} >
                 <h1 style={{ marginTop: '5px', textAlign: 'center', fontSize: '5rem', color:'#212222'}}>Prices</h1>
                 <p style={{ textAlign: 'center', fontSize: '2rem', color:'#212222', marginTop:'-3rem'}}>Choose the plan that best fits your needs</p>
