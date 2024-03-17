@@ -4,7 +4,7 @@ const express = require('express');
 const cors = require('cors');
 const nodemailer = require('nodemailer'); // for mailing
 const app = express();
-const PORT = process.env.PORT || 5173; // Ensure this port is free or change it as needed
+const PORT = process.env.PORT || 8080; // Ensure this port is free or change it as needed
 
 //login/signup
 const bodyParser = require('body-parser');

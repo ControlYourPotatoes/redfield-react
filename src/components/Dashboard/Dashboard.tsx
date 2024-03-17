@@ -1,8 +1,26 @@
-import { Box, Typography } from '@mui/material';
-import HurricaneMap from './HurricaneMap';
+import React, { useState, useEffect } from 'react';
+import LayoutSwitcher from './LayoutSwitcher';
+import { Switch, Box, Typography } from '@mui/material';
 import ReceiptComponent from './Map Receipt/ReceiptComponent';
 
-const Dashboard: React.FC = () => {
+// Import might not be used since moved to LayoutSwitcher
+import InfoPanel from './InfoPanel';
+import PolicyStatus from './PolicyStatus';
+import HurricaneMap from './HurricaneMap';
+import WeatherWidget from './WeatherWidget';
+
+const Dashboard = () => {
+
+
+
+  //States
+  const [isLiveWeatherEvent, setIsLiveWeatherEvent] = useState<boolean>(false);
+
+  const handleToggleWeatherEvent = () => {
+    setIsLiveWeatherEvent((prevState) => !prevState);
+  };
+
+
   return (
     <Box sx={{ padding: '20px' }}>
       <Typography variant="h4">Dashboard Placeholder</Typography>
@@ -19,7 +37,16 @@ const Dashboard: React.FC = () => {
         date="04-21-2024"
       />
           
-    </Box>
+    <div>
+      <h1>Dashboard</h1>
+      <Switch
+        checked={isLiveWeatherEvent}
+        onChange={handleToggleWeatherEvent}
+        name="weatherEventToggle"
+        />
+      <LayoutSwitcher isLiveWeatherEvent={isLiveWeatherEvent} />
+    </div>
+        </Box>
   );
 };
 

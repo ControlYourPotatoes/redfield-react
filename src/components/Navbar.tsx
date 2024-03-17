@@ -5,26 +5,27 @@ import { scroller , animateScroll as scroll } from 'react-scroll'; // Import for
 import AccountMenu from './pages/AccountMenu'; // Import AccountMenu component
 import './Navbar.css';
 
-const MenuIcon = "./assets/icon/Open-icon.png"; // Path to your custom menu icon
+const MenuIcon = "./assets/icon/logoLightMode.png"; // Path to your custom menu icon
 const CloseIcon = "./assets/icon/closed-icon.png"; // Path to your custom close icon
 
 // Define styles using the `styled` utility
 const StyledToolbar = styled(Toolbar)(() => ({
   justifyContent: 'space-between',
-  backgroundColor: '#2E3B55',
-  maxHeight: '3rem',
+  backgroundColor: '#7dbbc5#7fbbf4',
+  maxHeight: '2rem',
 }));
 
 const LogoButton = styled(Button)(({ theme }) => ({
   marginRight: theme.spacing(2),
   '& img': {
-    height: '50px',
+    height: '40px',
+    marginTop: '7px',
   },
 }));
 
 const Hurricane = styled('img')(({ }) => ({
   //  marginRight: '16px', // Adjust the spacing as needed
-  height: '100px', // Adjust the size as needed
+  height: '45px', // Adjust the size as needed
   // Add more styles as needed
 }));
 
@@ -122,21 +123,7 @@ const Navbar: React.FC = () => {
         gap: isMobile ? '10px' : '20px',
       }}
     >
-      <StyledButton onClick={handleHomeClick} style={{color: getButtonTextColor()}}>Home</StyledButton>
-      <StyledButton onClick={() => handleNavigationClick('about')} style={{color: getButtonTextColor()}}>About</StyledButton>
-      <StyledButton onClick={() => handleNavigationClick('prices')} style={{color: getButtonTextColor()}}>Prices</StyledButton>
-      <a href="mailto:project.h.redfield@gmail.com" style={{ textDecoration: 'none' }}>
-      <StyledButton style={{color: getButtonTextColor()}}>Contact Us</StyledButton>
-      </a>
-      <MuiLink component={RouterLink} to="/GuidedStore" style={{ textDecoration: 'none' }}>
-        <StyledButton style={{color: getButtonTextColor()}}>Get Started</StyledButton>
-      </MuiLink>
-      <MuiLink component={RouterLink} to="/Dashboard" style={{ textDecoration: 'none' }}>
-        <StyledButton style={{color: getButtonTextColor()}}>Dashboard</StyledButton>
-      </MuiLink>
-      <MuiLink component={RouterLink} to="/InvestorDashboard" style={{ textDecoration: 'none' }}>
-        <StyledButton style={{color: getButtonTextColor()}}>InvestorDashboard</StyledButton>
-      </MuiLink>
+      
     </Box>
   );
 
@@ -145,10 +132,12 @@ const Navbar: React.FC = () => {
     <AppBar position="fixed" style={{ transition: 'top 0.3s', top: visible ? '0' : '-100px' }}>
       <StyledToolbar>
         <IconContainer>
-          <Hurricane src="./assets/gifs/spinHurricane.gif" alt="New Icon" />
+          <Hurricane src="./assetsicon/logoLightMode.png" alt="New Icon" />
           <MuiLink component={RouterLink} to="/" style={{ textDecoration: 'none' }}>
-            <LogoButton>
-              <img src="/assets/icon/edited_logo.png" alt="Logo" />
+            <LogoButton color="inherit" aria-label="logo">
+            
+                <img src="\assets\logo\redfieldLogoDark.png" alt="Logo" />
+              
             </LogoButton>
           </MuiLink>
         </IconContainer>

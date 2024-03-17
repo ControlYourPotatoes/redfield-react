@@ -9,7 +9,10 @@ import SignInSignUpPage from './components/pages/SignUpform';
 import ResetPassword from './components/pages/resetPassword';
 import AccountMenu from './components/pages/AccountMenu';
 import InvestorDashboard from './components/Dashboard/InvestorDashboard';
-
+import ContactUs from './components/pages/ContactUs';
+import ThemeProvider from "@mui/material/styles/ThemeProvider";
+import theme from './theme';
+import { AuthProvider } from './components/pages/AuthContext';
 
 // MainPage component that includes Home, Prices, and About
 const MainPage = () => (
@@ -20,20 +23,28 @@ const MainPage = () => (
   </div>
 );
 
+
 function App() {
   return (
-    <div>
-      <AccountMenu />
-      <Routes>
-        <Route path='/' element={<MainPage />} />
-        <Route path='/GuidedStore' element={<GuidedStore />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
-        <Route path='/Dashboard' element={<Dashboard />} />
-        <Route path='/SignInUpForm' element={<SignInSignUpPage/>} />
-        <Route path="/reset-password/:token" element={<ResetPassword />} />
-        <Route path='/InvestorDashboard' element={<InvestorDashboard />} />
-      </Routes>
-    </div>
+    <ThemeProvider theme={theme}>
+      <div>
+        <AuthProvider>
+          <AccountMenu />
+          <Routes>
+            <Route path='/' element={<MainPage />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
+            <Route path='/About' element={<About />} />
+            <Route path='/Contact_us' element={<ContactUs />} />
+            <Route path='/Prices' element={<Prices />} />
+            <Route path='/GuidedStore' element={<GuidedStore />} />
+            <Route path='/Dashboard' element={<Dashboard />} />
+            <Route path='/SignInUpForm' element={<SignInSignUpPage />} />
+            <Route path="/reset-password/:token" element={<ResetPassword />} />
+            <Route path='/InvestorDashboard' element={<InvestorDashboard />} />
+          </Routes>
+        </AuthProvider>
+      </div>
+    </ThemeProvider>
   );
 }
 

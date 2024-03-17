@@ -1,16 +1,9 @@
-// AuthContext.tsx
 import React, { createContext, useContext, useState, ReactNode } from 'react';
-import axios from 'axios';
-
-interface AuthContextType {
-  isLoggedIn: boolean;
-  login: (email: string, password: string) => Promise<void>;
-  logout: () => void;
-}
+import { AuthContextType } from '../../types';
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-export const useAuth = () => {
+export function useAuth() {
   const context = useContext(AuthContext);
   if (context === undefined) {
     throw new Error('useAuth must be used within an AuthProvider');
@@ -18,32 +11,31 @@ export const useAuth = () => {
   return context;
 }
 
-export const AuthProvider = ({ children }: { children: ReactNode }) => {
-    const [isLoggedIn, setIsLoggedIn] = useState<boolean>(() => {
-      return localStorage.getItem('isLoggedIn') === 'true'; // Initialize from persisted state
-    });
+interface AuthProviderProps {
+  children: ReactNode;
+}
 
-  const login = async (email: string, password: string) => {
-    try {
-      const response = await axios.post('http://localhost:3001/api/login', { email, password });
-      if (response.data) {
-        setIsLoggedIn(true);
-        localStorage.setItem('isLoggedIn', 'true'); // Persist login state
-        localStorage.saveItem(response)
-      }
-    } catch (error) {
-      console.error('Login failed:', error);
-    }
+export function AuthProvider({ children }: AuthProviderProps) {
+  const [currentUser, setCurrentUser] = useState<any>(null); // Consider defining a more specific type for users
+  const [authToken, setAuthToken] = useState<string>("");
+
+  const login = (token: string) => {
+    setAuthToken(token);
+    // Optionally decode token to set currentUser
   };
 
   const logout = () => {
-    setIsLoggedIn(false);
-    localStorage.removeItem('isLoggedIn'); // Clear persisted state
+    setAuthToken("");
+    setCurrentUser(null);
+    // Clear token from storage
   };
 
-  return (
-    <AuthContext.Provider value={{ isLoggedIn, login, logout }}>
-      {children}
-    </AuthContext.Provider>
-  );
-};
+  const value = {
+    currentUser,
+    authToken,
+    login,
+    logout
+  };
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+}

@@ -8,13 +8,16 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Logout from '@mui/icons-material/Logout';
 import PublicIcon from '@mui/icons-material/Public';
 import { scroller } from 'react-scroll'; // Import for smooth scrolling
+import { useAuth } from './AuthContext'; // Adjust the path as necessary
 
 export default function AccountMenu() {
   const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
   const [profileDialogOpen, setProfileDialogOpen] = useState(false);
-  const [profilePic, setProfilePic] = useState(<AccountCircleIcon />);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [profilePic, setProfilePic] = useState<JSX.Element>(<AccountCircleIcon />);
   const navigate = useNavigate();
+  const { authToken, logout } = useAuth(); // Destructure the relevant fields from useAuth
+  const isLoggedIn = !!authToken; // Determine if logged in based on the presence of an authToken
   //icons
   const icons = [<FaceIcon />, <TagFacesIcon />, <PetsIcon />];
 
@@ -42,13 +45,8 @@ export default function AccountMenu() {
     }
   };
 
-  useEffect(() => {
-    // Check if the authToken exists in local storage to set the login status
-    const authToken = localStorage.getItem('authToken');
-    setIsLoggedIn(!!authToken);
-  }, []);
-
-  const handleClick = (event) => {
+  
+  const handleClick = (event: any)  => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -62,16 +60,16 @@ export default function AccountMenu() {
   };
 
   const handleLogin = () => {
-    setIsLoggedIn(true);
+    navigate('/SignInUpForm'); // Navigate to login/sign up form
   };
 
   const handleLogout = () => {
     // Perform logout logic here (e.g., clearing user data)
-    localStorage.removeItem('authToken');
-    setIsLoggedIn(false);
+    logout();
     handleClose();
 
     // Navigate to Home page on logout
+    navigate('/');
     navigate('/');
   };
 
@@ -79,37 +77,43 @@ export default function AccountMenu() {
     navigate('/Dashboard');
   };
 
-  const StyledAppBar = styled(AppBar)({
-    backgroundColor: '#2E3B55', // Define your color
-    maxHeight: '64px', // Adjust based on your design
-    zIndex: 1201, // Ensures AppBar is above most other components
-    position: 'fixed', // Fixed position for AppBar
-  });
+ 
+const StyledAppBar = styled(AppBar)({
+  backgroundColor: '#2E3B55', // Define your color
+  maxHeight: '64px', // Adjust based on your design
+  zIndex: 1201, // Ensures AppBar is above most other components
+  position: 'fixed', // Fixed position for AppBar
+});
 
-  const Logo = styled('img')({
-    height: '50px',
-    // Additional styles
-  });
+const Logo = styled('img')({
+  height: '50px',
+  // Additional styles
+});
 
-  const Hurricane = styled('img')({
-    height: '100px',
-    // Additional styles
-  });
+const Hurricane = styled('img')({
+  height: '60px',
+  marginRight: '20px',
+  // Additional styles
+});
 
-  const NavigationContainer = styled(Box)(({ theme }) => ({
-    display: 'flex', // Ensures the items inside are laid out as flex items
-    alignItems: 'center', // Centers the items vertically
-    minWidth: '250px', // Sets a minimum width for the container
-    marginLeft: 'auto', // Pushes the container to the end of the toolbar
-  }));
+const NavigationContainer = styled(Box)(({ theme }) => ({
+  display: 'flex', // Ensures the items inside are laid out as flex items
+  alignItems: 'center', // Centers the items vertically
+  minWidth: '250px', // Sets a minimum width for the container
+  marginLeft: 'auto', // Pushes the container to the end of the toolbar
+}));
+
+
+
+
 
   return (
     <React.Fragment>
       <StyledAppBar>
         <Toolbar>
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <Hurricane src="./assets/gifs/spinHurricane.gif" alt="New Icon" />
-            <Logo src="./assets/icon/edited_logo.png" alt="Logo" />
+            <Hurricane src="\assets\icon\logoLightMode.png" alt="New Icon" />
+            <Logo src="\assets\logo\redfieldLogoDark.svg" alt="Logo" />
           </Box>
 
           <NavigationContainer>

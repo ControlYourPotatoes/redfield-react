@@ -1,17 +1,14 @@
 import React, { useState } from 'react';
-import { Typography, TextField, Grid, Button, Box } from '@mui/material';
+import { Typography, TextField, Grid, Box } from '@mui/material';
 import * as yup from 'yup';
 import { useFormikContext } from 'formik';
+import { FormData } from '../../types';
 
 import MapComponent from './MapComponent';
 
 // Validation schema
 const personalInfoValidationSchema = yup.object({
   personalInfo: yup.object({
-    firstName: yup.string().required('First Name is required'),
-    lastName: yup.string().required('Last Name is required'),
-    phoneNumber: yup.string().required('Phone is required').matches(/^\d+$/, 'Phone must be only digits'),
-    email: yup.string().email('Invalid email format').required('Email is required'),
     address: yup.string().required('Address is required'),
   })
 });
@@ -20,13 +17,13 @@ const googleMapsApiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
 
 
 const PersonalInfoComponent = () => {
-  const { values, setFieldValue} = useFormikContext();
+  const { values, setFieldValue } = useFormikContext<FormData>();
   
 
 
   const defaultCoordinates = {
-    lat: 18.2208,
-    lng: -66.5901,
+    lat: 18.4450625,
+    lng: -66.0674375,
   };
 
   const [coordinates, setCoordinates] = useState({ lat: 18.2208, lng: -66.5901 }); // Default to Puerto Rico's approximate center
@@ -49,10 +46,6 @@ const PersonalInfoComponent = () => {
   };
 
   interface LocalErrors {
-    'personalInfo.firstName'?: string;
-    'personalInfo.lastName'?: string;
-    'personalInfo.phoneNumber'?: string;
-    'personalInfo.email'?: string;
     'personalInfo.address'?: string;
     [key: string]: string | undefined; // This line allows indexing with any string, but each property must be a string or undefined
   }
@@ -66,11 +59,11 @@ const PersonalInfoComponent = () => {
     setFieldValue(name, value); // Keep this as is to update the form state correctly
     
     // Remove the 'personalInfo.' prefix before passing to validateField
-    const fieldName = name.replace("personalInfo.", "");
+    const fieldName = name.replace("policy.", "");
     validateField(fieldName, value); // Now passing the adjusted field name
 
     // Geocode address when address field changes
-    if (name === 'personalInfo.address') {
+    if (name === 'policy.address') {
       // Only geocode when the address field has a non-empty value
       if (value.trim() !== '') {
         geocodeAddress(value);
@@ -91,7 +84,7 @@ const PersonalInfoComponent = () => {
       console.log(`${path} is valid`);
       // Note: Adjust localErrors state structure if needed to match this path
       setLocalErrors((prev) => ({ ...prev, [path]: undefined }));
-    } catch (error) {
+    } catch (error: any) {
       if (error instanceof yup.ValidationError) {
         console.log(`${path} is invalid:`, error.message);
         // Adjust localErrors to use the full path or just fieldName, based on your state structure
@@ -106,73 +99,17 @@ const PersonalInfoComponent = () => {
         Policy Holder Information
       </Typography>
       <Box component="form" sx={{ padding: 2 }}>
-        <Grid container spacing={2}>
-          <Grid item xs={12} sm={6}>
             <TextField
               required
-              id="personalInfo.firstName"
-              name="personalInfo.firstName"
-              label="First Name"
-              fullWidth
-              value={values.personalInfo?.firstName || ''}
-              onChange={handleChange}
-              error={Boolean(localErrors['personalInfo.firstName'])}
-              helperText={localErrors['personalInfo.firstName'] || ''}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              required
-              id="personalInfo.lastName"
-              name="personalInfo.lastName"
-              label="Last Name"
-              fullWidth
-              value={values.personalInfo?.lastName || ''}
-              onChange={handleChange}
-              error={Boolean(localErrors['personalInfo.lastName'])}
-              helperText={localErrors['personalInfo.lastName'] || ''}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              required
-              id="personalInfo.phoneNumber"
-              name="personalInfo.phoneNumber"
-              label="Phone Number"
-              fullWidth
-              value={values.personalInfo?.phoneNumber || ''}
-              onChange={handleChange}
-              error={Boolean(localErrors['personalInfo.phoneNumber'])}
-              helperText={localErrors['personalInfo.phoneNumber'] || ''}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              required
-              id="personalInfo.email"
-              name="personalInfo.email"
-              label="Email"
-              fullWidth
-              value={values.personalInfo?.email || ''}
-              onChange={handleChange}
-              error={Boolean(localErrors['personalInfo.email'])}
-              helperText={localErrors['personalInfo.email'] || ''}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              required
-              id="personalInfo.address"
-              name="personalInfo.address"
+              id="policy.address"
+              name="policy.address"
               label="Address"
               fullWidth
-              value={values.personalInfo?.address || ''}
+              value={values.policy?.address || ''}
               onChange={handleChange}
               error={Boolean(localErrors['personalInfo.address'])}
               helperText={localErrors['personalInfo.address'] || ''}
             />
-          </Grid>
-        </Grid>
       </Box>
       {/* Displaying the Puerto Rico map component below the form */}
       <Box sx={{ padding: 2 }}>
