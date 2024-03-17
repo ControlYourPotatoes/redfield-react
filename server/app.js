@@ -6,7 +6,14 @@ const createDatabasePool = require('./config/db'); // Adjust the path as necessa
 require('dotenv').config();
 
 const app = express();
-app.use(cors());
+
+
+const corsOption = {
+    origin: ['http://localhost:3000'],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+}
+app.use(cors(corsOption));
+
 
 app.use(express.json());
 

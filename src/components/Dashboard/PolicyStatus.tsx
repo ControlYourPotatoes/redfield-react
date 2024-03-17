@@ -8,7 +8,7 @@ import { format } from 'date-fns';
 
 
 const Item = styled(Box)(({ theme }) => ({ 
-  border: '1px dashed black',
+  // border: '1px dashed black',
 }));
 
 const Label = styled(Typography)(({ theme }) => ({

@@ -1,24 +1,40 @@
-# Use an official Node runtime as the parent image
-FROM node:14
+# Build stage for compiling native dependencies
+FROM node:14 as build
 
-# Set the working directory in the container
+# Set the working directory
 WORKDIR /usr/src/app
 
-# Assuming your server's package.json and yarn.lock are inside the server directory
-# Adjust these paths according to your project's structure
+# Copy package.json and yarn.lock for dependency installation
 COPY server/package.json server/yarn.lock ./
 
-# Install dependencies using Yarn
+# Install all dependencies
 RUN yarn install
 
-# Copy the server directory contents to the working directory
+# Copy over the rest of your server's code
 COPY server/ ./
 
-# Copy the built React app (dist directory) into the public directory of your server
-# Adjust this according to how your Express app serves static files
-# This example assumes your Express app serves static files from a directory named 'public'
+# Build stage for the final image
+FROM node:14-slim
+
+# Set the working directory in the slim container
+WORKDIR /usr/src/app
+
+# Copy package.json and yarn.lock from the build stage
+COPY --from=build /usr/src/app/package.json /usr/src/app/yarn.lock ./
+
+# Install only production dependencies
+RUN yarn install --production
+
+# Copy built server files from the build stage
+COPY --from=build /usr/src/app ./
+
+# Copy the built React app (dist directory) into the appropriate directory
+# This assumes your server serves static files from a directory named 'public'
+# Adjust the destination path according to your server's static file serving configuration
 COPY dist /usr/src/dist
 
-# The command to run your application
-# Make sure the start script in your server's package.json is set up to start your Express app
+
+# Expose the port your server listens on
+EXPOSE $PORT
+# Command to run your app (adjust as necessary)
 CMD ["yarn", "start"]
