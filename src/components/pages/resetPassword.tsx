@@ -5,41 +5,27 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import styled from 'styled-components';
 
-interface ErrorTextProps {
-  children: React.ReactNode;
-}
-
-interface RequirementProps {
-  meets: boolean;
-  children?: React.ReactNode;
-}
-
 
 const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #f7f7f7; // Optional: added for better contrast
-`;
-
-const FormContainer = styled.div`
-  padding: 20px;
+  
+  `;
+  
+  const FormContainer = styled.div`
+  padding: 30px;
   border: 1px solid #ccc;
   border-radius: 5px;
   display: flex;
   flex-direction: column;
-  width: 800px;
+  width:400px;
   background-color: white;
   color: black;
-`;
+  `;
 
-const FormAndRequirements = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 40px;
-`;
+
 
 
 const InputContainer = styled.div`
@@ -69,15 +55,20 @@ const ErrorMessageStyled = styled.div`
   visibility: ${(props) => (props.children ? 'visible' : 'hidden')}; // Only show when there are children
 `;
 
-
-const Requirement = styled.div<RequirementProps>`
-  color: ${(props) => (props.meets ? 'green' : 'red')};
+const FormAndRequirements = styled.div`
+  display: flex;
+  flex-direction: row; // Change from column to row
+  align-items: flex-end; // Align items at the start of the flex container
+  gap: 50px; // Add some gap between the form and the requirements
+  justify-content: center; // Center the content horizontally
 `;
 
-// A helper component to always render the space for error messages
-const ErrorText: React.FC<ErrorTextProps> = ({ children }) => (
-  <ErrorMessageStyled>{children || "\u00A0"}</ErrorMessageStyled>
-);
+const Requirement = styled.div.withConfig({
+  shouldForwardProp: (prop) => prop !== 'meets',
+})<{ meets: boolean }>`
+  color: ${props => props.meets ? 'green' : 'red'};
+`;
+
 
 const PasswordRequirements = ({ password }: { password: string }) => {
   const requirements = [
@@ -91,7 +82,7 @@ const PasswordRequirements = ({ password }: { password: string }) => {
     <RequirementsContainer>
       {requirements.map((requirement, index) => (
         <Requirement key={index} meets={requirement.test(password)}>
-          {requirement.text}
+        {requirement.text}
         </Requirement>
       ))}
     </RequirementsContainer>
@@ -104,16 +95,15 @@ const ResetPassword = () => {
 
   return (
     <Container>
-      <FormAndRequirements>
         <Formik
           initialValues={{ password: '', confirmPassword: '' }}
           validationSchema={Yup.object({
             password: Yup.string()
-              .matches(
-                /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$&*]).{8,}$/,
-                "Must be at least 8 characters long, include an uppercase letter, one number, and a special character (!@#$&*)"
-              )
-              .required('Required'),
+            .min(8, 'Password is too short')
+            .matches(/[A-Z]/, 'Password must contain at least one uppercase letter')
+            .matches(/[\W_]+/, 'Password must contain at least one special character')
+            .matches(/[0-9]/, 'Password must contain at least one number')
+            .required('Required'),
             confirmPassword: Yup.string()
               .oneOf([Yup.ref('password'), undefined], 'Passwords must match')
               .required('Required'),
@@ -131,6 +121,7 @@ const ResetPassword = () => {
         >
           {({ values }) => (
             <Form>
+              
               <FormContainer>
                 <h2>Reset Your Password</h2>
                 <InputContainer>
@@ -149,11 +140,12 @@ const ResetPassword = () => {
                 </InputContainer>
                 <SubmitButton type="submit">Submit</SubmitButton>
               </FormContainer>
-              <PasswordRequirements password={values.password} />
+              <FormAndRequirements>
+              {values.password && <PasswordRequirements password={values.password} />}
+              </FormAndRequirements>
             </Form>
           )}
         </Formik>
-      </FormAndRequirements>
     </Container>
   );
 };

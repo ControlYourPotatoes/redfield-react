@@ -191,12 +191,22 @@ const ForgotPasswordFormContainer = styled.div`
 
 const signInSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Required'),
-  password: Yup.string().min(6, 'Password is too short').required('Required'),
+  password: Yup.string()
+    .min(6, 'Password is too short')
+    .matches(/[A-Z]/, 'Password must contain at least one uppercase letter')
+    .matches(/[\W_]+/, 'Password must contain at least one special character')
+    .matches(/[0-9]/, 'Password must contain at least one number')
+    .required('Required'),
 });
 
 const signUpSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Email is required'),
-  password: Yup.string().min(6, 'Password is too short').required('Password is required'),
+  password: Yup.string()
+    .min(8, 'Password is too short')
+    .matches(/[A-Z]/, 'Password must contain at least one uppercase letter')
+    .matches(/[\W_]+/, 'Password must contain at least one special character')
+    .matches(/[0-9]/, 'Password must contain at least one number')
+    .required('Password is required'),
   confirmPassword: Yup.string()
     .oneOf([Yup.ref('password'), undefined], "Passwords don't match")
     .required('Confirming password is required'),
