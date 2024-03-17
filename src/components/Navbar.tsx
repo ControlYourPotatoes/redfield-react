@@ -11,7 +11,7 @@ const CloseIcon = "./assets/icon/closed-icon.png"; // Path to your custom close 
 // Define styles using the `styled` utility
 const StyledToolbar = styled(Toolbar)(() => ({
   justifyContent: 'space-between',
-  backgroundColor: '#7dbbc5#7fbbf4',
+  backgroundColor: '#fff',
   maxHeight: '2rem',
 }));
 

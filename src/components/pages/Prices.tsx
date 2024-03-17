@@ -7,7 +7,7 @@ import PricingCards from './PricingCards';
 const Prices: React.FC = () => {
     return (
         
-        <div style={{margin: '10em'}}>
+        <div style={{paddingTop: '20em'}}>
             
             <h1 style={{ marginTop: '16px', textAlign: 'center'}}>Prices</h1>
             <p style={{ textAlign: 'center'}}>Choose the plan that best fits your needs</p>
