@@ -13,15 +13,8 @@ import ContactUs from './components/pages/ContactUs';
 import ThemeProvider from "@mui/material/styles/ThemeProvider";
 import theme from './theme';
 import { AuthProvider } from './components/pages/AuthContext';
+import MainPage from './MainPage';
 
-// MainPage component that includes Home, Prices, and About
-const MainPage = () => (
-  <div>
-    <Home />
-    <Prices />
-    <About />
-  </div>
-);
 
 
 function App() {

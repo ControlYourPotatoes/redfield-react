@@ -30,8 +30,14 @@ export const PolicyProvider: React.FC<PolicyProviderProps> = ({ children, policy
     const fetchPolicyData = async () => {
       try {
         // Using the policyId prop in the request URL
-        const response = await axios.get(`http://localhost:3000/api/policy/${policyId}`);
+        const baseUrl = process.env.REACT_APP_API_BASE_URL || ''; // Fallback to empty string if not defined
+        console.log(`Initiating fetch for policy data with ID: ${policyId} at URL: ${baseUrl}/api/policy/${policyId}`);
+        
+        const startTime = Date.now(); // Start time for performance measurement
+        const response = await axios.get(`${baseUrl}/api/policy/${policyId}`);
+        
         setPolicyData(response.data);
+        console.log(`Fetch completed in ${Date.now() - startTime}ms`);
       } catch (error) {
         console.error('Error fetching policy data:', error);
       }

@@ -307,21 +307,23 @@ const SignInSignUpPage = () => {
 
   //submit login 
   const handleLoginSubmit = async (values: LoginFormValues, { setSubmitting }: FormikHelpers<LoginFormValues>) => {
-  
     try {
-      const response = await axios.post('http://localhost:3000/api/login', values);
-      const authToken = response.data.token; // Assuming the token is returned in the response
+      const baseUrl = process.env.REACT_APP_API_BASE_URL || '';
+      console.log(`Attempting login with base URL: ${baseUrl}`); // Debugging log
   
-      login(authToken); // Use the login function from your context to update the global state
+      const response = await axios.post(`${baseUrl}/api/login`, values);
+      console.log('Login successful, token received:', !!response.data.token); // Confirm token received but don't log it
   
-      localStorage.setItem('authToken', authToken); // Optional: Save the token to localStorage for persistence
-  
-      navigate('/dashboard'); // Navigate to dashboard upon successful login
+      const authToken = response.data.token; 
+      login(authToken);
+      localStorage.setItem('authToken', authToken);
+      navigate('/dashboard');
     } catch (error: any) {
-      console.error('Login Error', error?.response?.data || 'An error occurred');
+      console.error('Login Error:', error?.response?.status, error?.response?.data || 'An error occurred');
       setLoginError(error?.response?.data?.message || 'Failed to log in. Please try again.');
     } finally {
       setSubmitting(false);
+      console.log('Login process completed.'); // Confirm the process has completed
     }
   };
 
