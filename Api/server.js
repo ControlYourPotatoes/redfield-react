@@ -2,17 +2,23 @@ require('dotenv').config(); // Load environment variables from .env file
 
 const express = require('express');
 const cors = require('cors');
-const nodemailer = require('nodemailer'); // for mailing
+const nodemailer = require('nodemailer'); // testing for mailing 
 const app = express();
-const port = 8080; // Ensure this port is free or change it as needed
+const PORT = process.env.PORT || 8080; // Ensure this port is free or change it as needed
+
+//login/signup
+const bodyParser = require('body-parser');
+const jwt = require('jsonwebtoken');
+
 
 app.use(cors()); // This enables CORS for all routes
 app.use(express.json()); // To parse JSON bodies
+app.use(bodyParser.json());
 
-// Mock data
+// Mock data 
 const hurricaneData = {
   id: "hurricane-2023",
-  name: "Maria Path",
+  name: "maria path",
   path: [
     { lat: 15.300950405816799, lon: -61.14722058940372 },
     { lat: 15.496900874274315, lon: -61.42172327156733 },
@@ -38,29 +44,20 @@ let transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
     user: process.env.GMAIL_USER, // Your Gmail address
-    pass: process.env.GMAIL_APP_PASSWORD, // Your Gmail app password
+    pass: process.env.GMAIL_APP_PASSWORD, // Your Gmail password or App Password
   },
 });
 
-// Function to send an email with HTML content and embedded Redfield logo
+// send an email
 function sendNotificationEmail(message) {
-  const emailSignature = `<div style="margin-top: 20px;"><img src="cid:redfieldLogo" alt="Redfield Logo" style="width: 100px; height: auto;"></div>`;
-  
   let mailOptions = {
-    from: process.env.GMAIL_USER,
-    to: 'recipient@example.com', // Replace with the actual recipient email address
+    from: process.env.GMAIL_USER, // place your email
+    to: 'carl-frank7@hotmail.com', // Set the recipient email address
     subject: 'Hurricane Alert',
-    html: message + emailSignature,
-    attachments: [
-      {
-        filename: 'RedfieldLogo.png',
-        path: './public/assets/icon/RedfieldLogo.png', // Adjusted path
-        cid: 'redfieldLogo' // Content-ID reference for embedding the image
-      }
-    ]
+    text: message,
   };
-
-  transporter.sendMail(mailOptions, function(error, info) {
+  
+  transporter.sendMail(mailOptions,function(error, info) {
     if (error) {
       console.log(error);
     } else {
@@ -74,33 +71,54 @@ app.get('/api/hurricane', (req, res) => {
   res.json(hurricaneData);
 });
 
-// Endpoint to handle sending notifications
+// Adjust the endpoint to extract the message from the request body
 app.post('/api/send-notification', (req, res) => {
-  const { message } = req.body;
-  sendNotificationEmail(message);
+  const { message } = req.body; // Extract message from the request body
+  sendNotificationEmail(message); // Pass the message to the email function
   res.json({ message: 'Email sent successfully' });
 });
 
-// Root route serving a simple HTML page
-app.get('/', (req, res) => {
-  res.send(`
-    <!doctype html>
-    <html lang="en">
-      <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>H-Redfield</title>
-        <link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
-      </head>
-      <body>
-        <div id="root"></div>
-        <script type="module" src="/src/main.tsx"></script>
-      </body>
-    </html>
-  `);
+
+  //login/signup
+  // Database setup
+// Assume a mock database or use an actual DB like MongoDB, PostgreSQL, etc.
+const users = []; // This should be replaced with actual database logic
+
+app.post('/api/signup', async (req, res) => {
+  const { email, password, firstName, lastName, phoneNumber } = req.body;
+  
+  // Check if the user already exists (this is simplified for demonstration)
+  const userExists = users.some(user => user.email === email);
+  if (userExists) {
+      return res.status(400).send('User already exists');
+  }
+  
+  // Hash the password
+  const hashedPassword = await bcrypt.hash(password, 10);
+  // Save the user to your database
+  users.push({ email, password: hashedPassword, firstName, lastName, phoneNumber }); // Simplified for demonstration
+  // Return response
+  res.status(201).send('User created');
+});
+
+app.post('/api/login', async (req, res) => {
+  const { email, password } = req.body;
+  // Find the user by email
+  const user = users.find(user => user.email === email);
+  if (!user) {
+    return res.status(400).send('User not found');
+  }
+  // Check password
+  const isMatch = await bcrypt.compare(password, user.password);
+  if (!isMatch) {
+    return res.status(400).send('Invalid credentials');
+  }
+  // Generate JWT token
+  const token = jwt.sign({ email: user.email }, 'secret', { expiresIn: '1h' });
+  res.status(200).json({ token });
 });
 
 // Start the server
-app.listen(port, () => {
-  console.log(`Hurricane API running at http://localhost:${port}`);
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
