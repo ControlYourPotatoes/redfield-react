@@ -46,7 +46,7 @@ const HurricaneMap: React.FC = () => {
         setHurricanePosition(currentPosition);
 
         if (currentPosition[0] === hurricanePath[1][0] && currentPosition[1] === hurricanePath[1][1]) {
-          const emailMessageFirstMark = `Dear insured,      
+          const emailMessageFirstMark = `Dear insured,     
     We hope this message finds you well amidst these challenging times. As a committed partner in your safety and well-being, Redfield Insurance is closely monitoring the progression of the hurricane, which has now reached a significant milestone in its approach towards our area.
 Hurricane Update:
     The hurricane has reached the first critical point, signaling that it is advancing as anticipated and now presents a tangible risk to our community. This development necessitates our collective immediate action to prepare and mitigate its potential impacts.
