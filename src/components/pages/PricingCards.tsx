@@ -24,9 +24,11 @@ const PricingCards = () => {
                     }}>
                         <CardContent sx={{ p: 0 }}>
                             <div style={{display: '',justifyContent: 'center', marginBottom: 2,flexDirection: 'column'}}>
-
-                            <Typography sx={{fontSize: '3rem',lineHeight: '2rem',fontWeight: 700,color: '#fff',}}>$50</Typography>
-                            <Typography sx={{ color: '#fff', paddingTop: '10px', ml:'10px', fontSize: '1.3rem',}}>Standard</Typography>
+                            <Typography sx={{display: 'flex',justifyContent: 'center',mb: 2,flexDirection: 'column',textAlign: 'center'}}>
+                                <Typography sx={{fontSize: '3rem',lineHeight: '2rem',fontWeight: 700,color: '#fff'}}>$50</Typography>
+                                <Typography sx={{ color: '#fff', paddingTop: '10px', ml:'10px', fontSize: '1.3rem'}}>Standard</Typography>
+                            </Typography>
+                            
                             </div>
 
                             <Divider variant="middle" color='lightblue' />
@@ -61,7 +63,7 @@ const PricingCards = () => {
                         p: '1.5rem',
                     }}>
                     <CardContent sx={{ p: 0 }}>
-                        <Typography sx={{display: 'flex',justifyContent: 'center',mb: 2,flexDirection: 'column'}}>
+                        <Typography sx={{display: 'flex',justifyContent: 'center',mb: 2,flexDirection: 'column',textAlign: 'center'}}>
                             <Typography sx={{ fontSize: '3rem', lineHeight: '2rem', fontWeight: 700, color: '#fff', }}>$100</Typography>
                             <Typography sx={{ color: '#fff', paddingTop: '10px', ml: '10px', fontSize: '1.3rem' }}>Premium</Typography>
                         </Typography>
