@@ -8,6 +8,8 @@ import Dashboard from './components/Dashboard/Dashboard';
 import SignInSignUpPage from './components/pages/SignUpform';
 import ResetPassword from './components/pages/resetPassword';
 import AccountMenu from './components/pages/AccountMenu';
+import InvestorDashboard from './components/Dashboard/InvestorDashboard';
+
 
 // MainPage component that includes Home, Prices, and About
 const MainPage = () => (
@@ -29,6 +31,7 @@ function App() {
         <Route path='/Dashboard' element={<Dashboard />} />
         <Route path='/SignInUpForm' element={<SignInSignUpPage/>} />
         <Route path="/reset-password/:token" element={<ResetPassword />} />
+        <Route path='/InvestorDashboard' element={<InvestorDashboard />} />
       </Routes>
     </div>
   );
