@@ -157,7 +157,7 @@ const ForgotPasswordWrapper = styled.div`
   display: flex;
   justify-content: flex-end; /* Aligns the child to the right */
   width: 100%; /* Ensures it spans the full width of its parent container */
-  margin: 10px 0;
+  margin: -20px 01;
 `;
 
 const ForgotPasswordLink = styled.a`
@@ -209,6 +209,10 @@ const signUpSchema = Yup.object().shape({
     .required('Phone number is required'),
 });
 
+const LinkContainer = styled.div`
+
+margin-top: 40px; // Adjust as needed for your design
+`;
 
 
 // Yup validation schema for the forgot password email
@@ -224,8 +228,8 @@ const SignInSignUpPage = () => {
     const [loginError, setLoginError] = useState<string>('');
     const { login } = useAuth();
 
-    const toggleForm = (event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => {
-      setIsSignUp(checked);
+    const toggleForm = () => {
+      setIsSignUp(!isSignUp);
       setShowForgotPassword(false);
     };
 
@@ -329,11 +333,6 @@ const SignInSignUpPage = () => {
 
   return (
     <Container>
-      <FormControlLabel
-        control={<Switch checked={isSignUp} onChange={toggleForm} color="primary" />}
-        label={isSignUp ? 'Switch to Sign In' : 'Switch to Sign Up'}
-      />
-
       {/* Log-In Form */}
       <FormContainer $show={!isSignUp}>
         <Formik
@@ -369,6 +368,11 @@ const SignInSignUpPage = () => {
              {isSignUp ? 'Sign Up' : 'Sign In'}
              </SubmitButton>
              {loginError && <div style={{ color: 'red' }}> {loginError}</div>}
+             <LinkContainer>
+             <div>
+                    Don't have an account? <a href="#!" onClick={toggleForm}>Sign up</a>
+             </div>
+             </LinkContainer>
              <ForgotPasswordWrapper>
           <ForgotPasswordLink onClick={handleForgotPassword}>
             Forgot Password?
@@ -445,6 +449,11 @@ const SignInSignUpPage = () => {
                 {isSignUp ? 'Sign Up' : 'Sign In'}
               </SubmitButton>
               {signUpError && <div style={{ color: 'red' }}>{signUpError}</div>}
+              <LinkContainer>
+              <div>
+                    Already have an account? <a href="#!" onClick={toggleForm}>Log in</a>
+              </div>
+              </LinkContainer>
             </Form>
           )}
         </Formik>
