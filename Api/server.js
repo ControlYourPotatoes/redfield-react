@@ -4,12 +4,13 @@ const express = require('express');
 const cors = require('cors');
 const nodemailer = require('nodemailer'); // for mailing
 const app = express();
-const PORT = process.env.PORT || 8080; // Ensure this port is free or change it as needed
+const PORT =  8081; // Ensure this port is free or change it as needed
 
 //login/signup
 const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const path = require('path');
 
 
 app.use(cors()); // This enables CORS for all routes
@@ -49,23 +50,50 @@ let transporter = nodemailer.createTransport({
   },
 });
 
+// Define your signature HTML
+// const emailSignature = `
+// <div style="margin-top: 20px;">
+//   <p>Best regards,</p>
+//   <p>H-Redfield</p>
+//   <img src="cid:signatureImage" alt="Signature" style="width: 100px; height: auto;">
+// </div>
+// `;
+
 // Function to send an email with HTML content and embedded Redfield logo
-function sendNotificationEmail(message) {
-  const emailSignature = `<div style="margin-top: 20px;"><img src="cid:redfieldLogo" alt="Redfield Logo" style="width: 100px; height: auto;"></div>`;
-  
+function sendNotificationEmail(message, subject, recipient) {
+ // const emailSignature = `<div style="margin-top: 20px;"><img src="cid:redfieldLogo" alt="Redfield Logo" style="width: 100px; height: auto;"></div>`;
+//  const emailContent = message + emailSignature;
+
+const emailContent = `
+<html>
+  <head>
+    <style>
+      body { font-family: Arial, sans-serif; }
+      h2 { color: #333; }
+    </style>
+  </head>
+  <body>
+    ${message}
+    <div style="margin-top: 20px;">
+      <img src="cid:signatureImage" alt="Signature" style="width: 100px; height: auto;">
+    </div>
+  </body>
+</html>`;
+
   let mailOptions = {
     from: process.env.GMAIL_USER, // place your email
-    to: 'mercedes.diaz@holbertonschool.com', // Set the recipient email address
-    subject: 'Hurricane Alert',
-    html: message + emailSignature,
+    to: recipient, // Set the recipient email address
+    subject: subject,
+    html: emailContent,
     attachments: [
       {
-        filename: 'RedfieldLogo.png',
-        path: './public/assets/icon/RedfieldLogo.png', // Adjusted path
-        cid: 'redfieldLogo' // Content-ID reference for embedding the image
+        filename: 'signatureImage.png',
+        path: path.join(__dirname, '../public/assets/icon/RedfieldLogo.png'), // Adjust the path as necessary
+        cid: 'signatureImage' // Use this cid to reference the image in the HTML body
       }
     ]
   };
+ 
 
   transporter.sendMail(mailOptions, function(error, info) {
     if (error) {
@@ -83,8 +111,8 @@ app.get('/api/hurricane', (req, res) => {
 
 // Endpoint to handle sending notifications
 app.post('/api/send-notification', (req, res) => {
-  const { message } = req.body;
-  sendNotificationEmail(message);
+  const { message, subject, recipient } = req.body;
+  sendNotificationEmail(message, subject, recipient);
   res.json({ message: 'Email sent successfully' });
 });
 https://www.nhc.noaa.gov/data/tcr/AL152017_Maria.pdf
