@@ -167,7 +167,9 @@ const Navbar: React.FC = () => {
           // Web view - Full navbar links
           <>
             {navigationList()}
+           
             <AccountMenu />
+            
           </>
         )}
       </StyledToolbar>

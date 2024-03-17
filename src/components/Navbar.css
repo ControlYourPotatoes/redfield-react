@@ -7,3 +7,27 @@
     z-index: 1000; /* Ensures navbar stays on top */
     /* Add any other styles you need */
   }
+  // Define styles using the `styled` utility
+.StyledToolbar = styled(Toolbar)(() => ({
+  justifyContent: 'space-between',
+  backgroundColor: '#2E3B55',
+  maxHeight: '3rem',
+}));
+
+.LogoButton = styled(Button)(({ theme }) => ({
+  marginRight: theme.spacing(2),
+  '& img': {
+    height: '50px',
+  },
+}));
+
+.Hurricane = styled('img')(({ }) => ({
+  //  marginRight: '16px', // Adjust the spacing as needed
+  height: '100px', // Adjust the size as needed
+  // Add more styles as needed
+}));
+
+.IconContainer = styled('div')({
+  display: 'flex',
+  alignItems: 'center',
+});
