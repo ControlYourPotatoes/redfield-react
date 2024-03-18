@@ -1,21 +1,18 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { AppStore } from '../../store/store';
-import { celciusToFahrenheit, TempUnit } from './utils/unitConversion';
+import { useWeather } from './WeatherContext'; // Adjust the import path as necessary
+import { celciusToFahrenheit, TempUnit } from './utils/unitConversion'; // Ensure this is correctly imported
 
 interface ITemperatureProps {
   value: number;
 }
 
-const Temperature: React.FC<ITemperatureProps> = (props) => {
-  const { degreeType } = useSelector((state: AppStore) => ({
-    degreeType: state.app.tempUnit,
-  }));
+const Temperature: React.FC<ITemperatureProps> = ({ value }) => {
+  const { degreeType } = useWeather(); // Use context to get degreeType
 
-  if (degreeType === TempUnit.FAHRENHEIT) {
-    return <>{celciusToFahrenheit(props.value)}</>;
-  }
-  return <>{props.value}</>;
+  // Convert value to Fahrenheit if degreeType is FAHRENHEIT, otherwise display as Celsius
+  const displayValue = degreeType === TempUnit.FAHRENHEIT ? celciusToFahrenheit(value) : value;
+
+  return <>{displayValue}</>; // Render the temperature value
 };
 
 export default Temperature;
