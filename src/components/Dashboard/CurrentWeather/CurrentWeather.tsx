@@ -2,11 +2,13 @@ import React, { useEffect } from 'react';
 
 import { useWeather } from './WeatherContext';
 
-import { ReactComponent as HighIcon } from '../../assets/high-icon.svg';
-import { ReactComponent as HumidityIcon } from '../../assets/humidity-icon.svg';
-import { ReactComponent as LowIcon } from '../../assets/low-icon.svg';
-import { ReactComponent as PressureIcon } from '../../assets/pressure-icon.svg';
-import { ReactComponent as WindIcon } from '../../assets/wind-icon.svg';
+import HighIcon from '../../assets/icon/high-icon.svg?react';
+import HumidityIcon from '/assets/icon/humidity-icon.svg';
+import LowIcon from '/assets/icon/low-icon.svg';
+import PressureIcon from '/assets/icon/pressure-icon.svg';
+import WindIcon from '/assets/icon/wind-icon.svg';
+
+
 import { kmToMile, TempUnit } from './utils/unitConversion';
 import ToggleSwitch from './ToggleSwitch';
 import WeatherIcon from './WeatherIcon';

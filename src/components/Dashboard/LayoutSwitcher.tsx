@@ -5,6 +5,8 @@ import PolicyStatus from './PolicyStatus';
 import HurricaneMap from './HurricaneMap';
 import WeatherWidget from './WeatherWidget';
 import { PolicyProvider } from './PolicyContext';
+import { WeatherProvider } from './CurrentWeather/WeatherContext'; 
+import CurrentWeather from './CurrentWeather/CurrentWeather';
 interface LayoutSwitcherProps {
   isLiveWeatherEvent: boolean;
 }
@@ -24,6 +26,10 @@ const LayoutSwitcher: React.FC<LayoutSwitcherProps> = ({ isLiveWeatherEvent }) =
         <PolicyProvider policyId="b8869331-d076-4d26-a13d-f808d2a2e966">
             <PolicyStatus />
         </PolicyProvider>
+          
+        <WeatherProvider >
+          <CurrentWeather/>
+        </WeatherProvider>
         
       {isLiveWeatherEvent ? (
         <>
