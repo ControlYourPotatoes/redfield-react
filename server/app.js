@@ -9,7 +9,7 @@ const app = express();
 
 
 const corsOption = {
-    origin: ['http://localhost:3000'],
+    origin: '*', //Switched for local, test in production needed here
     methods: ["GET", "POST", "PUT", "DELETE"],
 }
 app.use(cors(corsOption));

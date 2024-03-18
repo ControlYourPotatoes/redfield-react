@@ -1,6 +1,7 @@
 import React, { createContext, useState, useEffect, ReactNode } from 'react';
 import axios from 'axios';
 
+
 interface Coordinates {
   latitude: number;
   longitude: number;
@@ -20,9 +21,9 @@ interface PolicyProviderProps {
   children: ReactNode;
   policyId: string; // Adding policyId as a prop to the Provider
 }
+const baseUrl = import.meta.env.VITE_API_BASE_URL || ''; // Fallback to empty string if not defined
 
 const PolicyContext = createContext<PolicyData | undefined>(undefined);
-const baseUrl = import.meta.env.VITE_API_BASE_URL || '';
 
 export const PolicyProvider: React.FC<PolicyProviderProps> = ({ children, policyId }) => {
   const [policyData, setPolicyData] = useState<PolicyData | undefined>(undefined);
@@ -31,7 +32,6 @@ export const PolicyProvider: React.FC<PolicyProviderProps> = ({ children, policy
     const fetchPolicyData = async () => {
       try {
         // Using the policyId prop in the request URL
-        const baseUrl = baseUrl || ''; // Fallback to empty string if not defined
         console.log(`Initiating fetch for policy data with ID: ${policyId} at URL: ${baseUrl}/api/policy/${policyId}`);
         
         const startTime = Date.now(); // Start time for performance measurement
