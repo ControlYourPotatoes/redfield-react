@@ -1,5 +1,4 @@
 // In your types.ts file
-import '@mui/material/styles';
 
 export interface PolicyInfo {
     id: string;
@@ -25,35 +24,49 @@ export interface PolicyInfo {
     personalInfo: PersonalInfo;
     payment: PaymentInfo;
   }
-  
-
-import '@mui/material/styles';
-
-declare module '@mui/material/styles' {
-  interface TypographyVariants {
-    cardlabel: React.CSSProperties;
-    cardvalue: React.CSSProperties;
-  }
-
-  // Allow configuration using `createTheme`
-  interface TypographyVariantsOptions {
-    cardlabel?: React.CSSProperties;
-    cardvalue?: React.CSSProperties;
-  }
-}
-
-// Update the Typography component's variant prop to accept the new custom variants
-declare module '@mui/material/Typography' {
-  interface TypographyPropsVariantOverrides {
-    cardlabel: true;
-    cardvalue: true;
-    // Optionally, disable some existing variants by setting them to false, if necessary
-  }
-}
 
 export interface AuthContextType {
   currentUser: any; // You can replace 'any' with a more specific type for your user
   authToken: string;
   login: (token: string) => void;
   logout: () => void;
+}
+
+export type WeatherData = {
+  weather: {
+    id: number;
+    main: string;
+    description: string;
+    icon: string;
+  };
+  main: {
+    temp: number;
+    feels_like: number;
+    temp_min: number;
+    temp_max: number;
+    pressure: number;
+    humidity: number;
+  };
+  wind: {
+    speed: number;
+    deg: number;
+  };
+  sys: {
+    country: string;
+    sunrise: number;
+    sunset: number;
+  };
+  name: string;
+}
+
+export type ExtendedForecastData = {
+  day: string;
+  temp: {
+    temp_min: number;
+    temp_max: number;
+  };
+  weather: {
+    id: number;
+    main: string;
+  };
 }

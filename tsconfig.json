@@ -15,7 +15,12 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "types": ["vite-plugin-svgr/client"],
-    "typeRoots": ["node_modules/@types", "src/@types"],
+    "typeRoots": ["node_modules/@types", "src/@types"]
   },
-  "include": ["src", "BackEndSQL/server.ts"]
+  "include": [
+    "src/**/*",
+    "./custom.d.ts", // Include your custom type declaration file
+    "./src/vite-env.d.ts" // Include vite-env.d.ts if it provides additional global declarations
+  ],
+  
 }
