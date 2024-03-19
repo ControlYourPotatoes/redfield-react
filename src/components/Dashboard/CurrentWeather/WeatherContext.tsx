@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useCallback, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useCallback, ReactNode, useEffect } from 'react';
 import {fetchWeather} from './fetchWeather';
 import {WeatherData, ExtendedForecastData} from '../../../types';
 import { TempUnit } from './utils/unitConversion';
@@ -42,7 +42,7 @@ export const WeatherProvider: React.FC<WeatherProviderProps> = ({ children }) =>
   const [error, setError] = useState<Error | null>(null);
   const [darkMode, setDarkMode] = useState(WeatherContextDefaultValues.darkMode);
 
-  const 
+  const testLocation = { lat: 40.7128, lng: -74.0060 };
 
   const fetchWeatherContext = async (city: string | { lat: number; lng: number }) => {
     setLoading(true);
@@ -56,6 +56,11 @@ export const WeatherProvider: React.FC<WeatherProviderProps> = ({ children }) =>
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    // Fetch weather data for the hardcoded location when the component mounts
+    fetchWeatherContext(testLocation);
+  }, []); 
 
   const setDegreeType = () => {
     setDegreeTypeInternal(prevDegreeType => 

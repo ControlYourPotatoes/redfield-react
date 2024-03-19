@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Theme from './theme';
 
 const Switch = styled.label`
   position: relative;
@@ -13,10 +14,10 @@ const Switch = styled.label`
   bottom: 0;
   transition: 0.4s;
   border-radius: 55px;
-  background-color: ${({ theme }) => theme.temperatureSwitch.backgroundColor};
+  background-color: #77b1c7;
   .on,
   .off {
-    color: ${({ theme }) => theme.temperatureSwitch.textColor};
+    color: #fff;
     position: absolute;
     transform: translate(-50%, -50%);
     top: 50%;
@@ -42,7 +43,7 @@ const Slider = styled.div`
   width: 18px;
   left: 2px;
   top: 2px;
-  background-color: ${({ theme }) => theme.temperatureSwitch.sliderColor};
+  background-color: #fff;
   -webkit-transition: 0.4s;
   transition: 0.4s;
   border-radius: 44px;

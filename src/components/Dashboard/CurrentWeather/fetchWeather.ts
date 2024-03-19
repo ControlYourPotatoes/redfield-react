@@ -4,23 +4,29 @@ import { getNextSevenDays } from './utils/dateUtils';
 import { kelvinToCelcius } from './utils/unitConversion';
 
 export async function fetchWeather(city: string | { lat: number; lng: number }): Promise<{ weather: WeatherData, forecast: ExtendedForecastData[] }> {
+  console.log('Fetching weather for:', city); // Log 1: Input check
+
   try {
     const [weatherResponse, forecastResponse] = await Promise.all([
       fetchWeatherData(city),
       fetchExtendedForecastData(city)
     ]);
 
+    console.log('Raw weather response:', weatherResponse); // Log 2: Raw weather data
+    console.log('Raw forecast response:', forecastResponse); // Log 2: Raw forecast data
+
     if (weatherResponse.cod === 200) {
-      // Directly return the transformed data
-      return transformWeatherData([weatherResponse, forecastResponse]);
+      const transformedData = transformWeatherData([weatherResponse, forecastResponse]);
+      console.log('Transformed data:', transformedData); // Log 3: Transformed data
+      return transformedData;
     } else {
       throw new Error(weatherResponse.message || "Failed to fetch weather data");
     }
   } catch (error) {
-    throw new Error('Error fetching weather data');
+    console.error('Error fetching weather data', error);
+    throw error;
   }
 }
-
 
 export const transformWeatherData = (
   res: any
@@ -44,11 +50,12 @@ export const transformWeatherData = (
   const next7Days = getNextSevenDays();
 
   res[1].list.forEach((i: any, index: number) => {
+    console.log(i)
     forecast.push({
       day: next7Days[index],
       temp: {
-        temp_max: kelvinToCelcius(i.temp.max),
-        temp_min: kelvinToCelcius(i.temp.min),
+        temp_max: kelvinToCelcius(i.temp?.max),
+        temp_min: kelvinToCelcius(i.temp?.min),
       },
       weather: {
         id: i.weather[0].id,

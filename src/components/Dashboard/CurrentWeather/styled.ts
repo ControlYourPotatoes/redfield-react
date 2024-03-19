@@ -1,29 +1,30 @@
 import styled from 'styled-components';
 
 export const WeatherContainer = styled.div`
-  background-color: ${({ theme }) => theme.panelBgColor};
+  background-color: #FFFFFF;
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
   border-radius: 15px;
-  padding: 1.5rem 2rem;
+  padding: 1.6rem;
   display: flex;
   flex-direction: column;
+  margin: 10px;
 `;
 export const SectionTitle = styled.h6`
   font-weight: 500;
   font-size: 1.125rem;
-  color: ${({ theme }) => theme.panelTitleColor};
+  color: #727E8E;
 `;
 export const CurrentWeatherContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  @media (max-width: 800px) {
+  @media (max-width: 300px) {
     justify-content: flex-start;
   }
 `;
 export const CurrentWeatherStatus = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 2rem 1.5rem;
+  margin: 0rem 1.5rem;
   width: 25rem;
 
   @media (max-width: 800px) {
@@ -31,16 +32,17 @@ export const CurrentWeatherStatus = styled.div`
   }
 
   h4 {
-    font-weight: 600;
-    font-size: 1.25rem;
+    font-weight: 500;
+    font-size: 3.25rem;
     color: #396bae;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
   }
   span {
-    font-weight: 200;
+    font-weight: 500;
     font-size: 7rem;
     color: #4a6fa1;
-    margin-left: 1.5rem;
+    margin-left: 1rem;
     line-height: 1;
     sup {
       line-height: 0;
@@ -50,13 +52,14 @@ export const CurrentWeatherStatus = styled.div`
     font-size: 1.375rem;
     text-align: left;
     color: #7b98b2;
+    margin-bottom: 1rem;
   }
 `;
 export const CurrentWeatherInfo = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 2rem 1rem;
-  margin-left: 2rem;
+  margin: 1rem 1rem;
+  margin-left: 1rem;
 `;
 export const FeelsLike = styled.p`
   font-size: 1.25rem;

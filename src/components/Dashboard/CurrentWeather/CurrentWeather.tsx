@@ -29,19 +29,13 @@ import Temperature from './Temperature';
 const CurrentWeather: React.FC = () => {
   const { weather, setDegreeType, degreeType, toggleDarkMode, error } = useWeather();
 
-  
 
-  useEffect(() => {
-    if (error) {
-      console.log('Cannot load weather for this place');
-    }
-  }, [error]);
 
   if (!weather) return <> Fetching Weather Data</>;
 
   return (
     <WeatherContainer>
-      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', border:'', margin:'' }}>
         <SectionTitle>Current Weather</SectionTitle>
         <div>
         <ToggleSwitch onClick={setDegreeType} />
