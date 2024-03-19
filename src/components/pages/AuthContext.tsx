@@ -22,6 +22,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const login = (token: string) => {
     setAuthToken(token);
     // Optionally decode token to set currentUser
+    const decodedToken = decodeToken(token);
+    if (decodedToken) {
+      const { id, email } = decodedToken;
+      setCurrentUser({ id, email });
+    }
   };
 
   const logout = () => {

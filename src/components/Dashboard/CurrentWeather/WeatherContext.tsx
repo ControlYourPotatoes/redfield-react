@@ -42,6 +42,8 @@ export const WeatherProvider: React.FC<WeatherProviderProps> = ({ children }) =>
   const [error, setError] = useState<Error | null>(null);
   const [darkMode, setDarkMode] = useState(WeatherContextDefaultValues.darkMode);
 
+  const 
+
   const fetchWeatherContext = async (city: string | { lat: number; lng: number }) => {
     setLoading(true);
     try {

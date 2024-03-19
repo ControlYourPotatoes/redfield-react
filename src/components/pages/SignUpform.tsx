@@ -308,7 +308,8 @@ const SignInSignUpPage = () => {
   //submit login 
   const handleLoginSubmit = async (values: LoginFormValues, { setSubmitting }: FormikHelpers<LoginFormValues>) => {
     try {
-      const baseUrl = process.env.REACT_APP_API_BASE_URL || '';
+      const baseUrl = import.meta.env.VITE_API_BASE_URL || ''; // Fallback to empty string if not defined
+
       console.log(`Attempting login with base URL: ${baseUrl}`); // Debugging log
   
       const response = await axios.post(`${baseUrl}/api/login`, values);

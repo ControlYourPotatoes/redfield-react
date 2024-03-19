@@ -2,11 +2,12 @@ import React, { useEffect } from 'react';
 
 import { useWeather } from './WeatherContext';
 
-import HighIcon from '../../assets/icon/high-icon.svg?react';
-import HumidityIcon from '/assets/icon/humidity-icon.svg';
-import LowIcon from '/assets/icon/low-icon.svg';
-import PressureIcon from '/assets/icon/pressure-icon.svg';
-import WindIcon from '/assets/icon/wind-icon.svg';
+import HighIcon from '../../../Icons/HighIcon';
+import HumidityIcon from '../../../Icons/HumidityIcon';
+import LowIcon from '../../../Icons/LowIcon';
+import PressureIcon from '../../../Icons/PressureIcon';
+import WindIcon from '../../../Icons/WindIcon';
+
 
 
 import { kmToMile, TempUnit } from './utils/unitConversion';
@@ -36,7 +37,7 @@ const CurrentWeather: React.FC = () => {
     }
   }, [error]);
 
-  if (!weather) return <></>;
+  if (!weather) return <> Fetching Weather Data</>;
 
   return (
     <WeatherContainer>

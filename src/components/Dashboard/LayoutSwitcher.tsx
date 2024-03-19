@@ -7,6 +7,7 @@ import WeatherWidget from './WeatherWidget';
 import { PolicyProvider } from './PolicyContext';
 import { WeatherProvider } from './CurrentWeather/WeatherContext'; 
 import CurrentWeather from './CurrentWeather/CurrentWeather';
+import { Box } from '@mui/material';
 interface LayoutSwitcherProps {
   isLiveWeatherEvent: boolean;
 }
@@ -27,9 +28,7 @@ const LayoutSwitcher: React.FC<LayoutSwitcherProps> = ({ isLiveWeatherEvent }) =
             <PolicyStatus />
         </PolicyProvider>
           
-        <WeatherProvider >
-          <CurrentWeather/>
-        </WeatherProvider>
+        
         
       {isLiveWeatherEvent ? (
         <>
