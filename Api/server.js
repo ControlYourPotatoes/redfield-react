@@ -67,7 +67,6 @@ function sendNotificationEmail(message) {
   });
 }
 
-// API endpoint for hurricane data
 app.get('/api/hurricane', (req, res) => {
   res.json(hurricaneData);
 });

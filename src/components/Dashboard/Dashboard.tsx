@@ -11,6 +11,7 @@ import {WeatherProvider} from './CurrentWeather/WeatherContext';
 import CurrentWeather from './CurrentWeather/CurrentWeather';
 import { flexbox } from '@mui/system';
 import { PolicyProvider } from './PolicyContext';
+import { Cloudy } from '../../Icons';
 
 const Dashboard = () => {
   //States
@@ -48,7 +49,7 @@ const Dashboard = () => {
           <CurrentWeather/>
         </WeatherProvider>
 
-        
+        <Cloudy style={{innerWidth:''}} />
       </Box>
       
       

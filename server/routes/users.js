@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const usersController = require('../controllers/usersController');
-
+const hurricaneData = require('../models/hurricane');
 
 router.post('/login', usersController.login);
 router.post('/signup', usersController.createUser);
@@ -21,6 +21,8 @@ router.get('/payment', usersController.getAllPayments);
 router.post('/:userId/payment', usersController.createPayment);
 router.get('/payment/:id', usersController.getPaymentById);
 
-
+router.get('/api/hurricane', (req, res) => {
+    res.json(hurricaneData);
+  });
 
 module.exports = router;

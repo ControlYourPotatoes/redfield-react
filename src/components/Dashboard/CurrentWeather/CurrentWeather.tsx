@@ -25,6 +25,8 @@ import {
   WeatherDegree,
 } from './styled';
 import Temperature from './Temperature';
+import SvgCloudy from '../../../Icons/Cloudy';
+import { Cloudy } from '../../../Icons';
 
 const CurrentWeather: React.FC = () => {
   const { weather, setDegreeType, degreeType, toggleDarkMode, error } = useWeather();
@@ -96,6 +98,7 @@ const CurrentWeather: React.FC = () => {
         </CurrentWeatherInfo>
       </CurrentWeatherContainer>
     </WeatherContainer>
+    
   );
 };
 

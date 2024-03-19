@@ -1,6 +1,6 @@
 import * as React from "react";
 const SvgHeavyRain = (props) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width={48} height={48} {...props}>
+  <svg xmlns="http://www.w3.org/2000/svg" width={100} height={100} {...props}>
     <path fill="#BBDEFB" d="M29.5 5a8.5 8.5 0 1 0 0 17 8.5 8.5 0 1 0 0-17" />
     <path
       fill="#BBDEFB"
