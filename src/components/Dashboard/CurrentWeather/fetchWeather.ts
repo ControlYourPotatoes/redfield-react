@@ -50,7 +50,7 @@ export const transformWeatherData = (
   const next7Days = getNextSevenDays();
 
   res[1].list.forEach((i: any, index: number) => {
-    console.log(i)
+    // console.log(i)
     forecast.push({
       day: next7Days[index],
       temp: {

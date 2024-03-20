@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const usersController = require('../controllers/usersController');
-const hurricaneData = require('../models/hurricane');
+const hurricaneData = require('../HurricanePath/mariaPath.json');
 
 router.post('/login', usersController.login);
 router.post('/signup', usersController.createUser);
@@ -21,8 +21,19 @@ router.get('/payment', usersController.getAllPayments);
 router.post('/:userId/payment', usersController.createPayment);
 router.get('/payment/:id', usersController.getPaymentById);
 
-router.get('/api/hurricane', (req, res) => {
+
+
+
+// Add a new route to serve the hurricane data
+router.get('/hurricane', (req, res) => {
+  try {
+    if (!hurricaneData) throw new Error('Hurricane data not found');
     res.json(hurricaneData);
-  });
+  } catch (error) {
+    console.error("Error serving hurricane data:", error);
+    res.status(500).json({ message: error.message });
+  }
+});
 
 module.exports = router;
+

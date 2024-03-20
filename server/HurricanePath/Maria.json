@@ -1,0 +1,88 @@
+{
+    "HurricaneMaria": {
+      "id": "AL152017",
+      "name": "Maria",
+      "date_range": "16–30 September 2017",
+      "category": "Category 5",
+      "max_intensity": "150 kt",
+      "min_pressure": "908 mb",
+      "path": [
+        {
+          "date_time": "2017-09-16T12:00Z",
+          "latitude": "12.2N",
+          "longitude": "49.7W",
+          "wind_speed": "30 kt",
+          "pressure": "1006 mb",
+          "stage": "Tropical Depression"
+        },
+        {
+          "date_time": "2017-09-18T18:00Z",
+          "latitude": "14.9N",
+          "longitude": "60.4W",
+          "wind_speed": "110 kt",
+          "pressure": "956 mb",
+          "stage": "Hurricane"
+        },
+        {
+          "date_time": "2017-09-19T01:15Z",
+          "latitude": "15.4N",
+          "longitude": "61.3W",
+          "wind_speed": "145 kt",
+          "pressure": "922 mb",
+          "stage": "Landfall in Dominica"
+        },
+        {
+          "date_time": "2017-09-20T03:00Z",
+          "latitude": "17.3N",
+          "longitude": "64.7W",
+          "wind_speed": "150 kt",
+          "pressure": "908 mb",
+          "stage": "Maximum Wind and Minimum Pressure"
+        },
+        {
+          "date_time": "2017-09-20T10:15Z",
+          "latitude": "18.0N",
+          "longitude": "65.9W",
+          "wind_speed": "135 kt",
+          "pressure": "920 mb",
+          "stage": "Landfall near Yabucoa Puerto Rico"
+        },
+        {
+          "date_time": "2017-09-30T18:00Z",
+          "latitude": "41.2N",
+          "longitude": "45.6W",
+          "wind_speed": "45 kt",
+          "pressure": "991 mb",
+          "stage": "Extratropical"
+        }
+      ],
+      "landfall": [
+        {
+          "location": "Dominica",
+          "date_time": "2017-09-19T01:15Z",
+          "wind_speed": "145 kt",
+          "pressure": "922 mb"
+        },
+        {
+          "location": "Puerto Rico",
+          "date_time": "2017-09-20T10:15Z",
+          "wind_speed": "135 kt",
+          "pressure": "920 mb"
+        }
+      ],
+      "peak_intensity": {
+        "wind_speed": "150 kt",
+        "pressure": "908 mb",
+        "date_time": "2017-09-20T03:00Z"
+      },
+      "additional_info": {
+        "total_deaths": "2975 in Puerto Rico",
+        "damage_cost": "$90 billion in Puerto Rico and U.S. Virgin Islands",
+        "category_at_landfall": {
+          "Dominica": "Category 5",
+          "Puerto Rico": "High-end Category 4"
+        }
+      }
+    }
+  }
+  

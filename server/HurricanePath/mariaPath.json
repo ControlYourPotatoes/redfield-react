@@ -1,0 +1,1251 @@
+[{
+  "point": "POINT(-54.4 12.8)",
+  "name": "MARIA",
+  "iso_time": "2017-09-17 06:00:00.000000 UTC",
+  "dist2land": "736",
+  "usa_wind": "55",
+  "usa_pressure": "994",
+  "usa_sshs": "0",
+  "radius_34kt": null,
+  "radius_50kt": null
+}, {
+  "point": "POINT(-55.0499 13.0573)",
+  "name": "MARIA",
+  "iso_time": "2017-09-17 09:00:00.000000 UTC",
+  "dist2land": "706",
+  "usa_wind": "57",
+  "usa_pressure": "992",
+  "usa_sshs": "0",
+  "radius_34kt": null,
+  "radius_50kt": null
+}, {
+  "point": "POINT(-55.7 13.3)",
+  "name": "MARIA",
+  "iso_time": "2017-09-17 12:00:00.000000 UTC",
+  "dist2land": "646",
+  "usa_wind": "60",
+  "usa_pressure": "990",
+  "usa_sshs": "0",
+  "radius_34kt": "45.0",
+  "radius_50kt": null
+}, {
+  "point": "POINT(-56.3727 13.4575)",
+  "name": "MARIA",
+  "iso_time": "2017-09-17 15:00:00.000000 UTC",
+  "dist2land": "590",
+  "usa_wind": "62",
+  "usa_pressure": "988",
+  "usa_sshs": "0",
+  "radius_34kt": "51.25",
+  "radius_50kt": null
+}, {
+  "point": "POINT(-57 13.6)",
+  "name": "MARIA",
+  "iso_time": "2017-09-17 18:00:00.000000 UTC",
+  "dist2land": "542",
+  "usa_wind": "65",
+  "usa_pressure": "986",
+  "usa_sshs": "1",
+  "radius_34kt": "57.5",
+  "radius_50kt": null
+}, {
+  "point": "POINT(-57.5225 13.7997)",
+  "name": "MARIA",
+  "iso_time": "2017-09-17 21:00:00.000000 UTC",
+  "dist2land": "515",
+  "usa_wind": "70",
+  "usa_pressure": "982",
+  "usa_sshs": "1",
+  "radius_34kt": "61.25",
+  "radius_50kt": null
+}, {
+  "point": "POINT(-58 14)",
+  "name": "MARIA",
+  "iso_time": "2017-09-18 00:00:00.000000 UTC",
+  "dist2land": "492",
+  "usa_wind": "75",
+  "usa_pressure": "979",
+  "usa_sshs": "1",
+  "radius_34kt": "65.0",
+  "radius_50kt": "22.5"
+}, {
+  "point": "POINT(-58.5225 14.165)",
+  "name": "MARIA",
+  "iso_time": "2017-09-18 03:00:00.000000 UTC",
+  "dist2land": "476",
+  "usa_wind": "77",
+  "usa_pressure": "978",
+  "usa_sshs": "1",
+  "radius_34kt": "65.0",
+  "radius_50kt": "23.75"
+}, {
+  "point": "POINT(-59 14.3)",
+  "name": "MARIA",
+  "iso_time": "2017-09-18 06:00:00.000000 UTC",
+  "dist2land": "457",
+  "usa_wind": "80",
+  "usa_pressure": "977",
+  "usa_sshs": "1",
+  "radius_34kt": "65.0",
+  "radius_50kt": "25.0"
+}, {
+  "point": "POINT(-59.3727 14.3923)",
+  "name": "MARIA",
+  "iso_time": "2017-09-18 09:00:00.000000 UTC",
+  "dist2land": "449",
+  "usa_wind": "90",
+  "usa_pressure": "972",
+  "usa_sshs": "2",
+  "radius_34kt": "77.5",
+  "radius_50kt": "27.5"
+}, {
+  "point": "POINT(-59.7 14.5)",
+  "name": "MARIA",
+  "iso_time": "2017-09-18 12:00:00.000000 UTC",
+  "dist2land": "448",
+  "usa_wind": "100",
+  "usa_pressure": "967",
+  "usa_sshs": "3",
+  "radius_34kt": "90.0",
+  "radius_50kt": "30.0"
+}, {
+  "point": "POINT(-60.05 14.6849)",
+  "name": "MARIA",
+  "iso_time": "2017-09-18 15:00:00.000000 UTC",
+  "dist2land": "460",
+  "usa_wind": "105",
+  "usa_pressure": "961",
+  "usa_sshs": "3",
+  "radius_34kt": "91.25",
+  "radius_50kt": "30.0"
+}, {
+  "point": "POINT(-60.4 14.9)",
+  "name": "MARIA",
+  "iso_time": "2017-09-18 18:00:00.000000 UTC",
+  "dist2land": "474",
+  "usa_wind": "110",
+  "usa_pressure": "956",
+  "usa_sshs": "3",
+  "radius_34kt": "92.5",
+  "radius_50kt": "30.0"
+}, {
+  "point": "POINT(-60.7164 15.0895)",
+  "name": "MARIA",
+  "iso_time": "2017-09-18 21:00:00.000000 UTC",
+  "dist2land": "493",
+  "usa_wind": "127",
+  "usa_pressure": "940",
+  "usa_sshs": "4",
+  "radius_34kt": "95.0",
+  "radius_50kt": "33.75"
+}, {
+  "point": "POINT(-61.1 15.3)",
+  "name": "MARIA",
+  "iso_time": "2017-09-19 00:00:00.000000 UTC",
+  "dist2land": "515",
+  "usa_wind": "145",
+  "usa_pressure": "924",
+  "usa_sshs": "5",
+  "radius_34kt": "97.5",
+  "radius_50kt": "37.5"
+}, {
+  "point": "POINT(-61.3 15.4)",
+  "name": "MARIA",
+  "iso_time": "2017-09-19 01:15:00.000000 UTC",
+  "dist2land": "526",
+  "usa_wind": "145",
+  "usa_pressure": "922",
+  "usa_sshs": "5",
+  "radius_34kt": "97.5",
+  "radius_50kt": "37.5"
+}, {
+  "point": "POINT(-61.5412 15.5205)",
+  "name": "MARIA",
+  "iso_time": "2017-09-19 03:00:00.000000 UTC",
+  "dist2land": "530",
+  "usa_wind": "141",
+  "usa_pressure": "928",
+  "usa_sshs": "5",
+  "radius_34kt": "98.25",
+  "radius_50kt": "39.75"
+}, {
+  "point": "POINT(-61.9 15.7)",
+  "name": "MARIA",
+  "iso_time": "2017-09-19 06:00:00.000000 UTC",
+  "dist2land": "482",
+  "usa_wind": "135",
+  "usa_pressure": "940",
+  "usa_sshs": "4",
+  "radius_34kt": "100.0",
+  "radius_50kt": "45.0"
+}, {
+  "point": "POINT(-62.2966 15.8909)",
+  "name": "MARIA",
+  "iso_time": "2017-09-19 09:00:00.000000 UTC",
+  "dist2land": "435",
+  "usa_wind": "137",
+  "usa_pressure": "935",
+  "usa_sshs": "5",
+  "radius_34kt": "101.25",
+  "radius_50kt": "53.75"
+}, {
+  "point": "POINT(-62.7 16.1)",
+  "name": "MARIA",
+  "iso_time": "2017-09-19 12:00:00.000000 UTC",
+  "dist2land": "387",
+  "usa_wind": "140",
+  "usa_pressure": "931",
+  "usa_sshs": "5",
+  "radius_34kt": "102.5",
+  "radius_50kt": "62.5"
+}, {
+  "point": "POINT(-63.1 16.3499)",
+  "name": "MARIA",
+  "iso_time": "2017-09-19 15:00:00.000000 UTC",
+  "dist2land": "340",
+  "usa_wind": "142",
+  "usa_pressure": "925",
+  "usa_sshs": "5",
+  "radius_34kt": "102.5",
+  "radius_50kt": "66.25"
+}, {
+  "point": "POINT(-63.5 16.6)",
+  "name": "MARIA",
+  "iso_time": "2017-09-19 18:00:00.000000 UTC",
+  "dist2land": "285",
+  "usa_wind": "145",
+  "usa_pressure": "920",
+  "usa_sshs": "5",
+  "radius_34kt": "102.5",
+  "radius_50kt": "70.0"
+}, {
+  "point": "POINT(-63.9002 16.7863)",
+  "name": "MARIA",
+  "iso_time": "2017-09-19 21:00:00.000000 UTC",
+  "dist2land": "238",
+  "usa_wind": "147",
+  "usa_pressure": "914",
+  "usa_sshs": "5",
+  "radius_34kt": "107.5",
+  "radius_50kt": "71.25"
+}, {
+  "point": "POINT(-64.3 17)",
+  "name": "MARIA",
+  "iso_time": "2017-09-20 00:00:00.000000 UTC",
+  "dist2land": "192",
+  "usa_wind": "150",
+  "usa_pressure": "909",
+  "usa_sshs": "5",
+  "radius_34kt": "112.5",
+  "radius_50kt": "72.5"
+}, {
+  "point": "POINT(-64.7 17.3)",
+  "name": "MARIA",
+  "iso_time": "2017-09-20 03:00:00.000000 UTC",
+  "dist2land": "138",
+  "usa_wind": "150",
+  "usa_pressure": "908",
+  "usa_sshs": "5",
+  "radius_34kt": "112.5",
+  "radius_50kt": "72.5"
+}, {
+  "point": "POINT(-65.1 17.6)",
+  "name": "MARIA",
+  "iso_time": "2017-09-20 06:00:00.000000 UTC",
+  "dist2land": "85",
+  "usa_wind": "140",
+  "usa_pressure": "913",
+  "usa_sshs": "5",
+  "radius_34kt": "112.5",
+  "radius_50kt": "72.5"
+}, {
+  "point": "POINT(-65.6616 17.8742)",
+  "name": "MARIA",
+  "iso_time": "2017-09-20 09:00:00.000000 UTC",
+  "dist2land": "15",
+  "usa_wind": "136",
+  "usa_pressure": "917",
+  "usa_sshs": "4",
+  "radius_34kt": "112.5",
+  "radius_50kt": "72.5"
+}, {
+  "point": "POINT(-65.9 18)",
+  "name": "MARIA",
+  "iso_time": "2017-09-20 10:15:00.000000 UTC",
+  "dist2land": "0",
+  "usa_wind": "135",
+  "usa_pressure": "920",
+  "usa_sshs": "4",
+  "radius_34kt": "112.5",
+  "radius_50kt": "72.5"
+}, {
+  "point": "POINT(-66.2 18.2)",
+  "name": "MARIA",
+  "iso_time": "2017-09-20 12:00:00.000000 UTC",
+  "dist2land": "0",
+  "usa_wind": "115",
+  "usa_pressure": "935",
+  "usa_sshs": "4",
+  "radius_34kt": "112.5",
+  "radius_50kt": "72.5"
+}, {
+  "point": "POINT(-66.6405 18.4344)",
+  "name": "MARIA",
+  "iso_time": "2017-09-20 15:00:00.000000 UTC",
+  "dist2land": "0",
+  "usa_wind": "105",
+  "usa_pressure": "947",
+  "usa_sshs": "3",
+  "radius_34kt": "112.5",
+  "radius_50kt": "70.0"
+}, {
+  "point": "POINT(-67 18.6)",
+  "name": "MARIA",
+  "iso_time": "2017-09-20 18:00:00.000000 UTC",
+  "dist2land": "22",
+  "usa_wind": "95",
+  "usa_pressure": "959",
+  "usa_sshs": "2",
+  "radius_34kt": "112.5",
+  "radius_50kt": "67.5"
+}, {
+  "point": "POINT(-67.3151 18.7999)",
+  "name": "MARIA",
+  "iso_time": "2017-09-20 21:00:00.000000 UTC",
+  "dist2land": "44",
+  "usa_wind": "95",
+  "usa_pressure": "958",
+  "usa_sshs": "2",
+  "radius_34kt": "113.75",
+  "radius_50kt": "67.5"
+}, {
+  "point": "POINT(-67.6 19)",
+  "name": "MARIA",
+  "iso_time": "2017-09-21 00:00:00.000000 UTC",
+  "dist2land": "74",
+  "usa_wind": "95",
+  "usa_pressure": "958",
+  "usa_sshs": "2",
+  "radius_34kt": "115.0",
+  "radius_50kt": "67.5"
+}, {
+  "point": "POINT(-67.9001 19.1925)",
+  "name": "MARIA",
+  "iso_time": "2017-09-21 03:00:00.000000 UTC",
+  "dist2land": "79",
+  "usa_wind": "97",
+  "usa_pressure": "958",
+  "usa_sshs": "3",
+  "radius_34kt": "115.0",
+  "radius_50kt": "67.5"
+}, {
+  "point": "POINT(-68.2 19.4)",
+  "name": "MARIA",
+  "iso_time": "2017-09-21 06:00:00.000000 UTC",
+  "dist2land": "79",
+  "usa_wind": "100",
+  "usa_pressure": "959",
+  "usa_sshs": "3",
+  "radius_34kt": "115.0",
+  "radius_50kt": "67.5"
+}, {
+  "point": "POINT(-68.4926 19.6349)",
+  "name": "MARIA",
+  "iso_time": "2017-09-21 09:00:00.000000 UTC",
+  "dist2land": "84",
+  "usa_wind": "100",
+  "usa_pressure": "959",
+  "usa_sshs": "3",
+  "radius_34kt": "115.0",
+  "radius_50kt": "71.25"
+}, {
+  "point": "POINT(-68.8 19.9)",
+  "name": "MARIA",
+  "iso_time": "2017-09-21 12:00:00.000000 UTC",
+  "dist2land": "85",
+  "usa_wind": "100",
+  "usa_pressure": "959",
+  "usa_sshs": "3",
+  "radius_34kt": "115.0",
+  "radius_50kt": "75.0"
+}, {
+  "point": "POINT(-69.1573 20.2151)",
+  "name": "MARIA",
+  "iso_time": "2017-09-21 15:00:00.000000 UTC",
+  "dist2land": "101",
+  "usa_wind": "102",
+  "usa_pressure": "959",
+  "usa_sshs": "3",
+  "radius_34kt": "118.75",
+  "radius_50kt": "76.25"
+}, {
+  "point": "POINT(-69.5 20.5)",
+  "name": "MARIA",
+  "iso_time": "2017-09-21 18:00:00.000000 UTC",
+  "dist2land": "113",
+  "usa_wind": "105",
+  "usa_pressure": "960",
+  "usa_sshs": "3",
+  "radius_34kt": "122.5",
+  "radius_50kt": "77.5"
+}, {
+  "point": "POINT(-69.7653 20.6649)",
+  "name": "MARIA",
+  "iso_time": "2017-09-21 21:00:00.000000 UTC",
+  "dist2land": "124",
+  "usa_wind": "107",
+  "usa_pressure": "956",
+  "usa_sshs": "3",
+  "radius_34kt": "121.25",
+  "radius_50kt": "77.5"
+}, {
+  "point": "POINT(-70 20.8)",
+  "name": "MARIA",
+  "iso_time": "2017-09-22 00:00:00.000000 UTC",
+  "dist2land": "128",
+  "usa_wind": "110",
+  "usa_pressure": "953",
+  "usa_sshs": "3",
+  "radius_34kt": "120.0",
+  "radius_50kt": "77.5"
+}, {
+  "point": "POINT(-70.2576 20.97)",
+  "name": "MARIA",
+  "iso_time": "2017-09-22 03:00:00.000000 UTC",
+  "dist2land": "137",
+  "usa_wind": "110",
+  "usa_pressure": "956",
+  "usa_sshs": "3",
+  "radius_34kt": "121.25",
+  "radius_50kt": "77.5"
+}, {
+  "point": "POINT(-70.5 21.2)",
+  "name": "MARIA",
+  "iso_time": "2017-09-22 06:00:00.000000 UTC",
+  "dist2land": "156",
+  "usa_wind": "110",
+  "usa_pressure": "959",
+  "usa_sshs": "3",
+  "radius_34kt": "122.5",
+  "radius_50kt": "77.5"
+}, {
+  "point": "POINT(-70.715 21.5125)",
+  "name": "MARIA",
+  "iso_time": "2017-09-22 09:00:00.000000 UTC",
+  "dist2land": "190",
+  "usa_wind": "110",
+  "usa_pressure": "958",
+  "usa_sshs": "3",
+  "radius_34kt": "122.5",
+  "radius_50kt": "78.75"
+}, {
+  "point": "POINT(-70.9 21.9)",
+  "name": "MARIA",
+  "iso_time": "2017-09-22 12:00:00.000000 UTC",
+  "dist2land": "230",
+  "usa_wind": "110",
+  "usa_pressure": "958",
+  "usa_sshs": "3",
+  "radius_34kt": "122.5",
+  "radius_50kt": "80.0"
+}, {
+  "point": "POINT(-71.0502 22.3349)",
+  "name": "MARIA",
+  "iso_time": "2017-09-22 15:00:00.000000 UTC",
+  "dist2land": "231",
+  "usa_wind": "110",
+  "usa_pressure": "958",
+  "usa_sshs": "3",
+  "radius_34kt": "122.5",
+  "radius_50kt": "73.75"
+}, {
+  "point": "POINT(-71.2 22.8)",
+  "name": "MARIA",
+  "iso_time": "2017-09-22 18:00:00.000000 UTC",
+  "dist2land": "257",
+  "usa_wind": "110",
+  "usa_pressure": "959",
+  "usa_sshs": "3",
+  "radius_34kt": "122.5",
+  "radius_50kt": "67.5"
+}, {
+  "point": "POINT(-71.3999 23.265)",
+  "name": "MARIA",
+  "iso_time": "2017-09-22 21:00:00.000000 UTC",
+  "dist2land": "286",
+  "usa_wind": "107",
+  "usa_pressure": "956",
+  "usa_sshs": "3",
+  "radius_34kt": "125.0",
+  "radius_50kt": "67.5"
+}, {
+  "point": "POINT(-71.6 23.7)",
+  "name": "MARIA",
+  "iso_time": "2017-09-23 00:00:00.000000 UTC",
+  "dist2land": "314",
+  "usa_wind": "105",
+  "usa_pressure": "953",
+  "usa_sshs": "3",
+  "radius_34kt": "127.5",
+  "radius_50kt": "67.5"
+}, {
+  "point": "POINT(-71.7651 24.065)",
+  "name": "MARIA",
+  "iso_time": "2017-09-23 03:00:00.000000 UTC",
+  "dist2land": "346",
+  "usa_wind": "102",
+  "usa_pressure": "952",
+  "usa_sshs": "3",
+  "radius_34kt": "133.75",
+  "radius_50kt": "72.5"
+}, {
+  "point": "POINT(-71.9 24.4)",
+  "name": "MARIA",
+  "iso_time": "2017-09-23 06:00:00.000000 UTC",
+  "dist2land": "375",
+  "usa_wind": "100",
+  "usa_pressure": "952",
+  "usa_sshs": "3",
+  "radius_34kt": "140.0",
+  "radius_50kt": "77.5"
+}, {
+  "point": "POINT(-72.0076 24.7425)",
+  "name": "MARIA",
+  "iso_time": "2017-09-23 09:00:00.000000 UTC",
+  "dist2land": "404",
+  "usa_wind": "100",
+  "usa_pressure": "952",
+  "usa_sshs": "3",
+  "radius_34kt": "143.75",
+  "radius_50kt": "77.5"
+}, {
+  "point": "POINT(-72.1 25.1)",
+  "name": "MARIA",
+  "iso_time": "2017-09-23 12:00:00.000000 UTC",
+  "dist2land": "445",
+  "usa_wind": "100",
+  "usa_pressure": "952",
+  "usa_sshs": "3",
+  "radius_34kt": "147.5",
+  "radius_50kt": "77.5"
+}, {
+  "point": "POINT(-72.2075 25.5)",
+  "name": "MARIA",
+  "iso_time": "2017-09-23 15:00:00.000000 UTC",
+  "dist2land": "487",
+  "usa_wind": "100",
+  "usa_pressure": "952",
+  "usa_sshs": "3",
+  "radius_34kt": "156.25",
+  "radius_50kt": "77.5"
+}, {
+  "point": "POINT(-72.3 25.9)",
+  "name": "MARIA",
+  "iso_time": "2017-09-23 18:00:00.000000 UTC",
+  "dist2land": "530",
+  "usa_wind": "100",
+  "usa_pressure": "952",
+  "usa_sshs": "3",
+  "radius_34kt": "165.0",
+  "radius_50kt": "77.5"
+}, {
+  "point": "POINT(-72.3502 26.2425)",
+  "name": "MARIA",
+  "iso_time": "2017-09-23 21:00:00.000000 UTC",
+  "dist2land": "562",
+  "usa_wind": "100",
+  "usa_pressure": "948",
+  "usa_sshs": "3",
+  "radius_34kt": "165.0",
+  "radius_50kt": "78.75"
+}, {
+  "point": "POINT(-72.4 26.6)",
+  "name": "MARIA",
+  "iso_time": "2017-09-24 00:00:00.000000 UTC",
+  "dist2land": "580",
+  "usa_wind": "100",
+  "usa_pressure": "945",
+  "usa_sshs": "3",
+  "radius_34kt": "165.0",
+  "radius_50kt": "80.0"
+}, {
+  "point": "POINT(-72.4925 27.035)",
+  "name": "MARIA",
+  "iso_time": "2017-09-24 03:00:00.000000 UTC",
+  "dist2land": "588",
+  "usa_wind": "97",
+  "usa_pressure": "943",
+  "usa_sshs": "3",
+  "radius_34kt": "168.75",
+  "radius_50kt": "80.0"
+}, {
+  "point": "POINT(-72.6 27.5)",
+  "name": "MARIA",
+  "iso_time": "2017-09-24 06:00:00.000000 UTC",
+  "dist2land": "600",
+  "usa_wind": "95",
+  "usa_pressure": "942",
+  "usa_sshs": "2",
+  "radius_34kt": "172.5",
+  "radius_50kt": "80.0"
+}, {
+  "point": "POINT(-72.7075 27.965)",
+  "name": "MARIA",
+  "iso_time": "2017-09-24 09:00:00.000000 UTC",
+  "dist2land": "618",
+  "usa_wind": "95",
+  "usa_pressure": "944",
+  "usa_sshs": "2",
+  "radius_34kt": "172.5",
+  "radius_50kt": "80.0"
+}, {
+  "point": "POINT(-72.8 28.4)",
+  "name": "MARIA",
+  "iso_time": "2017-09-24 12:00:00.000000 UTC",
+  "dist2land": "633",
+  "usa_wind": "95",
+  "usa_pressure": "947",
+  "usa_sshs": "2",
+  "radius_34kt": "172.5",
+  "radius_50kt": "80.0"
+}, {
+  "point": "POINT(-72.8651 28.7725)",
+  "name": "MARIA",
+  "iso_time": "2017-09-24 15:00:00.000000 UTC",
+  "dist2land": "652",
+  "usa_wind": "92",
+  "usa_pressure": "945",
+  "usa_sshs": "2",
+  "radius_34kt": "173.75",
+  "radius_50kt": "85.0"
+}, {
+  "point": "POINT(-72.9 29.1)",
+  "name": "MARIA",
+  "iso_time": "2017-09-24 18:00:00.000000 UTC",
+  "dist2land": "673",
+  "usa_wind": "90",
+  "usa_pressure": "943",
+  "usa_sshs": "2",
+  "radius_34kt": "175.0",
+  "radius_50kt": "90.0"
+}, {
+  "point": "POINT(-72.9076 29.4075)",
+  "name": "MARIA",
+  "iso_time": "2017-09-24 21:00:00.000000 UTC",
+  "dist2land": "681",
+  "usa_wind": "87",
+  "usa_pressure": "945",
+  "usa_sshs": "2",
+  "radius_34kt": "175.0",
+  "radius_50kt": "90.0"
+}, {
+  "point": "POINT(-72.9 29.7)",
+  "name": "MARIA",
+  "iso_time": "2017-09-25 00:00:00.000000 UTC",
+  "dist2land": "652",
+  "usa_wind": "85",
+  "usa_pressure": "947",
+  "usa_sshs": "2",
+  "radius_34kt": "175.0",
+  "radius_50kt": "90.0"
+}, {
+  "point": "POINT(-72.8926 30.0075)",
+  "name": "MARIA",
+  "iso_time": "2017-09-25 03:00:00.000000 UTC",
+  "dist2land": "623",
+  "usa_wind": "80",
+  "usa_pressure": "950",
+  "usa_sshs": "1",
+  "radius_34kt": "178.75",
+  "radius_50kt": "92.5"
+}, {
+  "point": "POINT(-72.9 30.3)",
+  "name": "MARIA",
+  "iso_time": "2017-09-25 06:00:00.000000 UTC",
+  "dist2land": "595",
+  "usa_wind": "75",
+  "usa_pressure": "954",
+  "usa_sshs": "1",
+  "radius_34kt": "182.5",
+  "radius_50kt": "95.0"
+}, {
+  "point": "POINT(-72.9425 30.55)",
+  "name": "MARIA",
+  "iso_time": "2017-09-25 09:00:00.000000 UTC",
+  "dist2land": "567",
+  "usa_wind": "72",
+  "usa_pressure": "957",
+  "usa_sshs": "1",
+  "radius_34kt": "181.25",
+  "radius_50kt": "100.0"
+}, {
+  "point": "POINT(-73 30.8)",
+  "name": "MARIA",
+  "iso_time": "2017-09-25 12:00:00.000000 UTC",
+  "dist2land": "543",
+  "usa_wind": "70",
+  "usa_pressure": "961",
+  "usa_sshs": "1",
+  "radius_34kt": "180.0",
+  "radius_50kt": "105.0"
+}, {
+  "point": "POINT(-73.0574 31.0925)",
+  "name": "MARIA",
+  "iso_time": "2017-09-25 15:00:00.000000 UTC",
+  "dist2land": "511",
+  "usa_wind": "70",
+  "usa_pressure": "963",
+  "usa_sshs": "1",
+  "radius_34kt": "175.0",
+  "radius_50kt": "105.0"
+}, {
+  "point": "POINT(-73.1 31.4)",
+  "name": "MARIA",
+  "iso_time": "2017-09-25 18:00:00.000000 UTC",
+  "dist2land": "485",
+  "usa_wind": "70",
+  "usa_pressure": "966",
+  "usa_sshs": "1",
+  "radius_34kt": "170.0",
+  "radius_50kt": "105.0"
+}, {
+  "point": "POINT(-73.1076 31.7)",
+  "name": "MARIA",
+  "iso_time": "2017-09-25 21:00:00.000000 UTC",
+  "dist2land": "459",
+  "usa_wind": "70",
+  "usa_pressure": "966",
+  "usa_sshs": "1",
+  "radius_34kt": "170.0",
+  "radius_50kt": "105.0"
+}, {
+  "point": "POINT(-73.1 32)",
+  "name": "MARIA",
+  "iso_time": "2017-09-26 00:00:00.000000 UTC",
+  "dist2land": "435",
+  "usa_wind": "70",
+  "usa_pressure": "966",
+  "usa_sshs": "1",
+  "radius_34kt": "170.0",
+  "radius_50kt": "105.0"
+}, {
+  "point": "POINT(-73.1 32.2925)",
+  "name": "MARIA",
+  "iso_time": "2017-09-26 03:00:00.000000 UTC",
+  "dist2land": "412",
+  "usa_wind": "67",
+  "usa_pressure": "968",
+  "usa_sshs": "1",
+  "radius_34kt": "176.25",
+  "radius_50kt": "105.0"
+}, {
+  "point": "POINT(-73.1 32.6)",
+  "name": "MARIA",
+  "iso_time": "2017-09-26 06:00:00.000000 UTC",
+  "dist2land": "391",
+  "usa_wind": "65",
+  "usa_pressure": "970",
+  "usa_sshs": "1",
+  "radius_34kt": "182.5",
+  "radius_50kt": "105.0"
+}, {
+  "point": "POINT(-73.1 32.95)",
+  "name": "MARIA",
+  "iso_time": "2017-09-26 09:00:00.000000 UTC",
+  "dist2land": "362",
+  "usa_wind": "65",
+  "usa_pressure": "970",
+  "usa_sshs": "1",
+  "radius_34kt": "182.5",
+  "radius_50kt": "105.0"
+}, {
+  "point": "POINT(-73.1 33.3)",
+  "name": "MARIA",
+  "iso_time": "2017-09-26 12:00:00.000000 UTC",
+  "dist2land": "343",
+  "usa_wind": "65",
+  "usa_pressure": "970",
+  "usa_sshs": "1",
+  "radius_34kt": "182.5",
+  "radius_50kt": "105.0"
+}, {
+  "point": "POINT(-73.1074 33.615)",
+  "name": "MARIA",
+  "iso_time": "2017-09-26 15:00:00.000000 UTC",
+  "dist2land": "325",
+  "usa_wind": "65",
+  "usa_pressure": "972",
+  "usa_sshs": "1",
+  "radius_34kt": "181.25",
+  "radius_50kt": "105.0"
+}, {
+  "point": "POINT(-73.1 33.9)",
+  "name": "MARIA",
+  "iso_time": "2017-09-26 18:00:00.000000 UTC",
+  "dist2land": "303",
+  "usa_wind": "65",
+  "usa_pressure": "975",
+  "usa_sshs": "1",
+  "radius_34kt": "180.0",
+  "radius_50kt": "105.0"
+}, {
+  "point": "POINT(-73.0575 34.1575)",
+  "name": "MARIA",
+  "iso_time": "2017-09-26 21:00:00.000000 UTC",
+  "dist2land": "281",
+  "usa_wind": "65",
+  "usa_pressure": "975",
+  "usa_sshs": "1",
+  "radius_34kt": "180.0",
+  "radius_50kt": "105.0"
+}, {
+  "point": "POINT(-73 34.4)",
+  "name": "MARIA",
+  "iso_time": "2017-09-27 00:00:00.000000 UTC",
+  "dist2land": "275",
+  "usa_wind": "65",
+  "usa_pressure": "975",
+  "usa_sshs": "1",
+  "radius_34kt": "180.0",
+  "radius_50kt": "105.0"
+}, {
+  "point": "POINT(-72.95 34.65)",
+  "name": "MARIA",
+  "iso_time": "2017-09-27 03:00:00.000000 UTC",
+  "dist2land": "265",
+  "usa_wind": "65",
+  "usa_pressure": "975",
+  "usa_sshs": "1",
+  "radius_34kt": "178.75",
+  "radius_50kt": null
+}, {
+  "point": "POINT(-72.9 34.9)",
+  "name": "MARIA",
+  "iso_time": "2017-09-27 06:00:00.000000 UTC",
+  "dist2land": "255",
+  "usa_wind": "65",
+  "usa_pressure": "976",
+  "usa_sshs": "1",
+  "radius_34kt": "177.5",
+  "radius_50kt": null
+}, {
+  "point": "POINT(-72.8574 35.1425)",
+  "name": "MARIA",
+  "iso_time": "2017-09-27 09:00:00.000000 UTC",
+  "dist2land": "247",
+  "usa_wind": "65",
+  "usa_pressure": "976",
+  "usa_sshs": "1",
+  "radius_34kt": "177.5",
+  "radius_50kt": null
+}, {
+  "point": "POINT(-72.8 35.4)",
+  "name": "MARIA",
+  "iso_time": "2017-09-27 12:00:00.000000 UTC",
+  "dist2land": "247",
+  "usa_wind": "65",
+  "usa_pressure": "977",
+  "usa_sshs": "1",
+  "radius_34kt": "177.5",
+  "radius_50kt": null
+}, {
+  "point": "POINT(-72.7224 35.6925)",
+  "name": "MARIA",
+  "iso_time": "2017-09-27 15:00:00.000000 UTC",
+  "dist2land": "252",
+  "usa_wind": "65",
+  "usa_pressure": "978",
+  "usa_sshs": "1",
+  "radius_34kt": "177.5",
+  "radius_50kt": null
+}, {
+  "point": "POINT(-72.6 36)",
+  "name": "MARIA",
+  "iso_time": "2017-09-27 18:00:00.000000 UTC",
+  "dist2land": "261",
+  "usa_wind": "65",
+  "usa_pressure": "979",
+  "usa_sshs": "1",
+  "radius_34kt": "177.5",
+  "radius_50kt": null
+}, {
+  "point": "POINT(-72.4526 36.3373)",
+  "name": "MARIA",
+  "iso_time": "2017-09-27 21:00:00.000000 UTC",
+  "dist2land": "274",
+  "usa_wind": "65",
+  "usa_pressure": "979",
+  "usa_sshs": "1",
+  "radius_34kt": "177.5",
+  "radius_50kt": null
+}, {
+  "point": "POINT(-72.2 36.6)",
+  "name": "MARIA",
+  "iso_time": "2017-09-28 00:00:00.000000 UTC",
+  "dist2land": "308",
+  "usa_wind": "65",
+  "usa_pressure": "979",
+  "usa_sshs": "1",
+  "radius_34kt": "177.5",
+  "radius_50kt": null
+}, {
+  "point": "POINT(-71.8171 36.6873)",
+  "name": "MARIA",
+  "iso_time": "2017-09-28 03:00:00.000000 UTC",
+  "dist2land": "340",
+  "usa_wind": "62",
+  "usa_pressure": "980",
+  "usa_sshs": "0",
+  "radius_34kt": "176.25",
+  "radius_50kt": null
+}, {
+  "point": "POINT(-71.3 36.7)",
+  "name": "MARIA",
+  "iso_time": "2017-09-28 06:00:00.000000 UTC",
+  "dist2land": "378",
+  "usa_wind": "60",
+  "usa_pressure": "982",
+  "usa_sshs": "0",
+  "radius_34kt": "175.0",
+  "radius_50kt": "82.5"
+}, {
+  "point": "POINT(-70.6876 36.7575)",
+  "name": "MARIA",
+  "iso_time": "2017-09-28 09:00:00.000000 UTC",
+  "dist2land": "421",
+  "usa_wind": "60",
+  "usa_pressure": "982",
+  "usa_sshs": "0",
+  "radius_34kt": "175.0",
+  "radius_50kt": "82.5"
+}, {
+  "point": "POINT(-70 36.8)",
+  "name": "MARIA",
+  "iso_time": "2017-09-28 12:00:00.000000 UTC",
+  "dist2land": "478",
+  "usa_wind": "60",
+  "usa_pressure": "982",
+  "usa_sshs": "0",
+  "radius_34kt": "175.0",
+  "radius_50kt": "82.5"
+}, {
+  "point": "POINT(-69.337 36.7991)",
+  "name": "MARIA",
+  "iso_time": "2017-09-28 15:00:00.000000 UTC",
+  "dist2land": "528",
+  "usa_wind": "57",
+  "usa_pressure": "983",
+  "usa_sshs": "0",
+  "radius_34kt": "175.0",
+  "radius_50kt": "82.5"
+}, {
+  "point": "POINT(-68.6 36.8)",
+  "name": "MARIA",
+  "iso_time": "2017-09-28 18:00:00.000000 UTC",
+  "dist2land": "553",
+  "usa_wind": "55",
+  "usa_pressure": "985",
+  "usa_sshs": "0",
+  "radius_34kt": "175.0",
+  "radius_50kt": "82.5"
+}, {
+  "point": "POINT(-67.76 36.8417)",
+  "name": "MARIA",
+  "iso_time": "2017-09-28 21:00:00.000000 UTC",
+  "dist2land": "577",
+  "usa_wind": "55",
+  "usa_pressure": "985",
+  "usa_sshs": "0",
+  "radius_34kt": "173.75",
+  "radius_50kt": "82.5"
+}, {
+  "point": "POINT(-66.8 36.9)",
+  "name": "MARIA",
+  "iso_time": "2017-09-29 00:00:00.000000 UTC",
+  "dist2land": "600",
+  "usa_wind": "55",
+  "usa_pressure": "985",
+  "usa_sshs": "0",
+  "radius_34kt": "172.5",
+  "radius_50kt": "82.5"
+}, {
+  "point": "POINT(-65.7601 36.9564)",
+  "name": "MARIA",
+  "iso_time": "2017-09-29 03:00:00.000000 UTC",
+  "dist2land": "634",
+  "usa_wind": "52",
+  "usa_pressure": "986",
+  "usa_sshs": "0",
+  "radius_34kt": "175.0",
+  "radius_50kt": null
+}, {
+  "point": "POINT(-64.6 37)",
+  "name": "MARIA",
+  "iso_time": "2017-09-29 06:00:00.000000 UTC",
+  "dist2land": "698",
+  "usa_wind": "50",
+  "usa_pressure": "987",
+  "usa_sshs": "0",
+  "radius_34kt": "177.5",
+  "radius_50kt": null
+}, {
+  "point": "POINT(-63.3578 36.976)",
+  "name": "MARIA",
+  "iso_time": "2017-09-29 09:00:00.000000 UTC",
+  "dist2land": "740",
+  "usa_wind": "50",
+  "usa_pressure": "987",
+  "usa_sshs": "0",
+  "radius_34kt": "177.5",
+  "radius_50kt": null
+}, {
+  "point": "POINT(-62 37)",
+  "name": "MARIA",
+  "iso_time": "2017-09-29 12:00:00.000000 UTC",
+  "dist2land": "775",
+  "usa_wind": "50",
+  "usa_pressure": "988",
+  "usa_sshs": "0",
+  "radius_34kt": "177.5",
+  "radius_50kt": null
+}, {
+  "point": "POINT(-60.5591 37.1456)",
+  "name": "MARIA",
+  "iso_time": "2017-09-29 15:00:00.000000 UTC",
+  "dist2land": "815",
+  "usa_wind": "50",
+  "usa_pressure": "988",
+  "usa_sshs": "0",
+  "radius_34kt": "178.75",
+  "radius_50kt": null
+}, {
+  "point": "POINT(-59 37.4)",
+  "name": "MARIA",
+  "iso_time": "2017-09-29 18:00:00.000000 UTC",
+  "dist2land": "861",
+  "usa_wind": "50",
+  "usa_pressure": "988",
+  "usa_sshs": "0",
+  "radius_34kt": "180.0",
+  "radius_50kt": null
+}, {
+  "point": "POINT(-57.3285 37.7039)",
+  "name": "MARIA",
+  "iso_time": "2017-09-29 21:00:00.000000 UTC",
+  "dist2land": "891",
+  "usa_wind": "50",
+  "usa_pressure": "988",
+  "usa_sshs": "0",
+  "radius_34kt": "180.0",
+  "radius_50kt": null
+}, {
+  "point": "POINT(-55.6 38.1)",
+  "name": "MARIA",
+  "iso_time": "2017-09-30 00:00:00.000000 UTC",
+  "dist2land": "911",
+  "usa_wind": "50",
+  "usa_pressure": "988",
+  "usa_sshs": "0",
+  "radius_34kt": "180.0",
+  "radius_50kt": null
+}, {
+  "point": "POINT(-53.8997 38.5826)",
+  "name": "MARIA",
+  "iso_time": "2017-09-30 03:00:00.000000 UTC",
+  "dist2land": "889",
+  "usa_wind": "50",
+  "usa_pressure": "988",
+  "usa_sshs": "0",
+  "radius_34kt": "176.25",
+  "radius_50kt": null
+}, {
+  "point": "POINT(-52.2 39.1)",
+  "name": "MARIA",
+  "iso_time": "2017-09-30 06:00:00.000000 UTC",
+  "dist2land": "837",
+  "usa_wind": "50",
+  "usa_pressure": "988",
+  "usa_sshs": "0",
+  "radius_34kt": "172.5",
+  "radius_50kt": null
+}, {
+  "point": "POINT(-50.481 39.5332)",
+  "name": "MARIA",
+  "iso_time": "2017-09-30 09:00:00.000000 UTC",
+  "dist2land": "819",
+  "usa_wind": "50",
+  "usa_pressure": "988",
+  "usa_sshs": "0",
+  "radius_34kt": "172.5",
+  "radius_50kt": null
+}, {
+  "point": "POINT(-48.8 40)",
+  "name": "MARIA",
+  "iso_time": "2017-09-30 12:00:00.000000 UTC",
+  "dist2land": "814",
+  "usa_wind": "50",
+  "usa_pressure": "988",
+  "usa_sshs": "0",
+  "radius_34kt": "172.5",
+  "radius_50kt": null
+}, {
+  "point": "POINT(-47.17 40.5903)",
+  "name": "MARIA",
+  "iso_time": "2017-09-30 15:00:00.000000 UTC",
+  "dist2land": "822",
+  "usa_wind": "47",
+  "usa_pressure": "989",
+  "usa_sshs": "0",
+  "radius_34kt": "168.75",
+  "radius_50kt": null
+}, {
+  "point": "POINT(-45.6 41.2)",
+  "name": "MARIA",
+  "iso_time": "2017-09-30 18:00:00.000000 UTC",
+  "dist2land": "852",
+  "usa_wind": "45",
+  "usa_pressure": "991",
+  "usa_sshs": "-4",
+  "radius_34kt": "165.0",
+  "radius_50kt": null
+}, {
+  "point": "POINT(-44.0948 41.6969)",
+  "name": "MARIA",
+  "iso_time": "2017-09-30 21:00:00.000000 UTC",
+  "dist2land": "904",
+  "usa_wind": "45",
+  "usa_pressure": "992",
+  "usa_sshs": "-4",
+  "radius_34kt": "165.0",
+  "radius_50kt": null
+}, {
+  "point": "POINT(-42.6 42.2)",
+  "name": "MARIA",
+  "iso_time": "2017-10-01 00:00:00.000000 UTC",
+  "dist2land": "966",
+  "usa_wind": "45",
+  "usa_pressure": "994",
+  "usa_sshs": "-4",
+  "radius_34kt": "165.0",
+  "radius_50kt": null
+}, {
+  "point": "POINT(-41.062 42.7587)",
+  "name": "MARIA",
+  "iso_time": "2017-10-01 03:00:00.000000 UTC",
+  "dist2land": "1034",
+  "usa_wind": "45",
+  "usa_pressure": "995",
+  "usa_sshs": "-4",
+  "radius_34kt": "165.0",
+  "radius_50kt": null
+}, {
+  "point": "POINT(-39.4 43.4)",
+  "name": "MARIA",
+  "iso_time": "2017-10-01 06:00:00.000000 UTC",
+  "dist2land": "1120",
+  "usa_wind": "45",
+  "usa_pressure": "996",
+  "usa_sshs": "-4",
+  "radius_34kt": "165.0",
+  "radius_50kt": null
+}, {
+  "point": "POINT(-37.5433 44.1171)",
+  "name": "MARIA",
+  "iso_time": "2017-10-01 09:00:00.000000 UTC",
+  "dist2land": "1223",
+  "usa_wind": "45",
+  "usa_pressure": "997",
+  "usa_sshs": "-4",
+  "radius_34kt": "165.0",
+  "radius_50kt": null
+}, {
+  "point": "POINT(-35.5 44.9)",
+  "name": "MARIA",
+  "iso_time": "2017-10-01 12:00:00.000000 UTC",
+  "dist2land": "1339",
+  "usa_wind": "45",
+  "usa_pressure": "999",
+  "usa_sshs": "-4",
+  "radius_34kt": "165.0",
+  "radius_50kt": null
+}, {
+  "point": "POINT(-33.2967 45.7356)",
+  "name": "MARIA",
+  "iso_time": "2017-10-01 15:00:00.000000 UTC",
+  "dist2land": "1477",
+  "usa_wind": "45",
+  "usa_pressure": "1001",
+  "usa_sshs": "-4",
+  "radius_34kt": "165.0",
+  "radius_50kt": null
+}, {
+  "point": "POINT(-31 46.5)",
+  "name": "MARIA",
+  "iso_time": "2017-10-01 18:00:00.000000 UTC",
+  "dist2land": "1596",
+  "usa_wind": "45",
+  "usa_pressure": "1003",
+  "usa_sshs": "-4",
+  "radius_34kt": "165.0",
+  "radius_50kt": null
+}, {
+  "point": "POINT(-28.7452 47.0778)",
+  "name": "MARIA",
+  "iso_time": "2017-10-01 21:00:00.000000 UTC",
+  "dist2land": "1411",
+  "usa_wind": "42",
+  "usa_pressure": "1004",
+  "usa_sshs": "-4",
+  "radius_34kt": null,
+  "radius_50kt": null
+}, {
+  "point": "POINT(-26.5 47.5)",
+  "name": "MARIA",
+  "iso_time": "2017-10-02 00:00:00.000000 UTC",
+  "dist2land": "1245",
+  "usa_wind": "40",
+  "usa_pressure": "1005",
+  "usa_sshs": "-4",
+  "radius_34kt": null,
+  "radius_50kt": null
+}, {
+  "point": "POINT(-24.2851 47.8181)",
+  "name": "MARIA",
+  "iso_time": "2017-10-02 03:00:00.000000 UTC",
+  "dist2land": "1085",
+  "usa_wind": "40",
+  "usa_pressure": "1008",
+  "usa_sshs": "-4",
+  "radius_34kt": null,
+  "radius_50kt": null
+}, {
+  "point": "POINT(-22 48)",
+  "name": "MARIA",
+  "iso_time": "2017-10-02 06:00:00.000000 UTC",
+  "dist2land": "926",
+  "usa_wind": "40",
+  "usa_pressure": "1012",
+  "usa_sshs": "-4",
+  "radius_34kt": null,
+  "radius_50kt": null
+}, {
+  "point": "POINT(-19.5486 48.0506)",
+  "name": "MARIA",
+  "iso_time": "2017-10-02 09:00:00.000000 UTC",
+  "dist2land": "766",
+  "usa_wind": "35",
+  "usa_pressure": "1014",
+  "usa_sshs": "-4",
+  "radius_34kt": null,
+  "radius_50kt": null
+}, {
+  "point": "POINT(-17 48)",
+  "name": "MARIA",
+  "iso_time": "2017-10-02 12:00:00.000000 UTC",
+  "dist2land": "628",
+  "usa_wind": "30",
+  "usa_pressure": "1016",
+  "usa_sshs": "-4",
+  "radius_34kt": null,
+  "radius_50kt": null
+}]

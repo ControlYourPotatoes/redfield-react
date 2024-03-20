@@ -21,3 +21,4 @@ const hurricaneData = {
       { lat: 19.76323026084966, lon: -68.17757126898121 },
     ]
   };
+  module.exports = hurricaneData;

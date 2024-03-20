@@ -24,6 +24,7 @@ const hurricaneInfo = {
 const LayoutSwitcher: React.FC<LayoutSwitcherProps> = ({ isLiveWeatherEvent }) => {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        
         <PolicyProvider policyId="b8869331-d076-4d26-a13d-f808d2a2e966">
             <PolicyStatus />
         </PolicyProvider>

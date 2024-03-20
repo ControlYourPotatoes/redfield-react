@@ -25,29 +25,27 @@ const Dashboard = () => {
   return (
     <div style={{ width: '100%', }}>
 
-      
       <Box sx={{ border: '1px gray solid', mt:'100px', display:'flex', flexDirection:'column', alignItems:'center'  }}>
-        <Box>
+        
+        <Box className='Title Container'>
           <h1>Dashboard</h1>
-          <h1>Dashboard</h1>
+          <Button onClick={handleToggleWeatherEvent}> name="weatherEventToggle"</Button>
         </Box>
-        <Box>
-          <h1>Dashboard</h1>
-          <h1>2</h1>
+
+        <Box >
+            <HurricaneMap />
+
         </Box>
-        <Box>
-          <h1>Dashboard</h1>
-          <h1>Dashboard</h1>
-        </Box>
+
       
-        <Button onClick={handleToggleWeatherEvent}> name="weatherEventToggle"</Button>
+        
         <PolicyProvider policyId="b8869331-d076-4d26-a13d-f808d2a2e966">
             <PolicyStatus />
         </PolicyProvider>
         
-        <WeatherProvider>
+        {/* <WeatherProvider>
           <CurrentWeather/>
-        </WeatherProvider>
+        </WeatherProvider> */}
 
         <Cloudy style={{innerWidth:''}} />
       </Box>
