@@ -16,12 +16,6 @@ const Prices: React.FC = () => {
             
             <PricingCards />
             
-
-
-
-
-            <PricingTable />
-            
         </div>
     );
 };
