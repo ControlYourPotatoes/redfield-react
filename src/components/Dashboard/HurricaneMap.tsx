@@ -88,10 +88,9 @@ const startAnimation = () => {
 
 
   return (
-    <Card raised sx={{backgroundColor:'#E0E0E0',borderRadius: '5px', padding: '1.6rem',margin: '10px', display:'flex', flexDirection:'column' }}>
-        <CardContent>
+    <Card raised sx={{backgroundColor:'#E0E0E0',borderRadius: '5px', padding: '1rem',margin: '10px' }}>
+        <CardContent sx={{display:'flex', flexDirection:'column'}}>
 
-          
         <Box sx={{ width:'430px', height: '100%x', padding: '10px'}} >
           <MapContainer center={hurricanePosition} zoom={6} style={{ }}>
             <TileLayer
