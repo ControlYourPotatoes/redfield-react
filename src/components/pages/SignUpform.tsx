@@ -141,18 +141,6 @@ const SubmitButton = styled.button`
   }
 `;
 
-// Adding a styled component for the checkbox label
-const CheckboxLabel = styled.label`
-  display: flex;
-  align-items: center;
-  margin: 10px 0;
-  cursor: pointer;
-`;
-
-const Checkbox = styled(Field)`
-  margin-right: 10px;
-`;
-
 const ForgotPasswordWrapper = styled.div`
   display: flex;
   justify-content: flex-end; /* Aligns the child to the right */
@@ -319,27 +307,28 @@ const SignInSignUpPage = () => {
       }
     };
 
-  //submit login 
-  const handleLoginSubmit = async (values: LoginFormValues, { setSubmitting }: FormikHelpers<LoginFormValues>) => {
-    try {
-      const baseUrl = process.env.REACT_APP_API_BASE_URL || '';
-      console.log(`Attempting login with base URL: ${baseUrl}`); // Debugging log
-  
-      const response = await axios.post(`${baseUrl}/api/login`, values);
-      console.log('Login successful, token received:', !!response.data.token); // Confirm token received but don't log it
-  
-      const authToken = response.data.token; 
-      login(authToken);
-      localStorage.setItem('authToken', authToken);
-      navigate('/dashboard');
-    } catch (error: any) {
-      console.error('Login Error:', error?.response?.status, error?.response?.data || 'An error occurred');
-      setLoginError(error?.response?.data?.message || 'Failed to log in. Please try again.');
-    } finally {
-      setSubmitting(false);
-      console.log('Login process completed.'); // Confirm the process has completed
-    }
-  };
+ //submit login 
+ const handleLoginSubmit = async (values: LoginFormValues, { setSubmitting }: FormikHelpers<LoginFormValues>) => {
+  try {
+    const baseUrl = import.meta.env.VITE_API_BASE_URL || ''; // Fallback to empty string if not defined
+
+    console.log(`Attempting login with base URL: ${baseUrl}`); // Debugging log
+
+    const response = await axios.post(`${baseUrl}/api/login`, values);
+    console.log('Login successful, token received:', !!response.data.token); // Confirm token received but don't log it
+
+    const authToken = response.data.token; 
+    login(authToken);
+    localStorage.setItem('authToken', authToken);
+    navigate('/dashboard');
+  } catch (error: any) {
+    console.error('Login Error:', error?.response?.status, error?.response?.data || 'An error occurred');
+    setLoginError(error?.response?.data?.message || 'Failed to log in. Please try again.');
+  } finally {
+    setSubmitting(false);
+    console.log('Login process completed.'); // Confirm the process has completed
+  }
+};
 
   return (
     <Container>
@@ -369,10 +358,6 @@ const SignInSignUpPage = () => {
               <ErrorMessageContainer>
                 <ErrorMessage name="password" component="div" />
               </ErrorMessageContainer>
-              <CheckboxLabel>
-                <Checkbox type="checkbox" />
-                Remember Me
-              </CheckboxLabel>
               
               <SubmitButton type="submit" disabled={isSubmitting}>
              {isSignUp ? 'Sign Up' : 'Sign In'}
