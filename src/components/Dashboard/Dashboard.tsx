@@ -43,9 +43,9 @@ const Dashboard = () => {
             <PolicyStatus />
         </PolicyProvider>
         
-        {/* <WeatherProvider>
+        <WeatherProvider>
           <CurrentWeather/>
-        </WeatherProvider> */}
+        </WeatherProvider>
 
         <Cloudy style={{innerWidth:''}} />
       </Box>

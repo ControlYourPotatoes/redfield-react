@@ -32,9 +32,10 @@ const WeatherContext = createContext<WeatherContextType>(WeatherContextDefaultVa
 
 interface WeatherProviderProps {
   children: ReactNode;
+  initialCoords?: { lat: number; lng: number }; // Optional prop for initial coordinates
 }
 
-export const WeatherProvider: React.FC<WeatherProviderProps> = ({ children }) => {
+export const WeatherProvider: React.FC<WeatherProviderProps> = ({ children, initialCoords }) => {
   const [weather, setWeather] = useState<WeatherData | null>(null);
   const [forecast, setForecast] = useState<ExtendedForecastData[] | null>(null);
   const [degreeType, setDegreeTypeInternal] = useState<TempUnit>(TempUnit.CELCIUS);
@@ -43,6 +44,9 @@ export const WeatherProvider: React.FC<WeatherProviderProps> = ({ children }) =>
   const [darkMode, setDarkMode] = useState(WeatherContextDefaultValues.darkMode);
 
   const testLocation = { lat: 40.7128, lng: -74.0060 };
+
+  const defaultCoords = { lat: 18.4655, lng: -66.1057 };
+  const coords = initialCoords || defaultCoords;
 
   const fetchWeatherContext = async (city: string | { lat: number; lng: number }) => {
     setLoading(true);
@@ -58,9 +62,9 @@ export const WeatherProvider: React.FC<WeatherProviderProps> = ({ children }) =>
   };
 
   useEffect(() => {
-    // Fetch weather data for the hardcoded location when the component mounts
-    fetchWeatherContext(testLocation);
-  }, []); 
+    // Fetch weather data for the provided or default location when the component mounts or coords change
+    fetchWeatherContext(coords);
+  }, [coords.lat, coords.lng]);
 
   const setDegreeType = () => {
     setDegreeTypeInternal(prevDegreeType => 

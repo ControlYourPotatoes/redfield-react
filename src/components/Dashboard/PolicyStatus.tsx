@@ -59,7 +59,7 @@ const PolicyStatus: React.FC = () => {
   
 
   return (
-    <Card raised sx={{ maxWidth: 530 }}>
+    <Card raised sx={{ maxWidth: 530,backgroundColor:'#E0E0E0',borderRadius: '5px', padding: '1.6rem',margin: '10px' }}>
       <CardContent>
         <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
 

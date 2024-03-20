@@ -109,7 +109,7 @@ const WeatherIcon: React.FC<IWeatherIconProps> = ({ code, big }) => {
     default:
       Icon = SunnyIcon;
   }
-  const iconStyle = big ? { width: '100px', height: '100px' } : {};
+  const iconStyle = big ? { width: '48px', height: '48px' } : {};
 
   return <Icon style={iconStyle} />;
 };

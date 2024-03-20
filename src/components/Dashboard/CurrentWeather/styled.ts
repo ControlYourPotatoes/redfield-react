@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
 export const WeatherContainer = styled.div`
-  background-color: #FFFFFF;
-  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
-  border-radius: 15px;
+  background-color: #EAEAEA; // Change the color to a slightly darker shade
+  box-shadow: 4px 1px 3px rgba(14, 14, 14, 0.71);
+  border-radius: 5px;
   padding: 1.6rem;
   display: flex;
   flex-direction: column;
@@ -11,23 +11,26 @@ export const WeatherContainer = styled.div`
 `;
 export const SectionTitle = styled.h6`
   font-weight: 500;
-  font-size: 1.125rem;
+  font-size: 1.5rem;
   color: #727E8E;
+  margin-top: 0.0rem;
+  margin-bottom: 0.5rem;
+  margin-left: 3rem;
 `;
 export const CurrentWeatherContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  @media (max-width: 300px) {
+  @media (max-width: 200px) {
     justify-content: flex-start;
   }
 `;
 export const CurrentWeatherStatus = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 0rem 1.5rem;
-  width: 25rem;
+  margin: 0rem 0rem;
+  width: 18rem;
 
-  @media (max-width: 800px) {
+  @media (max-width: 600px) {
     margin: 2rem 0rem;
   }
 
@@ -35,8 +38,8 @@ export const CurrentWeatherStatus = styled.div`
     font-weight: 500;
     font-size: 3.25rem;
     color: #396bae;
-    margin-bottom: 1rem;
-    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    margin-top: -1rem;
   }
   span {
     font-weight: 500;
@@ -50,24 +53,31 @@ export const CurrentWeatherStatus = styled.div`
   }
   h6 {
     font-size: 1.375rem;
-    text-align: left;
+    text-align: center;
     color: #7b98b2;
-    margin-bottom: 1rem;
+    margin-bottom: 0rem;
+    margin-right: 3rem;
+    margin-top: 1rem;
   }
 `;
 export const CurrentWeatherInfo = styled.div`
   display: flex;
   flex-direction: column;
   margin: 1rem 1rem;
-  margin-left: 1rem;
+  margin-left: 0rem;
+  margin-bottom: 0rem;
+
 `;
 export const FeelsLike = styled.p`
-  font-size: 1.25rem;
+  font-size: 2.25rem;
   color: #4a6fa1;
+  margin-bottom: .5rem;
+  margin-right: 0rem;
+  margin-top: -1rem;
 `;
 export const HighLowContainer = styled.div`
   display: flex;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   width: 2rem;
 `;
 export const WeatherDegree = styled.div`
@@ -79,7 +89,7 @@ export const WeatherDegree = styled.div`
   margin-top: 0.8rem;
   margin-right: 2.5rem;
   svg {
-    fill: ${({ theme }) => theme.smallIconColor};
+    fill: #000080;
     margin-right: 1rem;
   }
 `;
@@ -89,14 +99,14 @@ export const InfoRow = styled.div`
   justify-content: flex-start;
   margin-bottom: 0.8rem;
   div {
-    color: ${({ theme }) => theme.smallIconTextColor};
+    color: black;
     display: flex;
     align-items: center;
     font-size: 1rem;
     width: 8rem;
   }
   svg {
-    fill: ${({ theme }) => theme.smallIconColor};
+    fill: ;
     margin-right: 1rem;
     width: 1.6rem;
     margin-left: -0.3rem;

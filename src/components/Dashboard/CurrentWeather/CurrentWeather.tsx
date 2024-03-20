@@ -25,8 +25,8 @@ import {
   WeatherDegree,
 } from './styled';
 import Temperature from './Temperature';
-import SvgCloudy from '../../../Icons/Cloudy';
-import { Cloudy } from '../../../Icons';
+import { Card } from '@mui/material';
+
 
 const CurrentWeather: React.FC = () => {
   const { weather, setDegreeType, degreeType, toggleDarkMode, error } = useWeather();
@@ -36,7 +36,8 @@ const CurrentWeather: React.FC = () => {
   if (!weather) return <> Fetching Weather Data</>;
 
   return (
-    <WeatherContainer>
+    <Card raised style={{ maxWidth: '530', height: '100%', padding: '1rem', margin: '1rem'}}>
+    
       <div style={{ display: 'flex', justifyContent: 'space-between', border:'', margin:'' }}>
         <SectionTitle>Current Weather</SectionTitle>
         <div>
@@ -97,8 +98,8 @@ const CurrentWeather: React.FC = () => {
           </InfoRow>
         </CurrentWeatherInfo>
       </CurrentWeatherContainer>
-    </WeatherContainer>
     
+    </Card>
   );
 };
 
