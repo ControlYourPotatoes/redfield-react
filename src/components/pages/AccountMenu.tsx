@@ -68,8 +68,6 @@ export default function AccountMenu() {
     logout();
     handleClose();
 
-    // Navigate to Home page on logout
-    navigate('/');
     navigate('/');
   };
 
