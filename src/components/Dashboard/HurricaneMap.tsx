@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import L from 'leaflet';
 import { MapContainer, TileLayer, Marker, Polyline } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import { Box, Button } from '@mui/material';
+import { Box, Button, Card, CardContent } from '@mui/material';
 
 interface HurricanePathPoint {
   point: string; // "POINT(-longitude latitude)"
@@ -88,21 +88,27 @@ const startAnimation = () => {
 
 
   return (
-    <>
-    <Box sx={{ background: 'primary.main', width:'100%', height: '300px', padding: '30px', borderWidth: '20px', minWidth: '20rem'}} >
-      <MapContainer center={hurricanePosition} zoom={6} style={{ height: '100%', width: '100%' }}>
-        <TileLayer
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
-        <Marker position={hurricanePosition} icon={hurricaneIcon} />
-        <Polyline positions={hurricanePath} color="red" />
-      </MapContainer> 
-    </Box>
-      <Button onClick={startAnimation} variant="contained" color="primary" style={{ marginTop: '10px' }}>
-        Start Animation
-      </Button>
-    </>
-    
+    <Card raised sx={{backgroundColor:'#E0E0E0',borderRadius: '5px', padding: '1.6rem',margin: '10px', display:'flex', flexDirection:'column' }}>
+        <CardContent>
+
+          
+        <Box sx={{ width:'430px', height: '100%x', padding: '10px'}} >
+          <MapContainer center={hurricanePosition} zoom={6} style={{ }}>
+            <TileLayer
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+            <Marker position={hurricanePosition} icon={hurricaneIcon} />
+            <Polyline positions={hurricanePath} color="red" />
+          </MapContainer> 
+        </Box>
+
+        <Button onClick={startAnimation} variant="contained" color="primary" style={{ marginTop: '10px' }}>
+            Start Animation
+        </Button>
+
+
+      </CardContent>
+    </Card>
   );
 };
 
