@@ -2,6 +2,7 @@ import React, { createContext, useContext, useState, useCallback, ReactNode, use
 import {fetchWeather} from './fetchWeather';
 import {WeatherData, ExtendedForecastData} from '../../../types';
 import { TempUnit } from './utils/unitConversion';
+import PolicyContext from '../PolicyContext';
 
 
 interface WeatherContextType {
@@ -42,11 +43,16 @@ export const WeatherProvider: React.FC<WeatherProviderProps> = ({ children, init
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
   const [darkMode, setDarkMode] = useState(WeatherContextDefaultValues.darkMode);
+  const policyData = useContext(PolicyContext);
+
 
   const testLocation = { lat: 40.7128, lng: -74.0060 };
 
   const defaultCoords = { lat: 18.4655, lng: -66.1057 };
-  const coords = initialCoords || defaultCoords;
+
+  const coords = policyData?.coordinates ? { lat: policyData.coordinates.latitude, lng: policyData.coordinates.longitude } : defaultCoords;
+
+  console.log("Policy Data Coordinates: ", policyData?.coordinates);
 
   const fetchWeatherContext = async (city: string | { lat: number; lng: number }) => {
     setLoading(true);

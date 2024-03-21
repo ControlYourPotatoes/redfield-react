@@ -50,7 +50,7 @@ const HurricaneMap: React.FC<HurricaneMapProps> = ({ hurricaneData }) => {
   useEffect(() => {
     if (!hurricaneData) {
       const url = `${baseUrl}/api/hurricane`;
-      console.log("Trying to fetch hurricane path data from:", url);
+      // console.log("Trying to fetch hurricane path data from:", url);
   
       fetch(url)
         .then(response => response.json())

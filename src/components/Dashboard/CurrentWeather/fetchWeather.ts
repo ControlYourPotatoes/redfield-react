@@ -4,7 +4,7 @@ import { getNextSevenDays } from './utils/dateUtils';
 import { kelvinToCelcius } from './utils/unitConversion';
 
 export async function fetchWeather(city: string | { lat: number; lng: number }): Promise<{ weather: WeatherData, forecast: ExtendedForecastData[] }> {
-  console.log('Fetching weather for:', city); // Log 1: Input check
+  // console.log('Fetching weather for:', city); // Log 1: Input check
 
   try {
     const [weatherResponse, forecastResponse] = await Promise.all([
@@ -12,12 +12,12 @@ export async function fetchWeather(city: string | { lat: number; lng: number }):
       fetchExtendedForecastData(city)
     ]);
 
-    console.log('Raw weather response:', weatherResponse); // Log 2: Raw weather data
-    console.log('Raw forecast response:', forecastResponse); // Log 2: Raw forecast data
+    // console.log('Raw weather response:', weatherResponse); // Log 2: Raw weather data
+    // console.log('Raw forecast response:', forecastResponse); // Log 2: Raw forecast data
 
     if (weatherResponse.cod === 200) {
       const transformedData = transformWeatherData([weatherResponse, forecastResponse]);
-      console.log('Transformed data:', transformedData); // Log 3: Transformed data
+      // console.log('Transformed data:', transformedData); // Log 3: Transformed data
       return transformedData;
     } else {
       throw new Error(weatherResponse.message || "Failed to fetch weather data");

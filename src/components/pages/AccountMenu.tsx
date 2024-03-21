@@ -10,19 +10,39 @@ import PublicIcon from '@mui/icons-material/Public';
 import { scroller } from 'react-scroll'; // Import for smooth scrolling
 import { useAuth } from './AuthContext'; // Adjust the path as necessary
 
+
+function getCookie(name: string): string | undefined {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop()?.split(';').shift();
+}
+
+
 export default function AccountMenu() {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const [profileDialogOpen, setProfileDialogOpen] = useState(false);
   const [profilePic, setProfilePic] = useState<JSX.Element>(<AccountCircleIcon />);
   const navigate = useNavigate();
-  const { authToken, logout } = useAuth(); // Destructure the relevant fields from useAuth
+  const { authToken, validateAndSetToken, logout } = useAuth(); // Destructure the relevant fields from useAuth
   const isLoggedIn = !!authToken; // Determine if logged in based on the presence of an authToken
   //icons
   const icons = [<FaceIcon />, <TagFacesIcon />, <PetsIcon />];
  
 
-   // Function to scroll to the top of the page
+   
+
+  useEffect(() => {
+    // Only attempt to set token from cookie if not already authenticated
+    if (!authToken) {
+      const tokenFromCookie = getCookie('token');
+      if (tokenFromCookie) {
+        validateAndSetToken(tokenFromCookie);
+      }
+    }
+  }, [authToken, validateAndSetToken]);
+
+
    const scrollToTop = () => {
     if (location.pathname !== '/') {
       navigate('/');
@@ -110,7 +130,7 @@ const NavigationContainer = styled(Box)(({ theme }) => ({
      <StyledAppBar>
         <Toolbar>
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <Hurricane src="\assets\icon\logoLightMode.png" alt="New Icon" />
+            <Hurricane src="\assets\icon\logoDarkMode.png" alt="New Icon" />
             <Logo src="\assets\logo\redfieldLogoDark.svg" alt="Logo" />
           </Box>
 

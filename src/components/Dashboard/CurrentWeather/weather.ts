@@ -8,7 +8,7 @@ export const fetchWeatherData = async (city: string | { lat: number; lng: number
   if (typeof city === 'object') {
     url = `${baseUrl}/weather?lat=${city.lat}&lon=${city.lng}&appid=${apikey}`;
   }
-  console.log('This is the weather data url: ', url);
+  // console.log('This is the weather data url: ', url);
   try {
     const response = await fetch(url);
     const data = await response.json();
@@ -28,7 +28,7 @@ export const fetchExtendedForecastData = async (city: string | { lat: number; ln
     url = `${baseUrl}/forecast?lat=${city.lat}&lon=${city.lng}&appid=${apikey}`;
   }
 
-  console.log('This is the forecast weather data url: ', url);
+  // console.log('This is the forecast weather data url: ', url);
   try {
     const response = await fetch(url);
     const data = await response.json();

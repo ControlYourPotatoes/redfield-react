@@ -27,12 +27,16 @@ const PolicyContext = createContext<PolicyData | undefined>(undefined);
 
 export const PolicyProvider: React.FC<PolicyProviderProps> = ({ children, policyId }) => {
   const [policyData, setPolicyData] = useState<PolicyData | undefined>(undefined);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
 
+  // console.log("Policy ID recieved for context: ", policyId);
+  
   useEffect(() => {
     const fetchPolicyData = async () => {
       try {
         // Using the policyId prop in the request URL
-        console.log(`Initiating fetch for policy data with ID: ${policyId} at URL: ${baseUrl}/api/policy/${policyId}`);
+        // console.log(`Initiating fetch for policy data with ID: ${policyId} at URL: ${baseUrl}/api/policy/${policyId}`);
         
         const startTime = Date.now(); // Start time for performance measurement
         const response = await axios.get(`${baseUrl}/api/policy/${policyId}`);
@@ -47,7 +51,7 @@ export const PolicyProvider: React.FC<PolicyProviderProps> = ({ children, policy
     if (policyId) { // Only fetch policy data if a policyId is provided
       fetchPolicyData();
     }
-  }, [policyId]); // Adding policyId to the dependency array
+  }, [policyId]);
 
   return (
     <PolicyContext.Provider value={policyData}>

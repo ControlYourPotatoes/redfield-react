@@ -28,6 +28,7 @@ export interface PolicyInfo {
 export interface AuthContextType {
   currentUser: any; // You can replace 'any' with a more specific type for your user
   authToken: string;
+  validateAndSetToken: (token: string) => void;
   login: (token: string) => void;
   logout: () => void;
 }

@@ -12,6 +12,7 @@ import ThemeProvider from "@mui/material/styles/ThemeProvider";
 import theme from './theme';
 import { AuthProvider } from './components/pages/AuthContext';
 import MainPage from './MainPage';
+import AccountMenu from './components/pages/AccountMenu';
 
 
 
@@ -20,7 +21,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <div>
         <AuthProvider>
-          <Navbar />
+          <AccountMenu />
           <Routes>
             <Route path='/' element={<MainPage />} />
             <Route path='/About' element={<About />} />

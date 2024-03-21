@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 
 import { useWeather } from './WeatherContext';
 
@@ -7,7 +7,7 @@ import HumidityIcon from '../../../Icons/HumidityIcon';
 import LowIcon from '../../../Icons/LowIcon';
 import PressureIcon from '../../../Icons/PressureIcon';
 import WindIcon from '../../../Icons/WindIcon';
-
+import PolicyContext from '../PolicyContext';
 
 
 import { kmToMile, TempUnit } from './utils/unitConversion';
@@ -30,7 +30,7 @@ import { Card } from '@mui/material';
 
 const CurrentWeather: React.FC = () => {
   const { weather, setDegreeType, degreeType, toggleDarkMode, error } = useWeather();
-
+  const policyData = useContext(PolicyContext);
 
 
   if (!weather) return <> Fetching Weather Data</>;

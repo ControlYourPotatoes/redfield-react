@@ -210,11 +210,11 @@ const UserModel = {
         console.log(`Comparing login password: '${password}' with stored password: '${user.password}'`);
 
         const validPassword = password.trim() === user.password.trim();
-
+        console.log(`Checking user `, user);
 
         if (validPassword) {
           // Generate the token without including sensitive data
-          const token = jwt.sign({ id: user.id, email: user.email }, 'secret', { expiresIn: '1h' });
+          const token = jwt.sign({ id: user.id, email: user.email, firstName: user.firstname, lastName: user.lastname }, 'secret', { expiresIn: '1h' });
           return { success: true, token: token };
         } else {
           // If the password is invalid, return an object indicating failure but do not throw an error here
