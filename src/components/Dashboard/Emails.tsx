@@ -20,7 +20,7 @@ const sendEmail = (message: string, subject: string, recipient: string) => {
 const Emails = () => {
     const { currentUser } = useAuth();
     const policyContext = useContext(PolicyContext);
-
+    
     useEffect(() => {
         if (!policyContext || !currentUser || !policyContext.status) {
             return; // Do nothing if context or user is not available or if status is not set
@@ -66,7 +66,7 @@ const Emails = () => {
           
           <h2>What This Means for You:</h2>
           <p>It is crucial to remain vigilant and adhere to all recommended safety measures and instructions from local officials. Ensure that your emergency kit is fully stocked and that you have a safe, predetermined location to stay during the storm.</p>
-          
+          email
           <h2>Redfield Insurance Support:</h2>
           <p>We are actively monitoring the situation and are ready to provide assistance as needed. Remember, your policy includes enhanced protections for situations like these, ensuring you have the support for immediate needs without the necessity for claim submissions.</p>
           
@@ -88,7 +88,7 @@ const Emails = () => {
           <p>We hope this email finds you safe and well. We have important news regarding your insurance policy with Redfield Insurance, particularly concerning the imminent impact of the hurricane.</p>
           
           <h2>Update on Hurricane Progress:</h2>
-          <p>We regret to inform you that the hurricane has now reached the third significant milestone in its path, bringing it within 50 kilometers of your property at 123 Main St. This development indicates that the storm's effects may soon be felt in your area.</p>
+          <p>We regret to inform you that the hurricane has now reached the third significant milestone in its path, bringing it within 50 kilometers of your property. This development indicates that the storm's effects may soon be felt in your area.</p>
           
           <h2>Instant Insurance Payment Confirmation:</h2>
           <p>As outlined in your Standard Policy, we are pleased to confirm that your property coverage entitles you to an instant payment of $350 in the event of a hurricane reaching within 50 kilometers of your insured property. This payment will be deposited into your designated account immediately to assist with any necessary preparations or mitigations.</p>
