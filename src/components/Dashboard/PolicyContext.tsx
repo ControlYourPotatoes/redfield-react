@@ -22,6 +22,7 @@ interface PolicyProviderProps {
   policyId: string; // Adding policyId as a prop to the Provider
 }
 const baseUrl = import.meta.env.VITE_API_BASE_URL || ''; // Fallback to empty string if not defined
+const baseUrl = import.meta.env.VITE_API_BASE_URL || ''; // Fallback to empty string if not defined
 
 const PolicyContext = createContext<PolicyData | undefined>(undefined);
 

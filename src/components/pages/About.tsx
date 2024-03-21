@@ -101,7 +101,7 @@ const profileCards = [
     {
       name: "Carlos Carrasquillo",
       role: "Blockchain Expert, Fullstack web3 Developer",
-      imageUrl: "./assets/Profile/Carlos.jpg",
+      imageUrl: "./assets/Profile/carlos.png",
       linkedInUrl: "https://www.linkedin.com/in/carlos-carrasquillo-developer/",
      
     },

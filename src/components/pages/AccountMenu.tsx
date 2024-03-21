@@ -1,6 +1,6 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AppBar, Avatar, Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider, IconButton, ListItemIcon, Menu, MenuItem, Tooltip, styled, Toolbar, useTheme} from '@mui/material';
+import { AppBar, Avatar, Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider, IconButton, ListItemIcon, Menu, MenuItem, Tooltip, styled, Toolbar, useTheme } from '@mui/material';
 import FaceIcon from '@mui/icons-material/Face';
 import TagFacesIcon from '@mui/icons-material/TagFaces';
 import PetsIcon from '@mui/icons-material/Pets';
@@ -28,7 +28,6 @@ export default function AccountMenu() {
   const isLoggedIn = !!authToken; // Determine if logged in based on the presence of an authToken
   //icons
   const icons = [<FaceIcon />, <TagFacesIcon />, <PetsIcon />];
- 
 
    
 
@@ -88,6 +87,7 @@ export default function AccountMenu() {
     // Perform logout logic here (e.g., clearing user data)
     logout();
     handleClose();
+
     navigate('/');
   };
 
@@ -127,7 +127,7 @@ const NavigationContainer = styled(Box)(({ theme }) => ({
 
   return (
     <React.Fragment>
-     <StyledAppBar>
+      <StyledAppBar>
         <Toolbar>
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <Hurricane src="\assets\icon\logoDarkMode.png" alt="New Icon" />
@@ -141,76 +141,44 @@ const NavigationContainer = styled(Box)(({ theme }) => ({
             <Button color="inherit" component="a" href="mailto:project.h.redfield@gmail.com" sx={{ textDecoration: 'none', color: 'inherit' }}>
               Contact Us
             </Button>
-            </NavigationContainer>
+          </NavigationContainer>
+
           {!isLoggedIn ? (
             <Button color="inherit" onClick={handleLogin}>Log In</Button>
-            ) : (
+          ) : (
             <React.Fragment>
               <Tooltip title="Account settings">
                 <IconButton
-                    
-                   onClick={handleClick}
-                   size="small"
-                   sx={{ ml: 2}}  
+                  onClick={handleClick}
+                  size="small"
+                  sx={{ ml: 2 }}
                 >
                   <Avatar sx={{ width: 32, height: 32 }}>{profilePic}</Avatar>
                 </IconButton>
               </Tooltip>
               <Menu
-                
                 id="account-menu"
-                open={open}
+                anchorEl={anchorEl}
+                open={Boolean(anchorEl)}
                 onClose={handleClose}
-                PaperProps={{
-                  elevation: 0,
-                  sx: {
-                    overflow: 'visible',
-                    filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
-                    mt: -86.5,
-                    '& .MuiAvatar-root': {
-                      width: 32,
-                      height: 32,
-                      ml: -0.5,
-                      mr: 1,
-                    },
-                    '&::before': {
-                      content: '""',
-                      display: 'block',
-                      position: 'absolute',
-                      top: 0,
-                      right: 14,
-                      width: 10,
-                      height: 10,
-                      bgcolor: 'background.paper',
-                      transform: 'translateY(-50%) rotate(45deg)',
-                      zIndex: 0,
-                    },
-                  },
-                }}
-                anchorOrigin={{
-                  vertical: 'bottom',
-                  horizontal: 'right',
-                }}
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                >
+                transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+                anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+              >
                 <MenuItem onClick={() => setProfileDialogOpen(true)}>Change Profile Picture</MenuItem>
                 <MenuItem onClick={handleClose}>
-                <Avatar /> Profile
+                  <Avatar /> Profile
                 </MenuItem>
                 <MenuItem onClick={handleNavigateToDashboard}>
-                <ListItemIcon>
-                  <PublicIcon fontSize="small" />
-                </ListItemIcon>
+                  <ListItemIcon>
+                    <PublicIcon fontSize="small" />
+                  </ListItemIcon>
                   Dashboard
-                  </MenuItem>
+                </MenuItem>
                 <Divider />
                 <MenuItem onClick={handleLogout}>
-                 <ListItemIcon>
-                  <Logout fontSize="small" />
-                 </ListItemIcon>
+                  <ListItemIcon>
+                    <Logout fontSize="small" />
+                  </ListItemIcon>
                   Log Out
                 </MenuItem>
               </Menu>
@@ -218,19 +186,19 @@ const NavigationContainer = styled(Box)(({ theme }) => ({
           )}
         </Toolbar>
 
-      <Toolbar />
-      <Dialog open={profileDialogOpen} onClose={() => setProfileDialogOpen(false)}>
-        <DialogTitle>Change Profile Picture</DialogTitle>
-        <DialogContent>
-          {icons.map((icon, index) => (
-            <IconButton key={index} onClick={() => handleIconSelect(icon)}>{icon}</IconButton>
+        <Toolbar />
+        <Dialog open={profileDialogOpen} onClose={() => setProfileDialogOpen(false)}>
+          <DialogTitle>Change Profile Picture</DialogTitle>
+          <DialogContent>
+            {icons.map((icon, index) => (
+              <IconButton key={index} onClick={() => handleIconSelect(icon)}>{icon}</IconButton>
             ))}
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={() => setProfileDialogOpen(false)}>Cancel</Button>
-        </DialogActions>
-      </Dialog>
-            </StyledAppBar>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={() => setProfileDialogOpen(false)}>Cancel</Button>
+          </DialogActions>
+        </Dialog>
+      </StyledAppBar>
     </React.Fragment>
   );
 }

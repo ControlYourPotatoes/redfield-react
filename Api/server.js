@@ -2,24 +2,25 @@ require('dotenv').config(); // Load environment variables from .env file
 
 const express = require('express');
 const cors = require('cors');
-const nodemailer = require('nodemailer'); // testing for mailing 
+const nodemailer = require('nodemailer'); // for mailing
 const app = express();
-const PORT = process.env.PORT || 8080; // Ensure this port is free or change it as needed
+const PORT =  8081; // Ensure this port is free or change it as needed
 
 //login/signup
 const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const path = require('path');
 
 
 app.use(cors()); // This enables CORS for all routes
 app.use(express.json()); // To parse JSON bodies
 app.use(bodyParser.json());
 
-// Mock data 
+// Mock data
 const hurricaneData = {
   id: "hurricane-2023",
-  name: "maria path",
+  name: "Maria Path",
   path: [
     { lat: 15.300950405816799, lon: -61.14722058940372 },
     { lat: 15.496900874274315, lon: -61.42172327156733 },
@@ -45,20 +46,56 @@ let transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
     user: process.env.GMAIL_USER, // Your Gmail address
-    pass: process.env.GMAIL_APP_PASSWORD, // Your Gmail password or App Password
+    pass: process.env.GMAIL_APP_PASSWORD, // Your Gmail app password
   },
 });
 
-// send an email
-function sendNotificationEmail(message) {
+// Define your signature HTML
+// const emailSignature = `
+// <div style="margin-top: 20px;">
+//   <p>Best regards,</p>
+//   <p>H-Redfield</p>
+//   <img src="cid:signatureImage" alt="Signature" style="width: 100px; height: auto;">
+// </div>
+// `;
+
+// Function to send an email with HTML content and embedded Redfield logo
+function sendNotificationEmail(message, subject, recipient) {
+ // const emailSignature = `<div style="margin-top: 20px;"><img src="cid:redfieldLogo" alt="Redfield Logo" style="width: 100px; height: auto;"></div>`;
+//  const emailContent = message + emailSignature;
+
+const emailContent = `
+<html>
+  <head>
+    <style>
+      body { font-family: Arial, sans-serif; }
+      h2 { color: #333; }
+    </style>
+  </head>
+  <body>
+    ${message}
+    <div style="margin-top: 20px;">
+      <img src="cid:signatureImage" alt="Signature" style="width: 100px; height: auto;">
+    </div>
+  </body>
+</html>`;
+
   let mailOptions = {
     from: process.env.GMAIL_USER, // place your email
-    to: 'mercedes.diaz@holbertonschool.com', // Set the recipient email address
-    subject: 'Hurricane Alert',
-    text: message,
+    to: recipient, // Set the recipient email address
+    subject: subject,
+    html: emailContent,
+    attachments: [
+      {
+        filename: 'signatureImage.png',
+        path: path.join(__dirname, '../public/assets/icon/RedfieldLogo.png'), // Adjust the path as necessary
+        cid: 'signatureImage' // Use this cid to reference the image in the HTML body
+      }
+    ]
   };
-  
-  transporter.sendMail(mailOptions,function(error, info) {
+ 
+
+  transporter.sendMail(mailOptions, function(error, info) {
     if (error) {
       console.log(error);
     } else {
@@ -71,10 +108,10 @@ app.get('/api/hurricane', (req, res) => {
   res.json(hurricaneData);
 });
 
-// Adjust the endpoint to extract the message from the request body
+// Endpoint to handle sending notifications
 app.post('/api/send-notification', (req, res) => {
-  const { message } = req.body; // Extract message from the request body
-  sendNotificationEmail(message); // Pass the message to the email function
+  const { message, subject, recipient } = req.body;
+  sendNotificationEmail(message, subject, recipient);
   res.json({ message: 'Email sent successfully' });
 });
 https://www.nhc.noaa.gov/data/tcr/AL152017_Maria.pdf
@@ -94,8 +131,8 @@ app.get('/', (req, res) => {
         <script type="module" src="/src/main.tsx"></script>
       </body>
     </html>
-    `);
-  });
+  `);
+});
 
   //login/signup
   // Database setup

@@ -32,6 +32,7 @@ const HurricaneMap: React.FC<HurricaneMapProps> = ({ hurricaneData }) => {
   const [hurricanePosition, setHurricanePosition] = useState<[number, number]>([15.3, -61.3]);
   const [hurricanePath, setHurricanePath] = useState<[number, number][]>([]);
 
+  const email = `hector.r.rodriguezlopez@gmail.com`;
   const hurricaneIcon = new L.Icon({
     iconUrl: 'assets/gifs/hurricaneicon.gif',
     iconSize: [100, 100],

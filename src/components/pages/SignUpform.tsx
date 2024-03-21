@@ -141,23 +141,11 @@ const SubmitButton = styled.button`
   }
 `;
 
-// Adding a styled component for the checkbox label
-const CheckboxLabel = styled.label`
-  display: flex;
-  align-items: center;
-  margin: 10px 0;
-  cursor: pointer;
-`;
-
-const Checkbox = styled(Field)`
-  margin-right: 10px;
-`;
-
 const ForgotPasswordWrapper = styled.div`
   display: flex;
   justify-content: flex-end; /* Aligns the child to the right */
   width: 100%; /* Ensures it spans the full width of its parent container */
-  margin: 10px 0;
+  margin: -20px 01;
 `;
 
 const ForgotPasswordLink = styled.a`
@@ -191,12 +179,22 @@ const ForgotPasswordFormContainer = styled.div`
 
 const signInSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Required'),
-  password: Yup.string().min(6, 'Password is too short').required('Required'),
+  password: Yup.string()
+    .min(6, 'Password is too short')
+    .matches(/[A-Z]/, 'Password must contain at least one uppercase letter')
+    .matches(/[\W_]+/, 'Password must contain at least one special character')
+    .matches(/[0-9]/, 'Password must contain at least one number')
+    .required('Required'),
 });
 
 const signUpSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Email is required'),
-  password: Yup.string().min(6, 'Password is too short').required('Password is required'),
+  password: Yup.string()
+    .min(8, 'Password is too short')
+    .matches(/[A-Z]/, 'Password must contain at least one uppercase letter')
+    .matches(/[\W_]+/, 'Password must contain at least one special character')
+    .matches(/[0-9]/, 'Password must contain at least one number')
+    .required('Password is required'),
   confirmPassword: Yup.string()
     .oneOf([Yup.ref('password'), undefined], "Passwords don't match")
     .required('Confirming password is required'),
@@ -209,6 +207,10 @@ const signUpSchema = Yup.object().shape({
     .required('Phone number is required'),
 });
 
+const LinkContainer = styled.div`
+
+margin-top: 40px; // Adjust as needed for your design
+`;
 
 
 // Yup validation schema for the forgot password email
@@ -224,8 +226,8 @@ const SignInSignUpPage = () => {
     const [loginError, setLoginError] = useState<string>('');
     const { login } = useAuth();
 
-    const toggleForm = (event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => {
-      setIsSignUp(checked);
+    const toggleForm = () => {
+      setIsSignUp(!isSignUp);
       setShowForgotPassword(false);
     };
 
@@ -330,11 +332,6 @@ const SignInSignUpPage = () => {
 
   return (
     <Container>
-      <FormControlLabel
-        control={<Switch checked={isSignUp} onChange={toggleForm} color="primary" />}
-        label={isSignUp ? 'Switch to Sign In' : 'Switch to Sign Up'}
-      />
-
       {/* Log-In Form */}
       <FormContainer $show={!isSignUp}>
         <Formik
@@ -361,15 +358,16 @@ const SignInSignUpPage = () => {
               <ErrorMessageContainer>
                 <ErrorMessage name="password" component="div" />
               </ErrorMessageContainer>
-              <CheckboxLabel>
-                <Checkbox type="checkbox" />
-                Remember Me
-              </CheckboxLabel>
               
               <SubmitButton type="submit" disabled={isSubmitting}>
              {isSignUp ? 'Sign Up' : 'Sign In'}
              </SubmitButton>
              {loginError && <div style={{ color: 'red' }}> {loginError}</div>}
+             <LinkContainer>
+             <div>
+                    Don't have an account? <a href="#!" onClick={toggleForm}>Sign up</a>
+             </div>
+             </LinkContainer>
              <ForgotPasswordWrapper>
           <ForgotPasswordLink onClick={handleForgotPassword}>
             Forgot Password?
@@ -446,6 +444,11 @@ const SignInSignUpPage = () => {
                 {isSignUp ? 'Sign Up' : 'Sign In'}
               </SubmitButton>
               {signUpError && <div style={{ color: 'red' }}>{signUpError}</div>}
+              <LinkContainer>
+              <div>
+                    Already have an account? <a href="#!" onClick={toggleForm}>Log in</a>
+              </div>
+              </LinkContainer>
             </Form>
           )}
         </Formik>
