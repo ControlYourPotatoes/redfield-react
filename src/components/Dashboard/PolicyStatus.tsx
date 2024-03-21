@@ -5,6 +5,8 @@ import { Unstable_Grid2 as Grid } from "@mui/material";
 import AccessTimeIcon from '@mui/icons-material/AccessTime'; 
 import { styled } from '@mui/material/styles';
 import { format } from 'date-fns';
+
+
 import { useAuth } from '../pages/AuthContext';
 
 const Item = styled(Box)(({ theme }) => ({ 
@@ -25,7 +27,7 @@ const Values = styled(Typography)(({ theme }) => ({
 
 const PolicyStatus: React.FC = () => {
   const policyData = useContext(PolicyContext);
-  const { currentUser } = useAuth();
+  const { currentUser,  } = useAuth();
 
   const getStatusLabel = (status: number) => {
     const statusMap: Record<number, string> = {

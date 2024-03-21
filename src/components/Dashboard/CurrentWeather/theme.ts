@@ -31,7 +31,7 @@ export interface Theme {
 
 export const lightTheme: Theme = {
   appTitleColor: '#2F5D8A',
-  backgroundImage: lightBg,
+  backgroundImage:'', //lightBg,
   backgroundGradient: {
     color1: '#F9FFFF',
     color2: '#38C8E6',
@@ -59,7 +59,7 @@ export const lightTheme: Theme = {
 
 export const darkTheme: Theme = {
   appTitleColor: '#2F5D8A',
-  backgroundImage: darkBg,
+  backgroundImage: '',// darkBg
   backgroundGradient: {
     color1: '#031027',
     color2: '#02101D',
