@@ -11,7 +11,7 @@ const options = {
       display: false,
     },
     tooltip: {
-      mode: 'index',
+      mode: 'index' as 'index', // Explicitly type 'mode' as 'index'
       intersect: false,
     },
   },
@@ -33,8 +33,21 @@ const options = {
   },
 };
 
+
+interface DataSet {
+  label: string;
+  data: number[];
+  borderColor: string;
+  backgroundColor: string;
+}
+
+interface ChartData {
+  labels: string[];
+  datasets: DataSet[];
+}
+
 const EthereumPriceChart: React.FC = () => {
-  const [data, setData] = useState({
+  const [data, setData] = useState<ChartData>({
     labels: [],
     datasets: [
       {

@@ -18,13 +18,6 @@ const ConfirmationComponent: React.FC<{ formData: FormData }> = ({ formData }) =
                         {/* Include additional policy details as needed */}
                     </Grid>
                     <Grid item xs={12}>
-                        <Typography variant="h6">Personal Info</Typography>
-                        <Typography>Name: {formData.personalInfo.firstName} {formData.personalInfo.lastName}</Typography>
-                        <Typography>Phone: {formData.personalInfo.phoneNumber}</Typography>
-                        <Typography>Email: {formData.personalInfo.email}</Typography>
-                        {/* Include additional personal info details as needed */}
-                    </Grid>
-                    <Grid item xs={12}>
                         <Typography variant="h6">Payment Info</Typography>
                         <Typography>Type: {formData.payment.type}</Typography>
                         {/* Include additional payment details as needed */}

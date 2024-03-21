@@ -14,7 +14,6 @@ import ThemeProvider from "@mui/material/styles/ThemeProvider";
 import theme from './theme';
 import { AuthProvider } from './components/pages/AuthContext';
 import MainPage from './MainPage';
-import AccountMenu from './components/pages/AccountMenu';
 
 
 

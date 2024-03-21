@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import L from 'leaflet';
 import { MapContainer, TileLayer, Marker, Polyline } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { Box, Button, Card, CardContent } from '@mui/material';
-
+import PolicyContext from './PolicyContext';
 interface HurricanePathPoint {
   point: string; // "POINT(-longitude latitude)"
   iso_time: string;
@@ -31,6 +31,9 @@ const baseUrl = import.meta.env.VITE_API_BASE_URL || '';
 const HurricaneMap: React.FC<HurricaneMapProps> = ({ hurricaneData }) => {
   const [hurricanePosition, setHurricanePosition] = useState<[number, number]>([15.3, -61.3]);
   const [hurricanePath, setHurricanePath] = useState<[number, number][]>([]);
+  const { setStatus } = useContext(PolicyContext);
+
+
 
   const email = `hector.r.rodriguezlopez@gmail.com`;
   const hurricaneIcon = new L.Icon({
@@ -74,19 +77,27 @@ const HurricaneMap: React.FC<HurricaneMapProps> = ({ hurricaneData }) => {
   
 
   
-const startAnimation = () => {
-  let pathIndex = 0;
-
-  const interval = setInterval(() => {
-    if (pathIndex < hurricanePath.length) {
-      setHurricanePosition(hurricanePath[pathIndex]);
-      pathIndex += 1;
-    } else {
-      clearInterval(interval);
-    }
-  }, 50); // Adjust the interval as necessary
-};
-
+  const startAnimation = () => {
+    let index = 0; // Starting index, adjust according to your actual logic
+  
+    const interval = setInterval(() => {
+      console.log("Current Index value:", index);
+      if (index < hurricanePath.length) {
+        setHurricanePosition(hurricanePath[index]);
+      }
+      // Trigger updates based on index values
+      if (index === 17) {
+        setStatus(2);
+      } else if (index === 26) {
+        setStatus(3);
+      } else if (index === 30) {
+        setStatus(4);
+        // Assuming you want to stop the animation at index 30
+      }
+  
+      index++; // Increment index, adjust this logic as per your requirements
+    }, 500); // Example: increment index every second
+  };
 
   return (
     <Card raised sx={{backgroundColor:'#E0E0E0',borderRadius: '5px', padding: '1rem',margin: '10px' }}>

@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import { Typography, Switch, FormControlLabel, Button, Alert } from '@mui/material';
-
+import { useFormikContext } from 'formik';
+import { FormData } from '../../types';
 // Styling for the overall layout, adjusted for wider tables
 const Container = styled.div`
 max-width: 195%; // Adjusted to ensure it fits within most screens
@@ -12,7 +13,8 @@ box-shadow: 0 0 100px rgba(0, 0, 0, 0.1); // Optional: adds a subtle shadow for 
 display: flex;
 flex-direction: column;
 align-items: center; // Center children (including the toggle button)
-
+padding-top: 20px;
+padding-bottom: 20px;
 `;
 
 // Styling for the tables
@@ -22,7 +24,7 @@ const Table = styled.table`
   margin: 20px 0;
   th, td {
     border: 1px solid #ddd;
-    padding: 8px;
+    padding: 7px;
     text-align: left;
   }
   th {
@@ -33,7 +35,7 @@ const Table = styled.table`
 // Styling for the policy selection 
 const PolicySelector = styled.label`
   display: block;
-  margin: 20px;
+  margin: 10px;
   cursor: pointer;
 `;
 
@@ -44,15 +46,24 @@ const Checkbox = styled.input`
 // Styling for the message displaying the selected policy
 const SelectedPolicyMessage = styled.div`
  height: 20px;
- margin-top: 20px;
+ margin-top: 0px;
  text-align: center;
  transition: opacity 0.3s ease;
  opacity: 0; // Invisible by default
+ font-size: 1.2em;
+ border-radius: 10px;
+ border: 1px solid #ddd;
+ padding: 10px;
+ fontweight: bold;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ background-color: #7584c8;
 `;
 
 
 // Types definitions
-type PolicyType = 'Basic' | 'Premium';
+type PolicyType = 'Standard' | 'Premium';
 
 // Define an interface for SliderProps to accept the activePolicy prop
   
@@ -67,19 +78,21 @@ interface Policy {
 }
 
 interface Policies {
-  Basic: Policy;
+  Standard: Policy;
   Premium: Policy;
 }
 
 // React component
 const CoverageComponent = () => {
-  const [activePolicy, setActivePolicy] = useState<PolicyType>('Basic'); // To track which policy is active
+  const { values, setFieldValue } = useFormikContext<FormData>();
+
+  const [activePolicy, setActivePolicy] = useState<PolicyType>('Standard'); // To track which policy is active
   const [selectedPolicyName, setSelectedPolicyName] = useState<string>('');// To track the selected policy name
   const [isPolicySelected, setIsPolicySelected] = useState<boolean>(false);// To track checkbox state
 
   // Data for policies
   const policies: Policies = {
-    Basic: {
+    Standard: {
       categories: [
         { windSpeed: '≥ 157 mph', payment: '1000' },
         { windSpeed: '130 - 156 mph', payment: '450 - $800' },
@@ -104,9 +117,9 @@ const CoverageComponent = () => {
   // Clone the categories array and reverse it to display from 5 to 1
 const reversedCategories = [...policies[activePolicy].categories].reverse();
 
-  // Function to toggle between Basic and Premium policies
+  // Function to toggle between Standard and Premium policies
   const togglePolicy = () => {
-    setActivePolicy(activePolicy === 'Basic' ? 'Premium' : 'Basic');
+    setActivePolicy(activePolicy === 'Standard' ? 'Premium' : 'Standard');
     setIsPolicySelected(false); // Reset selection on toggle
   };
 
@@ -114,6 +127,8 @@ const reversedCategories = [...policies[activePolicy].categories].reverse();
    const handlePolicySelection = (event: React.ChangeEvent<HTMLInputElement>) => {
     setIsPolicySelected(event.target.checked);
     setSelectedPolicyName(event.target.checked ? activePolicy : '');
+    setFieldValue('policy.type', activePolicy);
+    
   };
 
   return (
@@ -127,7 +142,7 @@ const reversedCategories = [...policies[activePolicy].categories].reverse();
             color="primary"
           />
         }
-        label={activePolicy === 'Premium' ? 'Premium' : 'Basic'}
+        label={activePolicy === 'Premium' ? 'Premium' : 'Standard'}
       />
     <Table>
       <thead>
@@ -158,6 +173,7 @@ const reversedCategories = [...policies[activePolicy].categories].reverse();
         onChange={handlePolicySelection}
       />
       Select {activePolicy} Policy
+      <pre>{JSON.stringify(values, null, 2)}</pre>
     </PolicySelector>
     <SelectedPolicyMessage style={{ opacity: selectedPolicyName ? 1 : 0 }}>
         {selectedPolicyName ? `${selectedPolicyName} Policy has been selected` : ''}

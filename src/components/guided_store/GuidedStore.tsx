@@ -1,4 +1,5 @@
 import React from 'react';
+import { useEffect } from 'react';
 import { Stepper, Step, StepLabel, Button, Typography, Box, Paper } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import HomeIcon from '@mui/icons-material/Home';
@@ -7,7 +8,7 @@ import PaymentIcon from '@mui/icons-material/Payment';
 import InfoIcon from '@mui/icons-material/Info';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import './GuidedStore.css';
-
+import { useAuth } from '../pages/AuthContext';
 // Import individual step components
 import StartComponent from './StartComponent';
 import CoverageComponent from './CoverageComponent';
@@ -15,6 +16,8 @@ import PersonalInfoComponent from './PersonalInfoComponent';
 import PaymentComponent from './PaymentComponent';
 import ConfirmationComponent from './ConfirmationComponent';
 import { Formik, Form } from 'formik';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
+
 
 
 
@@ -64,21 +67,18 @@ const ColorlibStepIcon = (props: ColorlibStepIconProps) => {
 
 export default function GuidedStore() {
   const [activeStep, setActiveStep] = React.useState(0);
+  const { currentUser } = useAuth();
+  const navigate = useNavigate(); // Define navigate here
 
+  console.log(currentUser);
   interface PolicyInfo {
     id: string;
     type: string;
     coordinates: [number, number]; // Or [number, number] or { lat: number, lng: number }
+    address: string;
   }
   
-  interface PersonalInfo {
-    firstName: string;
-    lastName: string;
-    phone: string;
-    email: string;
-    address: string;
-    coordinates: [number, number]; // Or [number, number] or { lat: number, lng: number }
-  }
+
   
   interface PaymentInfo {
     type: string;
@@ -86,26 +86,65 @@ export default function GuidedStore() {
   
   interface FormValues {
     policy: PolicyInfo;
-    personalInfo: PersonalInfo;
     payment: PaymentInfo;
   }
   
   const initialFormValues: FormValues = {
-    policy: { id: '', type: '', coordinates: [0, 0]},
-    personalInfo: { firstName: '', lastName: '', phone: '', email: '', address: '', coordinates: [0, 0]},
+    policy: { id: currentUser?.id, type: '', coordinates: [0, 0], address: ''},
     payment: { type: '' },
   };
 
   // Placeholder submission handler
-  const handleSubmit = (values: any) => {
-    console.log('Form Values:', values);
-    // Here you would typically send the values to a server or perform some action with them
+  const handleSubmit = async (values: FormValues) => {
+    const baseUrl = import.meta.env.VITE_API_BASE_URL || ''; // Fallback to empty string if not defined
+  
+    if (!currentUser) {
+      console.error('User is not logged in');
+      return; // or handle this scenario appropriately
+    }
+  
+    // Prepare the data for submission
+    const submissionData = {
+      userId: values.policy.id, // Assuming this is handled server-side and not needed in the payload
+      type: values.policy.type,
+      address: values.policy.address,
+      coordinates: { 
+        lat: values.policy.coordinates[0], 
+        lng: values.policy.coordinates[1] 
+      },
+      status: 1, // Assuming status 1 indicates active
+    };
+  
+    try {
+      console.log(submissionData);
+      const response = await fetch(`${baseUrl}/api/policy/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          // Include authorization headers if needed
+        },
+        body: JSON.stringify(submissionData),
+      });
+  
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+  
+      // Process response data here
+      const data = await response.json();
+      console.log('Policy created:', data);
+  
+      // Handle successful policy creation (e.g., navigate to a success page, show a message)
+      navigate('/dashboard');
+    } catch (error) {
+      console.error('Failed to submit policy:', error);
+      // Handle error (e.g., show error message to the user)
+    }
   };
 
-  const handleNext = () => {
+  const handleNext = (submitForm: () => void) => { // Pass Formik's submitForm function
     if (activeStep === steps.length - 1) {
-      // If it's the last step, submit the form.
-      console.log('Ending submit');
+      submitForm(); // Trigger Formik's submission
     } else {
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
     }
@@ -134,8 +173,33 @@ export default function GuidedStore() {
   };
 
   return (
-    <Formik initialValues={initialFormValues} onSubmit={handleSubmit}>
-    {({ values, handleChange }) => (
+    <Formik
+      initialValues={initialFormValues}
+      onSubmit={handleSubmit}
+    >
+      {({ values, setFieldValue, handleChange, handleSubmit, submitForm }) => {
+        // Effect hook to update `id` in form values when currentUser.id becomes available
+        useEffect(() => {
+          if (currentUser?.id) {
+            setFieldValue('policy.id', currentUser.id, false);
+          }
+        }, [currentUser?.id, setFieldValue]);
+
+        const handleNext = () => {
+          if (activeStep === steps.length - 1) {
+            submitForm(); // Directly use submitForm here
+          } else {
+            setActiveStep((prevActiveStep) => prevActiveStep + 1);
+          }
+        };
+
+        const handleBack = () => {
+          setActiveStep((prevActiveStep) => prevActiveStep - 1);
+        };
+
+        // Define renderActiveComponent, steps, etc., as before
+
+        return (
       <Form>
         <Box sx={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <Box sx={{ width: '60%', margin: 'auto', padding: '10px', marginTop: '30px' }}>
@@ -181,8 +245,9 @@ export default function GuidedStore() {
             </React.Fragment>
           )}
         </Box>
-      </Form>
-    )}
+          </Form>
+        );
+      }}
     </Formik>
   );
 }

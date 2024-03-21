@@ -49,3 +49,4 @@ createDatabasePool().then(pool => {
   console.error('Failed to initialize the database pool:', error);
   process.exit(1);
 });
+

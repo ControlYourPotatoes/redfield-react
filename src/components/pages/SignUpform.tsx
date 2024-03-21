@@ -296,7 +296,7 @@ const SignInSignUpPage = () => {
     const handleSignUpSubmit = async (values: SignUpFormValues, { setSubmitting }: FormikHelpers<SignUpFormValues>) => {
       try {
         await axios.post('http://localhost:3000/api/signup', values);
-        navigate('/dashboard'); // Navigate to dashboard upon successful signup
+        navigate('/GuidedStore'); // Navigate to dashboard upon successful signup
         setSignUpError(''); // Clear any previous error messages
       } catch (error: any) {
         console.error('Sign Up Error', error?.response?.data || 'An error occurred');

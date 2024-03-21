@@ -20,10 +20,10 @@ const StartComponent = () => {
                         }} 
                     />
                     <img 
-                        src="\assets\icon\edited_logo.png" 
+                        src="\assets\logo\redfieldLogoLight.svg" 
                         alt="Insurance" 
                         style={{ 
-                            width: '20%', 
+                            width: '40%', 
                             display: 'block',  // Make it a block-level element
                             marginLeft: 'auto',  // Auto margin on the left
                             marginRight: 'auto', // Auto margin on the right
@@ -31,7 +31,7 @@ const StartComponent = () => {
                         }} 
                     />
                 </div>
-                <Typography variant="body1" align="center" sx={{ marginBottom: 4 }}>
+                <Typography variant="body1" align="center" sx={{ marginBottom: 4, fontSize:'2em' }}>
                     No evaluations, no waiting—just instant, reliable coverage.
                 </Typography>
             </Box>

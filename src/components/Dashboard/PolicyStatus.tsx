@@ -26,7 +26,22 @@ const Values = styled(Typography)(({ theme }) => ({
 }));
 
 const PolicyStatus: React.FC = () => {
-  const policyData = useContext(PolicyContext);
+  const context = useContext(PolicyContext);
+
+  if (!context) {
+    return <Typography>Loading...</Typography>; // Context is not available
+  }
+
+  if (!context.policyData) {
+    return <Typography>Loading policy data...</Typography>; // Policy data is not yet loaded
+  }
+
+  const { policyData } = context;
+  
+
+  
+  
+  
   const { currentUser,  } = useAuth();
 
   const getStatusLabel = (status: number) => {
@@ -47,9 +62,7 @@ const PolicyStatus: React.FC = () => {
     lastName: currentUser.lastName,
   };
 
-  if (!policyData) {
-    return <Typography>Loading...</Typography>;
-  }
+  
 
   const formattedExpirationDate = policyData.expirationdate
   ? format(new Date(policyData.expirationdate), 'PPP')

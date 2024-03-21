@@ -28,7 +28,6 @@ const UserModel = {
       VALUES ($1, $2, $3, $4, $5)
       RETURNING *;
     `;
-    // The values array does not include expirationDate
     const values = [userId, type, address, JSON.stringify(coordinates), status];
 
     try {

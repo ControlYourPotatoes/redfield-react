@@ -12,7 +12,9 @@ import CurrentWeather from './CurrentWeather/CurrentWeather';
 import { flexbox } from '@mui/system';
 import { PolicyProvider } from './PolicyContext';
 import { useAuth } from '../pages/AuthContext'; // Adjust the path as necessary
-
+import sendEmails  from './Emails';
+import Emails from './Emails';
+import ReceiptComponent from './Map Receipt/ReceiptComponent';
 
 const Dashboard = () => {
   //States
@@ -49,34 +51,29 @@ const Dashboard = () => {
 
   return (
     
-
-    
     <div style={{ width: '100%', }}>
         <Box className='Title Container'>
           <h1>Dashboard</h1>
-          <Button onClick={handleToggleWeatherEvent}> name="weatherEventToggle"</Button>
         </Box>
-      <Box sx={{ border: '1px gray solid', mt:'100px', display:'flex', flexDirection:'column', alignItems:'center'  }}>
-        
+      <Box sx={{ border: '', mt:'100px', display:'flex', flexDirection:'column', alignItems:'center'  }}>
 
-        <Box >
-            <HurricaneMap />
-        </Box>
-
-        <Box >
-            {/* <InfoPanel {...props}/> */}
-        </Box>
         
         <PolicyProvider policyId={currentUser.id} >
-          {/* test id 86b58036-71d4-4b91-b0bf-1c2f5ded97c2 with no policy */}
+          
+            
+            
             <PolicyStatus />
         
-        
-        <WeatherProvider >
-          <CurrentWeather/>
-        </WeatherProvider>
+            <Box >
+                <HurricaneMap />
+            </Box>
 
-        </PolicyProvider>
+            {/* <WeatherProvider >
+              <CurrentWeather/>
+            </WeatherProvider> */}
+            <Emails />
+            <ReceiptComponent/>
+          </PolicyProvider>
         
       </Box>
       

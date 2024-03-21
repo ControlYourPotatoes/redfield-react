@@ -50,19 +50,9 @@ let transporter = nodemailer.createTransport({
   },
 });
 
-// Define your signature HTML
-// const emailSignature = `
-// <div style="margin-top: 20px;">
-//   <p>Best regards,</p>
-//   <p>H-Redfield</p>
-//   <img src="cid:signatureImage" alt="Signature" style="width: 100px; height: auto;">
-// </div>
-// `;
 
 // Function to send an email with HTML content and embedded Redfield logo
 function sendNotificationEmail(message, subject, recipient) {
- // const emailSignature = `<div style="margin-top: 20px;"><img src="cid:redfieldLogo" alt="Redfield Logo" style="width: 100px; height: auto;"></div>`;
-//  const emailContent = message + emailSignature;
 
 const emailContent = `
 <html>
@@ -114,30 +104,8 @@ app.post('/api/send-notification', (req, res) => {
   sendNotificationEmail(message, subject, recipient);
   res.json({ message: 'Email sent successfully' });
 });
-https://www.nhc.noaa.gov/data/tcr/AL152017_Maria.pdf
 // Root route serving a simple HTML page
-app.get('/', (req, res) => {
-  res.send(`
-    <!doctype html>
-    <html lang="en">
-      <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>H-Redfield</title>
-        <link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
-      </head>
-      <body>
-        <div id="root"></div>
-        <script type="module" src="/src/main.tsx"></script>
-      </body>
-    </html>
-  `);
-});
 
-  //login/signup
-  // Database setup
-// Assume a mock database or use an actual DB like MongoDB, PostgreSQL, etc.
-const users = []; // This should be replaced with actual database logic
 
 app.post('/api/signup', async (req, res) => {
   const { email, password, firstName, lastName, phoneNumber } = req.body;

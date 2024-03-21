@@ -2,9 +2,9 @@ import React, { createContext, useContext, useState, useCallback, ReactNode, use
 import {fetchWeather} from './fetchWeather';
 import {WeatherData, ExtendedForecastData} from '../../../types';
 import { TempUnit } from './utils/unitConversion';
+import {Typography} from '@mui/material';
 import PolicyContext from '../PolicyContext';
-
-
+import { useAuth } from '../../pages/AuthContext';
 interface WeatherContextType {
     weather: WeatherData | null;
     forecast: ExtendedForecastData[] | null;
@@ -43,8 +43,15 @@ export const WeatherProvider: React.FC<WeatherProviderProps> = ({ children, init
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
   const [darkMode, setDarkMode] = useState(WeatherContextDefaultValues.darkMode);
-  const policyData = useContext(PolicyContext);
+  
+  const { currentUser } = useAuth();
+  const { policyData } = useContext(PolicyContext); // Corrected to destructure policyData
 
+  if (!policyData || !currentUser) {
+    return <Typography variant='h1' >Loading...</Typography>;
+  }
+
+  
 
   const testLocation = { lat: 40.7128, lng: -74.0060 };
 

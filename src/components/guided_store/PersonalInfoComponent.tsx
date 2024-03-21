@@ -37,6 +37,9 @@ const PersonalInfoComponent = () => {
       if (data.status === 'OK') {
         const { lat, lng } = data.results[0].geometry.location;
         setCoordinates({ lat, lng });
+
+        setFieldValue('policy.coordinates', [lat, lng]);
+        // console.log(values.policy.coordinates);
       } else {
         console.error('Geocoding error:', data.status);
       }
@@ -58,9 +61,7 @@ const PersonalInfoComponent = () => {
     console.log(`Field changed - Name: ${name}, Value: ${value}`);
     setFieldValue(name, value); // Keep this as is to update the form state correctly
     
-    // Remove the 'personalInfo.' prefix before passing to validateField
-    const fieldName = name.replace("policy.", "");
-    validateField(fieldName, value); // Now passing the adjusted field name
+    
 
     // Geocode address when address field changes
     if (name === 'policy.address') {
@@ -70,28 +71,12 @@ const PersonalInfoComponent = () => {
       } else {
         // Reset coordinates if the address field is cleared
         setCoordinates(defaultCoordinates);
+        
+
       }
     }
   };
 
-  const validateField = async (fieldName: string, value: string) => {
-    // Construct the path with 'personalInfo' prefix for Yup validation
-    const path = `personalInfo.${fieldName}`;
-    console.log(`Validating: ${path} with value: ${value}`);
-  
-    try {
-      await personalInfoValidationSchema.validateAt(path, { personalInfo: { [fieldName]: value } });
-      console.log(`${path} is valid`);
-      // Note: Adjust localErrors state structure if needed to match this path
-      setLocalErrors((prev) => ({ ...prev, [path]: undefined }));
-    } catch (error: any) {
-      if (error instanceof yup.ValidationError) {
-        console.log(`${path} is invalid:`, error.message);
-        // Adjust localErrors to use the full path or just fieldName, based on your state structure
-        setLocalErrors((prev) => ({ ...prev, [path]: error.message }));
-      }
-    }
-  };
   
   return (
     <div>

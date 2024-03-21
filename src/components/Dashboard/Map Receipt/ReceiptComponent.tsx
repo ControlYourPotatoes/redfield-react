@@ -1,8 +1,13 @@
 import React from 'react';
+import { useContext } from 'react';
 import { Typography, Box, Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import { blue } from '@mui/material/colors';
+
+import PolicyContext from '../PolicyContext';
+import { useAuth } from '../../pages/AuthContext';
+import { format } from 'date-fns';
 
 interface PolicyHolder {
   firstName: string;
@@ -25,37 +30,45 @@ interface ReceiptProps {
   windspeed: string;
 }
 
-const ReceiptComponent: React.FC<ReceiptProps> = ({
-  policyHolder,
-  policyType,
-  hurricaneDetails,
-  date,
-  windspeed,
-}) => {
+const ReceiptComponent: React.FC = () => {
+  
+  const { currentUser } = useAuth();
+  const { policyData } = useContext(PolicyContext); // Corrected to destructure policyData
+
+  if (!policyData || !currentUser) {
+    return <Typography>Loading...</Typography>;
+  }
+
+  if (!policyData) {
+    return <Typography>Loading policy data...</Typography>; // Policy data is not yet loaded
+  }
+  // Hardcoded values
+  const hurricaneDetails = { category: 4 };
+  const windspeed = '130 mph';
+  const date = format(new Date(), 'PPP'); // Formats current date as "MMM dd, yyyy"
+  // Assuming policyData.type returns 'standard' or 'premium'
+  const policyType = policyData.type.toLowerCase() as 'standard' | 'premium';
+
   // Pricing data
-  const pricingData: { [key in PolicyType]: { category: number; payment: number }[] } = {
+  const pricingData: { [key in typeof policyType]: { category: number; payment: number }[] } = {
     standard: [
       { category: 5, payment: 1000 },
       { category: 4, payment: 800 },
-      { category: 3, payment: 350 },
-      { category: 2, payment: 100 },
-      { category: 1, payment: 25 },
+      // Add other categories as needed
     ],
     premium: [
       { category: 5, payment: 2000 },
       { category: 4, payment: 1600 },
-      { category: 3, payment: 700 },
-      { category: 2, payment: 200 },
-      { category: 1, payment: 50 },
+      // Add other categories as needed
     ],
   };
 
-  const getPaymentAmount = (policyType: PolicyType, category: number): number => {
-    const paymentInfo = pricingData[policyType].find(p => p.category === category);
+  const getPaymentAmount = (category: number): number => {
+    const paymentInfo = pricingData[policyType]?.find(p => p.category === category);
     return paymentInfo ? paymentInfo.payment : 0;
   };
 
-  const totalPayment = getPaymentAmount(policyType, hurricaneDetails.category);
+  const totalPayment = getPaymentAmount(hurricaneDetails.category);
 
   
   
@@ -113,9 +126,9 @@ const ReceiptComponent: React.FC<ReceiptProps> = ({
           </Box>
           <Box >
             <Typography>Billed To</Typography>
-            <Typography>{policyHolder.firstName} {policyHolder.lastName}</Typography>
-            <Typography>{policyHolder.email}</Typography>
-            <Typography>{policyHolder.address}</Typography>
+            <Typography>{currentUser.firstName} {currentUser.lastName}</Typography>
+            <Typography>{currentUser.email}</Typography>
+            <Typography>{policyData.address}</Typography>
           </Box>
         </Box>
         
