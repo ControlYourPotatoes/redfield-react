@@ -79,6 +79,12 @@ const ReceiptComponent: React.FC<ReceiptProps> = ({
   
   return (
     <Box sx={{
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      height: '100vh',
+    }}>
+    <Box sx={{
       padding: 2,
       backgroundColor: '#fff',
       borderRadius: '8px',
@@ -117,8 +123,8 @@ const ReceiptComponent: React.FC<ReceiptProps> = ({
         <TableContainer component={Paper} sx={{ marginBottom: '20px' }}>
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
-              <TableRow>
-                <TableCell>DESCRIPTION</TableCell>
+              <TableRow sx={{ backgroundColor: blue[200] }}>
+                <TableCell>Policy</TableCell>
                 <TableCell align="right">Windspeed</TableCell>
                 <TableCell align="right">Category</TableCell>
                 <TableCell align="right">AMOUNT, USD</TableCell>
@@ -133,7 +139,7 @@ const ReceiptComponent: React.FC<ReceiptProps> = ({
                 </TableCell>
                 <TableCell align="right">{windspeed}</TableCell>
                 <TableCell align="right">{hurricaneDetails.category}</TableCell>
-                <TableCell align="right">$250.00</TableCell>
+                <TableCell align="right">{totalPayment}</TableCell>
               </TableRow>
             </TableBody>
           </Table>
@@ -147,6 +153,8 @@ const ReceiptComponent: React.FC<ReceiptProps> = ({
         </Box>
       </div>
       <Button variant="contained" onClick={handleSaveReceipt} sx={{ marginTop: '16px' }}>Save Receipt as PDF</Button>
+    
+    </Box>
     </Box>
   );
 };
