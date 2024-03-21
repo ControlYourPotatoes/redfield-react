@@ -68,7 +68,7 @@ const VideoSection: React.FC = () => {
   
   return (
     <div className={classes.container}>
-      <video className={classes.video} src='/assets/videos/REDFIELD INTRO.mp4' autoPlay loop muted={isMuted}/>
+      <video className={classes.video} src='/assets/videos/REDFIELD_INTRO_3.mp4' autoPlay loop muted={isMuted}/>
       <div className={classes.content}>
         
         <Typography variant="body1">
