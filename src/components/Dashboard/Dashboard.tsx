@@ -22,7 +22,7 @@ const Dashboard = () => {
 
 
   return (
-    <Box sx={{ padding: '20px' }}>
+    <Box sx={{ padding: '20px'}}>
       <Typography variant="h4">Dashboard Placeholder</Typography>
       <HurricaneMap />
       <ReceiptComponent
@@ -31,10 +31,12 @@ const Dashboard = () => {
           lastName: 'Smith',
           email: 'sofia@test.com',
           address: '123 Main St'
+          
         }}
         policyType="standard"
         hurricaneDetails={{ category: 3 }}
         date="04-21-2024"
+        windspeed='123 mph'
       />
           
     <div>
