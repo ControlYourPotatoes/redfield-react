@@ -173,7 +173,7 @@ const reversedCategories = [...policies[activePolicy].categories].reverse();
         onChange={handlePolicySelection}
       />
       Select {activePolicy} Policy
-      <pre>{JSON.stringify(values, null, 2)}</pre>
+      
     </PolicySelector>
     <SelectedPolicyMessage style={{ opacity: selectedPolicyName ? 1 : 0 }}>
         {selectedPolicyName ? `${selectedPolicyName} Policy has been selected` : ''}
